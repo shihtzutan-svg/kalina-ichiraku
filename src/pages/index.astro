@@ -6,6 +6,11 @@ import mascot3 from '../assets/mascot3.avif';
 import mascot4 from '../assets/mascot4.avif';
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import logo from '../assets/logo.avif';
+
+// ★追加：詳細ページと同じテキストファイルを読み込む
+import * as profileData from '../content/profile.md';
+const { frontmatter } = profileData;
+import * as clayData from '../content/clay.md';
 ---
 
 <html lang="ja">
@@ -56,14 +61,17 @@ import logo from '../assets/logo.avif';
       <!-- トップページ用 プロフィールセクション（要約版） -->
       <section class="card-panel profile-section" id="profile">
         <div class="profile-header-block">
-          <p class="catchphrase">魂の声を形にする 創作系スピリチュアルワーカー</p>
+<!-- ★テキストファイルからキャッチコピーを連動 -->
+<p class="catchphrase">{frontmatter.catchphrase}</p>
           <h2>プロフィール</h2>
         </div>
         
         <div class="card-content intro-message">
-          <p class="greeting">こんにちは、一樂 迦哩無（いちらく かりな）です。</p>
+<!-- ★テキストファイルから挨拶を連動 -->
+          <p class="greeting">{frontmatter.greeting}</p>
           <blockquote>
-            「みんなが自分の個性を発揮して、自由に生きてほしい」
+<!-- ★テキストファイルから引用句を連動 -->
+            {frontmatter.quote}
           </blockquote>
           <p>
             壮絶な葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
@@ -72,11 +80,15 @@ import logo from '../assets/logo.avif';
         </div>
       </section>
 
-      <!-- クレイワークセクション -->
+<!-- クレイワークセクション（要約版として連動） -->
       <section class="card-panel" id="clay">
-        <h2>クレイワーク・プログラム</h2>
+        <!-- トップと同じclay.mdから見出しと要約を自動で吸い上げる -->
+        <h2>{clayData.frontmatter.title}</h2>
         <div class="card-content">
-          <p>ここにクレイワークの詳細が入ります。</p>
+        <img src={clayData.frontmatter.image} alt="クレイワーク・イメージ" class="program-thumb" />
+          <p>{clayData.frontmatter.summary}</p>
+          <!-- 詳細ページへのリンクを追加 -->
+          <a href="/clay" class="read-more">プログラムの詳細はこちら →</a>
         </div>
       </section>
 
@@ -268,6 +280,8 @@ body {
     font-weight: bold;
     margin: 0 0 0.2rem 0;
     letter-spacing: 0.1em;
+    /* ★追加 */
+    white-space: pre-line;
   }
   .intro-message .greeting {
     font-size: 1.1rem;
@@ -281,6 +295,8 @@ body {
     font-style: italic;
     color: #fff;
     font-size: 1.05rem;
+    /* ★追加 */
+    white-space: pre-line;
   }
 
   /* フッターの装飾（最終解決版） */
@@ -334,5 +350,21 @@ body {
     .m2 { left: 6%; bottom: 8%; }   
     .m3 { right: 6%; top: 5%; }    
     .m4 { right: 6%; bottom: 10%; } 
+  }
+
+  /* トップページのクレイワーク枠内の改行を有効にする */
+  #clay .card-content p {
+    white-space: pre-line;
+  }
+
+  /* クレイワークのサムネイル画像 */
+  .program-thumb {
+    width: 100%;
+    height: auto;
+    max-height: 200px; /* トップページでは少し控えめの大きさに制限 */
+    object-fit: cover;  /* 枠に合わせて綺麗に切り抜き */
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
 </style>

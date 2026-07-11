@@ -1,0 +1,189 @@
+---
+import bgGalaxy from '../assets/bg-galaxy.avif';
+import logo from '../assets/logo.avif';
+
+// ★新しく作ったクレイワーク用のMarkdownを読み込む
+import * as clayData from '../content/clay.md';
+const { frontmatter } = clayData;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{frontmatter.title} | 一樂 迦哩無 - 公式サイト</title>
+  </head>
+  <body>
+    <!-- 背景画像 -->
+    <div class="bg-layer"></div>
+
+    <!-- ヘッダー -->
+    <header class="site-header">
+      <div class="logo-area">
+        <a href="/"><img src={logo.src} alt="一樂 迦哩無" class="site-logo-img" /></a>
+      </div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="/#profile">プロフィール</a></li>
+          <li><a href="/#activities">活動内容</a></li>
+          <li><a href="/#clay">クレイワーク・プログラム</a></li>
+          <li><a href="/#service">ライトワーカー様向けサービス</a></li>
+          <li><a href="/#contact">お申し込み・お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="detailed-container">
+      <section class="card-panel">
+        <div class="program-header-block">
+          <p class="catchphrase">{frontmatter.catchphrase}</p>
+          <h2>{frontmatter.title}</h2>
+        </div>
+        
+        <div class="card-content detailed-body">
+        <img src={frontmatter.image} alt="クレイワーク・メインイメージ" class="program-main-img" />
+          <div class="summary-message">
+            <p>{frontmatter.summary}</p>
+          </div>
+
+          <hr class="divider" />
+
+          <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
+          <div class="markdown-content">
+            <clayData.Content />
+          </div>
+          
+          <div class="back-home-container">
+              <a href="/" class="back-home-link">トップページへ戻る</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<!-- スタイル設定 -->
+<style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
+  * { box-sizing: border-box; }
+  body { 
+    margin: 0; padding: 0;
+    background: #0d0b18; color: #f0ecf4; 
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 背景アニメーション */
+  .bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: var(--bgUrl); background-size: cover; background-position: center;
+    z-index: -2; opacity: 0.7;
+    animation: bgMovement 25s ease-in-out infinite alternate;
+  }
+  @keyframes bgMovement {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(1deg); }
+  }
+
+  /* ヘッダー */
+  .site-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5rem 3rem; height: 100px;
+    background: rgba(13, 11, 24, 0.6); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: fixed; top: 0; width: 100%; z-index: 100;
+  }
+  .site-logo-img { max-height: 80px; width: auto; object-fit: contain; }
+  .nav-menu ul { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
+  .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+  .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
+
+  /* コンテナと吸着フッターの設定 */
+  .detailed-container {
+    flex: 1;
+    max-width: 900px;
+    margin: 140px auto 60px auto;
+    padding: 0 1.5rem;
+    width: 100%;
+  }
+  
+  .card-panel {
+    background: rgba(13, 11, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
+    padding: 2.5rem; backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* テキスト・見出し装飾 */
+  .program-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; }
+  .catchphrase {
+    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
+    white-space: pre-line;
+  }
+  .summary-message p { font-size: 1.1rem; line-height: 1.8; color: #fff;
+  /* ★この1行を追加することで、summaryの中の改行が画面に反映されます */
+    white-space: pre-line;
+   }
+  
+  .divider {
+    border: 0; height: 1px;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
+    margin: 2.5rem 0;
+  }
+
+  /* マークダウンから出力されるタグの装飾設定 */
+  .markdown-content :global(h3) {
+    font-size: 1.4rem; color: #ffb7ff; text-shadow: 0 0 8px rgba(255, 183, 255, 0.5);
+    margin: 2.5rem 0 1rem 0; letter-spacing: 0.05em;
+  }
+  .markdown-content :global(p) {
+    line-height: 1.85; margin-bottom: 1.4rem; color: #dbd7e0; letter-spacing: 0.03em;
+  }
+  .markdown-content :global(ul) {
+    margin: 1rem 0 2rem 0; padding-left: 1.5rem; color: #dbd7e0; line-height: 1.8;
+  }
+  .markdown-content :global(li) {
+    margin-bottom: 0.6rem;
+  }
+  
+  /* 戻るリンク */
+  .back-home-container { text-align: center; margin-top: 4rem; }
+  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+  .back-home-link:hover { color: #ffb7ff; }
+
+  /* フッター */
+  .site-footer {
+    display: block !important; position: relative; z-index: 9999 !important; width: 100vw;
+    margin-left: calc(-50vw + 50%); background: #0d0b18 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12); padding: 2.5rem 0; text-align: center; margin-top: 5rem;
+  }
+  .copyright { margin: 0; font-size: 0.85rem; color: #a3a0a8; letter-spacing: 0.05em; }
+
+  @media (max-width: 768px) {
+    .site-header { padding: 0.5rem 1rem; }
+    .nav-menu { display: none; }
+    .detailed-container { margin-top: 120px; }
+    .card-panel { padding: 1.5rem; }
+    .program-header-block h2 { font-size: 1.6rem; }
+  }
+
+  /* マークダウン内の画像を美しく整える */
+  .markdown-content :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 12px; /* 角を少し丸くする */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* ほんのり影をつけて立体感を出す */
+    margin: 2rem 0; /* 前後の文章との間に心地よい隙間を作る */
+  }
+</style>

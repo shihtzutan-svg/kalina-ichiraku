@@ -1,6 +1,10 @@
 ---
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import logo from '../assets/logo.avif';
+
+// ★追加：テキストファイルを読み込む
+import * as profileData from '../content/profile.md';
+const { frontmatter } = profileData;
 ---
 
 <html lang="ja">
@@ -31,21 +35,24 @@ import logo from '../assets/logo.avif';
       </nav>
     </header>
 
-    <!-- メインコンテンツ -->
+   <!-- メインコンテンツ -->
     <main class="detailed-profile-container">
       <section class="card-panel">
         <div class="profile-header-block">
-          <p class="catchphrase">魂の声を形にする 創作系スピリチュアルワーカー</p>
-          <h2>About 一樂 迦哩無</h2>
+          <!-- ★テキストファイルからキャッチコピーを読み込み -->
+          <p class="catchphrase">{frontmatter.catchphrase}</p>
+          <!-- ★テキストファイルからタイトルを読み込み -->
+          <h2>{frontmatter.title}</h2>
         </div>
         
         <div class="card-content detailed-story">
           <div class="intro-message">
-            <p class="greeting">こんにちは、一樂 迦哩無（いちらく かりな）です。</p>
+            <!-- ★テキストファイルから挨拶を読み込み -->
+            <p class="greeting">{frontmatter.greeting}</p>
             <blockquote>
-              「みんなが自分の個性を発揮して、自由に生きてほしい」
+              <!-- ★テキストファイルから引用句を読み込み -->
+              {frontmatter.quote}
             </blockquote>
-            <p>そんな想いで、この活動を始めました。<br>一人でも多くの人が、楽しく軽やかに人生を送れるその一助となれば幸いです。</p>
           </div>
 
           <hr class="profile-divider" />
@@ -53,16 +60,16 @@ import logo from '../assets/logo.avif';
           <!-- ストーリー（長いプロフィール） -->
           <div class="story-block">
             <h3>My Story</h3>
-            <p>1972年生まれ、神戸市在住の主婦。若くしてスピリチュアルに傾倒し、様々なライトワーカーに師事して技法を学ぶも、自分の生きる道を模索することに疲れ果て、2024～25年にかけて壮絶な心の葛藤と試練を経験。</p>
-            <p>人生のどん底にいた2025年、瞑想中に源（みなもと）との対話を果たし、この世の理（ことわり）を知ることとなる。</p>
-            <p>その後、クレジットカードのリボ払いによる経済的試練に直面するも、自らの波動を高く保つトレーニングを徹底した結果、思い立ってからわずか1ヶ月のうちにすべての負債を奇跡的に完済するという現実創造を体現。</p>
-            <p>現在は、持ち前の造形力とスピリチュアル能力を生かし、願いを叶えるマスコット「Kana-L（カナエル）」を制作・販売。また、過去の自分と同じように道に迷う人たちに向けて、楽しく覚醒に至ることができる「クレイワーク・プログラム」を考案し、精力的に活動を行っている。</p>
+            <!-- ★追加：Markdownの長い本文をここに自動展開する -->
+            <profileData.Content />
             
             <div class="personal-info">
               <p>⚡ <strong>目印:</strong> 金髪・タトゥー</p>
               <p>🎸 <strong>好きなこと:</strong> 粘土細工、天然石集め、推し活（某デスメタルバンドの大ファン！）</p>
             </div>
           </div>
+          
+          <!-- （中略：残りのスキルブロックやフッターなどはそのまま） -->
 
           <hr class="profile-divider" />
 
@@ -232,6 +239,7 @@ body {
   .intro-message blockquote {
     margin: 1.5rem 0; padding-left: 1.2rem; border-left: 3px solid #ffb7ff;
     font-style: italic; color: #fff; font-size: 1.1rem;
+    white-space: pre-line;
   }
   .profile-divider {
     border: 0; height: 1px;
