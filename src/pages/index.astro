@@ -11,6 +11,9 @@ import logo from '../assets/logo.avif';
 import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
 import * as clayData from '../content/clay.md';
+
+// ✨【追記】Kana-L（カナエル）のMarkdownデータをインポート
+import * as kanaLData from '../content/kana-l.md';
 ---
 
 <html lang="ja">
@@ -31,7 +34,7 @@ import * as clayData from '../content/clay.md';
       <nav class="nav-menu">
         <ul>
           <li><a href="/#profile">プロフィール</a></li>
-          <li><a href="/#activities">活動内容</a></li>
+          <li><a href="#kana-l">あなたの願いを叶える「Kana-L」</a></li>
           <li><a href="/#clay">クレイワーク・プログラム</a></li>
           <li><a href="/#service">ライトワーカー様向けサービス</a></li>
           <li><a href="/#contact">お申し込み・お問い合わせ</a></li>
@@ -77,6 +80,26 @@ import * as clayData from '../content/clay.md';
             壮絶な葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
           </p>
           <a href="/profile" class="read-more">一樂 迦哩無について 続きはこちら →</a>
+        </div>
+      </section>
+
+<!-- ✨ 2. 【新設】Kana-L（カナエル）カード -->
+      <section class="card-panel" id="kana-l">
+        <div class="profile-header-block">
+          <!-- Markdownの catchphrase から自動連動 -->
+          <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
+          <!-- Markdownの title から自動連動 -->
+          <h2>{kanaLData.frontmatter.title}</h2>
+        </div>
+        
+        <div class="card-content">
+          <!-- Markdownの image から自動連動 -->
+          <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" />
+          <!-- Markdownの summary から自動連動 -->
+          <p>{kanaLData.frontmatter.summary}</p>
+          
+          <!-- 詳細ページへのリンク（お好みのURLに調整してください） -->
+          <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
         </div>
       </section>
 
@@ -142,13 +165,13 @@ body {
     100% { transform: scale(1.08) rotate(1deg); }
   }
 
-  /* ヘッダー */
+/* ヘッダー：巨大化を防ぐため高さを制限 */
   .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 3rem;
-    height: 100px;
+    padding: 0.5rem 3rem; /* 上下パディングを縮小 */
+    height: 100px; /* ヘッダー全体の高さを固定 */
     background: rgba(13, 11, 24, 0.6);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -157,7 +180,7 @@ body {
   }
   .logo-area { display: flex; align-items: center; height: 100%; }
   .site-logo-img { 
-    max-height: 80px; 
+    max-height: 80px; /* ロゴが絶対にはみ出さないように最大高さを指定 */
     width: auto; 
     object-fit: contain; 
     display: block;
@@ -233,22 +256,52 @@ body {
     z-index: 5;
     margin-top: 0;
   }
-  
-  .card-panel {
-    background: rgba(13, 11, 24, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 2rem;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+ /* ＝黒メニュー（カード）を4つ綺麗に並べる設定＝ */
+/* 下部コンテンツエリア：4列横並びに修正 */
+  .content-grid {
+    flex: 1; /* 余った縦方向のスペースをこのエリアが自動で全部埋めます */
+    
+    display: grid;
+    /* ★3列（1fr 1.3fr 1fr）から「4列（等幅）」に変更しました */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 3rem 4rem;
+    background: linear-gradient(to bottom, rgba(13, 11, 24, 0.7) 0%, rgba(13, 11, 24, 0.95) 100%);
+    min-height: 400px;
+    position: relative;
+    z-index: 5;
+    margin-top: 0;
   }
+
+/* カード内のテキストや見出しを綺麗に整列させる設定 */
+  .card-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* ★上基準に変更 */
+    padding: 2rem 1.2rem !important;
+    height: 100%;
+  }
+
+  /* ★見出しの上のエリアを固定してガタつきを防止 */
+  .card-panel .card-header-block {
+    min-height: 50px; /* キャッチフレーズ分の高さを確保 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 下側に揃えることで、見出しの位置が綺麗に一致します */
+    margin-bottom: 0.5rem;
+  }
+
   .card-panel h2 { 
     font-size: 1.25rem; 
     border-bottom: 2px solid rgba(255, 255, 255, 0.08); 
     padding-bottom: 0.75rem; 
     margin-top: 0;
+    margin-bottom: 1.5rem;
   }
+
+  /* ★本文エリアを自動で広げ、ボタンを最下部に押し下げる */
   .card-content { 
+    flex: 1; /* ★これを追記することで、文字量に関わらずボタンの位置も下に揃います */
     color: #dbd7e0; 
     font-size: 0.95rem; 
     line-height: 1.75; 
@@ -319,10 +372,16 @@ body {
     letter-spacing: 0.05em;
   }
 
-  /* タブレット対応 */
+ /* タブレット・スマートフォン共通対応（1100px以下はすべて1列にする） */
   @media (max-width: 1100px) {
     .hero-section { padding: 40px 0 0 0; }
-    .content-grid { grid-template-columns: 1fr; padding: 2rem; }
+    
+    /* ★ここを1列（1fr）に固定しました */
+    .content-grid { 
+      grid-template-columns: 1fr !important; 
+      padding: 2rem 1.5rem; 
+    }
+    
     .site-header { padding: 0.5rem 1.5rem; }
     .nav-menu ul { gap: 1.2rem; }
     .floating-container { height: 460px; }
@@ -332,7 +391,7 @@ body {
     .m3 { right: 8%; top: 17%; } .m4 { right: 5%; bottom: 4%; }
   }
 
-  /* スマートフォン対応（768px以下） */
+  /* スマートフォン対応（768px以下でのヘッダーやヒーローエリアの微調整） */
   @media (max-width: 768px) {
     .site-header { flex-direction: column; height: auto; padding: 1rem 1rem 0.5rem 1rem; width: 100%; }
     .nav-menu ul { flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 0.8rem; }
@@ -346,10 +405,26 @@ body {
     }
     
     .mascot { width: 110px; }
-    .m1 { left: 6%; top: 3%; }     
+    .m1 { left: 6%; top: 3%; }      
     .m2 { left: 6%; bottom: 8%; }   
     .m3 { right: 6%; top: 5%; }    
     .m4 { right: 6%; bottom: 10%; } 
+  }
+
+  /* トップページのクレイワーク枠内の改行を有効にする */
+  #clay .card-content p {
+    white-space: pre-line;
+  }
+
+  /* クレイワークのサムネイル画像（修正版） */
+  .program-thumb {
+    width: 100%;
+    height: 250px;       /* 高さを固定します */
+    object-fit: cover;   /* これを入れることで、潰れずに綺麗に中央で切り抜かれます */
+    border-radius: 12px; /* ついでにここも角丸にしておきます */
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: block;      /* 隙間ができないようにブロック要素化 */
   }
 
   /* トップページのクレイワーク枠内の改行を有効にする */

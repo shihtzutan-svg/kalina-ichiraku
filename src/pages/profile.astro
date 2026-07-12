@@ -2,7 +2,7 @@
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import logo from '../assets/logo.avif';
 
-// ★追加：テキストファイルを読み込む
+// ★テキストファイルを読み込む
 import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
 ---
@@ -18,16 +18,14 @@ const { frontmatter } = profileData;
     <div class="bg-layer"></div>
 
     <!-- ヘッダー（トップと共通） -->
-<header class="site-header">
+    <header class="site-header">
       <div class="logo-area">
-        <!-- ロゴをクリックした時もトップへ戻れるように a タグで囲むのがおすすめです -->
         <a href="/"><img src={logo.src} alt="一樂 迦哩無" class="site-logo-img" /></a>
       </div>
       <nav class="nav-menu">
         <ul>
-          <!-- 先頭に / をつけることで、別ページからでもトップの各セクションへ飛べます -->
           <li><a href="/#profile">プロフィール</a></li>
-          <li><a href="/#activities">活動内容</a></li>
+          <li><a href="#kana-l">あなたの願いを叶える「Kana-L」</a></li>
           <li><a href="/#clay">クレイワーク・プログラム</a></li>
           <li><a href="/#service">ライトワーカー様向けサービス</a></li>
           <li><a href="/#contact">お申し込み・お問い合わせ</a></li>
@@ -35,22 +33,18 @@ const { frontmatter } = profileData;
       </nav>
     </header>
 
-   <!-- メインコンテンツ -->
-    <main class="detailed-profile-container">
+    <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
+    <main class="detailed-container">
       <section class="card-panel">
         <div class="profile-header-block">
-          <!-- ★テキストファイルからキャッチコピーを読み込み -->
           <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <!-- ★テキストファイルからタイトルを読み込み -->
           <h2>{frontmatter.title}</h2>
         </div>
         
         <div class="card-content detailed-story">
           <div class="intro-message">
-            <!-- ★テキストファイルから挨拶を読み込み -->
             <p class="greeting">{frontmatter.greeting}</p>
             <blockquote>
-              <!-- ★テキストファイルから引用句を読み込み -->
               {frontmatter.quote}
             </blockquote>
           </div>
@@ -60,7 +54,7 @@ const { frontmatter } = profileData;
           <!-- ストーリー（長いプロフィール） -->
           <div class="story-block">
             <h3>My Story</h3>
-            <!-- ★追加：Markdownの長い本文をここに自動展開する -->
+            <!-- Markdownの長い本文をここに自動展開 -->
             <profileData.Content />
             
             <div class="personal-info">
@@ -69,8 +63,6 @@ const { frontmatter } = profileData;
             </div>
           </div>
           
-          <!-- （中略：残りのスキルブロックやフッターなどはそのまま） -->
-
           <hr class="profile-divider" />
 
           <!-- スキル・資格 -->
@@ -110,6 +102,7 @@ const { frontmatter } = profileData;
         </div>
       </section>
     </main>
+
     <!-- フッター -->
     <footer class="site-footer">
       <div class="footer-content">
@@ -122,19 +115,13 @@ const { frontmatter } = profileData;
 <!-- スタイル設定 -->
 <style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
   * { box-sizing: border-box; }
-body { 
-    margin: 0; 
-    padding: 0;
-    background: #0d0b18; 
-    color: #f0ecf4; 
+  body { 
+    margin: 0; padding: 0;
+    background: #0d0b18; color: #f0ecf4; 
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x: hidden;
-    
-    /* ★ここを書き換え・追記します */
-    min-height: 100vh;           /* 常に画面の高さ100%分を最低限キープ */
-    display: flex;               /* Flexboxレイアウトを開始 */
-    flex-direction: column;      /* 中身を上から下へ縦並びにする */
-    
+    min-height: 100vh;
+    display: flex; flex-direction: column;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -143,8 +130,7 @@ body {
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: var(--bgUrl); background-size: cover; background-position: center;
-    z-index: -2;
-    opacity: 0.7;
+    z-index: -2; opacity: 0.7;
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
   @keyframes bgMovement {
@@ -154,86 +140,48 @@ body {
 
   /* ヘッダー */
   .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 3rem;
-    height: 100px;
-    background: rgba(13, 11, 24, 0.6);
-    backdrop-filter: blur(12px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5rem 3rem; height: 100px;
+    background: rgba(13, 11, 24, 0.6); backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: fixed; /* 詳細ページでは固定 */
-    top: 0; width: 100%;
-    z-index: 100;
+    position: fixed; top: 0; width: 100%; z-index: 100;
   }
-  .site-logo-img { 
-    max-height: 80px; 
-    width: auto; 
-    object-fit: contain; 
-  }
-  
+  .site-logo-img { max-height: 80px; width: auto; object-fit: contain; }
   .nav-menu ul { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
   .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
   .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
 
-  /* メインコンテンツコンテナ（ヘッダー分パディングを開ける） */
-/* 下部コンテンツエリア（content-grid）のところに1行追加 */
-  .content-grid {
-    flex: 1; /* ★これを追記！余った縦方向のスペースをこのエリアが自動で全部埋めます */
-    
-    display: grid;
-    grid-template-columns: 1fr 1.3fr 1fr;
-    gap: 2rem;
-    padding: 3rem 4rem;
-    background: linear-gradient(to bottom, rgba(13, 11, 24, 0.7) 0%, rgba(13, 11, 24, 0.95) 100%);
-    min-height: 400px;
-    position: relative;
-    z-index: 5;
-    margin-top: 0;
-  }
-
-/* フッターの装飾（最終解決版） */
-  .site-footer {
-    display: block !important; /* 絶対に非表示にさせない */
-    position: relative;
-    z-index: 9999 !important;  /* 最前面のヘッダーと同等レベルまで重なり順を引き上げる */
-    width: 100vw;              /* 画面の横幅いっぱいに強制固定 */
-    margin-left: calc(-50vw + 50%); /* どんな親要素の枠の中にいても画面の左端に強制リセット */
-    
-    background: #0d0b18 !important; /* 半透明をやめて完全に塗りつぶし、後ろに隠れるのを防ぐ */
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 2.5rem 0;
-    text-align: center;
-    margin-top: 5rem;          /* 上のコンテンツとの間に強制的に大きな隙間を作る */
-  }
-  .copyright {
-    margin: 0;
-    font-size: 0.85rem;
-    color: #a3a0a8;
-    letter-spacing: 0.05em;
+  /* 💡メインコンテンツコンテナ（clayと同様のスマートな中央寄せ） */
+  .detailed-container {
+    flex: 1;
+    max-width: 900px; /* 横幅を他ページと統一 */
+    margin: 140px auto 60px auto; /* 上部のヘッダー被りを回避し、中央配置 */
+    padding: 0 1.5rem;
+    width: 100%;
   }
   
-  /* カードパネル共通設定 */
+  /* カードパネル設定 */
   .card-panel {
     background: rgba(13, 11, 24, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 2.5rem;
-    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
+    padding: 2.5rem; backdrop-filter: blur(8px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   }
   
   /* テキスト装飾 */
-  .profile-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem;}
-  .profile-header-block h3 {
-    font-size: 1.4rem; color: #ffb7ff; text-shadow: 0 0 8px rgba(255, 183, 255, 0.5);
-    margin-top: 2rem; margin-bottom: 1rem; letter-spacing: 0.05em;
+  .profile-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; }
+  .catchphrase {
+    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
+    white-space: pre-line;
   }
-.detailed-story p { 
-    line-height: 1.85; /* ★行間をゆったり */
-    margin-bottom: 1.4rem; 
-    color: #dbd7e0; /* ★本文のチカチカを抑える */
-    letter-spacing: 0.03em;
+
+  .story-block h3, .skills-block h3 {
+    font-size: 1.4rem; color: #ffb7ff; text-shadow: 0 0 8px rgba(255, 183, 255, 0.5);
+    margin-top: 2rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;
+  }
+
+  .detailed-story p { 
+    line-height: 1.85; margin-bottom: 1.4rem; color: #dbd7e0; letter-spacing: 0.03em;
   }
   .intro-message .greeting { font-size: 1.15rem; font-weight: bold; color: #fff; }
   .intro-message blockquote {
@@ -241,37 +189,45 @@ body {
     font-style: italic; color: #fff; font-size: 1.1rem;
     white-space: pre-line;
   }
+
   .profile-divider {
     border: 0; height: 1px;
     background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
     margin: 2.5rem 0;
   }
+
   .personal-info {
     background: rgba(255, 255, 255, 0.03); padding: 1.2rem;
-    border-radius: 8px; margin-top: 1.5rem; font-size: 0.95rem;
+    border-radius: 8px; margin-top: 2rem; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
   .personal-info p { margin: 0.6rem 0; }
-  .skills-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-  }
+
+  /* スキルグリッド（中身は綺麗に2分割のまま） */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
   .skills-grid h4 { margin: 0 0 0.8rem 0; font-size: 1.1rem; color: #a3e2ff; }
   .skills-grid ul { margin: 0; padding-left: 1.2rem; font-size: 0.95rem; line-height: 1.7; }
   .skills-grid ul li { margin-bottom: 0.4rem; }
   .sub-info { font-size: 0.9rem; color: #aaa; margin: 0 0 0.8rem 0; }
   
   /* 戻るリンク */
-  .back-home-container { text-align: center; margin-top: 3rem; }
-  .back-home-link {
-      color: #aaa; text-decoration: none; font-size: 0.95rem;
-      transition: color 0.3s;
-  }
+  .back-home-container { text-align: center; margin-top: 4rem; }
+  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
 
+  /* フッターの装飾 */
+  .site-footer {
+    display: block !important; position: relative; z-index: 9999 !important; width: 100vw;
+    margin-left: calc(-50vw + 50%); background: #0d0b18 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12); padding: 2.5rem 0; text-align: center; margin-top: 5rem;
+  }
+  .copyright { margin: 0; font-size: 0.85rem; color: #a3a0a8; letter-spacing: 0.05em; }
+  
   /* レスポンシブ対応 */
   @media (max-width: 768px) {
-    .site-header { padding: 0.5rem 1rem; flex-direction: row; }
-    .nav-menu { display: none; } /* スマホではロゴクリックで戻る */
-    .detailed-profile-container { margin-top: 120px; }
+    .site-header { padding: 0.5rem 1rem; }
+    .nav-menu { display: none; }
+    .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
     .profile-header-block h2 { font-size: 1.6rem; }
     .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
