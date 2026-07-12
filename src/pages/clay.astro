@@ -452,9 +452,15 @@ const { frontmatter } = clayData;
     width: 100% !important; height: auto !important; border-radius: 12px !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important; margin: 2rem 0 !important;
   }
-  /* ウサギの画像 */
+  /* 作品画像 */
   .markdown-content :global(img[alt="クレイワークのイメージ"]) {
     width: 30% !important; max-width: 450px !important; height: auto !important;
+    margin: 2rem auto !important; display: block !important;
+  }
+
+    /* 受講生の声 */
+  .markdown-content :global(img[alt="受講生の声"]) {
+    width: 70% !important; max-width: 450px !important; height: auto !important;
     margin: 2rem auto !important; display: block !important;
   }
 
@@ -463,4 +469,134 @@ const { frontmatter } = clayData;
       flex: 1 1 100% !important;
     }
   }
+
+ /* ===================================================
+     ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
+     =================================================== */
+  .markdown-content :global(.action-buttons-container) {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+    margin: 3.5rem 0 !important;
+    width: 100% !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* ボタン共通のベーススタイル */
+  .markdown-content :global(.btn-action) {
+    flex: 1 !important;
+    max-width: 320px !important;
+    min-width: 260px !important;
+    height: 56px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    font-size: 1.05rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.05em !important;
+    border-radius: 30px !important;
+    position: relative !important;
+    transition: all 0.4s ease !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    border: none !important;
+  }
+
+  .markdown-content :global(.btn-action span) {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  /* 🔥 お申し込みボタン：ピンク〜オレンジグラデーション */
+  .markdown-content :global(.btn-apply) {
+    background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4) !important;
+  }
+
+  .markdown-content :global(.btn-apply::before) {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
+    background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+    transition: opacity 0.4s ease !important;
+  }
+
+  .markdown-content :global(.btn-apply:hover) {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important;
+  }
+  
+  .markdown-content :global(.btn-apply:hover::before) {
+    opacity: 1 !important;
+  }
+
+  /* 💬 お問い合わせボタン：パープルネオン調 */
+  .markdown-content :global(.btn-contact) {
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: #ffb7ff !important;
+    border: 2px solid #ffb7ff !important;
+    box-shadow: 0 4px 15px rgba(255, 183, 255, 0.1) !important;
+  }
+
+  .markdown-content :global(.btn-contact:hover) {
+    transform: translateY(-3px) !important;
+    background: rgba(255, 183, 255, 0.15) !important;
+    color: #fff !important;
+    box-shadow: 0 8px 25px rgba(255, 183, 255, 0.4), 0 0 15px rgba(255, 183, 255, 0.2) !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+  }
+
+  /* スマホ対応 */
+  @media (max-width: 600px) {
+    .markdown-content :global(.action-buttons-container) {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 1.2rem !important;
+    }
+    .markdown-content :global(.btn-action) {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
 </style>
+
+<!-- 既存の </style> のすぐ下に貼り付け（Astro完全対応版） -->
+<script is:inline>
+  function setupFormButtons() {
+    const container = document.querySelector('.action-buttons-container');
+    if (!container) return;
+
+    const links = container.querySelectorAll('a');
+    links.forEach(link => {
+      // 属性を強制注入
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+      
+      // クリックイベントを最優先で上書き（イベントのバブリングも考慮）
+      link.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const href = this.getAttribute('href');
+        if (href) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
+        return false;
+      };
+    });
+  }
+
+  // 1. 通常の読み込み時に実行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFormButtons);
+  } else {
+    setupFormButtons();
+  }
+
+  // 2. Astroの画面遷移（View Transitions）が発生した時にも実行
+  document.addEventListener('astro:page-load', setupFormButtons);
+  document.addEventListener('astro:after-swap', setupFormButtons);
+</script>

@@ -6,8 +6,8 @@ catchphrase: |
 
 summary: |
     このプログラムでは、「粘土遊び」をして作品を1つ作ることで創造性を働かせ自分を解放し、思考の枠組みを超えた覚醒への道筋を作ってゆきます。
-    完成した作品と向き合うことで自分の内面を見つめ、気付きを得る。
-    その気付きにより、潜在意識に作られたブロックが外れてゆきます。
+    完成した作品と向き合うことで自分の内面を見つめ、気づきを得る。
+    その気づきにより、潜在意識に作られたブロックが外れてゆきます。
 
 
 image: "/02.avif" 
@@ -24,6 +24,7 @@ image: "/02.avif"
 ![クレイワークの様子](../assets/03.avif)
 ![クレイワークの様子](../assets/04.avif)
 ![クレイワークの様子](../assets/05.avif)
+![クレイワークの様子](../assets/01.avif)
 
 ### 🧘 ハイアーセルフと繋がる
 「うまく作らなければ」「こんな変なのを作って恥ずかしい」などの気持ちは全部忘れて頂きます。
@@ -33,7 +34,25 @@ image: "/02.avif"
 
 ハイヤーセルフと繋がり、自分のありのままの本音をさらけ出せるようなボディとマインドの準備を整えてから粘土遊びに入ってゆきます。
 
+---
+
 ![クレイワークのイメージ](../assets/3.avif)
+
+<!-- コンバージョンボタンエリア -->
+<div class="action-buttons-container">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWzJm0er5IyG1msVXZQv7xIJkEH5J3Q6CAMu64kawYDH8YcA/viewform?embedded=true" class="btn-action btn-apply">
+    <span>お申し込みはこちら</span>
+  </a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc82y219bbR0uQjqlR_0_EQj3utegWtJQ5YfrZdHx6A8qtXmg/viewform?embedded=true" class="btn-action btn-contact">
+    <span>お問い合わせはこちら</span>
+  </a>
+</div>
+
+---
+### 💬 受講生の声
+
+![受講生の声](../assets/IMG_3103.jpeg)
+![受講生の声](../assets/IMG_3104.jpeg)
 ---
 
 ### ✨ クレイワーク・プログラムを受けるメリット
@@ -64,13 +83,14 @@ image: "/02.avif"
 
 ### 🎨 あらかじめご用意いただくもの
 ※汚れてもよい服装でご参加ください。
+ 
 ※下記はすべて100円ショップで揃います。
 
-* **必須のもの（◎）**
+* **必須のもの**
   * 紙粘土 2つ
   * 絵の具セット
   * 筆（平筆と細筆）
-* **代用がきくもの（〇）**
+* **代用がきくもの**
   * へら（割り箸や竹串などでOK）
   * 粘土マット（段ボールなどでOK）
   * 水入れ（紙コップ1つ分ぐらい）
@@ -82,10 +102,26 @@ image: "/02.avif"
 ※材料費別
 
 #### ◆ 1回（オンライン）
-* **通常価格（2日間）**：28,000円
+* **2日間**：通常価格　28,000円
 
 #### ◆ 半年コース（オンライン）
-* **2日間 × 6回**：150,000円（一括払い）
+* **2日間 × 6回**：通常価格　150,000円（一括払い）
 
 > 💡 **対面開催をご希望の方へ**
 > ご要望により対面での開催も可能です。まずはお気軽にお問い合わせください。
+
+---
+
+<!-- コンバージョンボタンエリア -->
+<div class="action-buttons-container">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWzJm0er5IyG1msVXZQv7xIJkEH5J3Q6CAMu64kawYDH8YcA/viewform?embedded=true" class="btn-action btn-apply">
+    <span>お申し込みはこちら</span>
+  </a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc82y219bbR0uQjqlR_0_EQj3utegWtJQ5YfrZdHx6A8qtXmg/viewform?embedded=true" class="btn-action btn-contact">
+    <span>お問い合わせはこちら</span>
+  </a>
+</div>
+
+---
+
+![クレイワークのイメージ](../assets/1.avif)
