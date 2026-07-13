@@ -16,22 +16,9 @@ const { frontmatter } = profileData;
   <body>
     <!-- 背景画像 -->
     <div class="bg-layer"></div>
-
-    <!-- ヘッダー（トップと共通） -->
-    <header class="site-header">
-      <div class="logo-area">
-        <a href="/"><img src={logo.src} alt="一樂 迦哩無" class="site-logo-img" /></a>
-      </div>
-      <nav class="nav-menu">
-        <ul>
-          <li><a href="/#profile">プロフィール</a></li>
-          <li><a href="#kana-l">あなたの願いを叶える「Kana-L」</a></li>
-          <li><a href="/#clay">クレイワーク・プログラム</a></li>
-          <li><a href="/#service">ライトワーカー様向けサービス</a></li>
-          <li><a href="/#contact">お申し込み・お問い合わせ</a></li>
-        </ul>
-      </nav>
-    </header>
+    
+<!-- ヘッダー -->
+<Header />
 
     <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
     <main class="detailed-container">

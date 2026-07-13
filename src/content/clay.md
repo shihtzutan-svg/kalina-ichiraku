@@ -40,10 +40,10 @@ image: "/02.avif"
 
 <!-- コンバージョンボタンエリア -->
 <div class="action-buttons-container">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWzJm0er5IyG1msVXZQv7xIJkEH5J3Q6CAMu64kawYDH8YcA/viewform?embedded=true" class="btn-action btn-apply">
+  <a href="https://forms.gle/Uf1iazz1dmR691yh9" target="_blank" rel="noopener noreferrer" class="btn-action btn-apply">
     <span>お申し込みはこちら</span>
   </a>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc82y219bbR0uQjqlR_0_EQj3utegWtJQ5YfrZdHx6A8qtXmg/viewform?embedded=true" class="btn-action btn-contact">
+  <a href="https://forms.gle/S4YanYgGCeFCjhqr8" target="_blank" rel="noopener noreferrer" class="btn-action btn-contact">
     <span>お問い合わせはこちら</span>
   </a>
 </div>
@@ -114,10 +114,10 @@ image: "/02.avif"
 
 <!-- コンバージョンボタンエリア -->
 <div class="action-buttons-container">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWzJm0er5IyG1msVXZQv7xIJkEH5J3Q6CAMu64kawYDH8YcA/viewform?embedded=true" class="btn-action btn-apply">
+  <a href="https://forms.gle/Uf1iazz1dmR691yh9" target="_blank" rel="noopener noreferrer" class="btn-action btn-apply">
     <span>お申し込みはこちら</span>
   </a>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc82y219bbR0uQjqlR_0_EQj3utegWtJQ5YfrZdHx6A8qtXmg/viewform?embedded=true" class="btn-action btn-contact">
+  <a href="https://forms.gle/S4YanYgGCeFCjhqr8" target="_blank" rel="noopener noreferrer" class="btn-action btn-contact">
     <span>お問い合わせはこちら</span>
   </a>
 </div>

@@ -357,17 +357,17 @@ import * as kanaLData from '../content/kana-l.md';
   }
 
 
- /* ========================================================
-     1600px以下：ヘッダーをハンバーガーメニューに【確実に】切り替え
+  /* ========================================================
+     1600px以下：ヘッダーをハンバーガーメニューに切り替え
      ======================================================== */
   @media (max-width: 1600px) {
-    /* 💡PC用の横並びメニューを完全に非表示にして、はみ出しを防ぐ */
-    .nav-menu ul {
+    /* 💡:global() を使い、Headerコンポーネント内の要素を強制制御 */
+    :global(.site-header .nav-menu ul) {
       display: none !important;
     }
 
-    /* 💡ハンバーガーボタン（3本線）を確実に画面に出現させる */
-    .menu-trigger {
+    /* 💡ハンバーガーボタン（3本線）を出現させる */
+    :global(.site-header .menu-trigger) {
       display: flex !important; 
       flex-direction: column;
       justify-content: space-between;
@@ -379,7 +379,7 @@ import * as kanaLData from '../content/kana-l.md';
       padding: 0;
       z-index: 200; 
     }
-    .menu-trigger span {
+    :global(.site-header .menu-trigger span) {
       width: 100%;
       height: 2px;
       background-color: #fff;
@@ -388,21 +388,21 @@ import * as kanaLData from '../content/kana-l.md';
     }
 
     /* ボタン変形設定（Xマーク） */
-    .menu-trigger.active span:nth-child(1) {
+    :global(.site-header .menu-trigger.active span:nth-child(1)) {
       transform: translateY(10px) rotate(-45deg);
       background-color: #ffb7ff;
     }
-    .menu-trigger.active span:nth-child(2) {
+    :global(.site-header .menu-trigger.active span:nth-child(2)) {
       opacity: 0;
     }
-    .menu-trigger.active span:nth-child(3) {
+    :global(.site-header .menu-trigger.active span:nth-child(3)) {
       transform: translateY(-10px) rotate(45deg);
       background-color: #ffb7ff;
     }
 
     /* スマホ・タブレット用全画面メニュー（初期状態：上空に隠す） */
-    .nav-menu {
-      position: fixed;
+    :global(.site-header .nav-menu) {
+      position: fixed !important;
       top: -100vh; 
       left: 0;
       width: 100%;
@@ -410,23 +410,23 @@ import * as kanaLData from '../content/kana-l.md';
       background: rgba(13, 11, 24, 0.95);
       backdrop-filter: blur(20px);
       transition: top 0.4s ease-in-out; 
-      display: flex !important; /* display: none を打ち消して動くようにする */
+      display: flex !important; 
       align-items: center;
       justify-content: center;
       z-index: 150;
     }
 
-    /* 💡メニューが開いた時だけ縦並びのリストを表示する */
-    .nav-menu.open {
-      top: 0;
+    /* メニューが開いた状態 */
+    :global(.site-header .nav-menu.open) {
+      top: 0 !important;
     }
-    .nav-menu.open ul { 
+    :global(.site-header .nav-menu.open ul) { 
       display: flex !important;
       flex-direction: column !important; 
       align-items: center;
       gap: 2rem !important; 
     }
-    .nav-menu.open a {
+    :global(.site-header .nav-menu.open a) {
       font-size: 1.2rem; 
       padding: 0.5rem 1rem;
     }
@@ -448,7 +448,7 @@ import * as kanaLData from '../content/kana-l.md';
       width: 100%; 
     }
     
-    /* マスコットとポートレートの位置調整 */
+    /* ★マスコットとポートレートの位置調整（ご指定の数値を維持） */
     .floating-container { height: 380px !important; width: 100%; }
     .portrait-container { width: 300px !important; height: 340px !important; }
     .mascot { width: 110px !important; }
