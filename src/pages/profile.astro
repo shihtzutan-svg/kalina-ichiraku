@@ -16,7 +16,7 @@ const { frontmatter } = profileData;
   </head>
   <body>
     <!-- 背景画像 -->
-    <div class="bg-layer"></div>
+   <div class="bg-layer"></div>
     
 <!-- ヘッダー -->
 <Header />
@@ -37,51 +37,11 @@ const { frontmatter } = profileData;
             </blockquote>
           </div>
 
-          <hr class="profile-divider" />
 
-          <!-- ストーリー（長いプロフィール） -->
-          <div class="story-block">
-            <h3>My Story</h3>
-            <!-- Markdownの長い本文をここに自動展開 -->
             <profileData.Content />
-            
-            <div class="personal-info">
-              <p>⚡ <strong>目印:</strong> 金髪・タトゥー</p>
-              <p>🎸 <strong>好きなこと:</strong> 粘土細工、天然石集め、推し活（某デスメタルバンドの大ファン！）</p>
-            </div>
-          </div>
-          
-          <hr class="profile-divider" />
 
-          <!-- スキル・資格 -->
-          <div class="skills-block">
-            <h3>Skills & Qualifications</h3>
-            
-            <div class="skills-grid">
-              <div>
-                <h4>🔮 スピリチュアルスキル</h4>
-                <ul>
-                  <li>占い（オラクルカード）</li>
-                  <li>チャネリング</li>
-                  <li>カナエルヒーリング（オリジナル）</li>
-                  <li>音叉ヒーリング / オーラヒーリング</li>
-                  <li>現代レイキ（レベル3修了）</li>
-                  <li>アクセスバーズ（プラクティショナー）</li>
-                  <li>24本エーテリックDNAアクティベーション</li>
-                </ul>
-              </div>
-              
-              <div>
-                <h4>🐾 動物たち＆資格</h4>
-                <p class="sub-text sub-info">自宅では犬、猫、爬虫類などたくさんの愛しい家族たちと暮らしています。</p>
-                <ul>
-                  <li>愛玩動物飼養管理士 2級</li>
-                  <li>トーク・トゥ・ザ・アニマル プラクティショナー</li>
-                  <li>アニマルコミュニケーション</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          
+
           
           <div class="back-home-container">
               <a href="/" class="back-home-link">トップページへ戻る</a>
@@ -101,6 +61,7 @@ const { frontmatter } = profileData;
   </body>
 </html>
 
+
 <!-- スタイル設定 -->
 <style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
   * { box-sizing: border-box; }
@@ -115,7 +76,7 @@ const { frontmatter } = profileData;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* 背景アニメーション */
+  /* 背景アニメーション（これで無事に復活します！） */
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: var(--bgUrl); background-size: cover; background-position: center;
@@ -140,11 +101,11 @@ const { frontmatter } = profileData;
   .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
   .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
 
-  /* 💡メインコンテンツコンテナ（clayと同様のスマートな中央寄せ） */
+  /* メインコンテンツコンテナ */
   .detailed-container {
     flex: 1;
-    max-width: 900px; /* 横幅を他ページと統一 */
-    margin: 140px auto 60px auto; /* 上部のヘッダー被りを回避し、中央配置 */
+    max-width: 900px; 
+    margin: 140px auto 60px auto; 
     padding: 0 1.5rem;
     width: 100%;
   }
@@ -179,12 +140,6 @@ const { frontmatter } = profileData;
     white-space: pre-line;
   }
 
-  .profile-divider {
-    border: 0; height: 1px;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
-    margin: 2.5rem 0;
-  }
-
   .personal-info {
     background: rgba(255, 255, 255, 0.03); padding: 1.2rem;
     border-radius: 8px; margin-top: 2rem; font-size: 0.95rem;
@@ -192,7 +147,7 @@ const { frontmatter } = profileData;
   }
   .personal-info p { margin: 0.6rem 0; }
 
-  /* スキルグリッド（中身は綺麗に2分割のまま） */
+  /* スキルグリッド */
   .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
   .skills-grid h4 { margin: 0 0 0.8rem 0; font-size: 1.1rem; color: #a3e2ff; }
   .skills-grid ul { margin: 0; padding-left: 1.2rem; font-size: 0.95rem; line-height: 1.7; }
@@ -220,5 +175,83 @@ const { frontmatter } = profileData;
     .card-panel { padding: 1.5rem; }
     .profile-header-block h2 { font-size: 1.6rem; }
     .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+</style>
+
+<!-- ✨ Markdownの中身を確実に装飾するためのグローバル指定（ここを分離しました！） -->
+<style is:global>
+  /* Markdownの「###」を左線付きのネオンラインに */
+  .card-panel h3 {
+    font-size: 1.35rem !important;
+    color: #ffb7ff !important;
+    text-shadow: 0 0 10px rgba(255, 183, 255, 0.4) !important;
+    border-left: 3px solid #ffb7ff !important;
+    padding-left: 0.8rem !important;
+    margin-top: 3.5rem !important;
+    margin-bottom: 2rem !important;
+    letter-spacing: 0.08em !important;
+    background: none !important;
+  }
+  
+  /* リスト全体に薄いオーラのような背景グラデーションを敷く */
+  .card-panel h4 + ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin: 0.8rem 0 2rem 0 !important;
+    background: linear-gradient(to right, rgba(163, 226, 255, 0.03), transparent) !important;
+    padding: 1rem 1.2rem !important;
+    border-radius: 6px !important;
+  }
+  
+  /* 各リスト項目の設定 */
+  .card-panel ul li {
+    position: relative !important;
+    padding-left: 1.4rem !important;
+    margin-bottom: 0.6rem !important;
+    color: #dbd7e0 !important;
+    font-size: 0.95rem !important;
+    background: none !important;
+    border: none !important;
+  }
+  
+  /* 行頭の丸ドットを、光る星屑（✦）に */
+  .card-panel ul li::before {
+    content: "✦" !important;
+    color: #a3e2ff !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: -1px !important;
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    background: none !important;
+    width: auto !important;
+    height: auto !important;
+    text-shadow: 0 0 4px rgba(163, 226, 255, 0.6) !important;
+  }
+
+  /* 小見出し（####）のカラーを水色に統一 */
+  .card-panel h4 {
+    margin-top: 2rem !important;
+    margin-bottom: 0.6rem !important;
+    font-size: 1.1rem !important;
+    color: #a3e2ff !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  /* 普通の文章テキスト（p）の余白とバランス調整 */
+  .card-panel h4 + p {
+    line-height: 1.85 !important;
+    color: #dbd7e0 !important;
+    margin-bottom: 2rem !important;
+    letter-spacing: 0.03em !important;
+    padding-left: 1.2rem !important;
+  }
+
+  /* Markdown内の区切り線（---）の装飾 */
+  .card-panel hr {
+    border: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
+    margin: 3.5rem 0 !important;
   }
 </style>
