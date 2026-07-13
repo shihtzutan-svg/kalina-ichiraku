@@ -1,6 +1,7 @@
 ---
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
+import PageTop from '../components/PageTop.astro';
 
 // ★新しく作ったKana-L用のMarkdownを読み込む
 import * as kanaLData from '../content/kana-l.md';
@@ -55,6 +56,7 @@ const { frontmatter } = kanaLData;
         <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
     </footer>
+    <PageTop />
   </body>
 </html>
 
@@ -459,6 +461,78 @@ const { frontmatter } = kanaLData;
     }
   }
 
+/* ===================================================
+   ✨ Kana-L（カナエル）ページ専用：拡張スタイル
+   =================================================== */
+
+/* ステップ部分（H4見出しとテキストの間隔調整） */
+.markdown-content :global(.kanal-steps h4) {
+  margin-top: 2rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+/* 例文のタグ装飾 */
+.markdown-content :global(.example-tag) {
+  display: inline-block;
+  background: rgba(255, 183, 255, 0.08) !important;
+  color: #ffb7ff !important;
+  border: 1px dashed rgba(255, 183, 255, 0.25) !important;
+  padding: 0.4rem 1rem !important;
+  border-radius: 6px !important;
+  font-size: 0.9rem !important;
+  margin-top: 0.5rem !important;
+}
+
+/* ===================================================
+   ⚡【修正】チャージ方法・料金の見た目をおとなしくリセット
+   =================================================== */
+
+/* チャージエリア全体の箇条書き（ul）を包む枠や背景を完全に消し去る */
+.markdown-content :global(.kanal-charge-section ul) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  margin: 1rem 0 2rem 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 箇条書きの各項目（li）の派手な背景や余白をリセット */
+.markdown-content :global(.kanal-charge-section ul li) {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 0 0 1.2rem !important;
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+  color: #dbd7e0 !important;
+  overflow: visible !important;
+}
+
+/* メリット用のカラフルな左帯を非表示にし、シンプルな淡い紫のドットにする */
+.markdown-content :global(.kanal-charge-section ul li::before) {
+  content: '•' !important;
+  color: #ffb7ff !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  font-size: 1.2rem !important;
+  line-height: 1.5 !important;
+  background: none !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* 金額のテキストだけ、ほんのり上品にテーマカラーを適用 */
+.markdown-content :global(.kanal-price-text) {
+  color: #ffb7ff !important;
+  font-size: 1.05rem !important;
+  font-weight: bold !important;
+  letter-spacing: 0.05em;
+}
+
   /* ===================================================
      ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
      =================================================== */
@@ -551,6 +625,70 @@ const { frontmatter } = kanaLData;
       max-width: 100% !important;
     }
   }
+
+/* ===================================================
+   🙋 よくあるご質問（FAQ）セクション
+   =================================================== */
+
+/* FAQ全体のコンテナの余白 */
+.markdown-content :global(.kanal-faq-section) {
+  margin-top: 2rem !important;
+}
+
+/* 質問（H4）の装飾：文字色を活かし、下部にうっすらと上品な線を引く */
+.markdown-content :global(.kanal-faq-section h4) {
+  font-size: 1.1rem !important;
+  margin-top: 3.5rem !important;
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid rgba(255, 183, 255, 0.15) !important;
+  padding-bottom: 0.6rem !important;
+}
+
+/* 最初の質問だけ、上の余白を少し詰める */
+.markdown-content :global(.kanal-faq-section h4:first-of-type) {
+  margin-top: 1.5rem !important;
+}
+
+/* 回答テキスト（P）の間隔微調整 */
+.markdown-content :global(.kanal-faq-section p) {
+  margin-bottom: 1.2rem !important;
+  font-size: 0.95rem !important;
+  color: #dbd7e0 !important;
+}
+
+/* ===================================================
+   訪問済みリンク（:visited）のカラー調整（完全対策版）
+   =================================================== */
+
+/* 通常のテキストリンク（Markdown内など）の訪問済みカラー */
+.markdown-content :global(a:visited) {
+  color: #e2b7ff !important; /* 明るく透明感のある薄紫へ */
+}
+
+/* 超重要】お申し込みボタンの文字色を「白」で絶対強制キープ */
+.markdown-content :global(.btn-apply:visited),
+.markdown-content :global(.btn-apply:visited span) {
+  color: #fff !important;
+}
+
+/* 【超重要】お問い合わせボタンの文字色を「元のピンクパープル」で絶対強制キープ */
+.markdown-content :global(.btn-contact:visited),
+.markdown-content :global(.btn-contact:visited span) {
+  color: #ffb7ff !important;
+}
+/* お問い合わせボタンをホバーした時は白にする設定もキープ */
+.markdown-content :global(.btn-contact:hover:visited) {
+  color: #fff !important;
+}
+
+/*ヘッダーのナビゲーションメニューの訪問済みカラー対策 */
+.nav-menu a:visited {
+  color: #fff;
+}
+.nav-menu a:hover:visited {
+  color: #ffb7ff;
+}
+
 </style>
 
 <!-- Astro完全対応版インラインスクリプト -->

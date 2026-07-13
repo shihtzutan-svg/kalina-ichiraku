@@ -3,9 +3,9 @@ import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
 
-// ★ ここを「* as clayData」に書き換えます
-import * as clayData from '../content/clay.md';
-const { frontmatter } = clayData;
+// ★新しく作ったKana-L用のMarkdownを読み込む
+import * as kanaLData from '../content/service.md';
+const { frontmatter } = kanaLData;
 ---
 
 <html lang="ja">
@@ -16,7 +16,7 @@ const { frontmatter } = clayData;
   </head>
   <body>
     <!-- 背景画像 -->
-    <div class="bg-layer"></div>
+   <div class="bg-layer"></div>
 
 <!-- ヘッダー -->
 <Header />
@@ -30,7 +30,9 @@ const { frontmatter } = clayData;
         </div>
         
         <div class="card-content detailed-body">
-        <img src={frontmatter.image} alt="クレイワーク・メインイメージ" class="program-main-img" />
+          {frontmatter.image && (
+            <img src={frontmatter.image} alt="Kana-L・メインイメージ" class="program-main-img" />
+          )}
           <div class="summary-message">
             <p>{frontmatter.summary}</p>
           </div>
@@ -38,7 +40,7 @@ const { frontmatter } = clayData;
           <hr class="divider" />
           <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
           <div class="markdown-content">
-            <clayData.Content />
+            <kanaLData.Content />
           </div>
           
           <div class="back-home-container">
@@ -447,7 +449,7 @@ const { frontmatter } = clayData;
     margin: 2rem auto !important; display: block !important;
   }
 
-    /* 受講生の声 */
+  /* 受講生の声 */
   .markdown-content :global(img[alt="受講生の声"]) {
     width: 70% !important; max-width: 450px !important; height: auto !important;
     margin: 2rem auto !important; display: block !important;
@@ -459,7 +461,7 @@ const { frontmatter } = clayData;
     }
   }
 
- /* ===================================================
+  /* ===================================================
      ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
      =================================================== */
   .markdown-content :global(.action-buttons-container) {
@@ -553,7 +555,7 @@ const { frontmatter } = clayData;
   }
 </style>
 
-<!-- 既存の </style> のすぐ下に貼り付け（Astro完全対応版） -->
+<!-- Astro完全対応版インラインスクリプト -->
 <script is:inline>
   function setupFormButtons() {
     const container = document.querySelector('.action-buttons-container');
@@ -561,11 +563,9 @@ const { frontmatter } = clayData;
 
     const links = container.querySelectorAll('a');
     links.forEach(link => {
-      // 属性を強制注入
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
       
-      // クリックイベントを最優先で上書き（イベントのバブリングも考慮）
       link.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -578,14 +578,12 @@ const { frontmatter } = clayData;
     });
   }
 
-  // 1. 通常の読み込み時に実行
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', setupFormButtons);
   } else {
     setupFormButtons();
   }
 
-  // 2. Astroの画面遷移（View Transitions）が発生した時にも実行
   document.addEventListener('astro:page-load', setupFormButtons);
   document.addEventListener('astro:after-swap', setupFormButtons);
 </script>

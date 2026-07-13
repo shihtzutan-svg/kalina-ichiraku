@@ -3,9 +3,9 @@ import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
 
-// ★ ここを「* as clayData」に書き換えます
-import * as clayData from '../content/clay.md';
-const { frontmatter } = clayData;
+// ★新しく作ったKana-L用のMarkdownを読み込む
+import * as kanaLData from '../content/contact.md';
+const { frontmatter } = kanaLData;
 ---
 
 <html lang="ja">
@@ -16,7 +16,7 @@ const { frontmatter } = clayData;
   </head>
   <body>
     <!-- 背景画像 -->
-    <div class="bg-layer"></div>
+   <div class="bg-layer"></div>
 
 <!-- ヘッダー -->
 <Header />
@@ -30,7 +30,9 @@ const { frontmatter } = clayData;
         </div>
         
         <div class="card-content detailed-body">
-        <img src={frontmatter.image} alt="クレイワーク・メインイメージ" class="program-main-img" />
+          {frontmatter.image && (
+            <img src={frontmatter.image} alt="Kana-L・メインイメージ" class="program-main-img" />
+          )}
           <div class="summary-message">
             <p>{frontmatter.summary}</p>
           </div>
@@ -38,7 +40,7 @@ const { frontmatter } = clayData;
           <hr class="divider" />
           <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
           <div class="markdown-content">
-            <clayData.Content />
+            <kanaLData.Content />
           </div>
           
           <div class="back-home-container">
@@ -447,7 +449,7 @@ const { frontmatter } = clayData;
     margin: 2rem auto !important; display: block !important;
   }
 
-    /* 受講生の声 */
+  /* 受講生の声 */
   .markdown-content :global(img[alt="受講生の声"]) {
     width: 70% !important; max-width: 450px !important; height: auto !important;
     margin: 2rem auto !important; display: block !important;
@@ -460,22 +462,22 @@ const { frontmatter } = clayData;
   }
 
  /* ===================================================
-     ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
-     =================================================== */
+   ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版・縦並び）
+   =================================================== */
   .markdown-content :global(.action-buttons-container) {
     display: flex !important;
-    justify-content: center !important;
-    gap: 1.5rem !important;
+    flex-direction: column !important; /* 💡PCでもスマホでも最初から縦並びにする */
+    align-items: center !important;     /* 💡縦並びの状態で中央揃えにする */
+    gap: 1.5rem !important;            /* ボタンとボタンの間の上下の隙間 */
     margin: 3.5rem 0 !important;
     width: 100% !important;
-    flex-wrap: wrap !important;
   }
 
   /* ボタン共通のベーススタイル */
   .markdown-content :global(.btn-action) {
-    flex: 1 !important;
-    max-width: 320px !important;
-    min-width: 260px !important;
+    width: 100% !important;
+    max-width: 500px !important;       /* 💡ボタンの長さを500pxにしっかりキープ */
+    min-width: 280px !important;
     height: 56px !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -490,6 +492,8 @@ const { frontmatter } = clayData;
     z-index: 1 !important;
     overflow: hidden !important;
     border: none !important;
+    text-align: center !important;
+    white-space: nowrap !important;    /* 文字の折り返しを絶対に防ぐ */
   }
 
   .markdown-content :global(.btn-action span) {
@@ -539,21 +543,15 @@ const { frontmatter } = clayData;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
   }
 
-  /* スマホ対応 */
+  /* スマホ対応（画面幅が狭いときは画面に合わせて縮む設定） */
   @media (max-width: 600px) {
-    .markdown-content :global(.action-buttons-container) {
-      flex-direction: column !important;
-      align-items: center !important;
-      gap: 1.2rem !important;
-    }
     .markdown-content :global(.btn-action) {
-      width: 100% !important;
-      max-width: 100% !important;
+      max-width: 90% !important; /* スマホでは画面の90%の幅に自動フィット */
     }
   }
 </style>
 
-<!-- 既存の </style> のすぐ下に貼り付け（Astro完全対応版） -->
+<!-- Astro完全対応版インラインスクリプト -->
 <script is:inline>
   function setupFormButtons() {
     const container = document.querySelector('.action-buttons-container');
@@ -561,11 +559,9 @@ const { frontmatter } = clayData;
 
     const links = container.querySelectorAll('a');
     links.forEach(link => {
-      // 属性を強制注入
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
       
-      // クリックイベントを最優先で上書き（イベントのバブリングも考慮）
       link.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -578,14 +574,12 @@ const { frontmatter } = clayData;
     });
   }
 
-  // 1. 通常の読み込み時に実行
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', setupFormButtons);
   } else {
     setupFormButtons();
   }
 
-  // 2. Astroの画面遷移（View Transitions）が発生した時にも実行
   document.addEventListener('astro:page-load', setupFormButtons);
   document.addEventListener('astro:after-swap', setupFormButtons);
 </script>

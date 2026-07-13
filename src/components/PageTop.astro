@@ -1,0 +1,94 @@
+<!-- ページトップ戻るボタン -->
+<button id="page-top-btn" class="page-top-scroll-btn" aria-label="ページトップへ戻る">
+  <span class="arrow"></span>
+</button>
+
+<style>
+  /* ボタンの基本スタイル（最初は非表示） */
+  .page-top-scroll-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(13, 11, 24, 0.8);
+    border: 2px solid #ffb7ff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 183, 255, 0.2);
+  }
+
+  /* 上向き矢印の形 */
+  .page-top-scroll-btn .arrow {
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid #ffb7ff;
+    border-left: 3px solid #ffb7ff;
+    transform: translateY(2px) rotate(45deg);
+    transition: border-color 0.3s;
+  }
+
+  /* スクロールされて表示状態になった時のクラス */
+  .page-top-scroll-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* ホバー（マウスを乗せた時）のエフェクト */
+  .page-top-scroll-btn:hover {
+    background: #ffb7ff;
+    box-shadow: 0 0 20px rgba(255, 183, 255, 0.6);
+  }
+  .page-top-scroll-btn:hover .arrow {
+    border-top-color: #0d0b18;
+    border-left-color: #0d0b18;
+  }
+
+  /* スマホの時は少し小さく＆位置を調整 */
+  @media (max-width: 600px) {
+    .page-top-scroll-btn {
+      bottom: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>
+
+<script>
+  // Astroのページ遷移（View Transitionsなど）にも対応できるよう、関数として定義
+  function initPageTop() {
+    const topBtn = document.getElementById('page-top-btn');
+    if (!topBtn) return;
+
+    // 1. 一定以上スクロールしたらボタンを表示・非表示にする
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) { // 400px以上スクロールしたら
+        topBtn.classList.add('show');
+      } else {
+        topBtn.classList.remove('show');
+      }
+    });
+
+    // 2. ボタンを押した時にスムーズに一番上に戻る
+    topBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 💡するすると滑らかにスクロールさせる
+      });
+    });
+  }
+
+  // 最初のアニメーション読み込み時＆Astroのページ切り替え時どちらでも動くように設定
+  initPageTop();
+  document.addEventListener('astro:after-swap', initPageTop);
+</script>
