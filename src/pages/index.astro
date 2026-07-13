@@ -5,7 +5,7 @@ import mascot2 from '../assets/mascot2.avif';
 import mascot3 from '../assets/mascot3.avif';
 import mascot4 from '../assets/mascot4.avif';
 import bgGalaxy from '../assets/bg-galaxy.avif';
-import logo from '../assets/logo.avif';
+import Header from '../components/Header.astro';
 
 // ★追加：詳細ページと同じテキストファイルを読み込む
 import * as profileData from '../content/profile.md';
@@ -26,21 +26,8 @@ import * as kanaLData from '../content/kana-l.md';
     <!-- 背景画像 -->
     <div class="bg-layer"></div>
 
-    <!-- ヘッダー -->
-    <header class="site-header">
-      <div class="logo-area">
-        <a href="/"><img src={logo.src} alt="一樂 迦哩無" class="site-logo-img" /></a>
-      </div>
-      <nav class="nav-menu">
-        <ul>
-          <li><a href="/#profile">プロフィール</a></li>
-          <li><a href="#kana-l">あなたの願いを叶える「Kana-L」</a></li>
-          <li><a href="/#clay">クレイワーク・プログラム</a></li>
-          <li><a href="/#service">ライトワーカー様向けサービス</a></li>
-          <li><a href="/#contact">お申し込み・お問い合わせ</a></li>
-        </ul>
-      </nav>
-    </header>
+<!-- ヘッダー -->
+<Header />
 
     <!-- ヒーローセクション -->
     <section class="hero-section">
@@ -135,19 +122,17 @@ import * as kanaLData from '../content/kana-l.md';
 
 <style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
   * { box-sizing: border-box; }
-body { 
+  
+  body { 
     margin: 0; 
     padding: 0;
     background: #0d0b18; 
     color: #f0ecf4; 
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x: hidden;
-    
-    /* ★ここを書き換え・追記します */
-    min-height: 100vh;           /* 常に画面の高さ100%分を最低限キープ */
-    display: flex;               /* Flexboxレイアウトを開始 */
-    flex-direction: column;      /* 中身を上から下へ縦並びにする */
-    
+    min-height: 100vh;           
+    display: flex;               
+    flex-direction: column;      
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -165,13 +150,13 @@ body {
     100% { transform: scale(1.08) rotate(1deg); }
   }
 
-/* ヘッダー：巨大化を防ぐため高さを制限 */
+  /* ヘッダー：巨大化を防ぐため高さを制限 */
   .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 3rem; /* 上下パディングを縮小 */
-    height: 100px; /* ヘッダー全体の高さを固定 */
+    padding: 0.5rem 3rem; 
+    height: 100px; 
     background: rgba(13, 11, 24, 0.6);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -180,7 +165,7 @@ body {
   }
   .logo-area { display: flex; align-items: center; height: 100%; }
   .site-logo-img { 
-    max-height: 80px; /* ロゴが絶対にはみ出さないように最大高さを指定 */
+    max-height: 80px; 
     width: auto; 
     object-fit: contain; 
     display: block;
@@ -241,28 +226,10 @@ body {
     50% { transform: translateY(15px) rotate(-2deg); }
   }
 
-  /* 下部コンテンツエリア */
-/* 下部コンテンツエリア（content-grid）のところに1行追加 */
+  /* 下部コンテンツエリア：4列横並び */
   .content-grid {
-    flex: 1; /* ★これを追記！余った縦方向のスペースをこのエリアが自動で全部埋めます */
-    
+    flex: 1; 
     display: grid;
-    grid-template-columns: 1fr 1.3fr 1fr;
-    gap: 2rem;
-    padding: 3rem 4rem;
-    background: linear-gradient(to bottom, rgba(13, 11, 24, 0.7) 0%, rgba(13, 11, 24, 0.95) 100%);
-    min-height: 400px;
-    position: relative;
-    z-index: 5;
-    margin-top: 0;
-  }
- /* ＝黒メニュー（カード）を4つ綺麗に並べる設定＝ */
-/* 下部コンテンツエリア：4列横並びに修正 */
-  .content-grid {
-    flex: 1; /* 余った縦方向のスペースをこのエリアが自動で全部埋めます */
-    
-    display: grid;
-    /* ★3列（1fr 1.3fr 1fr）から「4列（等幅）」に変更しました */
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     padding: 3rem 4rem;
@@ -273,21 +240,20 @@ body {
     margin-top: 0;
   }
 
-/* カード内のテキストや見出しを綺麗に整列させる設定 */
+  /* カード内のテキストや見出しを綺麗に整列させる設定 */
   .card-panel {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* ★上基準に変更 */
+    justify-content: flex-start; 
     padding: 2rem 1.2rem !important;
     height: 100%;
   }
 
-  /* ★見出しの上のエリアを固定してガタつきを防止 */
   .card-panel .card-header-block {
-    min-height: 50px; /* キャッチフレーズ分の高さを確保 */
+    min-height: 50px; 
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* 下側に揃えることで、見出しの位置が綺麗に一致します */
+    justify-content: flex-end; 
     margin-bottom: 0.5rem;
   }
 
@@ -299,9 +265,8 @@ body {
     margin-bottom: 1.5rem;
   }
 
-  /* ★本文エリアを自動で広げ、ボタンを最下部に押し下げる */
   .card-content { 
-    flex: 1; /* ★これを追記することで、文字量に関わらずボタンの位置も下に揃います */
+    flex: 1; 
     color: #dbd7e0; 
     font-size: 0.95rem; 
     line-height: 1.75; 
@@ -333,7 +298,6 @@ body {
     font-weight: bold;
     margin: 0 0 0.2rem 0;
     letter-spacing: 0.1em;
-    /* ★追加 */
     white-space: pre-line;
   }
   .intro-message .greeting {
@@ -348,11 +312,10 @@ body {
     font-style: italic;
     color: #fff;
     font-size: 1.05rem;
-    /* ★追加 */
     white-space: pre-line;
   }
 
-  /* フッターの装飾（最終解決版） */
+  /* フッターの装飾 */
   .site-footer {
     display: block !important;
     position: relative;
@@ -372,74 +335,150 @@ body {
     letter-spacing: 0.05em;
   }
 
- /* タブレット・スマートフォン共通対応（1100px以下はすべて1列にする） */
-  @media (max-width: 1100px) {
-    .hero-section { padding: 40px 0 0 0; }
+  /* パソコン時はハンバーガーボタンを非表示にする */
+  .menu-trigger {
+    display: none;
+  }
+
+  /* 改行を有効にする設定 */
+  #clay .card-content p {
+    white-space: pre-line;
+  }
+
+  /* クレイワークのサムネイル画像 */
+  .program-thumb {
+    width: 100%;
+    height: 250px;       
+    object-fit: cover;   
+    border-radius: 12px; 
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: block;      
+  }
+
+
+ /* ========================================================
+     1600px以下：ヘッダーをハンバーガーメニューに【確実に】切り替え
+     ======================================================== */
+  @media (max-width: 1600px) {
+    /* 💡PC用の横並びメニューを完全に非表示にして、はみ出しを防ぐ */
+    .nav-menu ul {
+      display: none !important;
+    }
+
+    /* 💡ハンバーガーボタン（3本線）を確実に画面に出現させる */
+    .menu-trigger {
+      display: flex !important; 
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 200; 
+    }
+    .menu-trigger span {
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: all 0.4s; 
+    }
+
+    /* ボタン変形設定（Xマーク） */
+    .menu-trigger.active span:nth-child(1) {
+      transform: translateY(10px) rotate(-45deg);
+      background-color: #ffb7ff;
+    }
+    .menu-trigger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-trigger.active span:nth-child(3) {
+      transform: translateY(-10px) rotate(45deg);
+      background-color: #ffb7ff;
+    }
+
+    /* スマホ・タブレット用全画面メニュー（初期状態：上空に隠す） */
+    .nav-menu {
+      position: fixed;
+      top: -100vh; 
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(13, 11, 24, 0.95);
+      backdrop-filter: blur(20px);
+      transition: top 0.4s ease-in-out; 
+      display: flex !important; /* display: none を打ち消して動くようにする */
+      align-items: center;
+      justify-content: center;
+      z-index: 150;
+    }
+
+    /* 💡メニューが開いた時だけ縦並びのリストを表示する */
+    .nav-menu.open {
+      top: 0;
+    }
+    .nav-menu.open ul { 
+      display: flex !important;
+      flex-direction: column !important; 
+      align-items: center;
+      gap: 2rem !important; 
+    }
+    .nav-menu.open a {
+      font-size: 1.2rem; 
+      padding: 0.5rem 1rem;
+    }
+
+    /* ヘッダー全体のコンパクト化 */
+    .site-header { 
+      flex-direction: row !important; 
+      justify-content: space-between;
+      height: 80px; 
+      padding: 0 1.5rem; 
+      width: 100%;
+    }
+    .site-logo-img { max-height: 55px; }
+
+    /* メイン画像エリアの隙間調整 */
+    .hero-section {
+      margin-top: 45px !important; 
+      padding: 0; 
+      width: 100%; 
+    }
     
-    /* ★ここを1列（1fr）に固定しました */
+    /* マスコットとポートレートの位置調整 */
+    .floating-container { height: 380px !important; width: 100%; }
+    .portrait-container { width: 300px !important; height: 340px !important; }
+    .mascot { width: 110px !important; }
+    .m1 { left: 6%; top: 22% !important; }  
+    .m2 { left: 6%; bottom: 8% !important; }   
+    .m3 { right: 6%; top: 24% !important; } 
+    .m4 { right: 6%; bottom: 10% !important; } 
+
+    /* 1600px〜1026pxの間、下の4列は綺麗に縮めて維持 */
+    .content-grid { 
+      grid-template-columns: repeat(4, 1fr) !important; 
+      padding: 2rem 1.5rem; 
+      gap: 1rem; 
+    }
+    .card-panel { padding: 1.5rem 0.8rem !important; }
+    .card-content { font-size: 0.85rem; line-height: 1.6; }
+    .card-panel h2 { font-size: 1.1rem; }
+  }
+
+  /* ========================================================
+     1025px以下：下の4列メニューを「縦1列」に切り替え
+     ======================================================== */
+  @media (max-width: 1025px) {
     .content-grid { 
       grid-template-columns: 1fr !important; 
-      padding: 2rem 1.5rem; 
+      gap: 2.5rem; 
+      padding: 3rem 2rem;
     }
-    
-    .site-header { padding: 0.5rem 1.5rem; }
-    .nav-menu ul { gap: 1.2rem; }
-    .floating-container { height: 460px; }
-    .portrait-container { width: 460px; height: 460px; }
-    .mascot { width: 160px; }
-    .m1 { left: 8%; top: 15%; } .m2 { left: 5%; bottom: 2%; } 
-    .m3 { right: 8%; top: 17%; } .m4 { right: 5%; bottom: 4%; }
-  }
-
-  /* スマートフォン対応（768px以下でのヘッダーやヒーローエリアの微調整） */
-  @media (max-width: 768px) {
-    .site-header { flex-direction: column; height: auto; padding: 1rem 1rem 0.5rem 1rem; width: 100%; }
-    .nav-menu ul { flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 0.8rem; }
-    
-    .hero-section { padding: 0; width: 100%; }
-    .floating-container { height: 340px; width: 100%; }
-    
-    .portrait-container { 
-      width: 300px; 
-      height: 340px; 
-    }
-    
-    .mascot { width: 110px; }
-    .m1 { left: 6%; top: 3%; }      
-    .m2 { left: 6%; bottom: 8%; }   
-    .m3 { right: 6%; top: 5%; }    
-    .m4 { right: 6%; bottom: 10%; } 
-  }
-
-  /* トップページのクレイワーク枠内の改行を有効にする */
-  #clay .card-content p {
-    white-space: pre-line;
-  }
-
-  /* クレイワークのサムネイル画像（修正版） */
-  .program-thumb {
-    width: 100%;
-    height: 250px;       /* 高さを固定します */
-    object-fit: cover;   /* これを入れることで、潰れずに綺麗に中央で切り抜かれます */
-    border-radius: 12px; /* ついでにここも角丸にしておきます */
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    display: block;      /* 隙間ができないようにブロック要素化 */
-  }
-
-  /* トップページのクレイワーク枠内の改行を有効にする */
-  #clay .card-content p {
-    white-space: pre-line;
-  }
-
-/* クレイワークのサムネイル画像（修正版） */
-  .program-thumb {
-    width: 100%;
-    height: 250px;       /* 高さを固定します */
-    object-fit: cover;   /* これを入れることで、潰れずに綺麗に中央で切り抜かれます */
-    border-radius: 12px; /* ついでにここも角丸にしておきます */
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    display: block;      /* 隙間ができないようにブロック要素化 */
+    .card-panel { padding: 2rem 1.5rem !important; }
+    .card-content { font-size: 0.95rem; line-height: 1.75; }
+    .card-panel h2 { font-size: 1.25rem; }
   }
 </style>

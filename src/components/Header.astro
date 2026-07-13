@@ -1,0 +1,190 @@
+---
+// src/components/Header.astro
+import logo from '../assets/logo.avif';
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <a href="/"><img src={logo.src} alt="一樂 迦哩無" class="site-logo-img" /></a>
+    </div>
+
+    <button class="menu-trigger" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="/#profile">プロフィール</a></li>
+        <li><a href="/#kana-l">あなたの願いを叶える「Kana-L（カナエル）」</a></li>
+        <li><a href="/#clay">クレイワーク・プログラム</a></li>
+        <li><a href="/#service">ライトワーカー様向けサービス</a></li>
+        <li><a href="/#contact">お申し込み・お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- 💡 is:inline をつけることで、ブラウザに直接「絶対に動かしなさい」と命令します -->
+<script is:inline>
+  // ページが完全に読み込まれたら実行
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.querySelector('.menu-trigger');
+    const menu = document.querySelector('.nav-menu');
+    const menuLinks = document.querySelectorAll('.nav-menu a');
+
+    if (trigger && menu) {
+      // ボタンをクリックしたとき
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation(); // クリックイベントが外に漏れるのを防ぐ
+        trigger.classList.toggle('active');
+        menu.classList.toggle('open');
+      });
+
+      // メニュー内のリンクをクリックしたとき（閉じる）
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          trigger.classList.remove('active');
+          menu.classList.remove('open');
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* --- PC・共通デザイン --- */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: rgba(13, 11, 24, 0.6);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 100;
+    /* 💡左右の端にピタッとくっつきすぎないよう、適度な余白だけ持たせる */
+    padding: 0 4rem; 
+    box-sizing: border-box;
+  }
+
+  .header-inner {
+    /* 💡max-widthの制限をなくすことで、ロゴは左端、メニューは右端へ完全に離れます！ */
+    max-width: 100%; 
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo-area {
+    flex-shrink: 0;
+  }
+  .site-logo-img {
+    max-height: 80px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .nav-menu {
+    flex-shrink: 1;
+  }
+  .nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem; /* 左右に広く離れるので、メニュー間の隙間も少し広げてゆったりさせます */
+    margin: 0;
+    padding: 0;
+  }
+  .nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem; /* 端に寄るため、少し文字を大きくしても大丈夫です */
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+  .nav-menu a:hover {
+    color: #ffb7ff;
+    text-shadow: 0 0 8px #ffb7ff;
+  }
+  .menu-trigger {
+    display: none;
+  }
+
+  /* --- スマートフォン対応（768px以下） --- */
+  @media (max-width: 768px) {
+    .site-header {
+      height: 80px;
+      padding: 0 1.5rem !important;
+    }
+    .header-inner {
+      max-width: 100%;
+    }
+    .site-logo-img {
+      max-height: 55px;
+    }
+    .menu-trigger {
+      display: flex !important;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 200;
+    }
+    .menu-trigger span {
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: all 0.4s;
+    }
+    .menu-trigger.active span:nth-child(1) {
+      transform: translateY(10px) rotate(-45deg);
+      background-color: #ffb7ff;
+    }
+    .menu-trigger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-trigger.active span:nth-child(3) {
+      transform: translateY(-10px) rotate(45deg);
+      background-color: #ffb7ff;
+    }
+    .nav-menu {
+      position: fixed;
+      top: -100vh;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(13, 11, 24, 0.95);
+      backdrop-filter: blur(20px);
+      transition: top 0.4s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 150;
+    }
+    .nav-menu.open {
+      top: 0;
+    }
+    .nav-menu ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem !important;
+    }
+    .nav-menu a {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>
