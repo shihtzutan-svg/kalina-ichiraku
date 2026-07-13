@@ -49,26 +49,27 @@ import * as kanaLData from '../content/kana-l.md';
 
     <!-- メインコンテンツ -->
     <main class="content-grid">
-      <!-- トップページ用 プロフィールセクション（要約版） -->
-      <section class="card-panel profile-section" id="profile">
-        <div class="profile-header-block">
+
+      <!-- トップページ用 プロフィールセクション -->
+      <section class="card-panel" id="profile">
+       <div class="profile-header-block">
 <!-- ★テキストファイルからキャッチコピーを連動 -->
 <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>プロフィール</h2>
-        </div>
-        
-        <div class="card-content intro-message">
+
 <!-- ★テキストファイルから挨拶を連動 -->
-          <p class="greeting">{frontmatter.greeting}</p>
+        <h2>{profileData.frontmatter.title}</h2>
+   <div class="card-content intro-message">
           <blockquote>
 <!-- ★テキストファイルから引用句を連動 -->
             {frontmatter.quote}
           </blockquote>
+    </div>
           <p>
             壮絶な葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
           </p>
-          <a href="/profile" class="read-more">一樂 迦哩無について 続きはこちら →</a>
-        </div>
+          <a href="/profile" class="read-more">続きはこちら →</a>
+        
+                </div>
       </section>
 
 <!-- ✨ 2. 【新設】Kana-L（カナエル）カード -->
@@ -93,8 +94,12 @@ import * as kanaLData from '../content/kana-l.md';
 
 <!-- クレイワークセクション（要約版として連動） -->
       <section class="card-panel" id="clay">
+       <div class="profile-header-block">
+       <!-- Markdownの catchphrase から自動連動 -->
+        <p class="catchphrase">{clayData.frontmatter.catchphrase}</p>
         <!-- トップと同じclay.mdから見出しと要約を自動で吸い上げる -->
         <h2>{clayData.frontmatter.title}</h2>
+       </div>
         <div class="card-content">
         <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
           <p>{clayData.frontmatter.summary}</p>
