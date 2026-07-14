@@ -3,7 +3,7 @@ title: "お申し込み・お問い合わせ"
 catchphrase: ""
 summary: ""
 
-image: "/IMG_1753.avif" 
+image: "/contact.avif" 
 ---
 
 
