@@ -16,10 +16,10 @@ const { frontmatter } = townData;
   </head>
   <body>
     <!-- 背景画像 -->
-   <div class="bg-layer"></div>
+    <div class="bg-layer"></div>
 
-<!-- ヘッダー -->
-<Header />
+    <!-- ヘッダー -->
+    <Header />
 
     <!-- メインコンテンツ -->
     <main class="detailed-container">
@@ -31,20 +31,30 @@ const { frontmatter } = townData;
         
         <div class="card-content detailed-body">
         
-{frontmatter.image && (
-  <div class="toppage-image-container">
-    <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
-  </div>
-)}
+          {frontmatter.image && (
+            <div class="toppage-image-container">
+              <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
+            </div>
+          )}
 
           <div class="summary-message">
             <p>{frontmatter.summary}</p>
           </div>
 
           <hr class="divider" />
-          <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
+
+          <!-- Markdownの本文（自動展開） -->
           <div class="markdown-content">
             <townData.Content />
+          </div>
+
+          <!-- ===================================================
+               🛜 【確実表示】スピリチュアル・タウンへのリンクボタン
+               =================================================== -->
+          <div class="action-buttons-container">
+            <a href="https://spi-town.com/" class="btn-action btn-town-link">
+              <span>スピリチュアル・タウンを見に行く</span>
+            </a>
           </div>
           
           <div class="back-home-container">
@@ -65,7 +75,7 @@ const { frontmatter } = townData;
 </html>
 
 <!-- スタイル設定 -->
-<!-- ① 背景専用のスタイル（影響をここに閉じ込める） -->
+<!-- ① 背景専用のスタイル -->
 <style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -79,7 +89,7 @@ const { frontmatter } = townData;
   }
 </style>
 
-<!-- ② ページ全体のメインスタイル（スケジュール完全分離・確定版） -->
+<!-- ② ページ全体のメインスタイル -->
 <style>
   * { box-sizing: border-box; }
   body { 
@@ -92,19 +102,6 @@ const { frontmatter } = townData;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  /* ヘッダー */
-  .site-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.5rem 3rem; height: 100px;
-    background: rgba(13, 11, 24, 0.6); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: fixed; top: 0; width: 100%; z-index: 100;
-  }
-  .site-logo-img { max-height: 80px; width: auto; object-fit: contain; }
-  .nav-menu ul { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
-  .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-  .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
 
   /* コンテナ */
   .detailed-container {
@@ -129,14 +126,87 @@ const { frontmatter } = townData;
     color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
     white-space: pre-line;
   }
-  .summary-message p { font-size: 1.1rem; line-height: 1.8; color: #fff;
+  .summary-message p { 
+    font-size: 1.15rem; line-height: 1.8; color: #fff; font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 183, 255, 0.2);
     white-space: pre-line;
+    margin: 2rem 0;
+  }
+
+  /* 中間区切り線 */
+  .card-panel .divider {
+    border: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.3), rgba(255,255,255,0)) !important;
+    margin: 3rem 0 !important;
+  }
+
+  /* ===================================================
+     ✨ お申し込み・お出かけボタン（マークダウン外の標準指定に修正）
+     =================================================== */
+  .action-buttons-container {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 4rem 0 2rem 0 !important;
+    width: 100% !important;
+  }
+
+  /* ボタン共通のベーススタイル */
+  .btn-action {
+    width: 100% !important;
+    max-width: 380px !important;
+    height: 60px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.08em !important;
+    border-radius: 30px !important;
+    position: relative !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    border: none !important;
+  }
+
+  .btn-action span {
+    position: relative !important;
+    z-index: 2 !important;
+    color: #fff !important;
+  }
+
+  /* 🌌 スピリチュアル・タウンへの直行：美麗シアン×パープルグラデーション */
+  .btn-town-link {
+    background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3) !important;
+  }
+
+  .btn-town-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #7f00ff, #e100ff) !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+    transition: opacity 0.4s ease !important;
+  }
+
+  .btn-town-link:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 8px 30px rgba(127, 0, 255, 0.5), 0 0 15px rgba(0, 242, 254, 0.3) !important;
   }
   
-  .divider {
-    border: 0; height: 1px;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
-    margin: 2.5rem 0;
+  .btn-town-link:hover::before {
+    opacity: 1 !important;
+  }
+
+  /* 訪問済みリンクのカラー対策 */
+  .btn-town-link:visited,
+  .btn-town-link:visited span {
+    color: #fff !important;
   }
 
   /* 戻るリンク */
@@ -152,404 +222,39 @@ const { frontmatter } = townData;
   }
   .copyright { margin: 0; font-size: 0.85rem; color: #a3a0a8; letter-spacing: 0.05em; }
 
-
-
   @media (max-width: 768px) {
-    .site-header { padding: 0.5rem 1rem; }
-    .nav-menu { display: none; }
     .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
     .program-header-block h2 { font-size: 1.6rem; }
   }
 
   /* ===================================================
-     ★重要：マークダウンの中身を「クラス名なし」で強力に装飾
+     📚 マークダウン本文（town.md）の最適化装飾
      =================================================== */
-  
   .markdown-content :global(p) {
-    line-height: 1.85 !important; margin-bottom: 1.4rem !important; color: #dbd7e0 !important; letter-spacing: 0.03em !important;
-  }
-
-  /* ゴールド縦線の見出し (h3) */
-  .markdown-content :global(h3) {
-    font-size: 1.3rem !important;
-    color: #fff !important;
-    border-left: 4px solid #d4af37 !important;
-    padding-left: 12px !important;
-    margin: 4rem 0 1.5rem 0 !important;
-    letter-spacing: 0.05em !important;
-    display: block !important;
-  }
-  .markdown-content :global(h3:first-of-type) {
-    margin-top: 2rem !important;
-  }
-
-  /* ---------------------------------------------------
-     🎨 メリットカード（一番基本となる1つ目のul層）
-     --------------------------------------------------- */
-  .markdown-content :global(ul) {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
-    gap: 1.2rem !important;
-    margin: 2rem 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-  }
-
-  .markdown-content :global(ul li) {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 12px !important;
-    padding: 1.2rem 1.5rem 1.2rem 1.8rem !important;
-    position: relative !important;
-    overflow: hidden !important;
-    font-size: 0.95rem !important;
-    line-height: 1.6 !important;
-    color: #e0dce5 !important;
-    list-style-type: none !important;
-  }
-
-  /* 基本の左帯（メリットセクション用） */
-  .markdown-content :global(ul > li::before) {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
-    height: 100% !important;
-  }
-  .markdown-content :global(ul > li:nth-child(1)::before) { background: linear-gradient(to bottom, #ff9966, #ff5e62) !important; }
-  .markdown-content :global(ul > li:nth-child(2)::before) { background: linear-gradient(to bottom, #f5af19, #f12711) !important; }
-  .markdown-content :global(ul > li:nth-child(3)::before) { background: linear-gradient(to bottom, #00c6ff, #0072ff) !important; }
-  .markdown-content :global(ul > li:nth-child(4)::before) { background: linear-gradient(to bottom, #7F00FF, #E100FF) !important; }
-  .markdown-content :global(ul > li:nth-child(5)::before) { background: linear-gradient(to bottom, #11998e, #38ef7d) !important; }
-  .markdown-content :global(ul > li:nth-child(6)::before) { background: linear-gradient(to bottom, #00f2fe, #4facfe) !important; }
-
-  .markdown-content :global(ul li strong) {
-    color: #ff8da1 !important;
-    font-weight: bold !important;
-  }
-
-  /* ---------------------------------------------------
-     ⏰ スケジュール（h4 ＋ 番号付きリスト ol）完全独立設定
-     --------------------------------------------------- */
-  
-  /* スケジュール用のh4（絶対に文字を下に潜り込ませない、独立した通常配置） */
-  .markdown-content :global(h4) {
-    color: #ffb7ff !important;
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #dbd7e0 !important; 
+    letter-spacing: 0.04em !important;
     font-size: 1.05rem !important;
-    margin: 2.5rem 0 0.5rem 0 !important;
-    padding: 0 !important;
-    position: relative !important;
-    display: block !important;
-    margin-bottom: 0.5rem !important; /* 位置崩れを強硬に防ぐためのリセット */
-    z-index: 1 !important;
   }
 
-  .markdown-content :global(ol) {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem 1.5rem 1.5rem 2.5rem !important;
-    margin: 0.5rem 0 2.5rem 0 !important;
-    list-style-type: decimal !important;
-    display: block !important;
-    clear: both !important;
-  }
-
-  .markdown-content :global(ol li) {
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0.8rem 0 !important;
-    font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
-    line-height: 1.6 !important;
-  }
-  .markdown-content :global(ol li::before) { display: none !important; content: none !important; }
-  .markdown-content :global(ol li::marker) { font-size: 1rem !important; color: #ffb7ff !important; }
-
-
-  /* ===================================================
-     🎨 持ち物リスト（2列レイアウト＆帯消去）
-     =================================================== */
-
-  .markdown-content :global(ul:has(ul)) {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    gap: 1.5rem !important;
-    margin: 2rem 0 3rem 0 !important;
-    padding: 0 !important;
-    list-style-type: none !important;
-  }
-
-  .markdown-content :global(ul:has(ul) > li) {
-    flex: 0 1 calc(50% - 0.75rem) !important;
-    min-width: 300px !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem 2rem 2rem 2rem !important;
-    overflow: visible !important;
-    list-style-type: none !important;
-    display: block !important;
-  }
-  .markdown-content :global(ul:has(ul) > li::marker) { display: none !important; content: none !important; }
-
-  .markdown-content :global(ul:has(ul) > li::before) {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
-    height: 100% !important;
-    background: linear-gradient(to bottom, #ff9966, #ff5e62) !important;
-  }
-  .markdown-content :global(ul:has(ul) > li:nth-of-type(2)::before) { 
-    background: linear-gradient(to bottom, #f5af19, #f12711) !important; 
-  }
-
-  .markdown-content :global(ul:has(ul) ul) {
-    display: block !important;
-    margin: 0.5rem 0 0 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-  }
-
-  .markdown-content :global(ul:has(ul) ul li) {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    border-radius: 8px !important;
-    padding: 0.9rem 1.2rem 0.9rem 2.8rem !important;
-    margin: 0.6rem 0 !important;
-    position: relative !important;
-    font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
-    overflow: visible !important;
-    list-style-type: none !important;
-    display: block !important;
-  }
-  .markdown-content :global(ul:has(ul) ul li::marker) { display: none !important; content: none !important; }
-
-  .markdown-content :global(ul:has(ul) ul li::before) {
-    content: '✓' !important;
-    position: absolute !important;
-    left: 1.2rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-weight: bold !important;
-    font-size: 1.1rem !important;
-    background: none !important;
-    width: auto !important;
-    height: auto !important;
-  }
-  .markdown-content :global(ul:has(ul) > li:nth-of-type(1) ul li::before) { color: #ff8da1 !important; }
-  .markdown-content :global(ul:has(ul) > li:nth-of-type(2) ul li::before) { color: #d4af37 !important; }
-
-
-  /* ===================================================
-     🎨 料金セクション（料金カード用h4だけに強烈な潜り込みを限定）
-     =================================================== */
-
-  /* ★【修正の肝】「直後にulが来ているh4」だけを「料金用」として完全分離し、潜り込ませる */
-  .markdown-content :global(h4) + :global(ul) {
-    display: block !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 16px !important;
-    padding: 5.5rem 2rem 2rem 2rem !important;
-    margin: 0 0 3.5rem 0 !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    position: relative !important;
-    overflow: hidden !important;
-    list-style: none !important;
-  }
-
-  /* 料金セクションの直前にあるh4のスタイルを、スケジュールから完全に切り離して上書き定義 */
-  .markdown-content :global(h4 + ul) {
-    /* この直前にあるh4要素に対してスタイルを強制するためのダミー親 */
-  }
-  
-  /* 料金カード内の見出しテキスト。スケジュール（h4 + ol）には100%干渉しません */
-  .markdown-content :global(main) .markdown-content :global(h4):has(+ ul),
-  .markdown-content :global(h4):has(+ ul) {
-    margin-top: 3.5rem !important;
-    margin-bottom: -4.5rem !important; /* 金額枠内に潜り込ませる */
-    position: relative !important;
-    z-index: 10 !important;
-    padding-left: 2rem !important;
-    font-size: 1.15rem !important;
-    font-weight: bold !important;
-    color: #ffb7ff !important;
-    display: block !important;
-  }
-
-  /* 料金カードの左側に美しく伸びる縦グラデーション */
-  .markdown-content :global(h4) + :global(ul)::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
-    z-index: 5 !important;
-    height: 100% !important;
-  }
-  
-  /* 1つ目の料金プラン */
-  .markdown-content :global(h4:nth-of-type(1)):has(+ ul) + :global(ul)::before,
-  .markdown-content :global(h4):has(+ ul) + :global(ul)::before {
-    background: linear-gradient(to bottom, #ff9966, #ff5e62) !important;
-  }
-  /* 2つ目の料金プラン */
-  .markdown-content :global(ul) + :global(h4):has(+ ul) + :global(ul)::before {
-    background: linear-gradient(to bottom, #f5af19, #f12711) !important;
-  }
-
-  /* 金額表示の行（メリット用の左帯を完全に抹殺） */
-  .markdown-content :global(h4) + :global(ul) li {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem 2rem !important;
-    margin: 0 !important;
-    width: 100% !important;
-    font-size: 1.05rem !important;
-    color: #fff !important;
-    overflow: hidden !important;
-    position: relative !important;
-    list-style-type: none !important;
-    display: block !important;
-  }
-  .markdown-content :global(h4) + :global(ul) li::marker { display: none !important; content: none !important; }
-  .markdown-content :global(h4) + :global(ul) li::before {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-  }
-
-  /* 💡対面開催をご希望の方へ の引用ブロック装飾 */
-  .markdown-content :global(blockquote) {
-    border-left: 4px solid #ffb7ff !important;
-    background: rgba(255, 183, 255, 0.05) !important;
-    padding: 1rem 1.5rem !important;
-    margin: 2.5rem 0 !important;
-    border-radius: 0 8px 8px 0 !important;
-  }
-  .markdown-content :global(blockquote p) { margin: 0 !important; color: #fff !important; font-size: 0.95rem !important; }
-
-  /* マークダウン内の画像通常設定 */
-  .markdown-content :global(img) {
-    width: 100% !important; height: auto !important; border-radius: 12px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important; margin: 2rem 0 !important;
-  }
-  /* 作品画像 */
-  .markdown-content :global(img[alt="クレイワークのイメージ"]) {
-    width: 30% !important; max-width: 450px !important; height: auto !important;
-    margin: 2rem auto !important; display: block !important;
-  }
-
-  /* 受講生の声 */
-  .markdown-content :global(img[alt="受講生の声"]) {
-    width: 70% !important; max-width: 450px !important; height: auto !important;
-    margin: 2rem auto !important; display: block !important;
-  }
-
-  @media (max-width: 768px) {
-    .markdown-content :global(ul:has(ul) > li) {
-      flex: 1 1 100% !important;
-    }
-  }
-
-  /* ===================================================
-     ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
-     =================================================== */
-  .markdown-content :global(.action-buttons-container) {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 1.5rem !important;
-    margin: 3.5rem 0 !important;
-    width: 100% !important;
-    flex-wrap: wrap !important;
-  }
-
-  /* ボタン共通のベーススタイル */
-  .markdown-content :global(.btn-action) {
-    flex: 1 !important;
-    max-width: 320px !important;
-    min-width: 260px !important;
-    height: 56px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+  /* 本文内のaタグリンクを読みやすくネオン調に */
+  .markdown-content :global(p a) {
+    color: #a3e2ff !important;
     text-decoration: none !important;
-    font-size: 1.05rem !important;
     font-weight: bold !important;
-    letter-spacing: 0.05em !important;
-    border-radius: 30px !important;
-    position: relative !important;
-    transition: all 0.4s ease !important;
-    z-index: 1 !important;
-    overflow: hidden !important;
-    border: none !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
   }
-
-  .markdown-content :global(.btn-action span) {
-    position: relative !important;
-    z-index: 2 !important;
-  }
-
-  /* 🔥 お申し込みボタン：ピンク〜オレンジグラデーション */
-  .markdown-content :global(.btn-apply) {
-    background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
-    color: #fff !important;
-    box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4) !important;
-  }
-
-  .markdown-content :global(.btn-apply::before) {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
-    background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
-    opacity: 0 !important;
-    z-index: 1 !important;
-    transition: opacity 0.4s ease !important;
-  }
-
-  .markdown-content :global(.btn-apply:hover) {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important;
-  }
-  
-  .markdown-content :global(.btn-apply:hover::before) {
-    opacity: 1 !important;
-  }
-
-  /* 💬 お問い合わせボタン：パープルネオン調 */
-  .markdown-content :global(.btn-contact) {
-    background: rgba(255, 255, 255, 0.03) !important;
+  .markdown-content :global(p a:hover) {
     color: #ffb7ff !important;
-    border: 2px solid #ffb7ff !important;
-    box-shadow: 0 4px 15px rgba(255, 183, 255, 0.1) !important;
-  }
-
-  .markdown-content :global(.btn-contact:hover) {
-    transform: translateY(-3px) !important;
-    background: rgba(255, 183, 255, 0.15) !important;
-    color: #fff !important;
-    box-shadow: 0 8px 25px rgba(255, 183, 255, 0.4), 0 0 15px rgba(255, 183, 255, 0.2) !important;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
-  }
-
-  /* スマホ対応 */
-  @media (max-width: 600px) {
-    .markdown-content :global(.action-buttons-container) {
-      flex-direction: column !important;
-      align-items: center !important;
-      gap: 1.2rem !important;
-    }
-    .markdown-content :global(.btn-action) {
-      width: 100% !important;
-      max-width: 100% !important;
-    }
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
   }
 </style>
 
+<!-- ③ メイン画像用コンテナスタイル -->
 <style is:global>
   .toppage-image-container {
     width: 100%;
@@ -567,8 +272,7 @@ const { frontmatter } = townData;
   }
 </style>
 
-
-<!-- Astro完全対応版インラインスクリプト -->
+<!-- Astro完全対応版インラインスクリプト（安全に新タブで開く挙動を保証） -->
 <script is:inline>
   function setupFormButtons() {
     const container = document.querySelector('.action-buttons-container');

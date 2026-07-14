@@ -3,13 +3,9 @@ import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
 
-// ★本の画像（表紙）をインポート
-import bookCover1 from '../assets/guide.avif'; // 『ガイドとの対話』
-import bookCover2 from '../assets/source.avif';     // 『「源」との対話』
-
 // ★テキストファイルを読み込む
-import * as profileData from '../content/profile.md';
-const { frontmatter } = profileData;
+import * as profile2Data from '../content/profile2.md';
+const { frontmatter } = profile2Data;
 ---
 
 <html lang="ja">
@@ -46,61 +42,10 @@ const { frontmatter } = profileData;
               {frontmatter.quote}
             </blockquote>
           </div>
-
-          <!-- ===================================================
-               📚 Kindle書籍 紹介エリア（2冊連続配置）
-               =================================================== -->
-          <div class="books-wrapper">
-            
-            <!-- 1冊目：ガイドとの対話 -->
-            <div class="book-promo-card">
-              <div class="book-img-area">
-                <img src={bookCover1.src} alt="Kindle書籍『ガイドとの対話』表紙" class="book-cover-img" />
-              </div>
-              <div class="book-info-area">
-                <div class="book-promo-badge source-badge">発売中</div>
-                <h4 class="book-promo-title">Kindle書籍『ガイドとの対話』</h4>
-                <p class="book-promo-description">
-                  私が瞑想の最中、スピリチュアルガイドと思しき存在と繋がり、対話した内容の一部始終です。<br />
-ガイドに「書きなさい」と促され、出版致しました。<br />
-この世の理（ことわり）が語られています。<br />
-ありのままを書いておりますので、意味不明な箇所もあるかもしれませんが、気にならない方はご一読頂けると幸いです。
-                </p>
-                <div class="action-buttons-container">
-                  <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%93%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?tag=szdmorg-22" class="btn-action btn-apply">
-                    <span>Amazonで詳細を見る</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2冊目：「源」との対話 -->
-            <div class="book-promo-card">
-              <div class="book-img-area">
-                <img src={bookCover2.src} alt="Kindle書籍『「源」との対話』表紙" class="book-cover-img" />
-              </div>
-              <div class="book-info-area">
-                <div class="book-promo-badge source-badge">発売中</div>
-                <h4 class="book-promo-title">Kindle書籍『「源」との対話』</h4>
-                <p class="book-promo-description">
-                  前著「ガイドとの対話」を経て、今回は大いなる存在「源」との直接の対話に至りました。<br />
-この宇宙の「理（ことわり）」についての対話（原文そのまま）と、著者独自の解釈を記載しております。<br />
-著者の行っている瞑想の方法についても説明しています。
-                </p>
-                <div class="action-buttons-container">
-                  <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E3%81%84%E3%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?tag=szdmorg-22" class="btn-action btn-apply">
-                    <span>Amazonで詳細を見る</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
+          
 
           <!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
-          <profileData.Content />
-
-
+          <profile2Data.Content />
 
           <div class="back-home-container">
               <a href="/" class="back-home-link">トップページへ戻る</a>
