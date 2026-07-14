@@ -8,13 +8,22 @@ import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
 
-// ★追加：詳細ページと同じテキストファイルを読み込む
+// 📝 各種Markdownデータのインポート
 import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
 import * as clayData from '../content/clay.md';
-
-// ✨【追記】Kana-L（カナエル）のMarkdownデータをインポート
 import * as kanaLData from '../content/kana-l.md';
+import * as townData from '../content/town.md';
+
+// 📰【変更】「お知らせ」コレクションから全記事を取得し、新しい順に並び替えて上から3件だけ切り取る
+import { getCollection } from 'astro:content';
+const allNews = await getCollection('news');
+const latestNews = allNews
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+// 💡 Umami用の環境判定
+const isProd = import.meta.env.PROD;
 ---
 
 <html lang="ja">
@@ -27,8 +36,8 @@ import * as kanaLData from '../content/kana-l.md';
     <!-- 背景画像 -->
     <div class="bg-layer"></div>
 
-<!-- ヘッダー -->
-<Header />
+    <!-- ヘッダー -->
+    <Header />
 
     <!-- ヒーローセクション -->
     <section class="hero-section">
@@ -50,75 +59,118 @@ import * as kanaLData from '../content/kana-l.md';
     <!-- メインコンテンツ -->
     <main class="content-grid">
 
-      <!-- トップページ用 プロフィールセクション -->
-      <section class="card-panel" id="profile">
-       <div class="profile-header-block">
-<!-- ★テキストファイルからキャッチコピーを連動 -->
-<p class="catchphrase">{frontmatter.catchphrase}</p>
+<div class="grid-row-three">
+        <!-- プロフィール -->
+        <section class="card-panel" id="profile">
+          <div class="profile-header-block">
+            <p class="catchphrase">{frontmatter.catchphrase}</p>
+            <h2>{profileData.frontmatter.title}</h2>
+          </div>
+          <div class="card-content intro-message">
+            <!-- 🖼️ ①プロフィールに画像を追加 -->
+            {profileData.frontmatter.image && (
+              <img src={profileData.frontmatter.image} alt="Profile" class="program-thumb" />
+            )}
+            <blockquote>
+              {frontmatter.quote}
+            </blockquote>
+            <p>
+              壮壮たる葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
+            </p>
+            <a href="/profile" class="read-more">続きはこちら →</a>
+          </div>
+        </section>
 
-<!-- ★テキストファイルから挨拶を連動 -->
-        <h2>{profileData.frontmatter.title}</h2>
-   <div class="card-content intro-message">
-          <blockquote>
-<!-- ★テキストファイルから引用句を連動 -->
-            {frontmatter.quote}
-          </blockquote>
-    </div>
-          <p>
-            壮絶な葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
-          </p>
-          <a href="/profile" class="read-more">続きはこちら →</a>
-        
-                </div>
-      </section>
+        <!--Kana-L（カナエル）-->
+        <section class="card-panel" id="kana-l">
+          <div class="profile-header-block">
+            <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
+            <h2>{kanaLData.frontmatter.title}</h2>
+          </div>
+          <div class="card-content">
+            <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" />
+            <p>{kanaLData.frontmatter.summary}</p>
+            <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
+          </div>
+        </section>
 
-<!-- ✨ 2. 【新設】Kana-L（カナエル）カード -->
-      <section class="card-panel" id="kana-l">
-        <div class="profile-header-block">
-          <!-- Markdownの catchphrase から自動連動 -->
-          <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
-          <!-- Markdownの title から自動連動 -->
-          <h2>{kanaLData.frontmatter.title}</h2>
-        </div>
-        
-        <div class="card-content">
-          <!-- Markdownの image から自動連動 -->
-          <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" />
-          <!-- Markdownの summary から自動連動 -->
-          <p>{kanaLData.frontmatter.summary}</p>
-          
-          <!-- 詳細ページへのリンク（お好みのURLに調整してください） -->
-          <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
-        </div>
-      </section>
+        <!-- クレイワーク-->
+        <section class="card-panel" id="clay">
+          <div class="profile-header-block">
+            <p class="catchphrase">{clayData.frontmatter.catchphrase}</p>
+            <h2>{clayData.frontmatter.title}</h2>
+          </div>
+          <div class="card-content">
+            <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
+            <p>{clayData.frontmatter.summary}</p>
+            <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
+          </div>
+        </section>
+         </div>
 
-<!-- クレイワークセクション（要約版として連動） -->
-      <section class="card-panel" id="clay">
-       <div class="profile-header-block">
-       <!-- Markdownの catchphrase から自動連動 -->
-        <p class="catchphrase">{clayData.frontmatter.catchphrase}</p>
-        <!-- トップと同じclay.mdから見出しと要約を自動で吸い上げる -->
-        <h2>{clayData.frontmatter.title}</h2>
-       </div>
-        <div class="card-content">
-        <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
-          <p>{clayData.frontmatter.summary}</p>
-          <!-- 詳細ページへのリンクを追加 -->
-          <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
-        </div>
-      </section>
+<div class="grid-row-three">
+        <!-- サービス -->
+        <section class="card-panel" id="service">
+          <div class="profile-header-block">
+            <p class="catchphrase">LIGHTWORKER SERVICE</p>
+            <h2>ライトワーカー様向けサービス</h2>
+          </div>
+          <div class="card-content">
+          <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
+            <p>近日公開！</p>
+            <p>ライトワーカー様を応援する、カウンセリングやWebサイト作成、SNS運用などがセットになったパックのご紹介です。</p>
+          </div>
+        </section>
 
-      <!-- サービスセクション -->
-      <section class="card-panel" id="service">
-        <h2>ライトワーカー様向けサービス</h2>
-        <div class="card-content">
-          <p>近日公開！</p>
-          <p>ライトワーカー様を応援する、カウンセリングやWebサイト作成、SNS運用などがセットになったパックのご紹介です。</p>
-        </div>
-      </section>
+        <!-- スピリチュアル・タウン -->
+        <section class="card-panel" id="spiritual-town">
+          <div class="profile-header-block">
+            <p class="catchphrase">{townData.frontmatter.catchphrase}</p>
+            <h2>{townData.frontmatter.title}</h2>
+          </div>
+          <div class="card-content">
+            <!-- 🖼️ ①② mdファイルから画像を自動取得 -->
+            <img src={townData.frontmatter.image} alt="スピリチュアル・タウン" class="program-thumb" />
+            <p>{townData.frontmatter.summary}</p>
+            <a href="/spiritual-town" class="read-more">スピリチュアル・タウンの説明 →</a>
+          </div>
+        </section>
+
+
+<!-- お知らせ -->
+        <section class="card-panel" id="news">
+          <div class="profile-header-block">
+            <p class="catchphrase">INFORMATION</p>
+            <h2>お知らせ</h2>
+          </div>
+          <div class="card-content">
+            <!-- 🖼️ 一番新しいお知らせの画像を自動でアイキャッチとして表示 -->
+            {latestNews.length > 0 && latestNews[0].data.image && (
+              <img src={latestNews[0].data.image} alt="お知らせ" class="program-thumb" />
+            )}
+
+            <div class="news-list-container">
+              {latestNews.map((post) => (
+                <article class="news-inline-item">
+                  <div class="news-inline-meta">
+                    <time datetime={post.data.date.toISOString()}>
+                      {post.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+                    </time>
+                  </div>
+                  <h3 class="news-inline-title">
+                    <a href={`/news/${post.id}`}>{post.data.title}</a>
+                  </h3>
+                </article>
+              ))}
+            </div>
+            <a href="/news" class="read-more">過去のお知らせ一覧 →</a>
+          </div>
+        </section>
+  </div>
+
     </main>
 
-    <!-- ★フッター（完全にmainの外側に配置） -->
+    <!-- ★フッター-->
     <footer class="site-footer">
       <div class="footer-content">
         <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
@@ -234,18 +286,52 @@ import * as kanaLData from '../content/kana-l.md';
     50% { transform: translateY(15px) rotate(-2deg); }
   }
 
-  /* 下部コンテンツエリア：4列横並び */
+  /* 下部コンテンツエリアのラッパー */
   .content-grid {
     flex: 1; 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; 
     padding: 3rem 4rem;
     background: linear-gradient(to bottom, rgba(13, 11, 24, 0.7) 0%, rgba(13, 11, 24, 0.95) 100%);
     min-height: 400px;
     position: relative;
     z-index: 5;
     margin-top: 0;
+  }
+
+/* 💻 パソコン画面：3列の均等グリッドにする設定 */
+  .grid-row-three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 💡 均等に3分割 */
+    gap: 2rem;
+    width: 100%;
+    margin-bottom: 2rem; /* 段と段の間の余白 */
+  }
+
+  /* 📱 スマホ・タブレット画面：横幅が狭くなったら自動で1列に折りたたむ */
+  @media (max-width: 1024px) {
+    .grid-row-three {
+      grid-template-columns: repeat(2, 1fr); /* タブレットサイズでは2列 */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grid-row-three {
+      grid-template-columns: 1fr; /* スマホサイズでは綺麗に1列 */
+    }
+  }
+
+  /* インスタ枠の一時的な見た目（調整用） */
+  .insta-placeholder {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
   }
 
   /* カード内のテキストや見出しを綺麗に整列させる設定 */
@@ -255,10 +341,14 @@ import * as kanaLData from '../content/kana-l.md';
     justify-content: flex-start; 
     padding: 2rem 1.2rem !important;
     height: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
   }
 
-  .card-panel .card-header-block {
-    min-height: 50px; 
+  .card-panel .profile-header-block {
+    min-height: 70px; 
     display: flex;
     flex-direction: column;
     justify-content: flex-end; 
@@ -279,12 +369,16 @@ import * as kanaLData from '../content/kana-l.md';
     font-size: 0.95rem; 
     line-height: 1.75; 
     letter-spacing: 0.03em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 上詰めに統一 */
   }
 
   /* 続きはこちらリンクの装飾 */
   .read-more {
     display: inline-block;
-    margin-top: 1.5rem;
+    align-self: flex-start;
+    margin-top: auto; /* ボタンを常にカードの一番下に固定 */
     padding: 0.8rem 1.2rem;
     background: linear-gradient(135deg, #ffb7ff 0%, #a3e2ff 100%);
     color: #0d0b18 !important;
@@ -349,14 +443,14 @@ import * as kanaLData from '../content/kana-l.md';
   }
 
   /* 改行を有効にする設定 */
-  #clay .card-content p {
+  #clay .card-content p, #spiritual-town .card-content p, #news .card-content p {
     white-space: pre-line;
   }
 
-  /* クレイワークのサムネイル画像 */
+  /* 全体のサムネイル画像のレイアウト統一 */
   .program-thumb {
     width: 100%;
-    height: 250px;       
+    height: 200px; /* 4列時・2列時とも破綻しにくいバランスに変更 */      
     object-fit: cover;   
     border-radius: 12px; 
     margin-bottom: 1.5rem;
@@ -364,17 +458,47 @@ import * as kanaLData from '../content/kana-l.md';
     display: block;      
   }
 
+  /* お知らせリスト用のスタイル */
+  .news-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .news-inline-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.75rem;
+  }
+  .news-inline-item:last-child {
+    border-bottom: none;
+  }
+  .news-inline-meta {
+    font-size: 0.8rem;
+    color: #ffb7ff;
+    margin-bottom: 0.2rem;
+  }
+  .news-inline-title {
+    font-size: 0.95rem;
+    margin: 0;
+    font-weight: normal;
+  }
+  .news-inline-title a {
+    color: #dbd7e0;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .news-inline-title a:hover {
+    color: #a3e2ff;
+  }
 
   /* ========================================================
      1600px以下：ヘッダーをハンバーガーメニューに切り替え
      ======================================================== */
   @media (max-width: 1600px) {
-    /* 💡:global() を使い、Headerコンポーネント内の要素を強制制御 */
     :global(.site-header .nav-menu ul) {
       display: none !important;
     }
 
-    /* 💡ハンバーガーボタン（3本線）を出現させる */
     :global(.site-header .menu-trigger) {
       display: flex !important; 
       flex-direction: column;
@@ -395,7 +519,6 @@ import * as kanaLData from '../content/kana-l.md';
       transition: all 0.4s; 
     }
 
-    /* ボタン変形設定（Xマーク） */
     :global(.site-header .menu-trigger.active span:nth-child(1)) {
       transform: translateY(10px) rotate(-45deg);
       background-color: #ffb7ff;
@@ -408,7 +531,6 @@ import * as kanaLData from '../content/kana-l.md';
       background-color: #ffb7ff;
     }
 
-    /* スマホ・タブレット用全画面メニュー（初期状態：上空に隠す） */
     :global(.site-header .nav-menu) {
       position: fixed !important;
       top: -100vh; 
@@ -424,7 +546,6 @@ import * as kanaLData from '../content/kana-l.md';
       z-index: 150;
     }
 
-    /* メニューが開いた状態 */
     :global(.site-header .nav-menu.open) {
       top: 0 !important;
     }
@@ -439,7 +560,6 @@ import * as kanaLData from '../content/kana-l.md';
       padding: 0.5rem 1rem;
     }
 
-    /* ヘッダー全体のコンパクト化 */
     .site-header { 
       flex-direction: row !important; 
       justify-content: space-between;
@@ -449,14 +569,12 @@ import * as kanaLData from '../content/kana-l.md';
     }
     .site-logo-img { max-height: 55px; }
 
-    /* メイン画像エリアの隙間調整 */
     .hero-section {
       margin-top: 45px !important; 
       padding: 0; 
       width: 100%; 
     }
     
-    /* ★マスコットとポートレートの位置調整（ご指定の数値を維持） */
     .floating-container { height: 380px !important; width: 100%; }
     .portrait-container { width: 300px !important; height: 340px !important; }
     .mascot { width: 110px !important; }
@@ -465,25 +583,30 @@ import * as kanaLData from '../content/kana-l.md';
     .m3 { right: 6%; top: 24% !important; } 
     .m4 { right: 6%; bottom: 10% !important; } 
 
-    /* 1600px〜1026pxの間、下の4列は綺麗に縮めて維持 */
-    .content-grid { 
-      grid-template-columns: repeat(4, 1fr) !important; 
-      padding: 2rem 1.5rem; 
-      gap: 1rem; 
-    }
+    .content-grid { padding: 2rem 1.5rem; gap: 2rem; }
+    .grid-row-first { gap: 1rem; }
+    .grid-row-second { gap: 1rem; }
+    
     .card-panel { padding: 1.5rem 0.8rem !important; }
     .card-content { font-size: 0.85rem; line-height: 1.6; }
     .card-panel h2 { font-size: 1.1rem; }
   }
 
   /* ========================================================
-     1025px以下：下の4列メニューを「縦1列」に切り替え
+     1025px以下：スマホ・タブレット環境では「すべて縦1列」
      ======================================================== */
   @media (max-width: 1025px) {
     .content-grid { 
+      padding: 3rem 2rem;
+      gap: 2.5rem;
+    }
+    .grid-row-first { 
       grid-template-columns: 1fr !important; 
       gap: 2.5rem; 
-      padding: 3rem 2rem;
+    }
+    .grid-row-second { 
+      grid-template-columns: 1fr !important; 
+      gap: 2.5rem; 
     }
     .card-panel { padding: 2rem 1.5rem !important; }
     .card-content { font-size: 0.95rem; line-height: 1.75; }

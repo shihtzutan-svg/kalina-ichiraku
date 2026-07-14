@@ -3,9 +3,9 @@ import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
 
-// ★新しく作ったservice用のMarkdownを読み込む
-import * as serviceData from '../content/service.md';
-const { frontmatter } = serviceData;
+// ★新しく作ったnews用のMarkdownを読み込む
+import * as newsData from '../content/news.md';
+const { frontmatter } = newsData;
 ---
 
 <html lang="ja">
@@ -40,7 +40,7 @@ const { frontmatter } = serviceData;
           <hr class="divider" />
           <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
           <div class="markdown-content">
-            <kanaLData.Content />
+            <newsData.Content />
           </div>
           
           <div class="back-home-container">

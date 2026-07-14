@@ -29,6 +29,21 @@ const isProd = import.meta.env.PROD;
         <li><a href="/service">ライトワーカー様向けサービス</a></li>
         <li><a href="https://spi-town.com/" target="_blank">スピリチュアルタウン</a></li>
         <li><a href="/contact">お申し込み・お問い合わせ</a></li>
+        <li><a href="https://instagram.com/kalina_ichiraku" target="_blank" rel="noopener noreferrer" class="instagram-nav-link" aria-label="Instagram">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  </a></li>
+<li><a href="https://lin.ee/QDK9CmS" target="_blank" rel="noopener noreferrer" class="sns-nav-link line-link" aria-label="LINE">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="21" height="21" fill="currentColor">
+    <!-- LINE公式のトーク吹き出しの形状 -->
+    <path d="M24 10.3c0-5.7-5.4-10.3-12-10.3S0 4.6 0 10.3c0 5.1 4.3 9.4 10.1 10.1l-.6 2.8c0 .2.1.4.3.5.1 0 .2 0 .2-.1l3.3-3.1c4.5-1.1 10.7-5.2 10.7-10.2z" />
+    <!-- 吹き出しの中に配置する超軽量・極太の「LINE」テキスト -->
+    <text x="12" y="13.5" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="5.2" fill="#0d0b18" text-anchor="middle" letter-spacing="-0.1">LINE</text>
+  </svg>
+</a></li>
       </ul>
     </nav>
   </div>
@@ -192,6 +207,48 @@ const isProd = import.meta.env.PROD;
     .nav-menu a {
       font-size: 1.2rem;
       padding: 0.5rem 1rem;
+    }
+  }
+
+
+  /* 🌐 SNSリンク全体の共通ルール */
+.sns-nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #dbd7e0;
+    margin-left: 0.1rem;       /* 💡 アイコン同士の間隔を狭く */
+    transition: color 0.2s, filter 0.2s;
+    vertical-align: middle;
+  }
+  
+  /* 📸 Instagram：ホバー時にブランドカラーのネオンピンクに光る */
+  .instagram-link:hover {
+    color: #ffb7ff;
+    filter: drop-shadow(0 0 8px rgba(255, 183, 255, 0.6));
+  }
+
+  /* 🟢 LINE：ホバー時にLINE公式のネオンクリーンに光る */
+  .line-link:hover {
+    color: #06C755;
+    filter: drop-shadow(0 0 8px rgba(6, 199, 85, 0.6));
+  }
+
+  /* LINEアイコンの中の文字は、ホバーしても背景色の「暗い紫」を維持して透過のように見せます */
+  .line-link svg text {
+    fill: #0d0b18;
+    transition: fill 0.2s;
+  }
+
+  .sns-nav-link.instagram-link {
+    margin-left: 1.0rem;       /* メニューからの独立感を持たせる適切な余白 */
+  }
+
+  /* 📱 スマホなど画面が狭いとき、SNSボタンが折り返されて重ならないよう調整 */
+  @media (max-width: 768px) {
+    .sns-nav-link {
+      margin-left: 0rem;
+      padding: 0.5rem 0;
     }
   }
 </style>
