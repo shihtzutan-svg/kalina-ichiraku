@@ -31,7 +31,7 @@ const { frontmatter } = serviceData;
         
         <div class="card-content detailed-body">
           {frontmatter.image && (
-            <img src={frontmatter.image} alt="Kana-L・メインイメージ" class="program-main-img" />
+            <img src={frontmatter.image} alt="メインイメージ" class="program-main-img" />
           )}
           <div class="summary-message">
             <p>{frontmatter.summary}</p>
@@ -40,7 +40,7 @@ const { frontmatter } = serviceData;
           <hr class="divider" />
           <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
           <div class="markdown-content">
-            <kanaLData.Content />
+            <serviceData.Content />
           </div>
           
           <div class="back-home-container">
