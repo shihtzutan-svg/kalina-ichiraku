@@ -671,6 +671,24 @@ const { frontmatter } = kanaLData;
   }
 </style>
 
+  <!-- サイト全体のシンプルなリンクにネオン風スタイルを一括適用 -->
+<style is:global>
+  /* ボタンやメニュー、ロゴ以外の、すべての素のテキストリンクに適用 */
+  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]):hover {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+</style>
+
 <!-- Astro完全対応版インラインスクリプト -->
 <script is:inline>
   function setupFormButtons() {
