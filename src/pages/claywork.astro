@@ -18,8 +18,8 @@ const { frontmatter } = clayData;
     <!-- 背景画像 -->
     <div class="bg-layer"></div>
 
-<!-- ヘッダー -->
-<Header />
+    <!-- ヘッダー -->
+    <Header />
 
     <!-- メインコンテンツ -->
     <main class="detailed-container">
@@ -30,7 +30,7 @@ const { frontmatter } = clayData;
         </div>
         
         <div class="card-content detailed-body">
-            {frontmatter.image && (
+          {frontmatter.image && (
             <div class="toppage-image-container">
               <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
             </div>
@@ -46,7 +46,7 @@ const { frontmatter } = clayData;
           </div>
           
           <div class="back-home-container">
-              <a href="/" class="back-home-link">トップページへ戻る</a>
+            <a href="/" class="back-home-link">トップページへ戻る</a>
           </div>
         </div>
       </section>
@@ -77,7 +77,7 @@ const { frontmatter } = clayData;
   }
 </style>
 
-<!-- ② ページ全体のメインスタイル（スケジュール完全分離・確定版） -->
+<!-- ② ページ全体のメインスタイル（不要ヘッダー用CSSを完全排除） -->
 <style>
   * { box-sizing: border-box; }
   body { 
@@ -90,19 +90,6 @@ const { frontmatter } = clayData;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  /* ヘッダー */
-  .site-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.5rem 3rem; height: 100px;
-    background: rgba(13, 11, 24, 0.6); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: fixed; top: 0; width: 100%; z-index: 100;
-  }
-  .site-logo-img { max-height: 80px; width: auto; object-fit: contain; }
-  .nav-menu ul { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
-  .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-  .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
 
   /* コンテナ */
   .detailed-container {
@@ -150,11 +137,7 @@ const { frontmatter } = clayData;
   }
   .copyright { margin: 0; font-size: 0.85rem; color: #a3a0a8; letter-spacing: 0.05em; }
 
-
-
   @media (max-width: 768px) {
-    .site-header { padding: 0.5rem 1rem; }
-    .nav-menu { display: none; }
     .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
     .program-header-block h2 { font-size: 1.6rem; }
@@ -230,7 +213,7 @@ const { frontmatter } = clayData;
      ⏰ スケジュール（h4 ＋ 番号付きリスト ol）完全独立設定
      --------------------------------------------------- */
   
-  /* スケジュール用のh4（絶対に文字を下に潜り込ませない、独立した通常配置） */
+  /* スケジュール用のh4 */
   .markdown-content :global(h4) {
     color: #ffb7ff !important;
     font-size: 1.05rem !important;
@@ -238,7 +221,7 @@ const { frontmatter } = clayData;
     padding: 0 !important;
     position: relative !important;
     display: block !important;
-    margin-bottom: 0.5rem !important; /* 位置崩れを強硬に防ぐためのリセット */
+    margin-bottom: 0.5rem !important;
     z-index: 1 !important;
   }
 
@@ -264,7 +247,6 @@ const { frontmatter } = clayData;
   }
   .markdown-content :global(ol li::before) { display: none !important; content: none !important; }
   .markdown-content :global(ol li::marker) { font-size: 1rem !important; color: #ffb7ff !important; }
-
 
   /* ===================================================
      🎨 持ち物リスト（2列レイアウト＆帯消去）
@@ -342,12 +324,11 @@ const { frontmatter } = clayData;
   .markdown-content :global(ul:has(ul) > li:nth-of-type(1) ul li::before) { color: #ff8da1 !important; }
   .markdown-content :global(ul:has(ul) > li:nth-of-type(2) ul li::before) { color: #d4af37 !important; }
 
-
   /* ===================================================
-     🎨 料金セクション（料金カード用h4だけに強烈な潜り込みを限定）
+     🎨 料金セクション
      =================================================== */
 
-  /* ★【修正の肝】「直後にulが来ているh4」だけを「料金用」として完全分離し、潜り込ませる */
+  /* 「直後にulが来ているh4」だけを「料金用」として完全分離し、潜り込ませる */
   .markdown-content :global(h4) + :global(ul) {
     display: block !important;
     background: rgba(255, 255, 255, 0.03) !important;
@@ -360,17 +341,12 @@ const { frontmatter } = clayData;
     overflow: hidden !important;
     list-style: none !important;
   }
-
-  /* 料金セクションの直前にあるh4のスタイルを、スケジュールから完全に切り離して上書き定義 */
-  .markdown-content :global(h4 + ul) {
-    /* この直前にあるh4要素に対してスタイルを強制するためのダミー親 */
-  }
   
-  /* 料金カード内の見出しテキスト。スケジュール（h4 + ol）には100%干渉しません */
+  /* 料金カード内の見出しテキスト */
   .markdown-content :global(main) .markdown-content :global(h4):has(+ ul),
   .markdown-content :global(h4):has(+ ul) {
     margin-top: 3.5rem !important;
-    margin-bottom: -4.5rem !important; /* 金額枠内に潜り込ませる */
+    margin-bottom: -4.5rem !important;
     position: relative !important;
     z-index: 10 !important;
     padding-left: 2rem !important;
@@ -399,7 +375,7 @@ const { frontmatter } = clayData;
     background: linear-gradient(to bottom, #f5af19, #f12711) !important;
   }
 
-  /* 金額表示の行（メリット用の左帯を完全に抹殺） */
+  /* 金額表示の行 */
   .markdown-content :global(h4) + :global(ul) li {
     background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -442,7 +418,7 @@ const { frontmatter } = clayData;
     margin: 2rem auto !important; display: block !important;
   }
 
-    /* 受講生の声 */
+  /* 受講生の声 */
   .markdown-content :global(img[alt="受講生の声"]) {
     width: 70% !important; max-width: 450px !important; height: auto !important;
     margin: 2rem auto !important; display: block !important;
@@ -460,13 +436,12 @@ const { frontmatter } = clayData;
   .markdown-content :global(hr) {
     border: 0 !important;
     height: 1px !important;
-    /* 真ん中が明るく、両端にむかって綺麗に消えていくグラデーション線 */
     background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
     margin: 3.5rem 0 !important;
   }
 
- /* ===================================================
-     ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
+  /* ===================================================
+     ✨ お申し込み・お問い合わせボタン（Markdown内強制適用版）
      =================================================== */
   .markdown-content :global(.action-buttons-container) {
     display: flex !important;
@@ -503,7 +478,7 @@ const { frontmatter } = clayData;
     z-index: 2 !important;
   }
 
-  /* 🔥 お申し込みボタン：ピンク〜オレンジグラデーション */
+  /* 🔥 お申し込みボタン */
   .markdown-content :global(.btn-apply) {
     background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
     color: #fff !important;
@@ -529,7 +504,7 @@ const { frontmatter } = clayData;
     opacity: 1 !important;
   }
 
-  /* 💬 お問い合わせボタン：パープルネオン調 */
+  /* 💬 お問い合わせボタン */
   .markdown-content :global(.btn-contact) {
     background: rgba(255, 255, 255, 0.03) !important;
     color: #ffb7ff !important;
@@ -589,7 +564,7 @@ const { frontmatter } = clayData;
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
       
-      // クリックイベントを最優先で上書き（イベントのバブリングも考慮）
+      // クリックイベントを最優先で上書き
       link.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -609,7 +584,7 @@ const { frontmatter } = clayData;
     setupFormButtons();
   }
 
-  // 2. Astroの画面遷移（View Transitions）が発生した時にも実行
+  // 2. Astroの画面遷移が発生した時にも実行
   document.addEventListener('astro:page-load', setupFormButtons);
   document.addEventListener('astro:after-swap', setupFormButtons);
 </script>

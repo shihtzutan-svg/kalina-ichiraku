@@ -3,6 +3,10 @@ import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
 
+// ★本の画像（表紙）をインポート
+import bookCover1 from '../assets/guide.avif'; // 『ガイドとの対話』
+import bookCover2 from '../assets/source.avif';     // 『「源」との対話』
+
 // ★テキストファイルを読み込む
 import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
@@ -16,10 +20,10 @@ const { frontmatter } = profileData;
   </head>
   <body>
     <!-- 背景画像 -->
-   <div class="bg-layer"></div>
+    <div class="bg-layer"></div>
     
-<!-- ヘッダー -->
-<Header />
+    <!-- ヘッダー -->
+    <Header />
 
     <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
     <main class="detailed-container">
@@ -30,8 +34,7 @@ const { frontmatter } = profileData;
         </div>
         
         <div class="card-content detailed-story">
-
-{frontmatter.image && (
+          {frontmatter.image && (
             <div class="toppage-image-container">
               <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
             </div>
@@ -44,16 +47,62 @@ const { frontmatter } = profileData;
             </blockquote>
           </div>
 
+          <!-- ===================================================
+               📚 Kindle書籍 紹介エリア（2冊連続配置）
+               =================================================== -->
+          <div class="books-wrapper">
+            
+            <!-- 1冊目：ガイドとの対話 -->
+            <div class="book-promo-card">
+              <div class="book-img-area">
+                <img src={bookCover1.src} alt="Kindle書籍『ガイドとの対話』表紙" class="book-cover-img" />
+              </div>
+              <div class="book-info-area">
+                <div class="book-promo-badge source-badge">発売中</div>
+                <h4 class="book-promo-title">Kindle書籍『ガイドとの対話』</h4>
+                <p class="book-promo-description">
+                  私が瞑想の最中、スピリチュアルガイドと思しき存在と繋がり、対話した内容の一部始終です。<br />
+ガイドに「書きなさい」と促され、出版致しました。<br />
+この世の理（ことわり）が語られています。<br />
+ありのままを書いておりますので、意味不明な箇所もあるかもしれませんが、気にならない方はご一読頂けると幸いです。
+                </p>
+                <div class="action-buttons-container">
+                  <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%93%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?tag=szdmorg-22" class="btn-action btn-apply">
+                    <span>Amazonで詳細を見る</span>
+                  </a>
+                </div>
+              </div>
+            </div>
 
-            <profileData.Content />
+            <!-- 2冊目：「源」との対話 -->
+            <div class="book-promo-card">
+              <div class="book-img-area">
+                <img src={bookCover2.src} alt="Kindle書籍『「源」との対話』表紙" class="book-cover-img" />
+              </div>
+              <div class="book-info-area">
+                <div class="book-promo-badge source-badge">発売中</div>
+                <h4 class="book-promo-title">Kindle書籍『「源」との対話』</h4>
+                <p class="book-promo-description">
+                  前著「ガイドとの対話」を経て、今回は大いなる存在「源」との直接の対話に至りました。<br />
+この宇宙の「理（ことわり）」についての対話（原文そのまま）と、著者独自の解釈を記載しております。<br />
+著者の行っている瞑想の方法についても説明しています。
+                </p>
+                <div class="action-buttons-container">
+                  <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E3%81%84%E3%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?tag=szdmorg-22" class="btn-action btn-apply">
+                    <span>Amazonで詳細を見る</span>
+                  </a>
+                </div>
+              </div>
+            </div>
 
-          
+          </div>
 
-          
+          <!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
+          <profileData.Content />
+
           <div class="back-home-container">
               <a href="/" class="back-home-link">トップページへ戻る</a>
           </div>
-
         </div>
       </section>
     </main>
@@ -70,7 +119,22 @@ const { frontmatter } = profileData;
 
 
 <!-- スタイル設定 -->
+<!-- ① 背景専用のスタイル -->
 <style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
+  .bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: var(--bgUrl); background-size: cover; background-position: center;
+    z-index: -2; opacity: 0.7;
+    animation: bgMovement 25s ease-in-out infinite alternate;
+  }
+  @keyframes bgMovement {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(1deg); }
+  }
+</style>
+
+<!-- ② ページ全体のメインスタイル -->
+<style>
   * { box-sizing: border-box; }
   body { 
     margin: 0; padding: 0;
@@ -82,31 +146,6 @@ const { frontmatter } = profileData;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  /* 背景アニメーション（これで無事に復活します！） */
-  .bg-layer {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: var(--bgUrl); background-size: cover; background-position: center;
-    z-index: -2; opacity: 0.7;
-    animation: bgMovement 25s ease-in-out infinite alternate;
-  }
-  @keyframes bgMovement {
-    0% { transform: scale(1) rotate(0deg); }
-    100% { transform: scale(1.08) rotate(1deg); }
-  }
-
-  /* ヘッダー */
-  .site-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.5rem 3rem; height: 100px;
-    background: rgba(13, 11, 24, 0.6); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: fixed; top: 0; width: 100%; z-index: 100;
-  }
-  .site-logo-img { max-height: 80px; width: auto; object-fit: contain; }
-  .nav-menu ul { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
-  .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-  .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
 
   /* メインコンテンツコンテナ */
   .detailed-container {
@@ -132,11 +171,6 @@ const { frontmatter } = profileData;
     white-space: pre-line;
   }
 
-  .story-block h3, .skills-block h3 {
-    font-size: 1.4rem; color: #ffb7ff; text-shadow: 0 0 8px rgba(255, 183, 255, 0.5);
-    margin-top: 2rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;
-  }
-
   .detailed-story p { 
     line-height: 1.85; margin-bottom: 1.4rem; color: #dbd7e0; letter-spacing: 0.03em;
   }
@@ -147,19 +181,95 @@ const { frontmatter } = profileData;
     white-space: pre-line;
   }
 
-  .personal-info {
-    background: rgba(255, 255, 255, 0.03); padding: 1.2rem;
-    border-radius: 8px; margin-top: 2rem; font-size: 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  /* ===================================================
+     📚 Kindle書籍 紹介カード（2冊用コンテナ）
+     =================================================== */
+  .books-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 3.5rem 0;
   }
-  .personal-info p { margin: 0.6rem 0; }
 
-  /* スキルグリッド */
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .skills-grid h4 { margin: 0 0 0.8rem 0; font-size: 1.1rem; color: #a3e2ff; }
-  .skills-grid ul { margin: 0; padding-left: 1.2rem; font-size: 0.95rem; line-height: 1.7; }
-  .skills-grid ul li { margin-bottom: 0.4rem; }
-  .sub-info { font-size: 0.9rem; color: #aaa; margin: 0 0 0.8rem 0; }
+  .book-promo-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 2.5rem !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 183, 255, 0.04) 100%) !important;
+    border: 1px solid rgba(255, 183, 255, 0.15) !important;
+    border-radius: 16px !important;
+    padding: 2.5rem !important;
+    box-shadow: 0 8px 32px rgba(13, 11, 24, 0.5), inset 0 0 15px rgba(255, 183, 255, 0.05) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* 書籍画像エリア */
+  .book-img-area {
+    flex: 0 0 160px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .book-cover-img {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 6px !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 183, 255, 0.1) !important;
+    transition: transform 0.3s ease !important;
+  }
+  .book-promo-card:hover .book-cover-img {
+    transform: translateY(-5px) scale(1.02) !important;
+  }
+
+  /* 書籍情報エリア */
+  .book-info-area {
+    flex: 1 !important;
+    text-align: left !important;
+  }
+
+  /* 好評発売中バッジ */
+  .book-promo-badge {
+    display: inline-block !important;
+    background: linear-gradient(90deg, #ff5e62, #ff9966) !important;
+    color: #fff !important;
+    font-size: 0.8rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.1em !important;
+    padding: 0.3rem 1.2rem !important;
+    border-radius: 20px !important;
+    margin-bottom: 1rem !important;
+    box-shadow: 0 0 10px rgba(255, 94, 98, 0.3) !important;
+  }
+
+  /* 2冊目のバッジ色を「源（source）」をイメージした紫・青系に微変化させ知的な印象に */
+  .source-badge {
+    background: linear-gradient(90deg, #8a2be2, #4a00e0) !important;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3) !important;
+  }
+
+  /* 書籍タイトル */
+  .book-promo-title {
+    font-size: 1.35rem !important;
+    color: #fff !important;
+    text-shadow: 0 0 10px rgba(255, 183, 255, 0.3) !important;
+    margin: 0 0 0.8rem 0 !important;
+    font-weight: bold !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  /* 書籍説明文 */
+  .book-promo-description {
+    font-size: 0.95rem !important;
+    color: #dbd7e0 !important;
+    line-height: 1.7 !important;
+    margin: 0 0 1.5rem 0 !important;
+  }
+
+  .book-promo-card .action-buttons-container {
+    margin: 0 !important;
+    justify-content: flex-start !important;
+  }
   
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
@@ -176,16 +286,31 @@ const { frontmatter } = profileData;
   
   /* レスポンシブ対応 */
   @media (max-width: 768px) {
-    .site-header { padding: 0.5rem 1rem; }
-    .nav-menu { display: none; }
     .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
     .profile-header-block h2 { font-size: 1.6rem; }
-    .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+    /* スマホ時は縦並びにする */
+    .book-promo-card {
+      flex-direction: column !important;
+      gap: 1.5rem !important;
+      padding: 2rem 1.5rem !important;
+    }
+    .book-img-area {
+      flex: 0 0 150px !important;
+      max-width: 150px !important;
+    }
+    .book-info-area {
+      text-align: center !important;
+      width: 100% !important;
+    }
+    .book-promo-card .action-buttons-container {
+      justify-content: center !important;
+    }
   }
 </style>
 
-<!-- ✨ Markdownの中身を確実に装飾するためのグローバル指定（ここを分離しました！） -->
+<!-- ✨ Markdownの中身を確実に装飾するためのグローバル指定 -->
 <style is:global>
   /* Markdownの「###」を左線付きのネオンラインに */
   .card-panel h3 {
@@ -262,8 +387,89 @@ const { frontmatter } = profileData;
     margin: 3.5rem 0 !important;
   }
 
+  /* ===================================================
+     ⚡ アクションボタンのグローバル装飾
+     =================================================== */
+  .action-buttons-container {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+    margin: 3.5rem 0 !important;
+    width: 100% !important;
+    flex-wrap: wrap !important;
+  }
+
+  .btn-action {
+    flex: 1 !important;
+    max-width: 320px !important;
+    min-width: 260px !important;
+    height: 56px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    font-size: 1.05rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.05em !important;
+    border-radius: 30px !important;
+    position: relative !important;
+    transition: all 0.4s ease !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    border: none !important;
+  }
+
+  .btn-action span {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  /* Amazonボタン：オレンジ〜ピンクグラデーション */
+  .btn-apply {
+    background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4) !important;
+  }
+
+  .btn-apply::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
+    background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+    transition: opacity 0.4s ease !important;
+  }
+
+  .btn-apply:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important;
+  }
+  
+  .btn-apply:hover::before {
+    opacity: 1 !important;
+  }
+
+  /* 訪問済みリンクのカラー対策 */
+  .btn-apply:visited,
+  .btn-apply:visited span {
+    color: #fff !important;
+  }
+
+  @media (max-width: 600px) {
+    .action-buttons-container {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 1.2rem !important;
+    }
+    .btn-action {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
 </style>
 
+<!-- ③ メイン画像用コンテナスタイル -->
 <style is:global>
   .toppage-image-container {
     width: 100%;
@@ -280,3 +486,36 @@ const { frontmatter } = profileData;
     display: block;
   }
 </style>
+
+<!-- 新規ウィンドウ用の安心スクリプト -->
+<script is:inline>
+  function setupFormButtons() {
+    const container = document.querySelector('.action-buttons-container');
+    if (!container) return;
+
+    const links = document.querySelectorAll('.book-promo-card .action-buttons-container a');
+    links.forEach(link => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+      
+      link.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const href = this.getAttribute('href');
+        if (href) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
+        return false;
+      };
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFormButtons);
+  } else {
+    setupFormButtons();
+  }
+
+  document.addEventListener('astro:page-load', setupFormButtons);
+  document.addEventListener('astro:after-swap', setupFormButtons);
+</script>
