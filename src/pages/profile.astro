@@ -30,6 +30,13 @@ const { frontmatter } = profileData;
         </div>
         
         <div class="card-content detailed-story">
+
+{frontmatter.image && (
+            <div class="toppage-image-container">
+              <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
+            </div>
+          )}
+
           <div class="intro-message">
             <p class="greeting">{frontmatter.greeting}</p>
             <blockquote>
@@ -253,5 +260,23 @@ const { frontmatter } = profileData;
     height: 1px !important;
     background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
     margin: 3.5rem 0 !important;
+  }
+
+</style>
+
+<style is:global>
+  .toppage-image-container {
+    width: 100%;
+    margin: 0 auto 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
+    border: 1px solid rgba(255, 183, 255, 0.3);
+  }
+  .toppage-main-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
   }
 </style>

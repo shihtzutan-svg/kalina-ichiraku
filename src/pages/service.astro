@@ -30,9 +30,13 @@ const { frontmatter } = serviceData;
         </div>
         
         <div class="card-content detailed-body">
-          {frontmatter.image && (
-            <img src={frontmatter.image} alt="メインイメージ" class="program-main-img" />
-          )}
+
+{frontmatter.image && (
+  <div class="toppage-image-container">
+    <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
+  </div>
+)}
+
           <div class="summary-message">
             <p>{frontmatter.summary}</p>
           </div>
@@ -552,6 +556,23 @@ const { frontmatter } = serviceData;
       width: 100% !important;
       max-width: 100% !important;
     }
+  }
+</style>
+
+<style is:global>
+  .toppage-image-container {
+    width: 100%;
+    margin: 0 auto 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
+    border: 1px solid rgba(255, 183, 255, 0.3);
+  }
+  .toppage-main-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
   }
 </style>
 

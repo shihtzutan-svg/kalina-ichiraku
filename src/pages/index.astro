@@ -13,6 +13,7 @@ import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
 import * as clayData from '../content/clay.md';
 import * as kanaLData from '../content/kana-l.md';
+import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
 
 // 📰【変更】「お知らせ」コレクションから全記事を取得し、新しい順に並び替えて上から3件だけ切り取る
@@ -113,13 +114,13 @@ const isProd = import.meta.env.PROD;
         <!-- サービス -->
         <section class="card-panel" id="service">
           <div class="profile-header-block">
-            <p class="catchphrase">LIGHTWORKER SERVICE</p>
-            <h2>ライトワーカー様向けサービス</h2>
+            <p class="catchphrase">{serviceData.frontmatter.catchphrase}</p>
+            <h2>{serviceData.frontmatter.title}</h2>
           </div>
           <div class="card-content">
-          <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
-            <p>近日公開！</p>
+          <img src={serviceData.frontmatter.image} alt="サービス" class="program-thumb" />
             <p>ライトワーカー様を応援する、カウンセリングやWebサイト作成、SNS運用などがセットになったパックのご紹介です。</p>
+            <a href="/service" class="read-more">サービスの説明 →</a>
           </div>
         </section>
 

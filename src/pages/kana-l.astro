@@ -30,9 +30,13 @@ const { frontmatter } = kanaLData;
         </div>
         
         <div class="card-content detailed-body">
-          {frontmatter.image && (
-            <img src={frontmatter.image} alt="Kana-L・メインイメージ" class="program-main-img" />
-          )}
+
+{frontmatter.image && (
+  <div class="toppage-image-container">
+    <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
+  </div>
+)}
+
           <div class="summary-message">
             <p>{frontmatter.summary}</p>
           </div>
@@ -148,16 +152,6 @@ const { frontmatter } = kanaLData;
   }
   .copyright { margin: 0; font-size: 0.85rem; color: #a3a0a8; letter-spacing: 0.05em; }
 
-  /* メイン画像設定 */
-  .program-main-img {
-    width: 100%;
-    max-height: 450px; 
-    object-fit: cover;   
-    border-radius: 12px; 
-    margin-bottom: 2rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    display: block;
-  }
 
   @media (max-width: 768px) {
     .site-header { padding: 0.5rem 1rem; }
@@ -689,6 +683,23 @@ const { frontmatter } = kanaLData;
   color: #ffb7ff;
 }
 
+</style>
+
+<style is:global>
+  .toppage-image-container {
+    width: 100%;
+    margin: 0 auto 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
+    border: 1px solid rgba(255, 183, 255, 0.3);
+  }
+  .toppage-main-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
 </style>
 
 <!-- Astro完全対応版インラインスクリプト -->
