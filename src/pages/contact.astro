@@ -2,7 +2,6 @@
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
-
 import * as contactLData from '../content/contact.md';
 const { frontmatter } = contactData;
 ---
@@ -30,7 +29,7 @@ const { frontmatter } = contactData;
         
         <div class="card-content detailed-body">
           {frontmatter.image && (
-            <img src={frontmatter.image} alt="Kana-L・メインイメージ" class="program-main-img" />
+            <img src={frontmatter.image} alt="メインイメージ" class="program-main-img" />
           )}
           <div class="summary-message">
             <p>{frontmatter.summary}</p>
@@ -39,7 +38,7 @@ const { frontmatter } = contactData;
           <hr class="divider" />
           <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
           <div class="markdown-content">
-            <kanaLData.Content />
+            <contactData.Content />
           </div>
           
           <div class="back-home-container">
