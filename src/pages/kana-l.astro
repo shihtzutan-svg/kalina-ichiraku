@@ -1,6 +1,6 @@
 ---
 import bgGalaxy from '../assets/bg-galaxy.avif';
-import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro'; // プロジェクトのパスに合わせて適宜調整してください
 import PageTop from '../components/PageTop.astro';
 
 // ★新しく作ったKana-L用のMarkdownを読み込む
@@ -8,66 +8,47 @@ import * as kanaLData from '../content/kana-l.md';
 const { frontmatter } = kanaLData;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{frontmatter.title} | 一樂 迦哩無 - 公式サイト</title>
-  </head>
-  <body>
-    <!-- 背景画像 -->
-    <div class="bg-layer"></div>
+<Layout 
+  title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
+  description={frontmatter.summary}
+>
+  <!-- 背景画像 -->
+  <div class="bg-layer"></div>
 
-    <!-- ヘッダー -->
-    <Header />
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-body">
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
+          </div>
+        )}
 
-    <!-- メインコンテンツ -->
-    <main class="detailed-container">
-      <section class="card-panel">
-        <div class="program-header-block">
-          <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>{frontmatter.title}</h2>
+        <div class="summary-message">
+          <p>{frontmatter.summary}</p>
+        </div>
+
+        <hr class="divider" />
+        <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
+        <div class="markdown-content">
+          <kanaLData.Content />
         </div>
         
-        <div class="card-content detailed-body">
-          {frontmatter.image && (
-            <div class="toppage-image-container">
-              <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
-            </div>
-          )}
-
-          <div class="summary-message">
-            <p>{frontmatter.summary}</p>
-          </div>
-
-          <hr class="divider" />
-          <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
-          <div class="markdown-content">
-            <kanaLData.Content />
-          </div>
-          
-          <div class="back-home-container">
-            <a href="/" class="back-home-link">トップページへ戻る</a>
-          </div>
+        <div class="back-home-container">
+          <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
-      </section>
-    </main>
-
-    <!-- フッター -->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
-        <div class="footer-links">
-          <a href="/privacy">プライバシーポリシー</a>
-          <span class="footer-separator">|</span>
-          <a href="/tokushouho">特定商取引法に基づく表記</a>
-        </div>
-        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
-    </footer>
-    <PageTop />
-  </body>
-</html>
+    </section>
+  </main>
+
+  <PageTop />
+</Layout>
 
 <!-- スタイル設定 -->
 <!-- ① 背景専用のスタイル（影響をここに閉じ込める） -->
@@ -131,57 +112,36 @@ const { frontmatter } = kanaLData;
     margin: 2.5rem 0;
   }
 
+/* ===================================================
+     📚 マークダウン本文（town.md）の最適化装飾
+     =================================================== */
+  .markdown-content :global(p) {
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #dbd7e0 !important; 
+    letter-spacing: 0.04em !important;
+    font-size: 1.05rem !important;
+  }
+
+  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  .markdown-content :global(a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content :global(a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
 
-  /* ★フッター */
-  .site-footer {
-    display: block !important; 
-    position: relative; 
-    z-index: 9999 !important; 
-    width: 100vw;
-    margin-left: calc(-50vw + 50%); 
-    background: #0d0b18 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12); 
-    padding: 2.5rem 0; 
-    text-align: center; 
-    margin-top: 5rem;
-  }
-  
-  /* 💡 追加：フッターリンク全体のコンテナ */
-  .footer-links {
-    margin-bottom: 1rem; /* コピーライトとの隙間 */
-    font-size: 0.85rem;
-  }
-
-  /* 💡 追加：リンク単体の装飾（テーマに合わせた淡い水色） */
-  .footer-links a {
-    color: #a3e2ff; 
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    font-weight: 500;
-  }
-
-  /* 💡 追加：ホバー時にテーマカラーのピンクになり、少し光る演出 */
-  .footer-links a:hover {
-    color: #ffb7ff;
-    text-shadow: 0 0 8px #ffb7ff;
-  }
-
-  /* 💡 追加：リンク同士の間にある「 | 」（区切り線）の装飾 */
-  .footer-separator {
-    color: rgba(255, 255, 255, 0.2);
-    margin: 0 1rem;
-  }
-
-  .copyright { 
-    margin: 0; 
-    font-size: 0.85rem; 
-    color: #a3a0a8; 
-    letter-spacing: 0.05em; 
-  }
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
@@ -549,7 +509,7 @@ const { frontmatter } = kanaLData;
   }
 
   /* ===================================================
-     ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
+     🎨 お申し込み・お問い合わせボタン（Markdown内強制適用版）
      =================================================== */
   .markdown-content :global(.action-buttons-container) {
     display: flex !important;
@@ -715,23 +675,7 @@ const { frontmatter } = kanaLData;
   }
 </style>
 
-  <!-- サイト全体のシンプルなリンクにネオン風スタイルを一括適用 -->
-<style is:global>
-  /* ボタンやメニュー、ロゴ以外の、すべての素のテキストリンクに適用 */
-  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]) {
-    color: #a3e2ff !important;
-    text-decoration: none !important;
-    font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
-    transition: all 0.3s ease !important;
-  }
 
-  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]):hover {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
-  }
-</style>
 
 <!-- Astro完全対応版インラインスクリプト -->
 <script is:inline>

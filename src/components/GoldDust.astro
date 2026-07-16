@@ -1,0 +1,165 @@
+<div id="gold-dust-container"></div>
+
+<script>
+  class GoldDust {
+    container: HTMLElement;
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
+    particles: Particle[];
+    animationFrameId: number | null;
+
+    constructor() {
+      this.container = document.getElementById('gold-dust-container')!;
+      this.canvas = document.createElement('canvas');
+      this.ctx = this.canvas.getContext('2d')!;
+      this.particles = [];
+      this.animationFrameId = null;
+
+      this.init();
+    }
+
+    init() {
+      this.container.appendChild(this.canvas);
+      this.resizeCanvas();
+      window.addEventListener('resize', () => this.resizeCanvas());
+
+      // 粒子の初期生成
+      const particleCount = Math.min(100, Math.floor((this.canvas.width * this.canvas.height) / 15000));
+      for (let i = 0; i < particleCount; i++) {
+        this.particles.push(new Particle(this.canvas.width, this.canvas.height, true));
+      }
+
+      this.animate();
+    }
+
+    resizeCanvas() {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
+
+    animate() {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      this.particles.forEach((p, index) => {
+        p.update(this.canvas.width, this.canvas.height);
+        p.draw(this.ctx);
+      });
+
+      this.animationFrameId = requestAnimationFrame(() => this.animate());
+    }
+  }
+
+  class Particle {
+    x: number;
+    y: number;
+    size: number;
+    baseSpeedY: number;
+    baseSpeedX: number;
+    opacity: number;
+    fadeSpeed: number;
+    twinkleSpeed: number;
+    twinklePhase: number;
+    glowRadius: number;
+
+    constructor(canvasWidth: number, canvasHeight: number, randomY = false) {
+      this.x = Math.random() * canvasWidth;
+      // 初期生成時は画面全体、追加生成時は画面の下部から
+      this.y = randomY ? Math.random() * canvasHeight : canvasHeight + 10;
+      
+      // メリハリのあるサイズ（極小の粉〜少し大きめの輝く星）
+      this.size = Math.random() < 0.85 ? Math.random() * 1.2 + 0.3 : Math.random() * 2.5 + 1.2;
+      
+      // 上昇する動き（虫っぽさをなくすため、基本は下から上への自然な流れに固定）
+      this.baseSpeedY = -(Math.random() * 0.4 + 0.1);
+      // わずかに右に流れる風（斜めに舞い上がる演出）
+      this.baseSpeedX = Math.random() * 0.15 + 0.05;
+      
+      // 明滅（ツインクル）のための設定
+      this.opacity = Math.random() * 0.5 + 0.2;
+      this.fadeSpeed = Math.random() * 0.005 + 0.002;
+      this.twinkleSpeed = Math.random() * 0.03 + 0.01;
+      this.twinklePhase = Math.random() * Math.PI * 2;
+      
+      // 光のぼかし幅
+      this.glowRadius = this.size * (Math.random() * 3 + 2);
+    }
+
+    update(canvasWidth: number, canvasHeight: number) {
+      // 緩やかな直線的移動（ウネウネさせない）
+      this.y += this.baseSpeedY;
+      this.x += this.baseSpeedX;
+
+      // 瞬き効果：サイン波を使ってフワフワと明滅させる
+      this.twinklePhase += this.twinkleSpeed;
+      const twinkle = Math.sin(this.twinklePhase) * 0.45 + 0.55; // 0.1 〜 1.0 の間を滑らかに往復
+      this.opacity = twinkle;
+
+      // 画面外、または寿命が尽きたら再生成
+      if (this.y < -50 || this.x > canvasWidth + 50) {
+        this.reset(canvasWidth, canvasHeight);
+      }
+    }
+
+    reset(canvasWidth: number, canvasHeight: number) {
+      this.x = Math.random() * canvasWidth;
+      this.y = canvasHeight + 10;
+      this.size = Math.random() < 0.85 ? Math.random() * 1.2 + 0.3 : Math.random() * 2.5 + 1.2;
+      this.baseSpeedY = -(Math.random() * 0.35 + 0.1);
+      this.baseSpeedX = Math.random() * 0.15 + 0.05;
+      this.opacity = 0;
+      this.twinklePhase = Math.random() * Math.PI * 2;
+      this.glowRadius = this.size * (Math.random() * 3 + 2);
+    }
+
+    draw(ctx: CanvasRenderingContext2D) {
+      ctx.save();
+      
+      // 金色・プラチナゴールドに輝く美しいグラデーションの光彩（グロー）を作成
+      const gradient = ctx.createRadialGradient(
+        this.x, this.y, 0,
+        this.x, this.y, this.glowRadius
+      );
+      // 中心はまばゆい白、外側へ向けて金色〜透明に
+      gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+      gradient.addColorStop(0.15, `rgba(255, 223, 137, ${this.opacity * 0.9})`);
+      gradient.addColorStop(0.4, `rgba(212, 175, 55, ${this.opacity * 0.4})`);
+      gradient.addColorStop(1, 'rgba(212, 175, 55, 0)');
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      // 光の散乱（ぼかし）を表現するため、粒子サイズより大きなグロー範囲で描画
+      ctx.arc(this.x, this.y, this.glowRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  // ページ初期化時に実行（AstroのViewTransitionsに対応）
+  const initGoldDust = () => {
+    if (document.getElementById('gold-dust-container')) {
+      new GoldDust();
+    }
+  };
+
+  initGoldDust();
+  document.addEventListener('astro:after-swap', initGoldDust);
+</script>
+
+<style>
+  #gold-dust-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* マウス操作を邪魔しない */
+    z-index: -1; /* 背景画像の直上、コンテンツの背後に配置 */
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

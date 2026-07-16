@@ -1,7 +1,6 @@
 ---
+import Layout from '../layouts/Layout.astro';
 import bgGalaxy from '../assets/bg-galaxy.avif';
-import Header from '../components/Header.astro';
-import PageTop from '../components/PageTop.astro';
 
 // ★トップページから移植：ポートレートと4体のマスコット画像をインポート
 import portrait from '../assets/portrait.avif';
@@ -19,130 +18,107 @@ import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>一樂 迦哩無について - 詳細プロフィール | 一樂 迦哩無 - 公式サイト</title>
-  </head>
-  <body>
-    <!-- 背景画像 -->
-    <div class="bg-layer"></div>
-    
-    <!-- ヘッダー -->
-    <Header />
+<Layout title="一樂 迦哩無について - 詳細プロフィール | 一樂 迦哩無 - 公式サイト">
+  <!-- 背景画像 -->
+  <div class="bg-layer"></div>
 
-    <!-- ★トップページから移植：ヒーローセクション（浮遊するマスコットとポートレート） -->
-    <section class="hero-section">
-      <div class="floating-container">
-        <!-- マスコット -->
-        <img src={mascot1.src} alt="Mascot1" class="mascot m1" />
-        <img src={mascot2.src} alt="Mascot2" class="mascot m2" />
-        
-        <!-- ポートレート -->
-        <div class="portrait-container">
-          <img src={portrait.src} alt="一樂 迦哩無" class="portrait-img" />
-        </div>
-        
-        <img src={mascot3.src} alt="Mascot3" class="mascot m3" />
-        <img src={mascot4.src} alt="Mascot4" class="mascot m4" />
+  <!-- ★トップページから移植：ヒーローセクション（浮遊するマスコットとポートレート） -->
+  <section class="hero-section">
+    <div class="floating-container">
+      <!-- マスコット -->
+      <img src={mascot1.src} alt="Mascot1" class="mascot m1" />
+      <img src={mascot2.src} alt="Mascot2" class="mascot m2" />
+      
+      <!-- ポートレート -->
+      <div class="portrait-container">
+        <img src={portrait.src} alt="一樂 迦哩無" class="portrait-img" />
       </div>
-    </section>
+      
+      <img src={mascot3.src} alt="Mascot3" class="mascot m3" />
+      <img src={mascot4.src} alt="Mascot4" class="mascot m4" />
+    </div>
+  </section>
 
-    <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
-    <main class="detailed-container">
-      <section class="card-panel">
-        <div class="profile-header-block">
-          <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>{frontmatter.title}</h2>
+  <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="profile-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-story">
+        <!-- 元々ここにあった単体の toppage-image-container は、上部ヒーローセクションへの移植に伴い不要になったため削除しています -->
+
+        <div class="intro-message">
+          <p class="greeting">{frontmatter.greeting}</p>
+          <blockquote>
+            {frontmatter.quote}
+          </blockquote>
         </div>
-        
-        <div class="card-content detailed-story">
-          <!-- 元々ここにあった単体の toppage-image-container は、上部ヒーローセクションへの移植に伴い不要になったため削除しています -->
 
-          <div class="intro-message">
-            <p class="greeting">{frontmatter.greeting}</p>
-            <blockquote>
-              {frontmatter.quote}
-            </blockquote>
-          </div>
-
-          <!-- ===================================================
-               📚 Kindle書籍 紹介エリア（2冊連続配置）
-               =================================================== -->
-          <div class="books-wrapper">
-            
-            <!-- 1冊目：ガイドとの対話 -->
-            <div class="book-promo-card">
-              <div class="book-img-area">
-                <img src={bookCover1.src} alt="Kindle書籍『ガイドとの対話』表紙" class="book-cover-img" />
-              </div>
-              <div class="book-info-area">
-                <div class="book-promo-badge source-badge">発売中</div>
-                <h4 class="book-promo-title">Kindle書籍『ガイドとの対話』</h4>
-                <p class="book-promo-description">
-                  私が瞑想の最中、スピリチュアルガイドと思しき存在と繋がり、対話した内容の一部始終です。<br />
+        <!-- ===================================================
+             📚 Kindle書籍 紹介エリア（2冊連続配置）
+             =================================================== -->
+        <div class="books-wrapper">
+          
+          <!-- 1冊目：ガイドとの対話 -->
+          <div class="book-promo-card">
+            <div class="book-img-area">
+              <img src={bookCover1.src} alt="Kindle書籍『ガイドとの対話』表紙" class="book-cover-img" />
+            </div>
+            <div class="book-info-area">
+              <div class="book-promo-badge source-badge">発売中</div>
+              <h4 class="book-promo-title">Kindle書籍『ガイドとの対話』</h4>
+              <p class="book-promo-description">
+                私が瞑想の最中、スピリチュアルガイドと思しき存在と繋がり、対話した内容の一部始終です。<br />
 ガイドに「書きなさい」と促され、出版致しました。<br />
 この世の理（ことわり）が語られています。<br />
 ありのままを書いておりますので、意味不明な箇所もあるかもしれませんが、気にならない方はご一読頂けると幸いです。
-                </p>
-                <div class="action-buttons-container">
-                  <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%93%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?tag=szdmorg-22" class="btn-action btn-apply">
-                    <span>Amazonで詳細を見る</span>
-                  </a>
-                </div>
+              </p>
+              <div class="action-buttons-container">
+                <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%93%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?tag=szdmorg-22" class="btn-action btn-apply">
+                  <span>Amazonで詳細を見る</span>
+                </a>
               </div>
             </div>
+          </div>
 
-            <!-- 2冊目：「源」との対話 -->
-            <div class="book-promo-card">
-              <div class="book-img-area">
-                <img src={bookCover2.src} alt="Kindle書籍『「源」との対話』表紙" class="book-cover-img" />
-              </div>
-              <div class="book-info-area">
-                <div class="book-promo-badge source-badge">発売中</div>
-                <h4 class="book-promo-title">Kindle書籍『「源」との対話』</h4>
-                <p class="book-promo-description">
-                  前著「ガイドとの対話」を経て、今回は大いなる存在「源」との直接の対話に至りました。<br />
+          <!-- 2冊目：「源」との対話 -->
+          <div class="book-promo-card">
+            <div class="book-img-area">
+              <img src={bookCover2.src} alt="Kindle書籍『「源」との対話』表紙" class="book-cover-img" />
+            </div>
+            <div class="book-info-area">
+              <div class="book-promo-badge source-badge">発売中</div>
+              <h4 class="book-promo-title">Kindle書籍『「源」との対話』</h4>
+              <p class="book-promo-description">
+                前著「ガイドとの対話」を経て、今回は大いなる存在「源」との直接の対話に至りました。<br />
 この宇宙の「理（ことわり）」についての対話（原文そのまま）と、著者独自の解釈を記載しております。<br />
 著者の行っている瞑想の方法についても説明しています。
-                </p>
-                <div class="action-buttons-container">
-                  <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E3%81%84%E3%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?tag=szdmorg-22" class="btn-action btn-apply">
-                    <span>Amazonで詳細を見る</span>
-                  </a>
-                </div>
+              </p>
+              <div class="action-buttons-container">
+                <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E3%81%84%E3%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?tag=szdmorg-22" class="btn-action btn-apply">
+                  <span>Amazonで詳細を見る</span>
+                </a>
               </div>
             </div>
-
           </div>
 
-          <!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
+        </div>
+
+<!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
+        <div class="markdown-content">
           <profileData.Content />
-
-          <div class="back-home-container">
-              <a href="/" class="back-home-link">トップページへ戻る</a>
-          </div>
         </div>
-      </section>
-    </main>
 
-   <!-- ★フッター-->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
-        <div class="footer-links">
-          <a href="/privacy">プライバシーポリシー</a>
-          <span class="footer-separator">|</span>
-          <a href="/tokushouho">特定商取引法に基づく表記</a>
+        <div class="back-home-container">
+            <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
-        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
-    </footer>
-    <PageTop />
-  </body>
-</html>
-
+    </section>
+  </main>
+</Layout>
 
 <!-- スタイル設定 -->
 <!-- ① 背景専用のスタイル -->
@@ -262,8 +238,8 @@ const { frontmatter } = profileData;
   }
 
   /* ===================================================
-     📚 Kindle書籍 紹介カード（2冊用コンテナ）
-     =================================================== */
+      📚 Kindle書籍 紹介カード（2冊用コンテナ）
+      =================================================== */
   .books-wrapper {
     display: flex;
     flex-direction: column;
@@ -351,57 +327,35 @@ const { frontmatter } = profileData;
     justify-content: flex-start !important;
   }
   
+/* ===================================================
+     📚 マークダウン本文（town.md）の最適化装飾
+     =================================================== */
+  .markdown-content :global(p) {
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #dbd7e0 !important; 
+    letter-spacing: 0.04em !important;
+    font-size: 1.05rem !important;
+  }
+
+  /* マークダウン本文内のすべてのリンク（直書きHTMLのaタグも含む）をネオン調に */
+  :global(.markdown-content a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  :global(.markdown-content a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
-
-/* ★フッター */
-  .site-footer {
-    display: block !important; 
-    position: relative; 
-    z-index: 9999 !important; 
-    width: 100vw;
-    margin-left: calc(-50vw + 50%); 
-    background: #0d0b18 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12); 
-    padding: 2.5rem 0; 
-    text-align: center; 
-    margin-top: 5rem;
-  }
-  
-  /* 💡 追加：フッターリンク全体のコンテナ */
-  .footer-links {
-    margin-bottom: 1rem; /* コピーライトとの隙間 */
-    font-size: 0.85rem;
-  }
-
-  /* 💡 追加：リンク単体の装飾（テーマに合わせた淡い水色） */
-  .footer-links a {
-    color: #a3e2ff; 
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    font-weight: 500;
-  }
-
-  /* 💡 追加：ホバー時にテーマカラーのピンクになり、少し光る演出 */
-  .footer-links a:hover {
-    color: #ffb7ff;
-    text-shadow: 0 0 8px #ffb7ff;
-  }
-
-  /* 💡 追加：リンク同士の間にある「 | 」（区切り線）の装飾 */
-  .footer-separator {
-    color: rgba(255, 255, 255, 0.2);
-    margin: 0 1rem;
-  }
-
-  .copyright { 
-    margin: 0; 
-    font-size: 0.85rem; 
-    color: #a3a0a8; 
-    letter-spacing: 0.05em; 
-  }
   
   /* レスポンシブ対応 */
 @media (max-width: 768px) {
@@ -533,8 +487,8 @@ const { frontmatter } = profileData;
   }
 
   /* ===================================================
-     ⚡ アクションボタンのグローバル装飾
-     =================================================== */
+      ⚡ アクションボタンのグローバル装飾
+      =================================================== */
   .action-buttons-container {
     display: flex !important;
     justify-content: center !important;
@@ -614,23 +568,7 @@ const { frontmatter } = profileData;
   }
 </style>
 
-<!-- サイト全体のシンプルなリンクにネオン風スタイルを一括適用 -->
-<style is:global>
-  /* ボタンやメニュー、ロゴ以外の、すべての素のテキストリンクに適用 */
-  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]) {
-    color: #a3e2ff !important;
-    text-decoration: none !important;
-    font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
-    transition: all 0.3s ease !important;
-  }
 
-  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]):hover {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
-  }
-</style>
 
 <!-- 新規ウィンドウ用の安心スクリプト -->
 <script is:inline>

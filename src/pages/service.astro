@@ -1,117 +1,48 @@
 ---
-import bgGalaxy from '../assets/bg-galaxy.avif';
-import Header from '../components/Header.astro';
-import PageTop from '../components/PageTop.astro';
+import Layout from '../layouts/Layout.astro';
 
 // ★新しく作ったservice用のMarkdownを読み込む
 import * as serviceData from '../content/service.md';
 const { frontmatter } = serviceData;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{frontmatter.title} | 一樂 迦哩無 - 公式サイト</title>
-  </head>
-  <body>
-    <!-- 背景画像 -->
-   <div class="bg-layer"></div>
+<Layout title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}>
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-body">
 
-<!-- ヘッダー -->
-<Header />
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
+          </div>
+        )}
 
-    <!-- メインコンテンツ -->
-    <main class="detailed-container">
-      <section class="card-panel">
-        <div class="program-header-block">
-          <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>{frontmatter.title}</h2>
+        <div class="summary-message">
+          <p>{frontmatter.summary}</p>
+        </div>
+
+        <hr class="divider" />
+        <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
+        <div class="markdown-content">
+          <serviceData.Content />
         </div>
         
-        <div class="card-content detailed-body">
-
-{frontmatter.image && (
-  <div class="toppage-image-container">
-    <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
-  </div>
-)}
-
-          <div class="summary-message">
-            <p>{frontmatter.summary}</p>
-          </div>
-
-          <hr class="divider" />
-          <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
-          <div class="markdown-content">
-            <serviceData.Content />
-          </div>
-          
-          <div class="back-home-container">
-              <a href="/" class="back-home-link">トップページへ戻る</a>
-          </div>
+        <div class="back-home-container">
+            <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
-      </section>
-    </main>
-
-    <!-- ★フッター-->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
-        <div class="footer-links">
-          <a href="/privacy">プライバシーポリシー</a>
-          <span class="footer-separator">|</span>
-          <a href="/tokushouho">特定商取引法に基づく表記</a>
-        </div>
-        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
-    </footer>
-    <PageTop />
-  </body>
-</html>
-
-<!-- スタイル設定 -->
-<!-- ① 背景専用のスタイル（影響をここに閉じ込める） -->
-<style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
-  .bg-layer {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: var(--bgUrl); background-size: cover; background-position: center;
-    z-index: -2; opacity: 0.7;
-    animation: bgMovement 25s ease-in-out infinite alternate;
-  }
-  @keyframes bgMovement {
-    0% { transform: scale(1) rotate(0deg); }
-    100% { transform: scale(1.08) rotate(1deg); }
-  }
-</style>
+    </section>
+  </main>
+</Layout>
 
 <!-- ② ページ全体のメインスタイル（スケジュール完全分離・確定版） -->
 <style>
-  * { box-sizing: border-box; }
-  body { 
-    margin: 0; padding: 0;
-    background: #0d0b18; color: #f0ecf4; 
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* ヘッダー */
-  .site-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.5rem 3rem; height: 100px;
-    background: rgba(13, 11, 24, 0.6); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: fixed; top: 0; width: 100%; z-index: 100;
-  }
-  .site-logo-img { max-height: 80px; width: auto; object-fit: contain; }
-  .nav-menu ul { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
-  .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-  .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
-
   /* コンテナ */
   .detailed-container {
     flex: 1;
@@ -145,57 +76,35 @@ const { frontmatter } = serviceData;
     margin: 2.5rem 0;
   }
 
+/* ===================================================
+     📚 マークダウン本文（town.md）の最適化装飾
+     =================================================== */
+  .markdown-content :global(p) {
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #dbd7e0 !important; 
+    letter-spacing: 0.04em !important;
+    font-size: 1.05rem !important;
+  }
+
+  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  .markdown-content :global(a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content :global(a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
-
-  /* ★フッター */
-  .site-footer {
-    display: block !important; 
-    position: relative; 
-    z-index: 9999 !important; 
-    width: 100vw;
-    margin-left: calc(-50vw + 50%); 
-    background: #0d0b18 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12); 
-    padding: 2.5rem 0; 
-    text-align: center; 
-    margin-top: 5rem;
-  }
-  
-  /* 💡 追加：フッターリンク全体のコンテナ */
-  .footer-links {
-    margin-bottom: 1rem; /* コピーライトとの隙間 */
-    font-size: 0.85rem;
-  }
-
-  /* 💡 追加：リンク単体の装飾（テーマに合わせた淡い水色） */
-  .footer-links a {
-    color: #a3e2ff; 
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    font-weight: 500;
-  }
-
-  /* 💡 追加：ホバー時にテーマカラーのピンクになり、少し光る演出 */
-  .footer-links a:hover {
-    color: #ffb7ff;
-    text-shadow: 0 0 8px #ffb7ff;
-  }
-
-  /* 💡 追加：リンク同士の間にある「 | 」（区切り線）の装飾 */
-  .footer-separator {
-    color: rgba(255, 255, 255, 0.2);
-    margin: 0 1rem;
-  }
-
-  .copyright { 
-    margin: 0; 
-    font-size: 0.85rem; 
-    color: #a3a0a8; 
-    letter-spacing: 0.05em; 
-  }
 
   /* メイン画像設定 */
   .program-main-img {
@@ -209,16 +118,14 @@ const { frontmatter } = serviceData;
   }
 
   @media (max-width: 768px) {
-    .site-header { padding: 0.5rem 1rem; }
-    .nav-menu { display: none; }
     .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
     .program-header-block h2 { font-size: 1.6rem; }
   }
 
   /* ===================================================
-     ★重要：マークダウンの中身を「クラス名なし」で強力に装飾
-     =================================================== */
+      ★重要：マークダウンの中身を「クラス名なし」で強力に装飾
+      =================================================== */
   
   .markdown-content :global(p) {
     line-height: 1.85 !important; margin-bottom: 1.4rem !important; color: #dbd7e0 !important; letter-spacing: 0.03em !important;
@@ -239,8 +146,8 @@ const { frontmatter } = serviceData;
   }
 
   /* ---------------------------------------------------
-     🎨 メリットカード（一番基本となる1つ目のul層）
-     --------------------------------------------------- */
+      🎨 メリットカード（一番基本となる1つ目のul層）
+      --------------------------------------------------- */
   .markdown-content :global(ul) {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
@@ -283,8 +190,8 @@ const { frontmatter } = serviceData;
   }
 
   /* ---------------------------------------------------
-     ⏰ スケジュール（h4 ＋ 番号付きリスト ol）完全独立設定
-     --------------------------------------------------- */
+      ⏰ スケジュール（h4 ＋ 番号付きリスト ol）完全独立設定
+      --------------------------------------------------- */
   
   /* スケジュール用のh4（絶対に文字を下に潜り込ませない、独立した通常配置） */
   .markdown-content :global(h4) {
@@ -323,8 +230,8 @@ const { frontmatter } = serviceData;
 
 
   /* ===================================================
-     🎨 持ち物リスト（2列レイアウト＆帯消去）
-     =================================================== */
+      🎨 持ち物リスト（2列レイアウト＆帯消去）
+      =================================================== */
 
   .markdown-content :global(ul:has(ul)) {
     display: flex !important;
@@ -400,8 +307,8 @@ const { frontmatter } = serviceData;
 
 
   /* ===================================================
-     🎨 料金セクション（料金カード用h4だけに強烈な潜り込みを限定）
-     =================================================== */
+      🎨 料金セクション（料金カード用h4だけに強烈な潜り込みを限定）
+      =================================================== */
 
   /* ★【修正の肝】「直後にulが来ているh4」だけを「料金用」として完全分離し、潜り込ませる */
   .markdown-content :global(h4) + :global(ul) {
@@ -511,8 +418,8 @@ const { frontmatter } = serviceData;
   }
 
   /* ===================================================
-     ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
-     =================================================== */
+      ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
+      =================================================== */
   .markdown-content :global(.action-buttons-container) {
     display: flex !important;
     justify-content: center !important;

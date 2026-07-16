@@ -1,14 +1,11 @@
 ---
+import Layout from '../layouts/Layout.astro';
 import portrait from '../assets/portrait.avif';
 import mascot1 from '../assets/mascot1.avif';
 import mascot2 from '../assets/mascot2.avif';
 import mascot3 from '../assets/mascot3.avif';
 import mascot4 from '../assets/mascot4.avif';
-import bgGalaxy from '../assets/bg-galaxy.avif';
-import Header from '../components/Header.astro';
-import PageTop from '../components/PageTop.astro';
 import heroArt from '../assets/top.avif'; 
-
 
 // 📝 各種Markdownデータのインポート
 import * as profileData from '../content/profile.md';
@@ -29,248 +26,163 @@ const latestNews = allNews
 const isProd = import.meta.env.PROD;
 ---
 
-
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>一樂 迦哩無 - 公式サイト</title>
-  </head>
-  <body>
-    <!-- 背景画像 -->
-    <div class="bg-layer"></div>
-
-    <!-- ヘッダー -->
-    <Header />
-
-    <div class="top-banner-wrapper">
-      <div class="banner-container">
-        <!-- 💡 JSを使わず、HTMLにあらかじめ星（s1〜s20）を直に埋め込んでおきます -->
-       <!-- 💡 星を40個に増量しました -->
-        <div class="sparkle-container">
-          <div class="star s1"></div>
-          <div class="star s2"></div>
-          <div class="star s3"></div>
-          <div class="star s4"></div>
-          <div class="star s5"></div>
-          <div class="star s6"></div>
-          <div class="star s7"></div>
-          <div class="star s8"></div>
-          <div class="star s9"></div>
-          <div class="star s10"></div>
-          <div class="star s11"></div>
-          <div class="star s12"></div>
-          <div class="star s13"></div>
-          <div class="star s14"></div>
-          <div class="star s15"></div>
-          <div class="star s16"></div>
-          <div class="star s17"></div>
-          <div class="star s18"></div>
-          <div class="star s19"></div>
-          <div class="star s20"></div>
-          <div class="star s21"></div>
-          <div class="star s22"></div>
-          <div class="star s23"></div>
-          <div class="star s24"></div>
-          <div class="star s25"></div>
-          <div class="star s26"></div>
-          <div class="star s27"></div>
-          <div class="star s28"></div>
-          <div class="star s29"></div>
-          <div class="star s30"></div>
-          <div class="star s31"></div>
-          <div class="star s32"></div>
-          <div class="star s33"></div>
-          <div class="star s34"></div>
-          <div class="star s35"></div>
-          <div class="star s36"></div>
-          <div class="star s37"></div>
-          <div class="star s38"></div>
-          <div class="star s39"></div>
-          <div class="star s40"></div>
-        </div>
-        <img src={heroArt.src} alt="" class="wide-banner-img" />
+<Layout title="一樂 迦哩無 - 公式サイト">
+  <div class="top-banner-wrapper">
+    <div class="banner-container">
+      <!-- 💡 JSを使わず、HTMLにあらかじめ星（s1〜s20）を直に埋め込んでおきます -->
+      <!-- 💡 星を40個に増量しました -->
+      <div class="sparkle-container">
+        <div class="star s1"></div>
+        <div class="star s2"></div>
+        <div class="star s3"></div>
+        <div class="star s4"></div>
+        <div class="star s5"></div>
+        <div class="star s6"></div>
+        <div class="star s7"></div>
+        <div class="star s8"></div>
+        <div class="star s9"></div>
+        <div class="star s10"></div>
+        <div class="star s11"></div>
+        <div class="star s12"></div>
+        <div class="star s13"></div>
+        <div class="star s14"></div>
+        <div class="star s15"></div>
+        <div class="star s16"></div>
+        <div class="star s17"></div>
+        <div class="star s18"></div>
+        <div class="star s19"></div>
+        <div class="star s20"></div>
+        <div class="star s21"></div>
+        <div class="star s22"></div>
+        <div class="star s23"></div>
+        <div class="star s24"></div>
+        <div class="star s25"></div>
+        <div class="star s26"></div>
+        <div class="star s27"></div>
+        <div class="star s28"></div>
+        <div class="star s29"></div>
+        <div class="star s30"></div>
+        <div class="star s31"></div>
+        <div class="star s32"></div>
+        <div class="star s33"></div>
+        <div class="star s34"></div>
+        <div class="star s35"></div>
+        <div class="star s36"></div>
+        <div class="star s37"></div>
+        <div class="star s38"></div>
+        <div class="star s39"></div>
+        <div class="star s40"></div>
       </div>
+      <img src={heroArt.src} alt="" class="wide-banner-img" />
+    </div>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <main class="content-grid">
+
+    <div class="grid-row-three">
+      <!-- プロフィール -->
+      <section class="card-panel" id="profile">
+        <div class="profile-header-block">
+          <p class="catchphrase">{frontmatter.catchphrase}</p>
+          <h2>{profileData.frontmatter.title}</h2>
+        </div>
+        <div class="card-content intro-message">
+          <img src="/profile.avif" alt="Profile" class="program-thumb" />
+          <p>
+            壮壮たる葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
+          </p>
+          <a href="/profile" class="read-more">続きはこちら →</a>
+        </div>
+      </section>
+
+      <!--Kana-L（カナエル）-->
+      <section class="card-panel" id="kana-l">
+        <div class="profile-header-block">
+          <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
+          <h2>{kanaLData.frontmatter.title}</h2>
+        </div>
+        <div class="card-content">
+          <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" />
+          <p>{kanaLData.frontmatter.summary}</p>
+          <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
+        </div>
+      </section>
+
+      <!-- クレイワーク-->
+      <section class="card-panel" id="clay">
+        <div class="profile-header-block">
+          <p class="catchphrase">{clayData.frontmatter.catchphrase}</p>
+          <h2>{clayData.frontmatter.title}</h2>
+        </div>
+        <div class="card-content">
+          <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
+          <p>{clayData.frontmatter.summary}</p>
+          <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
+        </div>
+      </section>
     </div>
 
-    <!-- メインコンテンツ -->
-    <main class="content-grid">
-
-      <div class="grid-row-three">
-        <!-- プロフィール -->
-        <section class="card-panel" id="profile">
-          <div class="profile-header-block">
-            <p class="catchphrase">{frontmatter.catchphrase}</p>
-            <h2>{profileData.frontmatter.title}</h2>
-          </div>
-          <div class="card-content intro-message">
-            <img src="/profile.avif" alt="Profile" class="program-thumb" />
-            <p>
-              壮壮たる葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
-            </p>
-            <a href="/profile" class="read-more">続きはこちら →</a>
-          </div>
-        </section>
-
-        <!--Kana-L（カナエル）-->
-        <section class="card-panel" id="kana-l">
-          <div class="profile-header-block">
-            <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
-            <h2>{kanaLData.frontmatter.title}</h2>
-          </div>
-          <div class="card-content">
-            <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" />
-            <p>{kanaLData.frontmatter.summary}</p>
-            <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
-          </div>
-        </section>
-
-        <!-- クレイワーク-->
-        <section class="card-panel" id="clay">
-          <div class="profile-header-block">
-            <p class="catchphrase">{clayData.frontmatter.catchphrase}</p>
-            <h2>{clayData.frontmatter.title}</h2>
-          </div>
-          <div class="card-content">
-            <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
-            <p>{clayData.frontmatter.summary}</p>
-            <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
-          </div>
-        </section>
-      </div>
-
-
-      <div class="grid-row-three">
-        <!-- サービス -->
-        <section class="card-panel" id="service">
-          <div class="profile-header-block">
-            <p class="catchphrase">{serviceData.frontmatter.catchphrase}</p>
-            <h2>{serviceData.frontmatter.title}</h2>
-          </div>
-          <div class="card-content">
-            <img src={serviceData.frontmatter.image} alt="サービス" class="program-thumb" />
-            <p>ライトワーカー様を応援する、カウンセリングやWebサイト作成、SNS運用などがセットになったパックのご紹介です。</p>
-            <a href="/service" class="read-more">サービスの説明 →</a>
-          </div>
-        </section>
-
-        <!-- スピリチュアル・タウン -->
-        <section class="card-panel" id="spiritual-town">
-          <div class="profile-header-block">
-            <p class="catchphrase">{townData.frontmatter.catchphrase}</p>
-            <h2>{townData.frontmatter.title}</h2>
-          </div>
-          <div class="card-content">
-            <img src={townData.frontmatter.image} alt="スピリチュアル・タウン" class="program-thumb" />
-            <p>{townData.frontmatter.summary}</p>
-            <a href="/spiritual-town" class="read-more">スピリチュアル・タウンの説明 →</a>
-          </div>
-        </section>
-
-
-        <!-- お知らせ -->
-        <section class="card-panel" id="news">
-          <div class="profile-header-block">
-            <p class="catchphrase">INFORMATION</p>
-            <h2>お知らせ</h2>
-          </div>
-          <div class="card-content">
-            {latestNews.length > 0 && latestNews[0].data.image && (
-              <img src={latestNews[0].data.image} alt="お知らせ" class="program-thumb" />
-            )}
-
-            <div class="news-list-container">
-              {latestNews.map((post) => (
-                <article class="news-inline-item">
-                  <div class="news-inline-meta">
-                    <time datetime={post.data.date.toISOString()}>
-                      {post.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}
-                    </time>
-                  </div>
-                  <h3 class="news-inline-title">
-                    <a href={`/news/${post.id}`}>{post.data.title}</a>
-                  </h3>
-                </article>
-              ))}
-            </div>
-            <a href="/news" class="read-more">過去のお知らせ一覧 →</a>
-          </div>
-        </section>
-      </div>
-
-    </main>
-
-<!-- ★フッター-->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
-        <div class="footer-links">
-          <a href="/privacy">プライバシーポリシー</a>
-          <span class="footer-separator">|</span>
-          <a href="/tokushouho">特定商取引法に基づく表記</a>
+    <div class="grid-row-three">
+      <!-- サービス -->
+      <section class="card-panel" id="service">
+        <div class="profile-header-block">
+          <p class="catchphrase">{serviceData.frontmatter.catchphrase}</p>
+          <h2>{serviceData.frontmatter.title}</h2>
         </div>
-        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
-      </div>
-    </footer>
-    <PageTop />
-  </body>
-</html>
+        <div class="card-content">
+          <img src={serviceData.frontmatter.image} alt="サービス" class="program-thumb" />
+          <p>ライトワーカー様を応援する、カウンセリングやWebサイト作成、SNS運用などがセットになったパックのご紹介です。</p>
+          <a href="/service" class="read-more">サービスの説明 →</a>
+        </div>
+      </section>
 
-<style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
-  * { box-sizing: border-box; }
-  
-  body { 
-    margin: 0; 
-    padding: 0;
-    background: #0d0b18; 
-    color: #f0ecf4; 
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;           
-    display: flex;                
-    flex-direction: column;      
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+      <!-- スピリチュアル・タウン -->
+      <section class="card-panel" id="spiritual-town">
+        <div class="profile-header-block">
+          <p class="catchphrase">{townData.frontmatter.catchphrase}</p>
+          <h2>{townData.frontmatter.title}</h2>
+        </div>
+        <div class="card-content">
+          <img src={townData.frontmatter.image} alt="スピリチュアル・タウン" class="program-thumb" />
+          <p>{townData.frontmatter.summary}</p>
+          <a href="/spiritual-town" class="read-more">スピリチュアル・タウンの説明 →</a>
+        </div>
+      </section>
 
-  /* 背景アニメーション */
-  .bg-layer {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: var(--bgUrl); background-size: cover; background-position: center;
-    z-index: -2;
-    opacity: 0.7;
-    animation: bgMovement 25s ease-in-out infinite alternate;
-  }
-  @keyframes bgMovement {
-    0% { transform: scale(1) rotate(0deg); }
-    100% { transform: scale(1.08) rotate(1deg); }
-  }
+      <!-- お知らせ -->
+      <section class="card-panel" id="news">
+        <div class="profile-header-block">
+          <p class="catchphrase">INFORMATION</p>
+          <h2>お知らせ</h2>
+        </div>
+        <div class="card-content">
+          {latestNews.length > 0 && latestNews[0].data.image && (
+            <img src={latestNews[0].data.image} alt="お知らせ" class="program-thumb" />
+          )}
 
-  /* ヘッダー */
-  .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 3rem; 
-    height: 100px; 
-    background: rgba(13, 11, 24, 0.6);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: relative;
-    z-index: 10;
-  }
-  .logo-area { display: flex; align-items: center; height: 100%; }
-  .site-logo-img { 
-    max-height: 80px; 
-    width: auto; 
-    object-fit: contain; 
-    display: block;
-  }
-  
-  .nav-menu ul { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
-  .nav-menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-  .nav-menu a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
+          <div class="news-list-container">
+            {latestNews.map((post) => (
+              <article class="news-inline-item">
+                <div class="news-inline-meta">
+                  <time datetime={post.data.date.toISOString()}>
+                    {post.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+                  </time>
+                </div>
+                <h3 class="news-inline-title">
+                  <a href={`/news/${post.id}`}>{post.data.title}</a>
+                </h3>
+              </article>
+            ))}
+          </div>
+          <a href="/news" class="read-more">過去のお知らせ一覧 →</a>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
 
+<style>
   /* 下部コンテンツエリアのラッパー */
   .content-grid {
     flex: 1; 
@@ -374,53 +286,6 @@ const isProd = import.meta.env.PROD;
     white-space: pre-line;
   }
 
-  /* ★フッター */
-  .site-footer {
-    display: block !important; 
-    position: relative; 
-    z-index: 9999 !important; 
-    width: 100vw;
-    margin-left: calc(-50vw + 50%); 
-    background: #0d0b18 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12); 
-    padding: 2.5rem 0; 
-    text-align: center; 
-    margin-top: 5rem;
-  }
-  
-  /* 💡 追加：フッターリンク全体のコンテナ */
-  .footer-links {
-    margin-bottom: 1rem; /* コピーライトとの隙間 */
-    font-size: 0.85rem;
-  }
-
-  /* 💡 追加：リンク単体の装飾（テーマに合わせた淡い水色） */
-  .footer-links a {
-    color: #a3e2ff; 
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    font-weight: 500;
-  }
-
-  /* 💡 追加：ホバー時にテーマカラーのピンクになり、少し光る演出 */
-  .footer-links a:hover {
-    color: #ffb7ff;
-    text-shadow: 0 0 8px #ffb7ff;
-  }
-
-  /* 💡 追加：リンク同士の間にある「 | 」（区切り線）の装飾 */
-  .footer-separator {
-    color: rgba(255, 255, 255, 0.2);
-    margin: 0 1rem;
-  }
-
-  .copyright { 
-    margin: 0; 
-    font-size: 0.85rem; 
-    color: #a3a0a8; 
-    letter-spacing: 0.05em; 
-  }
-
   #clay .card-content p, #spiritual-town .card-content p, #news .card-content p {
     white-space: pre-line;
   }
@@ -451,38 +316,32 @@ const isProd = import.meta.env.PROD;
   .news-inline-title a { color: #dbd7e0; text-decoration: none; transition: color 0.2s; }
   .news-inline-title a:hover { color: #a3e2ff; }
 
+  /* ===================================================
+     📚 マークダウン本文（town.md）の最適化装飾
+     =================================================== */
+  .markdown-content :global(p) {
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #dbd7e0 !important; 
+    letter-spacing: 0.04em !important;
+    font-size: 1.05rem !important;
+  }
+
+  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  .markdown-content :global(a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content :global(a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+
   @media (max-width: 1600px) {
-    :global(.site-header .nav-menu ul) { display: none !important; }
-    :global(.site-header .menu-trigger) {
-      display: flex !important; 
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      z-index: 200; 
-    }
-    :global(.site-header .menu-trigger span) {
-      width: 100%; height: 2px; background-color: #fff; border-radius: 2px; transition: all 0.4s; 
-    }
-    :global(.site-header .menu-trigger.active span:nth-child(1)) { transform: translateY(10px) rotate(-45deg); background-color: #ffb7ff; }
-    :global(.site-header .menu-trigger.active span:nth-child(2)) { opacity: 0; }
-    :global(.site-header .menu-trigger.active span:nth-child(3)) { transform: translateY(-10px) rotate(45deg); background-color: #ffb7ff; }
-
-    :global(.site-header .nav-menu) {
-      position: fixed !important; top: -100vh; left: 0; width: 100%; height: 100vh;
-      background: rgba(13, 11, 24, 0.95); backdrop-filter: blur(20px); transition: top 0.4s ease-in-out; 
-      display: flex !important; align-items: center; justify-content: center; z-index: 150;
-    }
-    :global(.site-header .nav-menu.open) { top: 0 !important; }
-    :global(.site-header .nav-menu.open ul) { display: flex !important; flex-direction: column !important; align-items: center; gap: 2rem !important; }
-    :global(.site-header .nav-menu.open a) { font-size: 1.2rem; padding: 0.5rem 1rem; }
-
-    .site-header { flex-direction: row !important; justify-content: space-between; height: 80px; padding: 0 1.5rem; width: 100%; }
-    .site-logo-img { max-height: 55px; }
     .content-grid { padding: 2rem 1.5rem; gap: 2rem; }
     .card-panel { padding: 1.5rem 0.8rem !important; }
     .card-content { font-size: 0.85rem; line-height: 1.6; }
@@ -490,7 +349,7 @@ const isProd = import.meta.env.PROD;
   }
 
   /* ==========================================
-     🎨 ヒーローバナー ＆ 100%確実なCSSキラキラ
+      🎨 ヒーローバナー ＆ 100%確実なCSSキラキラ
   ============================================= */
 
   .top-banner-wrapper {
@@ -535,7 +394,7 @@ const isProd = import.meta.env.PROD;
     .wide-banner-img { width: 100% !important; height: 250px !important; object-position: center 32% !important; }
   }
 
-/* ✨ キラキラ専用コンテナ（最前面に強制配置） */
+  /* ✨ キラキラ専用コンテナ（最前面に強制配置） */
   .sparkle-container {
     position: absolute !important;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -564,7 +423,7 @@ const isProd = import.meta.env.PROD;
   }
 
   /* ========================================================
-     💻 パソコン版（画面幅が広いとき）：40個の位置とサイズ設定
+      💻 パソコン版（画面幅が広いとき）：40個の位置とサイズ設定
      ======================================================== */
   .s1  { top: 15%; left: 12%; width: 24px; height: 24px; animation-delay: 0.2s; animation-duration: 3.2s; }
   .s2  { top: 40%; left: 85%; width: 28px; height: 28px; animation-delay: 1.5s; animation-duration: 4.5s; }
@@ -610,7 +469,7 @@ const isProd = import.meta.env.PROD;
   .s40 { top: 85%; left: 3%;  width: 22px; height: 22px; animation-delay: 1.7s; animation-duration: 3.2s; }
 
   /* ========================================================
-     📱 スマホ版（画面幅768px以下）：40個すべてを自動縮小
+      📱 スマホ版（画面幅768px以下）：40個すべてを自動縮小
      ======================================================== */
   @media (max-width: 768px) {
     .star {

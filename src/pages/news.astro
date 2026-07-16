@@ -1,72 +1,53 @@
 ---
 import bgGalaxy from '../assets/bg-galaxy.avif';
-import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
+import Layout from '../layouts/Layout.astro'; // Layout.astro のパスはプロジェクト構造に合わせて調整してください
 
 // ★新しく作ったnews用のMarkdownを読み込む
 import * as newsData from '../content/news.md';
 const { frontmatter } = newsData;
+
+// Layout.astro に渡すタイトルを生成
+const pageTitle = `${frontmatter.title} | 一樂 迦哩無 - 公式サイト`;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{frontmatter.title} | 一樂 迦哩無 - 公式サイト</title>
-  </head>
-  <body>
-    <!-- 背景画像 -->
-   <div class="bg-layer"></div>
+<Layout title={pageTitle}>
+  <!-- 背景画像 -->
+  <div class="bg-layer"></div>
 
-<!-- ヘッダー -->
-<Header />
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-body">
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
+          </div>
+        )}
+        <div class="summary-message">
+          <p>{frontmatter.summary}</p>
+        </div>
 
-    <!-- メインコンテンツ -->
-    <main class="detailed-container">
-      <section class="card-panel">
-        <div class="program-header-block">
-          <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>{frontmatter.title}</h2>
+        <hr class="divider" />
+        <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
+        <div class="markdown-content">
+          <newsData.Content />
         </div>
         
-        <div class="card-content detailed-body">
-{frontmatter.image && (
-  <div class="toppage-image-container">
-    <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
-  </div>
-)}
-          <div class="summary-message">
-            <p>{frontmatter.summary}</p>
-          </div>
-
-          <hr class="divider" />
-          <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
-          <div class="markdown-content">
-            <newsData.Content />
-          </div>
-          
-          <div class="back-home-container">
-              <a href="/" class="back-home-link">トップページへ戻る</a>
-          </div>
+        <div class="back-home-container">
+            <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
-      </section>
-    </main>
-
-    <!-- ★フッター-->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
-        <div class="footer-links">
-          <a href="/privacy">プライバシーポリシー</a>
-          <span class="footer-separator">|</span>
-          <a href="/tokushouho">特定商取引法に基づく表記</a>
-        </div>
-        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
-    </footer>
-    <PageTop />
-  </body>
-</html>
+    </section>
+  </main>
+
+  <PageTop />
+</Layout>
 
 <!-- スタイル設定 -->
 <!-- ① 背景専用のスタイル（影響をここに閉じ込める） -->

@@ -2,78 +2,61 @@
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
+import Layout from '../layouts/Layout.astro'; // ★ Layout コンポーネントをインポート
 
-// ★ ここを「* as clayData」に書き換えます
+// ★ ここを「* as clayData」に書き換え
 import * as clayData from '../content/clay.md';
 const { frontmatter } = clayData;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{frontmatter.title} | 一樂 迦哩無 - 公式サイト</title>
-  </head>
-  <body>
-    <!-- 背景画像 -->
-    <div class="bg-layer"></div>
+<Layout title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}>
+  <!-- 背景画像 (エラー防止のためインラインstyle属性から直接bgGalaxy.srcを注入) -->
+  <div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
 
-    <!-- ヘッダー -->
-    <Header />
+  <!-- ヘッダー -->
+  <Header />
 
-    <!-- メインコンテンツ -->
-    <main class="detailed-container">
-      <section class="card-panel">
-        <div class="program-header-block">
-          <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>{frontmatter.title}</h2>
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-body">
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
+          </div>
+        )}
+        <div class="summary-message">
+          <p>{frontmatter.summary}</p>
+        </div>
+
+        <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
+        <div class="markdown-content">
+          <clayData.Content />
         </div>
         
-        <div class="card-content detailed-body">
-          {frontmatter.image && (
-            <div class="toppage-image-container">
-              <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
-            </div>
-          )}
-          <div class="summary-message">
-            <p>{frontmatter.summary}</p>
-          </div>
-
-          <!-- Markdownの本文（特徴、おすすめの人、内容など）を自動展開 -->
-          <div class="markdown-content">
-            <clayData.Content />
-          </div>
-          
-          <div class="back-home-container">
-            <a href="/" class="back-home-link">トップページへ戻る</a>
-          </div>
+        <div class="back-home-container">
+          <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
-      </section>
-    </main>
-
-    <!-- フッター -->
-<!-- ★フッター-->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
-        <div class="footer-links">
-          <a href="/privacy">プライバシーポリシー</a>
-          <span class="footer-separator">|</span>
-          <a href="/tokushouho">特定商取引法に基づく表記</a>
-        </div>
-        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
-    </footer>
-    <PageTop />
-  </body>
-</html>
+    </section>
+  </main>
+
+  <!-- フッター -->
+
+  <PageTop />
+</Layout>
 
 <!-- スタイル設定 -->
-<!-- ① 背景専用のスタイル（影響をここに閉じ込める） -->
-<style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
+<!-- ① 背景専用のスタイル（define:varsを使用せず、通常のCSSとして定義） -->
+<style>
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: var(--bgUrl); background-size: cover; background-position: center;
+    background-size: cover; background-position: center;
     z-index: -2; opacity: 0.7;
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
@@ -128,6 +111,31 @@ const { frontmatter } = clayData;
     border: 0; height: 1px;
     background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
     margin: 2.5rem 0;
+  }
+
+  /* ===================================================
+     📚 マークダウン本文（town.md）の最適化装飾
+     =================================================== */
+  .markdown-content :global(p) {
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #dbd7e0 !important; 
+    letter-spacing: 0.04em !important;
+    font-size: 1.05rem !important;
+  }
+
+  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  .markdown-content :global(a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content :global(a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
   }
 
   /* 戻るリンク */
@@ -420,7 +428,7 @@ const { frontmatter } = clayData;
     background: linear-gradient(to bottom, #f5af19, #f12711) !important;
   }
 
-  /* 金額表示の行 */
+  /* 金額表示 of 行 */
   .markdown-content :global(h4) + :global(ul) li {
     background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid rgba(255, 255, 255, 0.05) !important;

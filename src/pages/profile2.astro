@@ -1,105 +1,48 @@
 ---
-import bgGalaxy from '../assets/bg-galaxy.avif';
-import Header from '../components/Header.astro';
-import PageTop from '../components/PageTop.astro';
+import Layout from '../layouts/Layout.astro';
 
 // ★テキストファイルを読み込む
 import * as profile2Data from '../content/profile2.md';
 const { frontmatter } = profile2Data;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>一樂 迦哩無について - 詳細プロフィール | 一樂 迦哩無 - 公式サイト</title>
-  </head>
-  <body>
-    <!-- 背景画像 -->
-    <div class="bg-layer"></div>
-    
-    <!-- ヘッダー -->
-    <Header />
+<Layout title="一樂 迦哩無について - 詳細プロフィール | 一樂 迦哩無 - 公式サイト">
+  <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="profile-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-story">
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
+          </div>
+        )}
 
-    <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
-    <main class="detailed-container">
-      <section class="card-panel">
-        <div class="profile-header-block">
-          <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>{frontmatter.title}</h2>
+        <div class="intro-message">
+          <p class="greeting">{frontmatter.greeting}</p>
+          <blockquote>
+            {frontmatter.quote}
+          </blockquote>
         </div>
         
-        <div class="card-content detailed-story">
-          {frontmatter.image && (
-            <div class="toppage-image-container">
-              <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
-            </div>
-          )}
 
-          <div class="intro-message">
-            <p class="greeting">{frontmatter.greeting}</p>
-            <blockquote>
-              {frontmatter.quote}
-            </blockquote>
-          </div>
-          
+        <!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
+        <profile2Data.Content />
 
-          <!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
-          <profile2Data.Content />
-
-          <div class="back-home-container">
-              <a href="/" class="back-home-link">トップページへ戻る</a>
-          </div>
+        <div class="back-home-container">
+            <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
-      </section>
-    </main>
-
-   <!-- ★フッター-->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
-        <div class="footer-links">
-          <a href="/privacy">プライバシーポリシー</a>
-          <span class="footer-separator">|</span>
-          <a href="/tokushouho">特定商取引法に基づく表記</a>
-        </div>
-        <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
-    </footer>
-    <PageTop />
-  </body>
-</html>
+    </section>
+  </main>
+</Layout>
 
-
-<!-- スタイル設定 -->
-<!-- ① 背景専用のスタイル -->
-<style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
-  .bg-layer {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: var(--bgUrl); background-size: cover; background-position: center;
-    z-index: -2; opacity: 0.7;
-    animation: bgMovement 25s ease-in-out infinite alternate;
-  }
-  @keyframes bgMovement {
-    0% { transform: scale(1) rotate(0deg); }
-    100% { transform: scale(1.08) rotate(1deg); }
-  }
-</style>
-
-<!-- ② ページ全体のメインスタイル -->
+<!-- ② ページ全体のメインスタイル（profile2 個別用） -->
 <style>
-  * { box-sizing: border-box; }
-  body { 
-    margin: 0; padding: 0;
-    background: #0d0b18; color: #f0ecf4; 
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   /* メインコンテンツコンテナ */
   .detailed-container {
     flex: 1;
@@ -135,8 +78,8 @@ const { frontmatter } = profile2Data;
   }
 
   /* ===================================================
-     📚 Kindle書籍 紹介カード（2冊用コンテナ）
-     =================================================== */
+      📚 Kindle書籍 紹介カード（2冊用コンテナ）
+      =================================================== */
   .books-wrapper {
     display: flex;
     flex-direction: column;
@@ -229,52 +172,6 @@ const { frontmatter } = profile2Data;
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
 
- /* ★フッター */
-  .site-footer {
-    display: block !important; 
-    position: relative; 
-    z-index: 9999 !important; 
-    width: 100vw;
-    margin-left: calc(-50vw + 50%); 
-    background: #0d0b18 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12); 
-    padding: 2.5rem 0; 
-    text-align: center; 
-    margin-top: 5rem;
-  }
-  
-  /* 💡 追加：フッターリンク全体のコンテナ */
-  .footer-links {
-    margin-bottom: 1rem; /* コピーライトとの隙間 */
-    font-size: 0.85rem;
-  }
-
-  /* 💡 追加：リンク単体の装飾（テーマに合わせた淡い水色） */
-  .footer-links a {
-    color: #a3e2ff; 
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    font-weight: 500;
-  }
-
-  /* 💡 追加：ホバー時にテーマカラーのピンクになり、少し光る演出 */
-  .footer-links a:hover {
-    color: #ffb7ff;
-    text-shadow: 0 0 8px #ffb7ff;
-  }
-
-  /* 💡 追加：リンク同士の間にある「 | 」（区切り線）の装飾 */
-  .footer-separator {
-    color: rgba(255, 255, 255, 0.2);
-    margin: 0 1rem;
-  }
-
-  .copyright { 
-    margin: 0; 
-    font-size: 0.85rem; 
-    color: #a3a0a8; 
-    letter-spacing: 0.05em; 
-  }
   /* レスポンシブ対応 */
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }
@@ -379,8 +276,8 @@ const { frontmatter } = profile2Data;
   }
 
   /* ===================================================
-     ⚡ アクションボタンのグローバル装飾
-     =================================================== */
+      ⚡ アクションボタンのグローバル装飾
+      =================================================== */
   .action-buttons-container {
     display: flex !important;
     justify-content: center !important;
@@ -478,23 +375,7 @@ const { frontmatter } = profile2Data;
   }
 </style>
 
-  <!-- サイト全体のシンプルなリンクにネオン風スタイルを一括適用 -->
-<style is:global>
-  /* ボタンやメニュー、ロゴ以外の、すべての素のテキストリンクに適用 */
-  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]) {
-    color: #a3e2ff !important;
-    text-decoration: none !important;
-    font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
-    transition: all 0.3s ease !important;
-  }
 
-  a:not([class*="btn"]):not([class*="logo"]):not([class*="nav"]):not([class*="back-home-link"]):hover {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
-  }
-</style>
 
 <!-- 新規ウィンドウ用の安心スクリプト -->
 <script is:inline>
