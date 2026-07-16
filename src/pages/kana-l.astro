@@ -56,6 +56,12 @@ const { frontmatter } = kanaLData;
     <!-- フッター -->
     <footer class="site-footer">
       <div class="footer-content">
+        <!-- 💡 プライバシーポリシーと特商法のリンクメニューを追加 -->
+        <div class="footer-links">
+          <a href="/privacy">プライバシーポリシー</a>
+          <span class="footer-separator">|</span>
+          <a href="/tokushouho">特定商取引法に基づく表記</a>
+        </div>
         <p class="copyright">&copy; 2026 一樂 迦哩無 All Rights Reserved.</p>
       </div>
     </footer>
@@ -130,14 +136,52 @@ const { frontmatter } = kanaLData;
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
 
-  /* フッター */
+  /* ★フッター */
   .site-footer {
-    display: block !important; position: relative; z-index: 9999 !important; width: 100vw;
-    margin-left: calc(-50vw + 50%); background: #0d0b18 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12); padding: 2.5rem 0; text-align: center; margin-top: 5rem;
+    display: block !important; 
+    position: relative; 
+    z-index: 9999 !important; 
+    width: 100vw;
+    margin-left: calc(-50vw + 50%); 
+    background: #0d0b18 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12); 
+    padding: 2.5rem 0; 
+    text-align: center; 
+    margin-top: 5rem;
   }
-  .copyright { margin: 0; font-size: 0.85rem; color: #a3a0a8; letter-spacing: 0.05em; }
+  
+  /* 💡 追加：フッターリンク全体のコンテナ */
+  .footer-links {
+    margin-bottom: 1rem; /* コピーライトとの隙間 */
+    font-size: 0.85rem;
+  }
 
+  /* 💡 追加：リンク単体の装飾（テーマに合わせた淡い水色） */
+  .footer-links a {
+    color: #a3e2ff; 
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+    font-weight: 500;
+  }
+
+  /* 💡 追加：ホバー時にテーマカラーのピンクになり、少し光る演出 */
+  .footer-links a:hover {
+    color: #ffb7ff;
+    text-shadow: 0 0 8px #ffb7ff;
+  }
+
+  /* 💡 追加：リンク同士の間にある「 | 」（区切り線）の装飾 */
+  .footer-separator {
+    color: rgba(255, 255, 255, 0.2);
+    margin: 0 1rem;
+  }
+
+  .copyright { 
+    margin: 0; 
+    font-size: 0.85rem; 
+    color: #a3a0a8; 
+    letter-spacing: 0.05em; 
+  }
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
