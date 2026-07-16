@@ -488,7 +488,7 @@ const pageTitle = `${frontmatter.title} | 一樂 迦哩無 - 公式サイト`;
     }
   }
 
-  /* ===================================================
+ /* ===================================================
      ✨ 追加：お申し込み・お問い合わせボタン（Markdown内強制適用版）
      =================================================== */
   .markdown-content :global(.action-buttons-container) {
@@ -500,15 +500,23 @@ const pageTitle = `${frontmatter.title} | 一樂 迦哩無 - 公式サイト`;
     flex-wrap: wrap !important;
   }
 
-  /* ボタン共通のベーススタイル */
+  /* ボタン共通のベーススタイル（PC・スマホ両対応へ改善） */
   .markdown-content :global(.btn-action) {
     flex: 1 !important;
     max-width: 320px !important;
     min-width: 260px !important;
-    height: 56px !important;
+    
+    /* 💡【はみ出し防止の最重要設定】 */
+    height: auto !important;                /* 固定高さを解除し、2段になってもボタンが縦に伸びるようにします */
+    min-height: 56px !important;            /* 1行の時のために、最低限の高さ56pxを保証します */
+    padding: 12px 18px !important;          /* 2段に折り返した際、上下がパツパツにならないようクッション（余白）を設けます */
+    white-space: normal !important;         /* 文字がはみ出さず、端で自動的に折り返すようにします */
+    word-break: break-all !important;       /* 日本語がボタンの端で綺麗に自動改行されるようにします */
+    
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    text-align: center !important;          /* 折り返したときの文字配置を中央揃えにします */
     text-decoration: none !important;
     font-size: 1.05rem !important;
     font-weight: bold !important;
@@ -524,6 +532,8 @@ const pageTitle = `${frontmatter.title} | 一樂 迦哩無 - 公式サイト`;
   .markdown-content :global(.btn-action span) {
     position: relative !important;
     z-index: 2 !important;
+    display: block !important;
+    line-height: 1.4 !important;            /* 改行されたときに、行と行の隙間が詰まりすぎないようにします */
   }
 
   /* 🔥 お申し込みボタン：ピンク〜オレンジグラデーション */
@@ -550,6 +560,26 @@ const pageTitle = `${frontmatter.title} | 一樂 迦哩無 - 公式サイト`;
   
   .markdown-content :global(.btn-apply:hover::before) {
     opacity: 1 !important;
+  }
+
+  /* 訪問済みリンクのカラー対策（お申し込みボタン用） */
+  .markdown-content :global(.btn-apply:visited),
+  .markdown-content :global(.btn-apply:visited span) {
+    color: #fff !important;
+  }
+
+  /* ===================================================
+     📱 スマホ専用：文字サイズを一回り小さくしてバランスを整える
+     =================================================== */
+  @media (max-width: 768px) {
+    .markdown-content :global(.btn-action) {
+      padding: 10px 14px !important;        /* スマホ向けにボタン内の余白を微調整 */
+    }
+    
+    .markdown-content :global(.btn-action span) {
+      font-size: 0.92rem !important;        /* スマホ画面でフォントサイズをやや小さくし、基本1〜2段に抑えます */
+      line-height: 1.35 !important;
+    }
   }
 
   /* 💬 お問い合わせボタン：パープルネオン調 */
