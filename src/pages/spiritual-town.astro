@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
 import * as townData from '../content/town.md';
 const { frontmatter } = townData;
 ---
@@ -32,7 +31,6 @@ const { frontmatter } = townData;
         <div class="markdown-content">
           <townData.Content />
         </div>
-
 
         <div class="action-buttons-container">
           <a href="https://spi-town.com/" class="btn-action btn-town-link">
@@ -89,7 +87,7 @@ const { frontmatter } = townData;
   }
 
   /* ===================================================
-     ✨ お申し込み・お出かけボタン（マークダウン外の標準指定に修正）
+     ✨ お申し込み・お出かけボタン
      =================================================== */
   .action-buttons-container {
     display: flex !important;
@@ -124,7 +122,7 @@ const { frontmatter } = townData;
     color: #fff !important;
   }
 
-  /* 🌌 スピリチュアル・タウンへの直行：美麗シアン×パープルグラデーション */
+  /*美麗シアン×パープルグラデーション */
   .btn-town-link {
     background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
     color: #fff !important;
@@ -178,17 +176,6 @@ const { frontmatter } = townData;
     font-size: 1.05rem !important;
   }
 
-/* ===================================================
-     📚 マークダウン本文（town.md）の最適化装飾
-     =================================================== */
-  .markdown-content :global(p) {
-    line-height: 1.95 !important; 
-    margin-bottom: 1.8rem !important; 
-    color: #dbd7e0 !important; 
-    letter-spacing: 0.04em !important;
-    font-size: 1.05rem !important;
-  }
-
   /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
   .markdown-content :global(a) {
     color: #a3e2ff !important;
@@ -202,6 +189,7 @@ const { frontmatter } = townData;
     border-bottom: 1px solid #ffb7ff !important;
     text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
   }
+</style>  <!-- 💡【修正】ここで中間のスタイルタグを安全に一度閉じる -->
 
 <!-- ③ メイン画像用コンテナスタイル -->
 <style is:global>
@@ -209,7 +197,7 @@ const { frontmatter } = townData;
     width: 100%;
     margin: 0 auto 2rem auto;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: hidden; /* 💡【修正】内側画像の角のはみ出しをここでカット */
     box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
     border: 1px solid rgba(255, 183, 255, 0.3);
   }
@@ -218,10 +206,11 @@ const { frontmatter } = townData;
     height: auto;
     object-fit: cover;
     display: block;
+    border-radius: 12px; /* 💡【修正】内側の画像自体にも角丸を適用して確実にする */
   }
 </style>
 
-<!-- Astro完全対応版インラインスクリプト（安全に新タブで開く挙動を保証） -->
+<!-- Astro完全対応版インラインスクリプト -->
 <script is:inline>
   function setupFormButtons() {
     const container = document.querySelector('.action-buttons-container');
