@@ -1,0 +1,294 @@
+---
+import bgGalaxy from '../../assets/bg-galaxy.avif';
+import PageTop from '../../components/PageTop.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content'; // 💡 「render」を新しく追加
+
+// 1. 最新版対応：id を用いて静的ルートを構築
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+// 2. 最新版対応：propsから記事を取得し、新方式の render(entry) で本文を解析
+const { entry } = Astro.props;
+const { Content } = await render(entry); // 💡 entry.render() から書き換えました！
+
+const pageTitle = `${entry.data.title} | 一樂 迦哩無 - 公式サイト`;
+---
+
+<Layout title={pageTitle}>
+  <!-- 背景画像 -->
+  <div class="bg-layer"></div>
+
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        {entry.data.catchphrase && <p class="catchphrase">{entry.data.catchphrase}</p>}
+        <h2>{entry.data.title}</h2>
+        <div class="blog-meta">
+          <time datetime={entry.data.date.toISOString()}>
+            📅 {entry.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        </div>
+      </div>
+      
+      <div class="card-content detailed-body">
+        {entry.data.image && (
+          <div class="toppage-image-container">
+            <img src={entry.data.image} alt="メインイメージ" class="toppage-main-image" />
+          </div>
+        )}
+        
+        {entry.data.summary && (
+          <div class="summary-message">
+            <p>{entry.data.summary}</p>
+          </div>
+        )}
+
+        <hr class="divider" />
+        
+        {/* Markdownの本文を自動展開 */}
+        <div class="markdown-content">
+          <Content />
+        </div>
+        
+        <div class="back-home-container">
+            <a href="/" class="back-home-link">トップページへ戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <PageTop />
+</Layout>
+
+<!-- スタイル設定 -->
+<!-- ① 背景専用のスタイル -->
+<style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
+  .bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: var(--bgUrl); background-size: cover; background-position: center;
+    z-index: -2; opacity: 0.7;
+    animation: bgMovement 25s ease-in-out infinite alternate;
+  }
+  @keyframes bgMovement {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(1deg); }
+  }
+</style>
+
+<!-- ② ページ全体のメインスタイル -->
+<style>
+  * { box-sizing: border-box; }
+  body { 
+    margin: 0; padding: 0;
+    background: #0d0b18; color: #f0ecf4; 
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* コンテナ */
+  .detailed-container {
+    flex: 1;
+    max-width: 900px;
+    margin: 140px auto 60px auto;
+    padding: 0 1.5rem;
+    width: 100%;
+  }
+  
+  .card-panel {
+    background: rgba(13, 11, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
+    padding: 2.5rem; backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+  }
+  
+  /* テキスト・見出し・メタデータ装飾 */
+  .program-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 0.8rem; }
+  .blog-meta { margin-bottom: 2.5rem; }
+  .blog-meta time { color: #ffb7ff; font-size: 0.9rem; font-weight: bold; }
+  
+  .catchphrase {
+    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
+    white-space: pre-line;
+  }
+  .summary-message p { font-size: 1.1rem; line-height: 1.8; color: #fff;
+    white-space: pre-line;
+  }
+  
+  .divider {
+    border: 0; height: 1px;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
+    margin: 2.5rem 0;
+  }
+
+  /* 画像領域 */
+  .toppage-image-container {
+    width: 100%;
+    max-height: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .toppage-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 戻るリンク */
+  .back-home-container { text-align: center; margin-top: 4rem; }
+  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+  .back-home-link:hover { color: #ffb7ff; }
+
+  @media (max-width: 768px) {
+    .detailed-container { margin-top: 120px; }
+    .card-panel { padding: 1.5rem; }
+    .program-header-block h2 { font-size: 1.6rem; }
+  }
+
+  /* ===================================================
+     ★重要：マークダウンの中身の強力装飾
+     =================================================== */
+  .markdown-content :global(p) {
+    line-height: 1.85 !important; margin-bottom: 1.4rem !important; color: #dbd7e0 !important; letter-spacing: 0.03em !important;
+  }
+
+  /* ゴールド縦線の見出し (h3) */
+  .markdown-content :global(h3) {
+    font-size: 1.3rem !important;
+    color: #fff !important;
+    border-left: 4px solid #d4af37 !important;
+    padding-left: 12px !important;
+    margin: 4rem 0 1.5rem 0 !important;
+    letter-spacing: 0.05em !important;
+    display: block !important;
+  }
+  .markdown-content :global(h3:first-of-type) {
+    margin-top: 2rem !important;
+  }
+
+  /* 🎨 メリットカード（ul層） */
+  .markdown-content :global(ul) {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    gap: 1.2rem !important;
+    margin: 2rem 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .markdown-content :global(ul li) {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    padding: 1.2rem 1.5rem 1.2rem 1.8rem !important;
+    position: relative !important;
+    overflow: hidden !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: #e0dce5 !important;
+    list-style-type: none !important;
+  }
+
+  .markdown-content :global(ul > li::before) {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
+    height: 100% !important;
+  }
+  .markdown-content :global(ul > li:nth-child(1)::before) { background: linear-gradient(to bottom, #ff9966, #ff5e62) !important; }
+  .markdown-content :global(ul > li:nth-child(2)::before) { background: linear-gradient(to bottom, #f5af19, #f12711) !important; }
+  .markdown-content :global(ul > li:nth-child(3)::before) { background: linear-gradient(to bottom, #00c6ff, #0072ff) !important; }
+  .markdown-content :global(ul > li:nth-child(4)::before) { background: linear-gradient(to bottom, #7F00FF, #E100FF) !important; }
+  .markdown-content :global(ul > li:nth-child(5)::before) { background: linear-gradient(to bottom, #11998e, #38ef7d) !important; }
+  .markdown-content :global(ul > li:nth-child(6)::before) { background: linear-gradient(to bottom, #00f2fe, #4facfe) !important; }
+
+  .markdown-content :global(ul li strong) {
+    color: #ff8da1 !important;
+    font-weight: bold !important;
+  }
+
+  /* ⏰ スケジュール */
+  .markdown-content :global(h4) {
+    color: #ffb7ff !important;
+    font-size: 1.05rem !important;
+    margin: 2.5rem 0 0.5rem 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+    z-index: 1 !important;
+  }
+
+  .markdown-content :global(ol) {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem !important;
+    margin: 0.5rem 0 2.5rem 0 !important;
+    list-style-type: decimal !important;
+    display: block !important;
+    clear: both !important;
+  }
+
+  .markdown-content :global(ol li) {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0.8rem 0 !important;
+    font-size: 0.95rem !important;
+    color: #dbd7e0 !important;
+    line-height: 1.6 !important;
+  }
+  .markdown-content :global(ol li::before) { display: none !important; content: none !important; }
+  .markdown-content :global(ol li::marker) { font-size: 1rem !important; color: #ffb7ff !important; }
+
+  /* 🎨 持ち物リスト */
+  .markdown-content :global(ul:has(ul)) {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    gap: 1.5rem !important;
+    margin: 2rem 0 3rem 0 !important;
+    padding: 0 !important;
+    list-style-type: none !important;
+  }
+
+  .markdown-content :global(ul:has(ul) > li) {
+    flex: 0 1 calc(50% - 0.75rem) !important;
+    min-width: 300px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 12px !important;
+    padding: 1.5rem 2rem 2rem 2rem !important;
+    overflow: visible !important;
+    list-style-type: none !important;
+    display: block !important;
+    position: relative !important;
+  }
+  .markdown-content :global(ul:has(ul) > li::marker) { display: none !important; content: none !important; }
+
+  .markdown-content :global(ul:has(ul) > li::before) {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
+    height: 100% !important;
+    background: linear-gradient(to bottom, #ff9966, #ff5e62) !important;
+  }
+  .markdown-content :global(ul:has(ul) > li:nth-of-type(2)::before) { 
+    background: linear-gradient(to bottom, #f5af19, #f12711) !important; 
+  }
+</style>

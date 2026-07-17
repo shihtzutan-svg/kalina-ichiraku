@@ -15,10 +15,10 @@ import * as kanaLData from '../content/kana-l.md';
 import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
 
-// 📰 「お知らせ」コレクションから全記事を取得
+// 📰 「ブログ（blog）」コレクションから全記事を取得して最新3件を切り出す
 import { getCollection } from 'astro:content';
-const allNews = await getCollection('news');
-const latestNews = allNews
+const allBlogPosts = await getCollection('blog');
+const latestBlogPosts = allBlogPosts
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
@@ -29,8 +29,6 @@ const isProd = import.meta.env.PROD;
 <Layout title="一樂 迦哩無 - 公式サイト">
   <div class="top-banner-wrapper">
     <div class="banner-container">
-      <!-- 💡 JSを使わず、HTMLにあらかじめ星（s1〜s20）を直に埋め込んでおきます -->
-      <!-- 💡 星を40個に増量しました -->
       <div class="sparkle-container">
         <div class="star s1"></div>
         <div class="star s2"></div>
@@ -90,7 +88,7 @@ const isProd = import.meta.env.PROD;
         <div class="card-content intro-message">
           <img src="/profile.avif" alt="Profile" class="program-thumb" />
           <p>
-            壮壮たる葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
+            壮壮たる葛藤から「源」との対話、精度高いチャネリング、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
           </p>
           <a href="/profile" class="read-more">続きはこちら →</a>
         </div>
@@ -150,19 +148,19 @@ const isProd = import.meta.env.PROD;
         </div>
       </section>
 
-      <!-- お知らせ -->
-      <section class="card-panel" id="news">
+      <!-- 📝 ブログセクション（お申し込みから置換完了） -->
+      <section class="card-panel" id="blog">
         <div class="profile-header-block">
-          <p class="catchphrase">INFORMATION</p>
-          <h2>お知らせ</h2>
+          <p class="catchphrase">BLOG</p>
+          <h2>ブログ記事一覧</h2>
         </div>
         <div class="card-content">
-          {latestNews.length > 0 && latestNews[0].data.image && (
-            <img src={latestNews[0].data.image} alt="お知らせ" class="program-thumb" />
+          {latestBlogPosts.length > 0 && latestBlogPosts[0].data.image && (
+            <img src={latestBlogPosts[0].data.image} alt="ブログ" class="program-thumb" />
           )}
 
           <div class="news-list-container">
-            {latestNews.map((post) => (
+            {latestBlogPosts.map((post) => (
               <article class="news-inline-item">
                 <div class="news-inline-meta">
                   <time datetime={post.data.date.toISOString()}>
@@ -170,12 +168,13 @@ const isProd = import.meta.env.PROD;
                   </time>
                 </div>
                 <h3 class="news-inline-title">
-                  <a href={`/news/${post.id}`}>{post.data.title}</a>
+                  {/* 動的ルーティング用の /blog/スラグのパスに設定 */}
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
                 </h3>
               </article>
             ))}
           </div>
-          <a href="/news" class="read-more">過去のお知らせ一覧 →</a>
+          <a href="/blog" class="read-more">過去のブログ一覧 →</a>
         </div>
       </section>
     </div>
@@ -286,7 +285,7 @@ const isProd = import.meta.env.PROD;
     white-space: pre-line;
   }
 
-  #clay .card-content p, #spiritual-town .card-content p, #news .card-content p {
+  #clay .card-content p, #spiritual-town .card-content p, #blog .card-content p {
     white-space: pre-line;
   }
 
@@ -317,7 +316,7 @@ const isProd = import.meta.env.PROD;
   .news-inline-title a:hover { color: #a3e2ff; }
 
   /* ===================================================
-     📚 マークダウン本文（town.md）の最適化装飾
+     📚 マークダウン本文の最適化装飾
      =================================================== */
   .markdown-content :global(p) {
     line-height: 1.95 !important; 
@@ -327,7 +326,6 @@ const isProd = import.meta.env.PROD;
     font-size: 1.05rem !important;
   }
 
-  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
   .markdown-content :global(a) {
     color: #a3e2ff !important;
     text-decoration: none !important;
@@ -349,9 +347,8 @@ const isProd = import.meta.env.PROD;
   }
 
   /* ==========================================
-      🎨 ヒーローバナー ＆ 100%確実なCSSキラキラ
+      🎨 ヒーローバナー & キラキラ
   ============================================= */
-
   .top-banner-wrapper {
     width: 100%;
     padding: 0 4rem;
@@ -379,7 +376,7 @@ const isProd = import.meta.env.PROD;
     object-fit: cover;
     object-position: center 28%;
     position: relative !important;
-    z-index: 1 !important; /* 画像を一番下に置く */
+    z-index: 1 !important;
     display: block;
   }
 
@@ -394,7 +391,7 @@ const isProd = import.meta.env.PROD;
     .wide-banner-img { width: 100% !important; height: 250px !important; object-position: center 32% !important; }
   }
 
-  /* ✨ キラキラ専用コンテナ（最前面に強制配置） */
+  /* ✨ キラキラ専用コンテナ */
   .sparkle-container {
     position: absolute !important;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -403,28 +400,23 @@ const isProd = import.meta.env.PROD;
     overflow: hidden;
   }
 
-  /* 🌟 星のベーススタイル（美しい十字形に変形） */
+  /* 🌟 星のベーススタイル */
   .star {
     position: absolute;
     background-color: #ffffff;
     clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
     opacity: 0;
     animation: blink 4s infinite ease-in-out;
-    
     filter: drop-shadow(0 0 4px #ffffff) 
             drop-shadow(0 0 8px #ffb7ff) 
             drop-shadow(0 0 12px #a3e2ff);
   }
 
-  /* 瞬くアニメーション */
   @keyframes blink {
     0%, 100% { transform: scale(0); opacity: 0; }
     50% { transform: scale(1.2); opacity: 1; }
   }
 
-  /* ========================================================
-      💻 パソコン版（画面幅が広いとき）：40個の位置とサイズ設定
-     ======================================================== */
   .s1  { top: 15%; left: 12%; width: 24px; height: 24px; animation-delay: 0.2s; animation-duration: 3.2s; }
   .s2  { top: 40%; left: 85%; width: 28px; height: 28px; animation-delay: 1.5s; animation-duration: 4.5s; }
   .s3  { top: 75%; left: 22%; width: 20px; height: 20px; animation-delay: 0.8s; animation-duration: 2.8s; }
@@ -446,7 +438,6 @@ const isProd = import.meta.env.PROD;
   .s19 { top: 18%; left: 25%; width: 28px; height: 28px; animation-delay: 1.2s; animation-duration: 4.3s; }
   .s20 { top: 90%; left: 75%; width: 24px; height: 24px; animation-delay: 2.9s; animation-duration: 3.1s; }
   
-  /* 💡 追加した20個（s21〜s40）のPC用配置 */
   .s21 { top: 12%; left: 55%; width: 22px; height: 22px; animation-delay: 0.7s; animation-duration: 3.4s; }
   .s22 { top: 32%; left: 18%; width: 26px; height: 26px; animation-delay: 1.9s; animation-duration: 4.1s; }
   .s23 { top: 88%; left: 32%; width: 20px; height: 20px; animation-delay: 2.5s; animation-duration: 2.7s; }
@@ -468,16 +459,12 @@ const isProd = import.meta.env.PROD;
   .s39 { top: 18%; left: 70%; width: 28px; height: 28px; animation-delay: 2.4s; animation-duration: 4.0s; }
   .s40 { top: 85%; left: 3%;  width: 22px; height: 22px; animation-delay: 1.7s; animation-duration: 3.2s; }
 
-  /* ========================================================
-      📱 スマホ版（画面幅768px以下）：40個すべてを自動縮小
-     ======================================================== */
   @media (max-width: 768px) {
     .star {
       filter: drop-shadow(0 0 2px #ffffff) 
               drop-shadow(0 0 5px #ffb7ff) 
               drop-shadow(0 0 8px #a3e2ff);
     }
-    
     .s1  { width: 10px; height: 10px; }
     .s2  { width: 12px; height: 12px; }
     .s3  { width: 8px;  height: 8px;  }
@@ -499,7 +486,6 @@ const isProd = import.meta.env.PROD;
     .s19 { width: 12px; height: 12px; }
     .s20 { width: 10px; height: 10px; }
     
-    /* 追加分のスマホサイズ */
     .s21 { width: 10px; height: 10px; }
     .s22 { width: 11px; height: 11px; }
     .s23 { width: 8px;  height: 8px;  }
