@@ -1,16 +1,14 @@
 ---
 import bgGalaxy from '../assets/bg-galaxy.avif';
-import Layout from '../layouts/Layout.astro'; // プロジェクトのパスに合わせて適宜調整してください
+import Layout from '../layouts/Layout.astro'; 
 import PageTop from '../components/PageTop.astro';
-
-// ★新しく作ったKana-L用のMarkdownを読み込む
 import * as kanaLData from '../content/kana-l.md';
 const { frontmatter } = kanaLData;
 ---
 
 <Layout 
   title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
-  description={frontmatter.summary}
+  description={frontmatter.summary || "あなたの願いを叶えるマスコット、宇宙天使「Kana-L（カナエル）」。一樂 迦哩無が万物の根源である「源」と繋がり、一つひとつ手作りしました。願いを託し、可愛がることで波動を高め、あなたの理想の現実創造を優しくサポートします。"}
 >
   <!-- 背景画像 -->
   <div class="bg-layer"></div>

@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// ★新しく作ったservice用のMarkdownを読み込む
 import * as serviceData from '../content/service.md';
 const { frontmatter } = serviceData;
 ---
 
-<Layout title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}>
+<Layout
+ title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
+ description={frontmatter.summary || "集客やホームページ制作、SNS・YouTube運用にお悩みのライトワーカー様へ。Webサイト制作からデザイン、動画撮影・編集、ライティングまで、あなたの活動をトータルでサポートする「お助け最強パック」をご紹介。ご状況や予算に応じた最適なメニューをご提案します。"}>
   <!-- メインコンテンツ -->
   <main class="detailed-container">
     <section class="card-panel">

@@ -6,13 +6,15 @@ import PageTop from '../components/PageTop.astro';
 // 各ページから受け取るプロパティ（Props）の定義
 interface Props {
   title: string;
+  description?: string;
 }
-const { title } = Astro.props;
+const { title, description = "一樂 迦哩無（いちらく かりな）公式サイト。魂の声を形にする創作系スピリチュアルワーカーとして、右脳を活性化するクレイワーク・プログラムや、願いを叶える宇宙天使「Kana-L」、ライトワーカー様向けのWeb制作・SNS運用応援パックをご提供しています。" } = Astro.props;
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
   </head>

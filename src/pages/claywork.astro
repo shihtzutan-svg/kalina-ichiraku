@@ -2,15 +2,16 @@
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import Header from '../components/Header.astro';
 import PageTop from '../components/PageTop.astro';
-import Layout from '../layouts/Layout.astro'; // ★ Layout コンポーネントをインポート
+import Layout from '../layouts/Layout.astro'; 
 
-// ★ ここを「* as clayData」に書き換え
 import * as clayData from '../content/clay.md';
 const { frontmatter } = clayData;
 ---
 
-<Layout title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}>
-  <!-- 背景画像 (エラー防止のためインラインstyle属性から直接bgGalaxy.srcを注入) -->
+<Layout title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
+ description={frontmatter.summary || "あなたの魂を解放する一樂 迦哩無の「クレイワーク・プログラム」。粘土をこねて作品を作ることで右脳を活性化し、思考の枠組みを超えた覚醒へアプローチします。ボディワークや誘導瞑想でハイヤーセルフと繋がり、潜在意識のブロックを外して本来の自分へ回帰します。"}
+>>
+  <!-- 背景画像 -->
   <div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
 
   <!-- ヘッダー -->
