@@ -71,7 +71,15 @@ const isProd = import.meta.env.PROD;
         <div class="star s39"></div>
         <div class="star s40"></div>
       </div>
-      <img src={heroArt.src} alt="" class="wide-banner-img" />
+      <!-- ⚡ LCP改善のコア修正：最優先で最速読込させる属性を追加 -->
+      <img 
+        src={heroArt.src} 
+        alt="一樂 迦哩無 ヒーローバナー" 
+        class="wide-banner-img" 
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
     </div>
   </div>
 
@@ -86,7 +94,7 @@ const isProd = import.meta.env.PROD;
           <h2>{profileData.frontmatter.title}</h2>
         </div>
         <div class="card-content intro-message">
-          <img src="/profile.avif" alt="Profile" class="program-thumb" />
+          <img src="/profile.avif" alt="Profile" class="program-thumb" loading="lazy" decoding="async" />
           <p>
             壮壮たる葛藤から「源」との対話、精度高いチャネリング、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
           </p>
@@ -101,7 +109,7 @@ const isProd = import.meta.env.PROD;
           <h2>{kanaLData.frontmatter.title}</h2>
         </div>
         <div class="card-content">
-          <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" />
+          <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" loading="lazy" decoding="async" />
           <p>{kanaLData.frontmatter.summary}</p>
           <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
         </div>
@@ -114,7 +122,7 @@ const isProd = import.meta.env.PROD;
           <h2>{clayData.frontmatter.title}</h2>
         </div>
         <div class="card-content">
-          <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" />
+          <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" loading="lazy" decoding="async" />
           <p>{clayData.frontmatter.summary}</p>
           <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
         </div>
@@ -129,7 +137,7 @@ const isProd = import.meta.env.PROD;
           <h2>{serviceData.frontmatter.title}</h2>
         </div>
         <div class="card-content">
-          <img src={serviceData.frontmatter.image} alt="サービス" class="program-thumb" />
+          <img src={serviceData.frontmatter.image} alt="サービス" class="program-thumb" loading="lazy" decoding="async" />
           <p>ライトワーカー様を応援する、カウンセリングやWebサイト作成、SNS運用などがセットになったパックのご紹介です。</p>
           <a href="/service" class="read-more">サービスの説明 →</a>
         </div>
@@ -142,13 +150,13 @@ const isProd = import.meta.env.PROD;
           <h2>{townData.frontmatter.title}</h2>
         </div>
         <div class="card-content">
-          <img src={townData.frontmatter.image} alt="スピリチュアル・タウン" class="program-thumb" />
+          <img src={townData.frontmatter.image} alt="スピリチュアル・タウン" class="program-thumb" loading="lazy" decoding="async" />
           <p>{townData.frontmatter.summary}</p>
           <a href="/spiritual-town" class="read-more">スピリチュアル・タウンの説明 →</a>
         </div>
       </section>
 
-      <!-- 📝 ブログセクション（お申し込みから置換完了） -->
+      <!-- 📝 ブログセクション -->
       <section class="card-panel" id="blog">
         <div class="profile-header-block">
           <p class="catchphrase">BLOG</p>
@@ -156,7 +164,7 @@ const isProd = import.meta.env.PROD;
         </div>
         <div class="card-content">
           {latestBlogPosts.length > 0 && latestBlogPosts[0].data.image && (
-            <img src={latestBlogPosts[0].data.image} alt="ブログ" class="program-thumb" />
+            <img src={latestBlogPosts[0].data.image} alt="ブログ" class="program-thumb" loading="lazy" decoding="async" />
           )}
 
           <div class="news-list-container">
@@ -168,7 +176,6 @@ const isProd = import.meta.env.PROD;
                   </time>
                 </div>
                 <h3 class="news-inline-title">
-                  {/* 動的ルーティング用の /blog/スラグのパスに設定 */}
                   <a href={`/blog/${post.id}`}>{post.data.title}</a>
                 </h3>
               </article>
