@@ -5,14 +5,12 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 
 
-vite: {
-    build: {
-      cssCodeSplit: false, 
-    }
-  },
-  experimental: {
+build: {
     inlineStylesheets: 'always' 
+  },
+  vite: {
+    build: {
+      cssCodeSplit: false 
+    }
   }
-
-
 });
