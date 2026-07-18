@@ -5,12 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 
 
-  build: {
-    inlineStylesheets: 'always' 
-  },
-  vite: {
-    build: {
-      cssCodeSplit: false 
-    }
+build: {
+    inlineStylesheets: 'always' // 各CSSはバラバラのまま、HTML内に直接最速で埋め込む
   }
 });
