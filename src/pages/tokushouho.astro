@@ -1,138 +1,154 @@
 ---
 // src/pages/tokushouho.astro
----
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>特定商取引法に基づく表記 - [サイト名/会社名]</title>
-  <style>
-    body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.8;
-      color: #333;
-      background-color: #fcfcfc;
-      margin: 0;
-      padding: 40px 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    h1 {
-      font-size: 28px;
-      border-bottom: 2px solid #a3e2ff;
-      padding-bottom: 10px;
-      margin-bottom: 30px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 15px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
-    }
-    th {
-      width: 30%;
-      background-color: #f9f9f9;
-      font-weight: bold;
-    }
-    td {
-      width: 70%;
-    }
-    .back-btn {
-      display: inline-block;
-      margin-top: 40px;
-      padding: 10px 20px;
-      background-color: #333;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: background 0.3s;
-    }
-    .back-btn:hover {
-      background-color: #555;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>特定商取引法に基づく表記</h1>
-    
-    <table>
-      <tbody>
-        <tr>
-          <th>販売事業者</th>
-          <td>一樂 迦哩無（取引時に請求があれば、遅滞なく本名を開示いたします。）</td>
-        </tr>
-        <tr>
-          <th>運営責任者</th>
-          <td>一樂 迦哩無（取引時に請求があれば、遅滞なく本名を開示いたします。）</td>
-        </tr>
-        <tr>
-          <th>所在地</th>
-          <td>取引時に請求があれば、遅滞なく電磁的記録等（メール等）にて開示いたします。</td>
-        </tr>
-        <tr>
-          <th>電話番号</th>
-          <td>取引時に請求があれば、遅滞なく電磁的記録等（メール等）にて開示いたします。</td>
-        </tr>
-        <tr>
-          <th>連絡先（お問い合わせ）</th>
-          <td>
-            <a href="https://forms.gle/S4YanYgGCeFCjhqr8" target="_blank" rel="noopener noreferrer">
-              お問い合わせフォームはこちら
-            </a>
-            <br />
-            <small style="color: #666; font-size: 0.75rem;">
-              ※お問い合わせは上記フォームより24時間受け付けております。
-            </small>
-          </td>
-        </tr>
-        <tr>
-          <th>販売価格</th>
-          <td>各商品の詳細ページに表示された価格（消費税込み）</td>
-        </tr>
-        <tr>
-          <th>商品代金以外の必要料金</th>
-          <td>振込手数料（銀行振込決済の場合）</td>
-        </tr>
-        <tr>
-          <th>お支払方法</th>
-          <td>銀行振込、PayPay</td>
-        </tr>
-        <tr>
-          <th>代金の支払時期</th>
-          <td>
-            銀行振込：ご注文後5日以内にお振込みください。
-             PayPay：ご注文後5日以内にご送金ください。<br />
-          </td>
-        </tr>
-        <tr>
-          <th>役務（ワークショップ）の提供時期</th>
-          <td>
-            決済完了確認後、2営業日以内にメールにて実施日時の調整（または参加方法）のご案内を送信いたします。
-          </td>
-        </tr>
-        <tr>
-          <th>返品・交換・キャンセル</th>
-          <td>
-            サービスの性質上、原則として購入手続き完了後のキャンセル・返金はお受けできません。<br />
-            ただし、やむを得ない事情で参加できない場合は、開催日の1日前までにメールにてご連絡いただいた場合に限り、日程の振り替えまたは全額返金（振込手数料を除く）に対応いたします。
-          </td>
-        </tr>
-      </tbody>
-    </table>
+import bgGalaxy from '../assets/bg-galaxy.avif';
+import Layout from '../layouts/Layout.astro';
+import PageTop from '../components/PageTop.astro';
 
-    <a href="/" class="back-btn">← トップページに戻る</a>
-  </div>
-</body>
-</html>
+const pageTitle = "特定商取引法に基づく表記 | 一樂 迦哩無 - 公式サイト";
+---
+
+<Layout title={pageTitle}>
+  <!-- 背景画像 -->
+  <div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
+
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        <p class="catchphrase">COMMERCIAL TRANSACTIONS LAW</p>
+        <h2>特定商取引法に基づく表記</h2>
+      </div>
+      
+      <div class="card-content detailed-body">
+        <div class="tokushouho-table-wrapper">
+          <table class="tokushouho-table">
+            <tbody>
+              <tr>
+                <th>販売事業者</th>
+                <td>一樂 迦哩無（取引時に請求があれば、遅滞なく本名を開示いたします。）</td>
+              </tr>
+              <tr>
+                <th>運営責任者</th>
+                <td>一樂 迦哩無（取引時に請求があれば、遅滞なく本名を開示いたします。）</td>
+              </tr>
+              <tr>
+                <th>所在地</th>
+                <td>取引時に請求があれば、遅滞なく電磁的記録等（メール等）にて開示いたします。</td>
+              </tr>
+              <tr>
+                <th>電話番号</th>
+                <td>取引時に請求があれば、遅滞なく電磁的記録等（メール等）にて開示いたします。</td>
+              </tr>
+              <tr>
+                <th>連絡先（お問い合わせ）</th>
+                <td class="markdown-content">
+                  <a href="https://forms.gle/S4YanYgGCeFCjhqr8" target="_blank" rel="noopener noreferrer">
+                    お問い合わせフォームはこちら
+                  </a>
+                  <br />
+                  <span class="table-notice">
+                    ※お問い合わせは上記フォームより24時間受け付けております。
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th>販売価格</th>
+                <td>各商品の詳細ページに表示された価格（消費税込み）</td>
+              </tr>
+              <tr>
+                <th>商品代金以外の必要料金</th>
+                <td>振込手数料（銀行振込決済の場合）</td>
+              </tr>
+              <tr>
+                <th>お支払方法</th>
+                <td>銀行振込、PayPay</td>
+              </tr>
+              <tr>
+                <th>代金の支払時期</th>
+                <td>
+                  銀行振込：ご注文後5日以内にお振込みください。<br />
+                  PayPay：ご注文後5日以内にご送金ください。
+                </td>
+              </tr>
+              <tr>
+                <th>役務（ワークショップ）の提供時期</th>
+                <td>
+                  決済完了確認後、2営業日以内にメールにて実施日時の調整（または参加方法）のご案内を送信いたします。
+                </td>
+              </tr>
+              <tr>
+                <th>返品・交換・キャンセル</th>
+                <td>
+                  サービスの性質上、原則として購入手続き完了後のキャンセル・返金はお受けできません。<br />
+                  ただし、やむを得ない事情で参加できない場合は、開催日の1日前までにメールにてご連絡いただいた場合に限り、日程の振り替えまたは全額返金（振込手数料を除く）に対応いたします。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="divider" />
+        
+        <div class="back-home-container">
+          <a href="/" class="back-home-link">トップページへ戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <PageTop />
+</Layout>
+
+<style is:global>
+  /* 背景の基本アニメーション */
+  .bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    z-index: -2; opacity: 0.7;
+    animation: bgMovement 25s ease-in-out infinite alternate;
+  }
+  @keyframes bgMovement {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(1deg); }
+  }
+
+  /* 🌌 共通デザインの強制適用枠組み */
+  .detailed-container {
+    flex: 1; max-width: 900px; margin: 140px auto 60px auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box;
+  }
+  .card-panel {
+    background: rgba(13, 11, 24, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+    border-radius: 16px !important; padding: 2.5rem !important; 
+    backdrop-filter: blur(12px) !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+    overflow: hidden; box-sizing: border-box;
+  }
+  .program-header-block h2 { font-size: 2rem !important; margin-top: 0.2rem !important; margin-bottom: 2rem !important; color: #fff !important; }
+  .catchphrase { color: #ffb7ff !important; font-size: 0.95rem !important; font-weight: bold !important; margin: 0 !important; letter-spacing: 0.1em !important; }
+  .divider { border: 0 !important; height: 1px !important; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0)) !important; margin: 2.5rem 0 !important; }
+  .back-home-container { text-align: center !important; margin-top: 4rem !important; }
+  .back-home-link { color: #aaa !important; text-decoration: none !important; font-size: 0.95rem !important; display: inline-block !important; }
+  .back-home-link:hover { color: #ffb7ff !important; }
+
+  /* 📊 特商法テーブルのデザイン設定 */
+  .tokushouho-table-wrapper { width: 100%; overflow-x: auto; margin-top: 1rem; }
+  .tokushouho-table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; overflow: hidden; background: rgba(255, 255, 255, 0.01); }
+  .tokushouho-table th, .tokushouho-table td { padding: 1.25rem 1.5rem; font-size: 0.95rem; line-height: 1.7; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: left; }
+  .tokushouho-table tr:last-child th, .tokushouho-table tr:last-child td { border-bottom: none; }
+  .tokushouho-table th { width: 30%; background: rgba(255, 183, 255, 0.06); color: #ffb7ff; font-weight: bold; white-space: nowrap; }
+  .tokushouho-table td { width: 70%; color: #dbd7e0; }
+  .table-notice { display: block; color: #aaa; font-size: 0.8rem; margin-top: 0.4rem; }
+  
+  .markdown-content a { color: #a3e2ff !important; text-decoration: none !important; font-weight: bold !important; border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important; }
+  .markdown-content a:hover { color: #ffb7ff !important; border-bottom: 1px solid #ffb7ff !important; }
+
+  @media (max-width: 768px) {
+    .detailed-container { margin-top: 120px; }
+    .card-panel { padding: 1.5rem !important; }
+    .program-header-block h2 { font-size: 1.6rem !important; }
+    .tokushouho-table tr { display: flex; flex-direction: column; width: 100%; }
+    .tokushouho-table th, .tokushouho-table td { width: 100% !important; box-sizing: border-box; }
+    .tokushouho-table th { border-bottom: none; padding-bottom: 0.5rem; }
+    .tokushouho-table td { padding-top: 0.5rem; }
+  }
+</style>

@@ -19,55 +19,70 @@ const isProd = import.meta.env.PROD;
       <span></span>
     </button>
 
-
     <nav class="nav-menu">
       <ul>
         <li><a href="/">TOP</a></li>
         <li><a href="/profile">プロフィール</a></li>
-        <li><a href="/kana-l">Kana-L（カナエル）</a></li>
-        <li><a href="/claywork">クレイワーク・プログラム</a></li>
-        <li><a href="/service">ライトワーカー様向けサービス</a></li>
-        <li><a href="/spiritual-town">スピリチュアルタウン</a></li>
+        
+        <!-- 📂 ドロップダウンメニュー -->
+        <li class="dropdown-item">
+          <a href="#" class="dropdown-trigger">活動内容 <span class="arrow">▼</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/kana-l">宇宙天使 Kana-L</a></li>
+            <li><a href="/claywork">クレイワーク・プログラム</a></li>
+            <li><a href="/service">ライトワーカー様向けサービス</a></li>
+            <li><a href="/spiritual-town">スピリチュアルタウン</a></li>
+          </ul>
+        </li>
+
         <li><a href="/blog">ブログ</a></li>
         <li><a href="/contact">お申し込み・お問い合わせ</a></li>
-        <li><a href="https://instagram.com/kalina_ichiraku" target="_blank" rel="noopener noreferrer" class="instagram-nav-link" aria-label="Instagram">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-    </svg>
-  </a></li>
-<li><a href="https://lin.ee/QDK9CmS" target="_blank" rel="noopener noreferrer" class="sns-nav-link line-link" aria-label="LINE">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="21" height="21" fill="currentColor">
-    <!-- LINE公式のトーク吹き出しの形状 -->
-    <path d="M24 10.3c0-5.7-5.4-10.3-12-10.3S0 4.6 0 10.3c0 5.1 4.3 9.4 10.1 10.1l-.6 2.8c0 .2.1.4.3.5.1 0 .2 0 .2-.1l3.3-3.1c4.5-1.1 10.7-5.2 10.7-10.2z" />
-    <!-- 吹き出しの中に配置する超軽量・極太の「LINE」テキスト -->
-    <text x="12" y="13.5" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="5.2" fill="#0d0b18" text-anchor="middle" letter-spacing="-0.1">LINE</text>
-  </svg>
-</a></li>
+        
+        <!-- SNSリンク -->
+        <li>
+          <a href="https://instagram.com/kalina_ichiraku" target="_blank" rel="noopener noreferrer" class="sns-nav-link instagram-nav-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://lin.ee/QDK9CmS" target="_blank" rel="noopener noreferrer" class="sns-nav-link line-link" aria-label="LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="21" height="21" fill="currentColor">
+              <path d="M24 10.3c0-5.7-5.4-10.3-12-10.3S0 4.6 0 10.3c0 5.1 4.3 9.4 10.1 10.1l-.6 2.8c0 .2.1.4.3.5.1 0 .2 0 .2-.1l3.3-3.1c4.5-1.1 10.7-5.2 10.7-10.2z" />
+              <text x="12" y="13.5" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="5.2" fill="#0d0b18" text-anchor="middle" letter-spacing="-0.1">LINE</text>
+            </svg>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
 </header>
 
-<!-- 💡 is:inline をつけることで、ブラウザに直接「絶対に動かしなさい」と命令します -->
 <script is:inline>
-  // ページが完全に読み込まれたら実行
   document.addEventListener('DOMContentLoaded', () => {
     const trigger = document.querySelector('.menu-trigger');
     const menu = document.querySelector('.nav-menu');
     const menuLinks = document.querySelectorAll('.nav-menu a');
 
     if (trigger && menu) {
-      // ボタンをクリックしたとき
       trigger.addEventListener('click', (e) => {
-        e.stopPropagation(); // クリックイベントが外に漏れるのを防ぐ
+        e.stopPropagation();
         trigger.classList.toggle('active');
         menu.classList.toggle('open');
       });
 
-      // メニュー内のリンクをクリックしたとき（閉じる）
       menuLinks.forEach(link => {
+        if (link.classList.contains('dropdown-trigger') && window.innerWidth <= 768) {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            link.parentElement.classList.toggle('mobile-active');
+          });
+          return;
+        }
+
         link.addEventListener('click', () => {
           trigger.classList.remove('active');
           menu.classList.remove('open');
@@ -81,178 +96,122 @@ const isProd = import.meta.env.PROD;
   /* --- PC・共通デザイン --- */
   .site-header {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
+    top: 0; left: 0; width: 100%; height: 100px;
     background: rgba(13, 11, 24, 0.6);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     z-index: 100;
-    /* 💡左右の端にピタッとくっつきすぎないよう、適度な余白だけ持たせる */
     padding: 0 4rem; 
     box-sizing: border-box;
   }
 
   .header-inner {
-    /* 💡max-widthの制限をなくすことで、ロゴは左端、メニューは右端へ完全に離れます！ */
-    max-width: 100%; 
-    width: 100%;
-    height: 100%;
+    max-width: 100%; width: 100%; height: 100%;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
   }
   
-  .logo-area {
-    flex-shrink: 0;
-  }
-  .site-logo-img {
-    max-height: 80px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
+  .logo-area { flex-shrink: 0; }
+  .site-logo-img { max-height: 80px; width: auto; object-fit: contain; display: block; }
 
-  .nav-menu {
-    flex-shrink: 1;
-  }
+  .nav-menu { flex-shrink: 1; }
   .nav-menu ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem; /* 左右に広く離れるので、メニュー間の隙間も少し広げてゆったりさせます */
-    margin: 0;
-    padding: 0;
+    display: flex; list-style: none; gap: 2rem; 
+    margin: 0; padding: 0; align-items: center;
   }
   .nav-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.95rem; /* 端に寄るため、少し文字を大きくしても大丈夫です */
-    font-weight: 500;
-    white-space: nowrap;
-    transition: color 0.3s;
+    color: #fff; text-decoration: none; font-size: 0.95rem; 
+    font-weight: 500; white-space: nowrap; transition: color 0.3s;
   }
   .nav-menu a:hover {
-    color: #ffb7ff;
-    text-shadow: 0 0 8px #ffb7ff;
+    color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff;
   }
-  .menu-trigger {
-    display: none;
+  .menu-trigger { display: none; }
+
+  /* 📂 PC版ドロップダウン基本設定（初期状態は絶対隠す設定に変更） */
+  .dropdown-item { position: relative; }
+  .dropdown-trigger .arrow {
+    font-size: 0.7rem; margin-left: 0.2rem; display: inline-block; transition: transform 0.3s;
+  }
+  
+  /* PC画面でのホバー処理をメディアクエリの外側で厳密に指定 */
+  @media (min-width: 769px) {
+    .dropdown-menu {
+      display: none !important; /* 初期値は強制非表示 */
+      position: absolute;
+      top: 100%; left: 50%; transform: translateX(-50%);
+      background: rgba(13, 11, 24, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px;
+      padding: 0.8rem 0 !important; min-width: 240px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      flex-direction: column !important; gap: 0 !important; margin-top: 10px;
+    }
+    
+    /* マウスが乗った時だけ「重要度(強制)」を持ってフレックス表示にする */
+    .dropdown-item:hover .dropdown-menu {
+      display: flex !important;
+    }
+    .dropdown-item:hover .dropdown-trigger .arrow {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu li { width: 100%; }
+    .dropdown-menu a {
+      display: block; padding: 0.7rem 1.5rem; font-size: 0.9rem; text-align: left;
+    }
+    .dropdown-menu a:hover {
+      background: rgba(255, 183, 255, 0.1); color: #ffb7ff;
+    }
   }
 
   /* --- スマートフォン対応（768px以下） --- */
   @media (max-width: 768px) {
-    .site-header {
-      height: 80px;
-      padding: 0 1.5rem !important;
-    }
-    .header-inner {
-      max-width: 100%;
-    }
-    .site-logo-img {
-      max-height: 55px;
-    }
+    .site-header { height: 80px; padding: 0 1.5rem !important; }
+    .site-logo-img { max-height: 55px; }
     .menu-trigger {
-      display: flex !important;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      z-index: 200;
+      display: flex !important; flex-direction: column; justify-content: space-between;
+      width: 30px; height: 22px; background: none; border: none; cursor: pointer; padding: 0; z-index: 200;
     }
-    .menu-trigger span {
-      width: 100%;
-      height: 2px;
-      background-color: #fff;
-      border-radius: 2px;
-      transition: all 0.4s;
-    }
-    .menu-trigger.active span:nth-child(1) {
-      transform: translateY(10px) rotate(-45deg);
-      background-color: #ffb7ff;
-    }
-    .menu-trigger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-trigger.active span:nth-child(3) {
-      transform: translateY(-10px) rotate(45deg);
-      background-color: #ffb7ff;
-    }
+    .menu-trigger span { width: 100%; height: 2px; background-color: #fff; border-radius: 2px; transition: all 0.4s; }
+    
+    .menu-trigger.active span:nth-child(1) { transform: translateY(10px) rotate(-45deg); background-color: #ffb7ff; }
+    .menu-trigger.active span:nth-child(2) { opacity: 0; }
+    .menu-trigger.active span:nth-child(3) { transform: translateY(-10px) rotate(45deg); background-color: #ffb7ff; }
+    
     .nav-menu {
-      position: fixed;
-      top: -100vh;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(13, 11, 24, 0.95);
-      backdrop-filter: blur(20px);
-      transition: top 0.4s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 150;
+      position: fixed; top: -100vh; left: 0; width: 100%; height: 100vh;
+      background: rgba(13, 11, 24, 0.98); backdrop-filter: blur(20px);
+      transition: top 0.4s ease-in-out; display: flex; align-items: center;
+      justify-content: flex-start; padding-top: 100px; box-sizing: border-box; z-index: 150; overflow-y: auto;
     }
-    .nav-menu.open {
-      top: 0;
+    .nav-menu.open { top: 0; }
+    .nav-menu ul { flex-direction: column; align-items: center; gap: 1.2rem !important; width: 100%; }
+    .nav-menu a { font-size: 1.15rem; padding: 0.4rem 1rem; }
+
+    /* スマホ用のドロップダウン展開設定 */
+    .dropdown-menu {
+      display: none !important;
+      position: static; transform: none; background: rgba(255, 255, 255, 0.03);
+      border: none; box-shadow: none; min-width: 100%; padding: 0.5rem 0 !important;
+      margin-top: 0.5rem; border-radius: 8px; flex-direction: column !important; gap: 0 !important;
     }
-    .nav-menu ul {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem !important;
+    /* スマホでタップされた時だけアコーディオン状に開く */
+    .dropdown-item.mobile-active .dropdown-menu {
+      display: flex !important;
     }
-    .nav-menu a {
-      font-size: 1.2rem;
-      padding: 0.5rem 1rem;
-    }
+    .dropdown-menu a { text-align: center; font-size: 1rem; padding: 0.6rem 1rem; }
   }
 
-
-
-
-  /* 🌐 SNSリンク全体の共通ルール */
-.sns-nav-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #dbd7e0;
-    margin-left: 0.1rem;       /* 💡 アイコン同士の間隔を狭く */
-    transition: color 0.2s, filter 0.2s;
-    vertical-align: middle;
+  /* 🌐 SNSリンク設定 */
+  .sns-nav-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #dbd7e0; transition: color 0.2s, filter 0.2s; vertical-align: middle;
   }
-  
-  /* 📸 Instagram：ホバー時にブランドカラーのネオンピンクに光る */
-  .instagram-link:hover {
-    color: #ffb7ff;
-    filter: drop-shadow(0 0 8px rgba(255, 183, 255, 0.6));
-  }
+  .instagram-nav-link:hover { color: #ffb7ff; filter: drop-shadow(0 0 8px rgba(255, 183, 255, 0.6)); }
+  .line-link:hover { color: #06C755; filter: drop-shadow(0 0 8px rgba(6, 199, 85, 0.6)); }
+  .line-link svg text { fill: #0d0b18; transition: fill 0.2s; }
 
-  /* 🟢 LINE：ホバー時にLINE公式のネオンクリーンに光る */
-  .line-link:hover {
-    color: #06C755;
-    filter: drop-shadow(0 0 8px rgba(6, 199, 85, 0.6));
-  }
-
-  /* LINEアイコンの中の文字は、ホバーしても背景色の「暗い紫」を維持して透過のように見せます */
-  .line-link svg text {
-    fill: #0d0b18;
-    transition: fill 0.2s;
-  }
-
-  .sns-nav-link.instagram-link {
-    margin-left: 1.0rem;       /* メニューからの独立感を持たせる適切な余白 */
-  }
-
-  /* 📱 スマホなど画面が狭いとき、SNSボタンが折り返されて重ならないよう調整 */
   @media (max-width: 768px) {
-    .sns-nav-link {
-      margin-left: 0rem;
-      padding: 0.5rem 0;
-    }
+    .sns-nav-link { padding: 0.5rem 0; }
   }
 </style>
-
