@@ -1,6 +1,6 @@
 ---
 import bgGalaxy from '../assets/bg-galaxy.avif';
-import Header from '../components/Header.astro';
+// 💡 重複の原因になっていた Header のインポートを削除しました
 import PageTop from '../components/PageTop.astro';
 import Layout from '../layouts/Layout.astro'; 
 
@@ -8,14 +8,14 @@ import * as clayData from '../content/clay.md';
 const { frontmatter } = clayData;
 ---
 
-<Layout title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
- description={frontmatter.summary || "あなたの魂を解放する一樂 迦哩無の「クレイワーク・プログラム」。粘土をこねて作品を作ることで右脳を活性化し、思考の枠組みを超えた覚醒へアプローチします。ボディワークや誘導瞑想でハイヤーセルフと繋がり、潜在意識のブロックを外して本来の自分へ回帰します。"}
->>
+<Layout 
+  title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
+  description={frontmatter.summary || "あなたの魂を解放する一樂 迦哩無の「クレイワーク・プログラム」。粘土をこねて作品を作ることで右脳を活性化し、思考の枠組みを超えた覚醒へアプローチします。ボディワークや誘導瞑想でハイヤーセルフと繋がり、潜在意識のブロックを外して本来の自分へ回帰します。"}
+>
   <!-- 背景画像 -->
   <div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
 
-  <!-- ヘッダー -->
-  <Header />
+  <!-- 💡 2重描画を防ぐため、ここにあった <Header /> を削除しました。これでLayout側のヘッダーのみが正しく動きます。 -->
 
   <!-- メインコンテンツ -->
   <main class="detailed-container">
@@ -47,41 +47,25 @@ const { frontmatter } = clayData;
     </section>
   </main>
 
-  <!-- フッター -->
-
   <PageTop />
 </Layout>
 
 <!-- スタイル設定 -->
-<!-- ① 背景専用のスタイル（define:varsを使用せず、通常のCSSとして定義） -->
 <style>
+  /* ① 背景専用のスタイル */
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-size: cover; background-position: center;
     z-index: -2; opacity: 0.7;
+    pointer-events: none; 
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
   @keyframes bgMovement {
     0% { transform: scale(1) rotate(0deg); }
     100% { transform: scale(1.08) rotate(1deg); }
   }
-</style>
 
-<!-- ② ページ全体のメインスタイル（不要ヘッダー用CSSを完全排除） -->
-<style>
-  * { box-sizing: border-box; }
-  body { 
-    margin: 0; padding: 0;
-    background: #0d0b18; color: #f0ecf4; 
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* コンテナ */
+  /* ② ページ全体のメインスタイル */
   .detailed-container {
     flex: 1;
     max-width: 900px;
@@ -98,15 +82,12 @@ const { frontmatter } = clayData;
     overflow: hidden;
   }
   
-  /* テキスト・見出し装飾 */
   .program-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; }
   .catchphrase {
     color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
     white-space: pre-line;
   }
-  .summary-message p { font-size: 1.1rem; line-height: 1.8; color: #fff;
-    white-space: pre-line;
-  }
+  .summary-message p { font-size: 1.1rem; line-height: 1.8; color: #fff; white-space: pre-line; }
   
   .divider {
     border: 0; height: 1px;
@@ -114,9 +95,25 @@ const { frontmatter } = clayData;
     margin: 2.5rem 0;
   }
 
-  /* ===================================================
-     📚 マークダウン本文（town.md）の最適化装飾
-     =================================================== */
+  /* 💡 トップ画像の表示崩れを防ぐスタイル */
+  .toppage-image-container {
+    width: 100%;
+    margin: 0 auto 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
+    border: 1px solid rgba(255, 183, 255, 0.3);
+  }
+  .toppage-main-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* 📚 マークダウン本文の最適化装飾 */
   .markdown-content :global(p) {
     line-height: 1.95 !important; 
     margin-bottom: 1.8rem !important; 
@@ -125,7 +122,6 @@ const { frontmatter } = clayData;
     font-size: 1.05rem !important;
   }
 
-  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
   .markdown-content :global(a) {
     color: #a3e2ff !important;
     text-decoration: none !important;
@@ -139,12 +135,10 @@ const { frontmatter } = clayData;
     text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
   }
 
-  /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
 
-  /* ★フッター */
   .site-footer {
     display: block !important; 
     position: relative; 
@@ -158,38 +152,11 @@ const { frontmatter } = clayData;
     margin-top: 5rem;
   }
   
-  /* 💡 追加：フッターリンク全体のコンテナ */
-  .footer-links {
-    margin-bottom: 1rem; /* コピーライトとの隙間 */
-    font-size: 0.85rem;
-  }
-
-  /* 💡 追加：リンク単体の装飾（テーマに合わせた淡い水色） */
-  .footer-links a {
-    color: #a3e2ff; 
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    font-weight: 500;
-  }
-
-  /* 💡 追加：ホバー時にテーマカラーのピンクになり、少し光る演出 */
-  .footer-links a:hover {
-    color: #ffb7ff;
-    text-shadow: 0 0 8px #ffb7ff;
-  }
-
-  /* 💡 追加：リンク同士の間にある「 | 」（区切り線）の装飾 */
-  .footer-separator {
-    color: rgba(255, 255, 255, 0.2);
-    margin: 0 1rem;
-  }
-
-  .copyright { 
-    margin: 0; 
-    font-size: 0.85rem; 
-    color: #a3a0a8; 
-    letter-spacing: 0.05em; 
-  }
+  .footer-links { margin-bottom: 1rem; font-size: 0.85rem; }
+  .footer-links a { color: #a3e2ff; text-decoration: none; transition: color 0.3s, text-shadow 0.3s; font-weight: 500; }
+  .footer-links a:hover { color: #ffb7ff; text-shadow: 0 0 8px #ffb7ff; }
+  .footer-separator { color: rgba(255, 255, 255, 0.2); margin: 0 1rem; }
+  .copyright { margin: 0; font-size: 0.85rem; color: #a3a0a8; letter-spacing: 0.05em; }
 
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }
@@ -197,15 +164,7 @@ const { frontmatter } = clayData;
     .program-header-block h2 { font-size: 1.6rem; }
   }
 
-  /* ===================================================
-     ★重要：マークダウンの中身を「クラス名なし」で強力に装飾
-     =================================================== */
-  
-  .markdown-content :global(p) {
-    line-height: 1.85 !important; margin-bottom: 1.4rem !important; color: #dbd7e0 !important; letter-spacing: 0.03em !important;
-  }
-
-  /* ゴールド縦線の見出し (h3) */
+  /* マークダウンの中身を強力に装飾 */
   .markdown-content :global(h3) {
     font-size: 1.3rem !important;
     color: #fff !important;
@@ -215,13 +174,9 @@ const { frontmatter } = clayData;
     letter-spacing: 0.05em !important;
     display: block !important;
   }
-  .markdown-content :global(h3:first-of-type) {
-    margin-top: 2rem !important;
-  }
+  .markdown-content :global(h3:first-of-type) { margin-top: 2rem !important; }
 
-  /* ---------------------------------------------------
-     🎨 メリットカード（一番基本となる1つ目のul層）
-     --------------------------------------------------- */
+  /* 🎨 メリットカード */
   .markdown-content :global(ul) {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
@@ -230,7 +185,6 @@ const { frontmatter } = clayData;
     padding: 0 !important;
     list-style: none !important;
   }
-
   .markdown-content :global(ul li) {
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -243,11 +197,8 @@ const { frontmatter } = clayData;
     color: #e0dce5 !important;
     list-style-type: none !important;
   }
-
-  /* 基本の左帯（メリットセクション用） */
   .markdown-content :global(ul > li::before) {
-    content: '' !important;
-    position: absolute !important;
+    content: '' !important; position: absolute !important;
     top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
     height: 100% !important;
   }
@@ -257,28 +208,14 @@ const { frontmatter } = clayData;
   .markdown-content :global(ul > li:nth-child(4)::before) { background: linear-gradient(to bottom, #7F00FF, #E100FF) !important; }
   .markdown-content :global(ul > li:nth-child(5)::before) { background: linear-gradient(to bottom, #11998e, #38ef7d) !important; }
   .markdown-content :global(ul > li:nth-child(6)::before) { background: linear-gradient(to bottom, #00f2fe, #4facfe) !important; }
+  .markdown-content :global(ul li strong) { color: #ff8da1 !important; font-weight: bold !important; }
 
-  .markdown-content :global(ul li strong) {
-    color: #ff8da1 !important;
-    font-weight: bold !important;
-  }
-
-  /* ---------------------------------------------------
-     ⏰ スケジュール（h4 ＋ 番号付きリスト ol）完全独立設定
-     --------------------------------------------------- */
-  
-  /* スケジュール用のh4 */
+  /* ⏰ スケジュール */
   .markdown-content :global(h4) {
-    color: #ffb7ff !important;
-    font-size: 1.05rem !important;
-    margin: 2.5rem 0 0.5rem 0 !important;
-    padding: 0 !important;
-    position: relative !important;
-    display: block !important;
-    margin-bottom: 0.5rem !important;
-    z-index: 1 !important;
+    color: #ffb7ff !important; font-size: 1.05rem !important;
+    margin: 2.5rem 0 0.5rem 0 !important; padding: 0 !important;
+    position: relative !important; display: block !important; z-index: 1 !important;
   }
-
   .markdown-content :global(ol) {
     background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -286,359 +223,162 @@ const { frontmatter } = clayData;
     padding: 1.5rem 1.5rem 1.5rem 2.5rem !important;
     margin: 0.5rem 0 2.5rem 0 !important;
     list-style-type: decimal !important;
-    display: block !important;
-    clear: both !important;
+    display: block !important; clear: both !important;
   }
-
   .markdown-content :global(ol li) {
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0.8rem 0 !important;
-    font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
-    line-height: 1.6 !important;
+    background: none !important; border: none !important; padding: 0 !important;
+    margin: 0.8rem 0 !important; font-size: 0.95rem !important; color: #dbd7e0 !important; line-height: 1.6 !important;
   }
   .markdown-content :global(ol li::before) { display: none !important; content: none !important; }
   .markdown-content :global(ol li::marker) { font-size: 1rem !important; color: #ffb7ff !important; }
 
-  /* ===================================================
-     🎨 持ち物リスト（2列レイアウト＆帯消去）
-     =================================================== */
-
+  /* 🎨 持ち物リスト */
   .markdown-content :global(ul:has(ul)) {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    gap: 1.5rem !important;
-    margin: 2rem 0 3rem 0 !important;
-    padding: 0 !important;
-    list-style-type: none !important;
+    display: flex !important; flex-direction: row !important; flex-wrap: wrap !important;
+    justify-content: space-between !important; gap: 1.5rem !important; margin: 2rem 0 3rem 0 !important;
+    padding: 0 !important; list-style-type: none !important;
   }
-
   .markdown-content :global(ul:has(ul) > li) {
-    flex: 0 1 calc(50% - 0.75rem) !important;
-    min-width: 300px !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem 2rem 2rem 2rem !important;
-    overflow: visible !important;
-    list-style-type: none !important;
-    display: block !important;
+    flex: 0 1 calc(50% - 0.75rem) !important; min-width: 300px !important;
+    background: rgba(255, 255, 255, 0.03) !important; border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 12px !important; padding: 1.5rem 2rem 2rem 2rem !important;
+    overflow: visible !important; list-style-type: none !important; display: block !important;
   }
   .markdown-content :global(ul:has(ul) > li::marker) { display: none !important; content: none !important; }
-
   .markdown-content :global(ul:has(ul) > li::before) {
-    content: '' !important;
-    position: absolute !important;
+    content: '' !important; position: absolute !important;
     top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
-    height: 100% !important;
-    background: linear-gradient(to bottom, #ff9966, #ff5e62) !important;
+    height: 100% !important; background: linear-gradient(to bottom, #ff9966, #ff5e62) !important;
   }
-  .markdown-content :global(ul:has(ul) > li:nth-of-type(2)::before) { 
-    background: linear-gradient(to bottom, #f5af19, #f12711) !important; 
-  }
-
-  .markdown-content :global(ul:has(ul) ul) {
-    display: block !important;
-    margin: 0.5rem 0 0 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-  }
-
+  .markdown-content :global(ul:has(ul) > li:nth-of-type(2)::before) { background: linear-gradient(to bottom, #f5af19, #f12711) !important; }
+  .markdown-content :global(ul:has(ul) ul) { display: block !important; margin: 0.5rem 0 0 0 !important; padding: 0 !important; list-style: none !important; }
   .markdown-content :global(ul:has(ul) ul li) {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    border-radius: 8px !important;
-    padding: 0.9rem 1.2rem 0.9rem 2.8rem !important;
-    margin: 0.6rem 0 !important;
-    position: relative !important;
-    font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
-    overflow: visible !important;
-    list-style-type: none !important;
-    display: block !important;
+    background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 8px !important; padding: 0.9rem 1.2rem 0.9rem 2.8rem !important; margin: 0.6rem 0 !important;
+    position: relative !important; font-size: 0.95rem !important; color: #dbd7e0 !important;
+    overflow: visible !important; list-style-type: none !important; display: block !important;
   }
   .markdown-content :global(ul:has(ul) ul li::marker) { display: none !important; content: none !important; }
-
   .markdown-content :global(ul:has(ul) ul li::before) {
-    content: '✓' !important;
-    position: absolute !important;
-    left: 1.2rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-weight: bold !important;
-    font-size: 1.1rem !important;
-    background: none !important;
-    width: auto !important;
-    height: auto !important;
+    content: '✓' !important; position: absolute !important; left: 1.2rem !important; top: 50% !important;
+    transform: translateY(-50%) !important; font-weight: bold !important; font-size: 1.1rem !important;
+    background: none !important; width: auto !important; height: auto !important;
   }
   .markdown-content :global(ul:has(ul) > li:nth-of-type(1) ul li::before) { color: #ff8da1 !important; }
   .markdown-content :global(ul:has(ul) > li:nth-of-type(2) ul li::before) { color: #d4af37 !important; }
 
-  /* ===================================================
-     🎨 料金セクション
-     =================================================== */
-
-  /* 「直後にulが来ているh4」だけを「料金用」として完全分離し、潜り込ませる */
+  /* 🎨 料金セクション */
   .markdown-content :global(h4) + :global(ul) {
-    display: block !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 16px !important;
-    padding: 5.5rem 2rem 2rem 2rem !important;
-    margin: 0 0 3.5rem 0 !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    position: relative !important;
-    overflow: hidden !important;
-    list-style: none !important;
+    display: block !important; background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 16px !important;
+    padding: 5.5rem 2rem 2rem 2rem !important; margin: 0 0 3.5rem 0 !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important; position: relative !important;
+    overflow: hidden !important; list-style: none !important;
   }
-  
-  /* 料金カード内の見出しテキスト */
-  .markdown-content :global(main) .markdown-content :global(h4):has(+ ul),
   .markdown-content :global(h4):has(+ ul) {
-    margin-top: 3.5rem !important;
-    margin-bottom: -4.5rem !important;
-    position: relative !important;
-    z-index: 10 !important;
-    padding-left: 2rem !important;
-    font-size: 1.15rem !important;
-    font-weight: bold !important;
-    color: #ffb7ff !important;
-    display: block !important;
+    margin-top: 3.5rem !important; margin-bottom: -4.5rem !important; position: relative !important;
+    z-index: 10 !important; padding-left: 2rem !important; font-size: 1.15rem !important;
+    font-weight: bold !important; color: #ffb7ff !important; display: block !important;
   }
-
-  /* 料金カードの左側に美しく伸びる縦グラデーション */
   .markdown-content :global(h4) + :global(ul)::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: 0 !important; bottom: 0 !important; width: 6px !important;
-    z-index: 5 !important;
-    height: 100% !important;
+    content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important;
+    bottom: 0 !important; width: 6px !important; z-index: 5 !important; height: 100% !important;
   }
-  
-  /* 1つ目の料金プラン */
-  .markdown-content :global(h4:nth-of-type(1)):has(+ ul) + :global(ul)::before,
-  .markdown-content :global(h4):has(+ ul) + :global(ul)::before {
-    background: linear-gradient(to bottom, #ff9966, #ff5e62) !important;
-  }
-  /* 2つ目の料金プラン */
-  .markdown-content :global(ul) + :global(h4):has(+ ul) + :global(ul)::before {
-    background: linear-gradient(to bottom, #f5af19, #f12711) !important;
-  }
+  .markdown-content :global(h4:has(+ ul) + ul::before) { background: linear-gradient(to bottom, #ff9966, #ff5e62) !important; }
+  .markdown-content :global(ul + h4:has(+ ul) + ul::before) { background: linear-gradient(to bottom, #f5af19, #f12711) !important; }
 
-  /* 金額表示 of 行 */
   .markdown-content :global(h4) + :global(ul) li {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem 2rem !important;
-    margin: 0 !important;
-    width: 100% !important;
-    font-size: 1.05rem !important;
-    color: #fff !important;
-    overflow: hidden !important;
-    position: relative !important;
-    list-style-type: none !important;
-    display: block !important;
+    background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important; padding: 1.5rem 2rem !important; margin: 0 !important;
+    width: 100% !important; font-size: 1.05rem !important; color: #fff !important;
+    overflow: hidden !important; position: relative !important; list-style-type: none !important; display: block !important;
   }
   .markdown-content :global(h4) + :global(ul) li::marker { display: none !important; content: none !important; }
-  .markdown-content :global(h4) + :global(ul) li::before {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-  }
 
-  /* 💡対面開催をご希望の方へ の引用ブロック装飾 */
   .markdown-content :global(blockquote) {
-    border-left: 4px solid #ffb7ff !important;
-    background: rgba(255, 183, 255, 0.05) !important;
-    padding: 1rem 1.5rem !important;
-    margin: 2.5rem 0 !important;
-    border-radius: 0 8px 8px 0 !important;
+    border-left: 4px solid #ffb7ff !important; background: rgba(255, 183, 255, 0.05) !important;
+    padding: 1rem 1.5rem !important; margin: 2.5rem 0 !important; border-radius: 0 8px 8px 0 !important;
   }
   .markdown-content :global(blockquote p) { margin: 0 !important; color: #fff !important; font-size: 0.95rem !important; }
 
-  /* マークダウン内の画像通常設定 */
-  .markdown-content :global(img) {
-    width: 100% !important; height: auto !important; border-radius: 12px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important; margin: 2rem 0 !important;
-  }
-  /* 作品画像 */
-  .markdown-content :global(img[alt="クレイワークのイメージ"]) {
-    width: 30% !important; max-width: 450px !important; height: auto !important;
-    margin: 2rem auto !important; display: block !important;
-  }
-
-  /* 受講生の声 */
-  .markdown-content :global(img[alt="受講生の声"]) {
-    width: 70% !important; max-width: 450px !important; height: auto !important;
-    margin: 2rem auto !important; display: block !important;
-  }
+  .markdown-content :global(img) { width: 100% !important; height: auto !important; border-radius: 12px !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important; margin: 2rem 0 !important; }
+  .markdown-content :global(img[alt="クレイワークのイメージ"]) { width: 30% !important; max-width: 450px !important; height: auto !important; margin: 2rem auto !important; display: block !important; }
+  .markdown-content :global(img[alt="受講生の声"]) { width: 70% !important; max-width: 450px !important; height: auto !important; margin: 2rem auto !important; display: block !important; }
 
   @media (max-width: 768px) {
-    .markdown-content :global(ul:has(ul) > li) {
-      flex: 1 1 100% !important;
-    }
+    .markdown-content :global(ul:has(ul) > li) { flex: 1 1 100% !important; }
   }
 
-  /* ===================================================
-     ✨ Markdown内の区切り線（---）の装飾
-     =================================================== */
   .markdown-content :global(hr) {
-    border: 0 !important;
-    height: 1px !important;
+    border: 0 !important; height: 1px !important;
     background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
     margin: 3.5rem 0 !important;
   }
 
-  /* ===================================================
-     ✨ お申し込み・お問い合わせボタン（Markdown内強制適用版）
-     =================================================== */
+  /* 🔘 お申し込み・お問い合わせボタン */
   .markdown-content :global(.action-buttons-container) {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 1.5rem !important;
-    margin: 3.5rem 0 !important;
-    width: 100% !important;
-    flex-wrap: wrap !important;
+    display: flex !important; justify-content: center !important; gap: 1.5rem !important;
+    margin: 3.5rem 0 !important; width: 100% !important; flex-wrap: wrap !important;
   }
-
-  /* ボタン共通のベーススタイル */
   .markdown-content :global(.btn-action) {
-    flex: 1 !important;
-    max-width: 320px !important;
-    min-width: 260px !important;
-    height: 56px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-decoration: none !important;
-    font-size: 1.05rem !important;
-    font-weight: bold !important;
-    letter-spacing: 0.05em !important;
-    border-radius: 30px !important;
-    position: relative !important;
-    transition: all 0.4s ease !important;
-    z-index: 1 !important;
-    overflow: hidden !important;
-    border: none !important;
+    flex: 1 !important; max-width: 320px !important; min-width: 260px !important; height: 56px !important;
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    text-decoration: none !important; font-size: 1.05rem !important; font-weight: bold !important;
+    letter-spacing: 0.05em !important; border-radius: 30px !important; position: relative !important;
+    transition: all 0.4s ease !important; z-index: 1 !important; overflow: hidden !important; border: none !important;
   }
-
-  .markdown-content :global(.btn-action span) {
-    position: relative !important;
-    z-index: 2 !important;
-  }
-
-  /* 🔥 お申し込みボタン */
+  .markdown-content :global(.btn-action span) { position: relative !important; z-index: 2 !important; }
+  
   .markdown-content :global(.btn-apply) {
-    background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
-    color: #fff !important;
+    background: linear-gradient(135deg, #ff5e62, #ff9966) !important; color: #fff !important;
     box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4) !important;
   }
-
   .markdown-content :global(.btn-apply::before) {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
-    background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
-    opacity: 0 !important;
-    z-index: 1 !important;
-    transition: opacity 0.4s ease !important;
+    content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important;
+    width: 100% !important; height: 100% !important; background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
+    opacity: 0 !important; z-index: 1 !important; transition: opacity 0.4s ease !important;
   }
+  .markdown-content :global(.btn-apply:hover) { transform: translateY(-3px) !important; box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important; }
+  .markdown-content :global(.btn-apply:hover::before) { opacity: 1 !important; }
 
-  .markdown-content :global(.btn-apply:hover) {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important;
-  }
-  
-  .markdown-content :global(.btn-apply:hover::before) {
-    opacity: 1 !important;
-  }
-
-  /* 💬 お問い合わせボタン */
   .markdown-content :global(.btn-contact) {
-    background: rgba(255, 255, 255, 0.03) !important;
-    color: #ffb7ff !important;
-    border: 2px solid #ffb7ff !important;
-    box-shadow: 0 4px 15px rgba(255, 183, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.03) !important; color: #ffb7ff !important;
+    border: 2px solid #ffb7ff !important; box-shadow: 0 4px 15px rgba(255, 183, 255, 0.1) !important;
   }
-
   .markdown-content :global(.btn-contact:hover) {
-    transform: translateY(-3px) !important;
-    background: rgba(255, 183, 255, 0.15) !important;
-    color: #fff !important;
+    transform: translateY(-3px) !important; background: rgba(255, 183, 255, 0.15) !important; color: #fff !important;
     box-shadow: 0 8px 25px rgba(255, 183, 255, 0.4), 0 0 15px rgba(255, 183, 255, 0.2) !important;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
   }
 
-  /* スマホ対応 */
   @media (max-width: 600px) {
-    .markdown-content :global(.action-buttons-container) {
-      flex-direction: column !important;
-      align-items: center !important;
-      gap: 1.2rem !important;
-    }
-    .markdown-content :global(.btn-action) {
-      width: 100% !important;
-      max-width: 100% !important;
-    }
+    .markdown-content :global(.action-buttons-container) { flex-direction: column !important; align-items: center !important; gap: 1.2rem !important; }
+    .markdown-content :global(.btn-action) { width: 100% !important; max-width: 100% !important; }
   }
 </style>
 
-<style is:global>
-  .toppage-image-container {
-    width: 100%;
-    max-height: 450px; 
-    margin: 0 auto 2rem auto;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
-    border: 1px solid rgba(255, 183, 255, 0.3);
-  }
-  .toppage-main-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-  }
-</style>
-
-<!-- 既存の </style> のすぐ下に貼り付け（Astro完全対応版） -->
+<!-- お申し込みボタン制御専用スクリプト -->
 <script is:inline>
-  function setupFormButtons() {
-    const container = document.querySelector('.action-buttons-container');
+  function setupPageButtons() {
+    const container = document.querySelector('.markdown-content .action-buttons-container');
     if (!container) return;
 
     const links = container.querySelectorAll('a');
     links.forEach(link => {
-      // 属性を強制注入
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
       
-      // クリックイベントを最優先で上書き
       link.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
         const href = this.getAttribute('href');
-        if (href) {
-          window.open(href, '_blank', 'noopener,noreferrer');
-        }
+        if (href) window.open(href, '_blank', 'noopener,noreferrer');
         return false;
       };
     });
   }
 
-  // 1. 通常の読み込み時に実行
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupFormButtons);
-  } else {
-    setupFormButtons();
-  }
-
-  // 2. Astroの画面遷移が発生した時にも実行
-  document.addEventListener('astro:page-load', setupFormButtons);
-  document.addEventListener('astro:after-swap', setupFormButtons);
+  setupPageButtons();
+  document.addEventListener('astro:page-load', setupPageButtons);
+  document.addEventListener('astro:after-swap', setupPageButtons);
 </script>
