@@ -20,7 +20,7 @@ import { getCollection } from 'astro:content';
 const allBlogPosts = await getCollection('blog');
 const latestBlogPosts = allBlogPosts
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+  .slice(0, 2);
 
 // 💡 Umami用の環境判定
 const isProd = import.meta.env.PROD;
