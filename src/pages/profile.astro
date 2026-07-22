@@ -134,7 +134,7 @@ const { frontmatter } = profileData;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* メインコンテンツコンテナ（profile2に準拠） */
+  /* メインコンテンツコンテナ */
   .detailed-container {
     flex: 1;
     max-width: 900px; 
@@ -168,7 +168,7 @@ const { frontmatter } = profileData;
     white-space: pre-line;
   }
 
-    /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
   .markdown-content :global(a) {
     color: #a3e2ff !important;
     text-decoration: none !important;
@@ -302,11 +302,11 @@ const { frontmatter } = profileData;
   }
 </style>
 
-<!-- ③ メイン画像用コンテナスタイル -->
+<!-- ③ メイン画像およびMarkdown内画像＆キャプション用スタイル -->
 <style is:global>
   .toppage-image-container {
-    width: 50%; /* 半分の大きさに指定 */
-    margin: 0 auto 2rem auto; /* 中央配置 */
+    width: 50%;
+    margin: 0 auto 2rem auto;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
@@ -319,10 +319,54 @@ const { frontmatter } = profileData;
     display: block;
   }
 
-  /* スマホ等で小さくなりすぎないための調整 */
+  /* 🖼️ JSで生成する画像ラッパーカード */
+  .markdown-img-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 50% !important; /* 横幅をきっちり50%に固定 */
+    max-width: 420px !important; /* 大きくなりすぎるのを防ぐ上限 */
+    margin: 2.5rem auto !important; /* 中央配置 */
+    padding: 0.8rem !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 183, 255, 0.15) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    box-sizing: border-box !important;
+  }
+
+  .markdown-img-wrapper img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    border-radius: 8px !important;
+  }
+
+  /* 🏷️ キャプションのテキストスタイル */
+  .img-caption-text {
+    margin-top: 0.8rem !important;
+    margin-bottom: 0.2rem !important;
+    font-size: 0.9rem !important;
+    color: #a3e2ff !important;
+    text-align: center !important;
+    letter-spacing: 0.08em !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 6px rgba(163, 226, 255, 0.4) !important;
+    line-height: 1.4 !important;
+  }
+
+  .img-caption-text::before {
+    content: "✦ " !important;
+    color: #ffb7ff !important;
+  }
+
+  /* スマホ対応 */
   @media (max-width: 768px) {
-    .toppage-image-container {
-      width: 80%;
+    .toppage-image-container,
+    .markdown-img-wrapper {
+      width: 80% !important; /* スマホでは見やすいよう80%に */
+      max-width: 100% !important;
     }
   }
 
@@ -472,17 +516,14 @@ const { frontmatter } = profileData;
   }
 </style>
 
-<!-- 新規ウィンドウ用の安心スクリプト -->
+<!-- ⚡ 自動キャプション生成＆新規ウィンドウ設定用スクリプト -->
 <script is:inline>
-  function setupFormButtons() {
-    const container = document.querySelector('.action-buttons-container');
-    if (!container) return;
-
+  function initProfilePage() {
+    // 1. Amazonリンク等の処理
     const links = document.querySelectorAll('.book-promo-card .action-buttons-container a');
     links.forEach(link => {
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
-      
       link.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -493,14 +534,37 @@ const { frontmatter } = profileData;
         return false;
       };
     });
+
+    // 2. Markdown本文内の画像にキャプションと枠線を自動挿入
+    const markdownImgs = document.querySelectorAll('.markdown-content img');
+    markdownImgs.forEach(img => {
+      // 処理済みならスキップ
+      if (img.parentElement.classList.contains('markdown-img-wrapper')) return;
+
+      const altText = img.getAttribute('alt');
+      const wrapper = document.createElement('div');
+      wrapper.className = 'markdown-img-wrapper';
+
+      // 画像を親要素から差し替え
+      img.parentNode.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
+
+      // alt属性テキストがあればキャプションを作成
+      if (altText && altText.trim() !== '') {
+        const caption = document.createElement('p');
+        caption.className = 'img-caption-text';
+        caption.textContent = altText;
+        wrapper.appendChild(caption);
+      }
+    });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupFormButtons);
+    document.addEventListener('DOMContentLoaded', initProfilePage);
   } else {
-    setupFormButtons();
+    initProfilePage();
   }
 
-  document.addEventListener('astro:page-load', setupFormButtons);
-  document.addEventListener('astro:after-swap', setupFormButtons);
+  document.addEventListener('astro:page-load', initProfilePage);
+  document.addEventListener('astro:after-swap', initProfilePage);
 </script>
