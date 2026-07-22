@@ -2,13 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import bgGalaxy from '../assets/bg-galaxy.avif';
 
-// ★トップページから移植：ポートレートと4体のマスコット画像をインポート
-import portrait from '../assets/portrait.avif';
-import mascot1 from '../assets/mascot1.avif';
-import mascot2 from '../assets/mascot2.avif';
-import mascot3 from '../assets/mascot3.avif';
-import mascot4 from '../assets/mascot4.avif';
-
 // ★本の画像（表紙）をインポート
 import bookCover1 from '../assets/guide.avif'; // 『ガイドとの対話』
 import bookCover2 from '../assets/source.avif';     // 『「源」との対話』
@@ -22,40 +15,33 @@ const { frontmatter } = profileData;
   <!-- 背景画像 -->
   <div class="bg-layer"></div>
 
-  <!-- ★トップページから移植：ヒーローセクション（浮遊するマスコットとポートレート） -->
-  <section class="hero-section">
-    <div class="floating-container">
-      <!-- マスコット -->
-      <img src={mascot1.src} alt="Mascot1" class="mascot m1" />
-      <img src={mascot2.src} alt="Mascot2" class="mascot m2" />
-      
-      <!-- ポートレート -->
-      <div class="portrait-container">
-        <img src={portrait.src} alt="一樂 迦哩無" class="portrait-img" />
-      </div>
-      
-      <img src={mascot3.src} alt="Mascot3" class="mascot m3" />
-      <img src={mascot4.src} alt="Mascot4" class="mascot m4" />
-    </div>
-  </section>
-
   <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
   <main class="detailed-container">
     <section class="card-panel">
+      <!-- 💡 profile2.astro と同構造のヘッダーブロック -->
       <div class="profile-header-block">
         <p class="catchphrase">{frontmatter.catchphrase}</p>
         <h2>{frontmatter.title}</h2>
       </div>
       
       <div class="card-content detailed-story">
-        <!-- 元々ここにあった単体の toppage-image-container は、上部ヒーローセクションへの移植に伴い不要になったため削除しています -->
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
+          </div>
+        )}
 
-        <div class="intro-message">
-          <p class="greeting">{frontmatter.greeting}</p>
-          <blockquote>
-            {frontmatter.quote}
-          </blockquote>
-        </div>
+        <!-- 💡 profile2.astro と同構造のご挨拶・引用ブロック -->
+        { (frontmatter.greeting || frontmatter.quote) && (
+          <div class="intro-message">
+            {frontmatter.greeting && <p class="greeting">{frontmatter.greeting}</p>}
+            {frontmatter.quote && (
+              <blockquote style="white-space: pre-line;">
+                {frontmatter.quote}
+              </blockquote>
+            )}
+          </div>
+        )}
 
         <!-- ===================================================
              📚 Kindle書籍 紹介エリア（2冊連続配置）
@@ -107,20 +93,19 @@ const { frontmatter } = profileData;
 
         </div>
 
-<!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
+        <!-- Markdownの本文を自動展開 -->
         <div class="markdown-content">
           <profileData.Content />
         </div>
 
         <div class="back-home-container">
-            <a href="/" class="back-home-link">トップページへ戻る</a>
+          <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
       </div>
     </section>
   </main>
 </Layout>
 
-<!-- スタイル設定 -->
 <!-- ① 背景専用のスタイル -->
 <style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
   .bg-layer {
@@ -149,64 +134,11 @@ const { frontmatter } = profileData;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ★トップページから移植：ヒーローエリアのレイアウトと調整 */
-  .hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 0 0 0; 
-  }
-/* ★修正箇所：コンテナの高さを自動（auto）にして、余白でコントロールします */
-  .floating-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    height: auto;               /* 500px から auto に変更 */
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    overflow: hidden;           /* はみ出しをカット */
-  }
-  
-/* ★修正：ポートレートの下端は現状（-30px）をキープして、少しカードの背景に潜り込ませます */
-  .portrait-container {
-    width: 500px;
-    height: auto;
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: -30px;
-    z-index: 2; /* カードの文字よりは下、カードの背景よりは上になるよう制御 */
-  }
-
-  .portrait-img { 
-    width: 100%; 
-    height: auto; 
-    display: block;
-  }
-
-  /* マスコット */
-  .mascot { width: 180px; height: auto; position: absolute; z-index: 3; }
-  
-/* ★修正箇所：PCでのマスコットの位置を、全体の高さ自動化に合わせて再調整 */
-  .m1 { top: 10%; left: 16%; animation: float1 5s ease-in-out infinite; }
-  .m2 { bottom: 10%; left: 14%; animation: float2 6s ease-in-out infinite; }
-  .m3 { top: 11%; right: 16%; animation: float1 5.5s ease-in-out infinite; animation-delay: 1s; }
-  .m4 { bottom: 12%; right: 14%; animation: float2 4.5s ease-in-out infinite; animation-delay: 0.5s; }
-
-  @keyframes float1 {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(2deg); }
-  }
-  @keyframes float2 {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(15px) rotate(-2deg); }
-  }
-/* ★修正：引き上げ幅を -30px に少し戻し、カードの中身（文字）を 50px 下に押し下げます */
+  /* メインコンテンツコンテナ（profile2に準拠） */
   .detailed-container {
     flex: 1;
     max-width: 900px; 
-    margin: -30px auto 60px auto; /* -50px から -30px に戻します */
+    margin: 140px auto 60px auto; 
     padding: 0 1.5rem;
     width: 100%;
   }
@@ -215,7 +147,6 @@ const { frontmatter } = profileData;
   .card-panel {
     background: rgba(13, 11, 24, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
-    padding-top: 50px !important; /* 上の余白を多めに空けて文字を下げます */
     padding: 2.5rem; backdrop-filter: blur(8px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   }
@@ -237,9 +168,23 @@ const { frontmatter } = profileData;
     white-space: pre-line;
   }
 
+    /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  .markdown-content :global(a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content :global(a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+
   /* ===================================================
-      📚 Kindle書籍 紹介カード（2冊用コンテナ）
-      =================================================== */
+     📚 Kindle書籍 紹介カード（2冊用コンテナ）
+     =================================================== */
   .books-wrapper {
     display: flex;
     flex-direction: column;
@@ -298,7 +243,6 @@ const { frontmatter } = profileData;
     box-shadow: 0 0 10px rgba(255, 94, 98, 0.3) !important;
   }
 
-  /* 2冊目のバッジ色を「源（source）」をイメージした紫・青系に微変化させ知的な印象に */
   .source-badge {
     background: linear-gradient(90deg, #8a2be2, #4a00e0) !important;
     box-shadow: 0 0 10px rgba(138, 43, 226, 0.3) !important;
@@ -327,67 +271,16 @@ const { frontmatter } = profileData;
     justify-content: flex-start !important;
   }
   
-/* ===================================================
-     📚 マークダウン本文（town.md）の最適化装飾
-     =================================================== */
-  .markdown-content :global(p) {
-    line-height: 1.95 !important; 
-    margin-bottom: 1.8rem !important; 
-    color: #dbd7e0 !important; 
-    letter-spacing: 0.04em !important;
-    font-size: 1.05rem !important;
-  }
-
-  /* マークダウン本文内のすべてのリンク（直書きHTMLのaタグも含む）をネオン調に */
-  :global(.markdown-content a) {
-    color: #a3e2ff !important;
-    text-decoration: none !important;
-    font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
-    transition: all 0.3s ease !important;
-  }
-  :global(.markdown-content a:hover) {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
-  }
-
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
-  
-  /* レスポンシブ対応 */
-@media (max-width: 768px) {
-/* ★修正：スマホ時も引き上げ幅を少しマイルドにします */
-    .detailed-container { 
-      margin-top: -25px; /* -40px から -25px に戻します */
-    } 
-    
-    /* ★修正：スマホ時のカード内側の上余白も確保します */
-    .card-panel { 
-      padding: 3rem 1.5rem 1.5rem 1.5rem !important; /* 上だけ padding（3rem = 約48px）を広くします */
-    }
-    
-    .profile-header-block h2 { font-size: 1.6rem; }
 
-    .floating-container {
-      height: auto;
-    }
-    .portrait-container {
-      width: 320px;
-      height: auto;
-      margin-bottom: -15px; /* スマホの画像めり込みも少しだけマイルドに */
-    }
-    .mascot {
-      width: 100px;
-    }
-    
-    /* スマホ用のマスコットの浮遊位置も微調整 */
-    .m1 { top: 5%; left: 5%; }
-    .m2 { bottom: 5%; left: 3%; }
-    .m3 { top: 6%; right: 5%; }
-    .m4 { bottom: 7%; right: 3%; }
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .detailed-container { margin-top: 120px; }
+    .card-panel { padding: 1.5rem; }
+    .profile-header-block h2 { font-size: 1.6rem; }
 
     /* スマホ時は本を縦並びにする */
     .book-promo-card {
@@ -409,9 +302,31 @@ const { frontmatter } = profileData;
   }
 </style>
 
-<!-- ✨ Markdownの中身を確実に装飾するためのグローバル指定 -->
+<!-- ③ メイン画像用コンテナスタイル -->
 <style is:global>
-  /* Markdownの「###」を左線付きのネオンラインに */
+  .toppage-image-container {
+    width: 50%; /* 半分の大きさに指定 */
+    margin: 0 auto 2rem auto; /* 中央配置 */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
+    border: 1px solid rgba(255, 183, 255, 0.3);
+  }
+  .toppage-main-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* スマホ等で小さくなりすぎないための調整 */
+  @media (max-width: 768px) {
+    .toppage-image-container {
+      width: 80%;
+    }
+  }
+
+  /* ✨ Markdownの中身を装飾するグローバル指定 */
   .card-panel h3 {
     font-size: 1.35rem !important;
     color: #ffb7ff !important;
@@ -424,7 +339,6 @@ const { frontmatter } = profileData;
     background: none !important;
   }
   
-  /* リスト全体に薄いオーラのような背景グラデーションを敷く */
   .card-panel h4 + ul {
     list-style: none !important;
     padding-left: 0 !important;
@@ -434,7 +348,6 @@ const { frontmatter } = profileData;
     border-radius: 6px !important;
   }
   
-  /* 各リスト項目の設定 */
   .card-panel ul li {
     position: relative !important;
     padding-left: 1.4rem !important;
@@ -445,7 +358,6 @@ const { frontmatter } = profileData;
     border: none !important;
   }
   
-  /* 行頭の丸ドットを、光る星屑（✦）に */
   .card-panel ul li::before {
     content: "✦" !important;
     color: #a3e2ff !important;
@@ -460,7 +372,6 @@ const { frontmatter } = profileData;
     text-shadow: 0 0 4px rgba(163, 226, 255, 0.6) !important;
   }
 
-  /* 小見出し（####）のカラーを水色に統一 */
   .card-panel h4 {
     margin-top: 2rem !important;
     margin-bottom: 0.6rem !important;
@@ -469,7 +380,6 @@ const { frontmatter } = profileData;
     letter-spacing: 0.05em !important;
   }
 
-  /* 普通の文章テキスト（p）の余白とバランス調整 */
   .card-panel h4 + p {
     line-height: 1.85 !important;
     color: #dbd7e0 !important;
@@ -478,7 +388,6 @@ const { frontmatter } = profileData;
     padding-left: 1.2rem !important;
   }
 
-  /* Markdown内の区切り線（---）の装飾 */
   .card-panel hr {
     border: 0 !important;
     height: 1px !important;
@@ -486,9 +395,6 @@ const { frontmatter } = profileData;
     margin: 3.5rem 0 !important;
   }
 
-  /* ===================================================
-      ⚡ アクションボタンのグローバル装飾
-      =================================================== */
   .action-buttons-container {
     display: flex !important;
     justify-content: center !important;
@@ -523,7 +429,6 @@ const { frontmatter } = profileData;
     z-index: 2 !important;
   }
 
-  /* Amazonボタン：オレンジ〜ピンクグラデーション */
   .btn-apply {
     background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
     color: #fff !important;
@@ -549,7 +454,6 @@ const { frontmatter } = profileData;
     opacity: 1 !important;
   }
 
-  /* 訪問済みリンクのカラー対策 */
   .btn-apply:visited,
   .btn-apply:visited span {
     color: #fff !important;
@@ -567,8 +471,6 @@ const { frontmatter } = profileData;
     }
   }
 </style>
-
-
 
 <!-- 新規ウィンドウ用の安心スクリプト -->
 <script is:inline>

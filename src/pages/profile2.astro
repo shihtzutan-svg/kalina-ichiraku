@@ -78,8 +78,8 @@ const { frontmatter } = profile2Data;
   }
 
   /* ===================================================
-      📚 Kindle書籍 紹介カード（2冊用コンテナ）
-      =================================================== */
+     📚 Kindle書籍 紹介カード（2冊用コンテナ）
+     =================================================== */
   .books-wrapper {
     display: flex;
     flex-direction: column;
@@ -276,8 +276,8 @@ const { frontmatter } = profile2Data;
   }
 
   /* ===================================================
-      ⚡ アクションボタンのグローバル装飾
-      =================================================== */
+     ⚡ アクションボタンのグローバル装飾
+     =================================================== */
   .action-buttons-container {
     display: flex !important;
     justify-content: center !important;
@@ -360,8 +360,8 @@ const { frontmatter } = profile2Data;
 <!-- ③ メイン画像用コンテナスタイル -->
 <style is:global>
   .toppage-image-container {
-    width: 100%;
-    margin: 0 auto 2rem auto;
+    width: 50%; /* 半分の大きさに指定 */
+    margin: 0 auto 2rem auto; /* 中央配置 */
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
@@ -373,9 +373,14 @@ const { frontmatter } = profile2Data;
     object-fit: cover;
     display: block;
   }
+
+  /* スマホ等で小さくなりすぎないための調整 */
+  @media (max-width: 768px) {
+    .toppage-image-container {
+      width: 80%;
+    }
+  }
 </style>
-
-
 
 <!-- 新規ウィンドウ用の安心スクリプト -->
 <script is:inline>

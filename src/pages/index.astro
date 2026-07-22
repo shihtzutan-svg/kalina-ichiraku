@@ -1,10 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import portrait from '../assets/portrait.avif';
-import mascot1 from '../assets/mascot1.avif';
-import mascot2 from '../assets/mascot2.avif';
-import mascot3 from '../assets/mascot3.avif';
-import mascot4 from '../assets/mascot4.avif';
 import heroArt from '../assets/top.avif'; 
 
 // 📝 各種Markdownデータのインポート
@@ -94,7 +89,7 @@ const isProd = import.meta.env.PROD;
           <h2>{profileData.frontmatter.title}</h2>
         </div>
         <div class="card-content intro-message">
-          <img src="/profile.avif" alt="Profile" class="program-thumb" loading="lazy" decoding="async" />
+          <img src="/_profile.avif" alt="Profile" class="program-thumb" loading="lazy" decoding="async" />
           <p>
             壮壮たる葛藤から「源」との対話、精度高いチャネリング、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
           </p>
