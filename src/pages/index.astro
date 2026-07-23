@@ -76,6 +76,17 @@ const isProd = import.meta.env.PROD;
         fetchpriority="high"
       />
     </div>
+
+
+<!-- 🔴 バナー下のメッセージ兼ナビゲーション（PC：横並び / スマホ：箇条書き） -->
+<div class="hero-overlay-message">
+  <ul class="hero-feature-list">
+    <li><a href="/claywork">あなたの能力を開花させる覚醒ワークショップ</a></li>
+    <li><a href="/service">ライトワーカーのための集客・活動サポート</a></li>
+    <li><a href="/kana-l">願いを叶えるマスコット「Kana-L（カナエル）」</a></li>
+    <li><a href="/spiritual-town">スピリチュアル専門ポータルサイト運営</a></li>
+  </ul>
+</div>
   </div>
 
   <!-- メインコンテンツ -->
@@ -89,7 +100,7 @@ const isProd = import.meta.env.PROD;
           <h2>{profileData.frontmatter.title}</h2>
         </div>
         <div class="card-content intro-message">
-          <img src="/_profile.avif" alt="Profile" class="program-thumb" loading="lazy" decoding="async" />
+          <img src="/new.avif" alt="Profile" class="program-thumb" loading="lazy" decoding="async" />
           <p>
             壮壮たる葛藤から「源」との対話、そして奇跡的な負債完済を経て、現在は造形力とスピリチュアル能力を融合させた活動を行っています。
           </p>
@@ -293,12 +304,12 @@ const isProd = import.meta.env.PROD;
 
   .program-thumb {
     width: 100%;
-    height: 200px;      
+    height: 200px;       
     object-fit: cover;   
     border-radius: 12px; 
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    display: block;      
+    display: block;       
   }
 
   .news-list-container {
@@ -349,7 +360,7 @@ const isProd = import.meta.env.PROD;
   }
 
   /* ==========================================
-      🎨 ヒーローバナー & キラキラ
+     🎨 ヒーローバナー & キラキラ & メッセージエリア
   ============================================= */
   .top-banner-wrapper {
     width: 100%;
@@ -382,6 +393,94 @@ const isProd = import.meta.env.PROD;
     display: block;
   }
 
+/* ==========================================
+   🔴 バナー下メッセージ＆リンクエリア
+============================================= */
+.hero-overlay-message {
+  padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+  width: 100%;
+}
+
+.hero-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: nowrap; /* PCでは改行させない */
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.hero-feature-list li {
+  position: relative;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+/* ✦ アイコン表示 */
+.hero-feature-list li::before {
+  content: "✦";
+  color: #a3e2ff;
+  font-size: 0.9rem;
+  margin-right: 0.4rem;
+  text-shadow: 0 0 6px rgba(163, 226, 255, 0.6);
+  flex-shrink: 0;
+}
+
+/* 🔗 リンクのスタイリング */
+.hero-feature-list li a {
+  color: #f0ecf4;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+/* ホバー時にふわっとピンクに光る演出 */
+.hero-feature-list li a:hover {
+  color: #ffb7ff;
+  text-shadow: 0 0 8px rgba(255, 183, 255, 0.6);
+  border-bottom: 1px solid #ffb7ff;
+}
+
+/* 📱 スマホ表示時（768px以下）：縦並びの箇条書き＆中央寄せ */
+@media (max-width: 768px) {
+  .hero-overlay-message {
+    padding: 1.2rem 1.5rem 0.5rem 1.5rem;
+  }
+
+  .hero-feature-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .hero-feature-list li {
+    white-space: normal;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  /* スマホのときは少しタップしやすいよう領域を確保 */
+  .hero-feature-list li a {
+    display: inline-block;
+    padding: 0.2rem 0;
+  }
+}
+
+/* 💻 中間画面（1200px以下）の微調整 */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .hero-feature-list li {
+    font-size: 0.85rem;
+    gap: 0.6rem;
+  }
+}
+
   @media (max-width: 1600px) {
     .top-banner-wrapper { padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 100px; }
     .wide-banner-img { height: 240px; }
@@ -391,6 +490,13 @@ const isProd = import.meta.env.PROD;
     .top-banner-wrapper { padding-left: 0 !important; padding-right: 0 !important; padding-top: 80px; }
     .banner-container { border-radius: 0 !important; border: none !important; box-shadow: none; }
     .wide-banner-img { width: 100% !important; height: 250px !important; object-position: center 32% !important; }
+
+    /* 📱 スマホ表示時：中央揃え ＆ 余白調整 */
+    .hero-overlay-message {
+      text-align: center;
+      padding: 1.5rem 1.5rem 0.8rem 1.5rem;
+      font-size: 0.95rem;
+    }
   }
 
   /* ✨ キラキラ専用コンテナ */
