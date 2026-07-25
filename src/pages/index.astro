@@ -10,7 +10,7 @@ import * as kanaLData from '../content/kana-l.md';
 import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
 
-// 📰 「ブログ（blog）」コレクションから全記事を取得して最新3件を切り出す
+// 📰 「ブログ（blog）」コレクションから全記事を取得して最新2件を切り出す
 import { getCollection } from 'astro:content';
 const allBlogPosts = await getCollection('blog');
 const latestBlogPosts = allBlogPosts
@@ -66,7 +66,7 @@ const isProd = import.meta.env.PROD;
         <div class="star s39"></div>
         <div class="star s40"></div>
       </div>
-      <!-- ⚡ LCP改善のコア修正：最優先で最速読込させる属性を追加 -->
+      <!-- ⚡ LCP改善のコア修正 -->
       <img 
         src={heroArt.src} 
         alt="一樂 迦哩無 ヒーローバナー" 
@@ -77,24 +77,24 @@ const isProd = import.meta.env.PROD;
       />
     </div>
 
-
-<!-- 🔴 バナー下のメッセージ兼ナビゲーション（PC：横並び / スマホ：箇条書き） -->
-<div class="hero-overlay-message">
-  <ul class="hero-feature-list">
-    <li><a href="/claywork">あなたの能力を開花させる覚醒ワークショップ</a></li>
-    <li><a href="/service">ライトワーカーのための集客・活動サポート</a></li>
-    <li><a href="/kana-l">願いを叶えるマスコット「Kana-L（カナエル）」</a></li>
-    <li><a href="/spiritual-town">スピリチュアル専門ポータルサイト運営</a></li>
-  </ul>
-</div>
+    <!-- 🔴 バナー下のメッセージ兼ナビゲーション -->
+    <div class="hero-overlay-message">
+      <p class="hero-lead-catch">魂の覚醒と光の活動を支援する</p>
+      <ul class="hero-feature-list">
+        <li><a href="/kana-l">願いを叶えるマスコットの制作</a></li>
+        <li><a href="/claywork">能力を開花させる覚醒ワークショップの開催</a></li>
+        <li><a href="/service">ライトワーカーのための集客・活動サポート</a></li>
+        <li><a href="/spiritual-town">スピリチュアル専門ポータルサイト運営</a></li>
+      </ul>
+    </div>
   </div>
 
   <!-- メインコンテンツ -->
   <main class="content-grid">
 
-    <div class="grid-row-three">
-      <!-- プロフィール -->
-      <section class="card-panel" id="profile">
+    <!-- ３．プロフィール（独立して中央配置） -->
+    <div class="profile-container">
+      <section class="card-panel profile-single" id="profile">
         <div class="profile-header-block">
           <p class="catchphrase">{frontmatter.catchphrase}</p>
           <h2>{profileData.frontmatter.title}</h2>
@@ -107,7 +107,22 @@ const isProd = import.meta.env.PROD;
           <a href="/profile" class="read-more">続きはこちら →</a>
         </div>
       </section>
+    </div>
 
+        <!-- ✦ セクション区切りアクセント ✦ -->
+    <div class="section-divider">
+      <span>✦</span>
+      <span>✦</span>
+      <span>✦</span>
+    </div>
+
+    <!-- ４．【覚醒前の人向け】グループ -->
+    <div class="target-group-header">
+      <span class="target-badge badge-before">覚醒前・自分の道をお探しの方へ</span>
+      <h3 class="target-group-title">心を開き、願いを叶えるプログラム</h3>
+    </div>
+
+    <div class="grid-row-two">
       <!--Kana-L（カナエル）-->
       <section class="card-panel" id="kana-l">
         <div class="profile-header-block">
@@ -135,7 +150,20 @@ const isProd = import.meta.env.PROD;
       </section>
     </div>
 
-    <div class="grid-row-three">
+        <!-- ✦ セクション区切りアクセント ✦ -->
+    <div class="section-divider">
+      <span>✦</span>
+      <span>✦</span>
+      <span>✦</span>
+    </div>
+
+    <!-- ５．【ライトワーカー向け】グループ -->
+    <div class="target-group-header">
+      <span class="target-badge badge-lightworker">ライトワーカー・活動中の方へ</span>
+      <h3 class="target-group-title">お仕事のサポートとコミュニティ</h3>
+    </div>
+
+    <div class="grid-row-two">
       <!-- サービス -->
       <section class="card-panel" id="service">
         <div class="profile-header-block">
@@ -161,33 +189,44 @@ const isProd = import.meta.env.PROD;
           <a href="/spiritual-town" class="read-more">スピリチュアル・タウンの説明 →</a>
         </div>
       </section>
+    </div>
 
-      <!-- 📝 ブログセクション -->
-      <section class="card-panel" id="blog">
+    <!-- ✦ セクション区切りアクセント ✦ -->
+    <div class="section-divider">
+      <span>✦</span>
+      <span>✦</span>
+      <span>✦</span>
+    </div>
+
+    <!-- ６．📝 ブログセクション（プロフィール幅に合わせて独立配置） -->
+    <div class="blog-container">
+      <section class="card-panel blog-panel" id="blog">
         <div class="profile-header-block">
-          <p class="catchphrase">BLOG</p>
-          <h2>ブログ記事一覧</h2>
+          <p class="catchphrase">BLOG & INFORMATION</p>
+          <h2>ブログ・最新情報</h2>
         </div>
-        <div class="card-content">
+        <div class="card-content blog-content-layout">
           {latestBlogPosts.length > 0 && latestBlogPosts[0].data.image && (
-            <img src={latestBlogPosts[0].data.image} alt="ブログ" class="program-thumb" loading="lazy" decoding="async" />
+            <img src={latestBlogPosts[0].data.image} alt="ブログ" class="program-thumb blog-thumb" loading="lazy" decoding="async" />
           )}
 
-          <div class="news-list-container">
-            {latestBlogPosts.map((post) => (
-              <article class="news-inline-item">
-                <div class="news-inline-meta">
-                  <time datetime={post.data.date.toISOString()}>
-                    {post.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}
-                  </time>
-                </div>
-                <h3 class="news-inline-title">
-                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                </h3>
-              </article>
-            ))}
+          <div class="blog-right-block">
+            <div class="news-list-container">
+              {latestBlogPosts.map((post) => (
+                <article class="news-inline-item">
+                  <div class="news-inline-meta">
+                    <time datetime={post.data.date.toISOString()}>
+                      {post.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+                    </time>
+                  </div>
+                  <h3 class="news-inline-title">
+                    <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                  </h3>
+                </article>
+              ))}
+            </div>
+            <a href="/blog" class="read-more">過去のブログ一覧 →</a>
           </div>
-          <a href="/blog" class="read-more">過去のブログ一覧 →</a>
         </div>
       </section>
     </div>
@@ -195,52 +234,103 @@ const isProd = import.meta.env.PROD;
 </Layout>
 
 <style>
-  /* 下部コンテンツエリアのラッパー */
+  /* ==========================================
+     📐 メインレイアウト（PC基本スタイル）
+  ============================================= */
   .content-grid {
-    flex: 1; 
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem; 
-    padding: 3rem 4rem;
-    background: linear-gradient(to bottom, rgba(13, 11, 24, 0.7) 0%, rgba(13, 11, 24, 0.95) 100%);
-    min-height: 400px;
-    position: relative;
-    z-index: 5;
-    margin-top: 0;
+    gap: 2rem;
+    box-sizing: border-box;
   }
 
-  /* 💻 パソコン画面：3列の均等グリッド */
-  .grid-row-three {
+  /* プロフィールエリア */
+  .profile-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .profile-single {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* 💻 PC用 2列グリッド */
+  .grid-row-two {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     width: 100%;
-    margin-bottom: 2rem;
   }
 
-  @media (max-width: 1024px) {
-    .grid-row-three {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  /* ✨ スピリチュアルタウンとブログ間のアクセント区切り（中央寄せ） */
+  .section-divider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 1rem auto;
+    opacity: 0.7;
+    text-align: center;
   }
 
-  @media (max-width: 768px) {
-    .grid-row-three {
-      grid-template-columns: 1fr;
-    }
+  .section-divider span {
+    color: #a3e2ff;
+    font-size: 0.9rem;
+    text-shadow: 0 0 8px rgba(163, 226, 255, 0.6), 0 0 12px rgba(255, 183, 255, 0.4);
   }
 
-  /* カードパネル */
+  /* 🎨 独立ブログセクション */
+  .blog-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .blog-panel {
+    width: 100%;
+    max-width: 800px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(163, 226, 255, 0.03) 100%);
+    border: 1px solid rgba(255, 183, 255, 0.2) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .blog-content-layout {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .blog-thumb {
+    width: 260px;
+    height: 160px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .blog-right-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+  }
+
+  /* カードパネル基本スタイル */
   .card-panel {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
-    padding: 2rem 1.2rem !important;
-    height: 100%;
+    padding: 2rem 1.5rem !important;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     backdrop-filter: blur(8px);
+    box-sizing: border-box;
   }
 
   .card-panel .profile-header-block {
@@ -304,72 +394,41 @@ const isProd = import.meta.env.PROD;
 
   .program-thumb {
     width: 100%;
-    height: 200px;       
-    object-fit: cover;   
-    border-radius: 12px; 
+    height: 200px;        
+    object-fit: cover;    
+    border-radius: 12px;  
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    display: block;       
+    display: block;        
   }
 
   .news-list-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
   }
   .news-inline-item {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
   }
   .news-inline-item:last-child { border-bottom: none; }
-  .news-inline-meta { font-size: 0.8rem; color: #ffb7ff; margin-bottom: 0.2rem; }
+  .news-inline-meta { font-size: 0.8rem; color: #ffb7ff; margin-bottom: 0.1rem; }
   .news-inline-title { font-size: 0.95rem; margin: 0; font-weight: normal; }
   .news-inline-title a { color: #dbd7e0; text-decoration: none; transition: color 0.2s; }
   .news-inline-title a:hover { color: #a3e2ff; }
-
-  /* ===================================================
-     📚 マークダウン本文の最適化装飾
-     =================================================== */
-  .markdown-content :global(p) {
-    line-height: 1.95 !important; 
-    margin-bottom: 1.8rem !important; 
-    color: #dbd7e0 !important; 
-    letter-spacing: 0.04em !important;
-    font-size: 1.05rem !important;
-  }
-
-  .markdown-content :global(a) {
-    color: #a3e2ff !important;
-    text-decoration: none !important;
-    font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
-    transition: all 0.3s ease !important;
-  }
-  .markdown-content :global(a:hover) {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
-  }
-
-  @media (max-width: 1600px) {
-    .content-grid { padding: 2rem 1.5rem; gap: 2rem; }
-    .card-panel { padding: 1.5rem 0.8rem !important; }
-    .card-content { font-size: 0.85rem; line-height: 1.6; }
-    .card-panel h2 { font-size: 1.1rem; }
-  }
 
   /* ==========================================
      🎨 ヒーローバナー & キラキラ & メッセージエリア
   ============================================= */
   .top-banner-wrapper {
     width: 100%;
-    padding: 0 4rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 100px 2rem 0 2rem;
     box-sizing: border-box;
     z-index: 6;
     position: relative;
-    padding-top: 100px;
-    margin-bottom: 0px;
   }
 
   .banner-container {
@@ -385,7 +444,7 @@ const isProd = import.meta.env.PROD;
 
   .wide-banner-img {
     width: 100%;
-    height: 500px;
+    height: 450px;
     object-fit: cover;
     object-position: center 28%;
     position: relative !important;
@@ -393,110 +452,120 @@ const isProd = import.meta.env.PROD;
     display: block;
   }
 
-/* ==========================================
-   🔴 バナー下メッセージ＆リンクエリア
-============================================= */
-.hero-overlay-message {
-  padding: 1.5rem 0.5rem 0.5rem 0.5rem;
-  width: 100%;
-}
-
-.hero-feature-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: nowrap; /* PCでは改行させない */
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.2rem;
-  width: 100%;
-}
-
-.hero-feature-list li {
-  position: relative;
-  font-size: 0.95rem;
-  font-weight: 500;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-}
-
-/* ✦ アイコン表示 */
-.hero-feature-list li::before {
-  content: "✦";
-  color: #a3e2ff;
-  font-size: 0.9rem;
-  margin-right: 0.4rem;
-  text-shadow: 0 0 6px rgba(163, 226, 255, 0.6);
-  flex-shrink: 0;
-}
-
-/* 🔗 リンクのスタイリング */
-.hero-feature-list li a {
-  color: #f0ecf4;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid transparent;
-}
-
-/* ホバー時にふわっとピンクに光る演出 */
-.hero-feature-list li a:hover {
-  color: #ffb7ff;
-  text-shadow: 0 0 8px rgba(255, 183, 255, 0.6);
-  border-bottom: 1px solid #ffb7ff;
-}
-
-/* 📱 スマホ表示時（768px以下）：縦並びの箇条書き＆中央寄せ */
-@media (max-width: 768px) {
+  /* ✨ 白みを少し強めた半透明の角丸枠 */
   .hero-overlay-message {
-    padding: 1.2rem 1.5rem 0.5rem 1.5rem;
-  }
-
-  .hero-feature-list {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.9rem;
-  }
-
-  .hero-feature-list li {
-    white-space: normal;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    padding: 1.8rem 1.5rem;
+    margin-top: 1.5rem;
+    width: 100%;
     text-align: center;
-  }
-  
-  /* スマホのときは少しタップしやすいよう領域を確保 */
-  .hero-feature-list li a {
-    display: inline-block;
-    padding: 0.2rem 0;
-  }
-}
+    box-sizing: border-box;
 
-/* 💻 中間画面（1200px以下）の微調整 */
-@media (max-width: 1200px) and (min-width: 769px) {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35),
+                inset 0 0 20px rgba(255, 255, 255, 0.08);
+  }
+
+  /* 目立つキャッチコピー */
+  .hero-lead-catch {
+    font-size: 1.35rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin: 0 0 1.2rem 0;
+    background: linear-gradient(135deg, #ffb7ff 0%, #a3e2ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(255, 183, 255, 0.4);
+  }
+
+  /* 2行×2列の配置設定 */
+  .hero-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 2.5rem;
+    width: 100%;
+    max-width: 920px;
+  }
+
   .hero-feature-list li {
+    position: relative;
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 380px;
+  }
+
+  .hero-feature-list li::before {
+    content: "✦";
+    color: #a3e2ff;
+    font-size: 0.9rem;
+    margin-right: 0.4rem;
+    text-shadow: 0 0 6px rgba(163, 226, 255, 0.6);
+    flex-shrink: 0;
+  }
+
+  .hero-feature-list li a {
+    color: #f0ecf4;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  .hero-feature-list li a:hover {
+    color: #ffb7ff;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.6);
+    border-bottom: 1px solid #ffb7ff;
+  }
+
+  /* ===================================================
+     🎯 ターゲット別グループ見出し
+     =================================================== */
+  .target-group-header {
+    text-align: center;
+    margin: 2.5rem auto 1rem auto;
+    padding: 0 1rem;
+    width: 100%;
+  }
+
+  .target-badge {
+    display: inline-block;
     font-size: 0.85rem;
-    gap: 0.6rem;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    padding: 0.4rem 1.4rem;
+    border-radius: 30px;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   }
-}
 
-  @media (max-width: 1600px) {
-    .top-banner-wrapper { padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 100px; }
-    .wide-banner-img { height: 240px; }
+  .badge-before {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    box-shadow: 0 0 15px rgba(255, 126, 95, 0.4);
   }
 
-  @media (max-width: 768px) {
-    .top-banner-wrapper { padding-left: 0 !important; padding-right: 0 !important; padding-top: 80px; }
-    .banner-container { border-radius: 0 !important; border: none !important; box-shadow: none; }
-    .wide-banner-img { width: 100% !important; height: 250px !important; object-position: center 32% !important; }
+  .badge-lightworker {
+    background: linear-gradient(90deg, #8a2be2, #00d2ff);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+  }
 
-    /* 📱 スマホ表示時：中央揃え ＆ 余白調整 */
-    .hero-overlay-message {
-      text-align: center;
-      padding: 1.5rem 1.5rem 0.8rem 1.5rem;
-      font-size: 0.95rem;
-    }
+  .target-group-title {
+    font-size: 1.6rem;
+    color: #ffffff;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
   /* ✨ キラキラ専用コンテナ */
@@ -508,7 +577,6 @@ const isProd = import.meta.env.PROD;
     overflow: hidden;
   }
 
-  /* 🌟 星のベーススタイル */
   .star {
     position: absolute;
     background-color: #ffffff;
@@ -545,7 +613,6 @@ const isProd = import.meta.env.PROD;
   .s18 { top: 82%; left: 10%; width: 20px; height: 20px; animation-delay: 0.3s; animation-duration: 3.7s; }
   .s19 { top: 18%; left: 25%; width: 28px; height: 28px; animation-delay: 1.2s; animation-duration: 4.3s; }
   .s20 { top: 90%; left: 75%; width: 24px; height: 24px; animation-delay: 2.9s; animation-duration: 3.1s; }
-  
   .s21 { top: 12%; left: 55%; width: 22px; height: 22px; animation-delay: 0.7s; animation-duration: 3.4s; }
   .s22 { top: 32%; left: 18%; width: 26px; height: 26px; animation-delay: 1.9s; animation-duration: 4.1s; }
   .s23 { top: 88%; left: 32%; width: 20px; height: 20px; animation-delay: 2.5s; animation-duration: 2.7s; }
@@ -567,7 +634,87 @@ const isProd = import.meta.env.PROD;
   .s39 { top: 18%; left: 70%; width: 28px; height: 28px; animation-delay: 2.4s; animation-duration: 4.0s; }
   .s40 { top: 85%; left: 3%;  width: 22px; height: 22px; animation-delay: 1.7s; animation-duration: 3.2s; }
 
+  /* ==========================================
+     📱 レスポンシブ対応
+  ============================================= */
+  
+  /* スマホ（768px以下） */
   @media (max-width: 768px) {
+    .content-grid {
+      padding: 1.5rem 1rem;
+    }
+    
+    .grid-row-two {
+      grid-template-columns: 1fr;
+    }
+
+    .section-divider {
+      margin: 0.5rem auto;
+      gap: 0.8rem;
+    }
+
+    .blog-content-layout {
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .blog-thumb {
+      width: 100%;
+      height: 180px;
+    }
+
+    .top-banner-wrapper { 
+      padding-left: 0.8rem !important; 
+      padding-right: 0.8rem !important; 
+      padding-top: 80px; 
+    }
+    .banner-container { 
+      border-radius: 12px !important; 
+      border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+      box-shadow: none; 
+    }
+    .wide-banner-img { 
+      width: 100% !important; 
+      height: 250px !important; 
+      object-position: center 32% !important; 
+    }
+
+    .hero-overlay-message {
+      padding: 1.2rem 1rem;
+      margin-top: 1rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.15); /* スマホ環境でもしっかり見やすく調整 */
+    }
+
+    .hero-lead-catch {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-feature-list {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .hero-feature-list li {
+      white-space: normal;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      text-align: center;
+      min-width: auto;
+    }
+
+    .target-group-header {
+      margin: 1.5rem auto 0.8rem auto;
+    }
+    .target-badge {
+      font-size: 0.8rem;
+      padding: 0.35rem 1.1rem;
+    }
+    .target-group-title {
+      font-size: 1.25rem;
+    }
+
     .star {
       filter: drop-shadow(0 0 2px #ffffff) 
               drop-shadow(0 0 5px #ffb7ff) 
@@ -593,7 +740,6 @@ const isProd = import.meta.env.PROD;
     .s18 { width: 8px;  height: 8px;  }
     .s19 { width: 12px; height: 12px; }
     .s20 { width: 10px; height: 10px; }
-    
     .s21 { width: 10px; height: 10px; }
     .s22 { width: 11px; height: 11px; }
     .s23 { width: 8px;  height: 8px;  }
