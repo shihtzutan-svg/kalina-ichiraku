@@ -109,7 +109,43 @@ const isProd = import.meta.env.PROD;
       </section>
     </div>
 
-        <!-- ✦ セクション区切りアクセント ✦ -->
+    <!-- ７．📚 Kindle電子書籍 -->
+    <div class="book-container">
+      <section class="card-panel book-panel" id="kindle-book">
+        <div class="profile-header-block">
+          <p class="catchphrase">KINDLE PUBLISHING</p>
+          <h2>著書（Kindle電子書籍）</h2>
+        </div>
+        
+        <div class="book-content-layout">
+          <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%93%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?&linkCode=ll2&tag=szdmorg-22&linkId=12c6b9b8833697fbe0ded8835ab89eae&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" class="kindle-book-card">
+            <div class="book-cover-wrapper">
+              <span class="kindle-badge">Kindle版</span>
+              <img src="guide.avif" alt="ガイドとの対話" class="book-cover-img" loading="lazy" decoding="async" />
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">ガイドとの対話</h3>
+              <span class="amazon-btn">Kindleで読む <span>→</span></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="book-content-layout">
+          <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E1%81%84%E1%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?&linkCode=ll2&tag=szdmorg-22&linkId=41bf4ad5c00dc2c22b63850478e2fe08&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" class="kindle-book-card">
+            <div class="book-cover-wrapper">
+              <span class="kindle-badge">Kindle版</span>
+              <img src="source.avif" alt="「源」との対話" class="book-cover-img" loading="lazy" decoding="async" />
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">「源」との対話</h3>
+              <span class="amazon-btn">Kindleで読む <span>→</span></span>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ✦ セクション区切りアクセント ✦ -->
     <div class="section-divider">
       <span>✦</span>
       <span>✦</span>
@@ -150,7 +186,7 @@ const isProd = import.meta.env.PROD;
       </section>
     </div>
 
-        <!-- ✦ セクション区切りアクセント ✦ -->
+    <!-- ✦ セクション区切りアクセント ✦ -->
     <div class="section-divider">
       <span>✦</span>
       <span>✦</span>
@@ -230,12 +266,21 @@ const isProd = import.meta.env.PROD;
         </div>
       </section>
     </div>
+
+    <!-- ✦ セクション区切りアクセント ✦ -->
+    <div class="section-divider">
+      <span>✦</span>
+      <span>✦</span>
+      <span>✦</span>
+    </div>
+
+
   </main>
 </Layout>
 
 <style>
   /* ==========================================
-     📐 メインレイアウト（PC基本スタイル）
+      📐 メインレイアウト（PC基本スタイル）
   ============================================= */
   .content-grid {
     max-width: 1280px;
@@ -320,6 +365,123 @@ const isProd = import.meta.env.PROD;
     min-height: 160px;
   }
 
+/* ==========================================
+      📚 Kindleカード（デザイン修正）
+  ============================================= */
+  .book-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .book-panel {
+    width: 100%;
+    max-width: 800px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 183, 255, 0.03) 100%);
+    border: 1px solid rgba(163, 226, 255, 0.2) !important;
+  }
+
+  .book-content-layout {
+    display: flex;
+    justify-content: center;
+    padding: 0.8rem 0;
+  }
+
+  .kindle-book-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(13, 11, 24, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 520px;
+    position: relative;
+  }
+
+  .kindle-book-card:hover {
+    border-color: #ffb7ff;
+    box-shadow: 0 8px 20px rgba(255, 183, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .book-cover-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    perspective: 1000px;
+  }
+
+  /* 1. 表紙画像を約半分のサイズに修正 */
+  .book-cover-img {
+    width: 65px; /* 元の130pxから半分の65pxへ変更 */
+    height: auto; /* アスペクト比を維持 */
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 
+      -2px 0 5px rgba(0, 0, 0, 0.4),
+      3px 5px 12px rgba(0, 0, 0, 0.7);
+    transition: transform 0.4s ease;
+    transform-origin: left center;
+    display: block;
+  }
+
+  .kindle-book-card:hover .book-cover-img {
+    transform: rotateY(-10deg) scale(1.03);
+  }
+
+  /* 2. 「Kindle版」バッジのサイズと位置を小サイズに合わせて微調整 */
+  .kindle-badge {
+    position: absolute;
+    top: -10px;
+    left: -8px;
+    background: #ff9900;
+    color: #111;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    z-index: 3;
+    letter-spacing: 0.03em;
+  }
+
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .book-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.4;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+  }
+
+  .amazon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: flex-start;
+    padding: 0.4rem 1rem;
+    background: #ff9900;
+    color: #111;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .kindle-book-card:hover .amazon-btn {
+    background: #ffac33;
+  }
+
   /* カードパネル基本スタイル */
   .card-panel {
     display: flex;
@@ -394,12 +556,12 @@ const isProd = import.meta.env.PROD;
 
   .program-thumb {
     width: 100%;
-    height: 200px;        
-    object-fit: cover;    
-    border-radius: 12px;  
+    height: 200px;         
+    object-fit: cover;     
+    border-radius: 12px;   
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    display: block;        
+    display: block;         
   }
 
   .news-list-container {
@@ -419,7 +581,7 @@ const isProd = import.meta.env.PROD;
   .news-inline-title a:hover { color: #a3e2ff; }
 
   /* ==========================================
-     🎨 ヒーローバナー & キラキラ & メッセージエリア
+      🎨 ヒーローバナー & キラキラ & メッセージエリア
   ============================================= */
   .top-banner-wrapper {
     width: 100%;
@@ -528,7 +690,7 @@ const isProd = import.meta.env.PROD;
   }
 
   /* ===================================================
-     🎯 ターゲット別グループ見出し
+      🎯 ターゲット別グループ見出し
      =================================================== */
   .target-group-header {
     text-align: center;
@@ -635,7 +797,7 @@ const isProd = import.meta.env.PROD;
   .s40 { top: 85%; left: 3%;  width: 22px; height: 22px; animation-delay: 1.7s; animation-duration: 3.2s; }
 
   /* ==========================================
-     📱 レスポンシブ対応
+      📱 レスポンシブ対応
   ============================================= */
   
   /* スマホ（768px以下） */
@@ -663,6 +825,27 @@ const isProd = import.meta.env.PROD;
       height: 180px;
     }
 
+    /* Kindleカードのスマホ表示調整 */
+    .kindle-book-card {
+      flex-direction: row; /* スマホでも横並びでコンパクトに維持 */
+      text-align: left;
+      padding: 0.8rem 1rem;
+      gap: 1rem;
+    }
+
+    .book-cover-img {
+      width: 55px; /* スマホではさらに一回り小さく */
+    }
+
+    .book-title {
+      font-size: 0.95rem;
+    }
+
+    .amazon-btn {
+      padding: 0.35rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
     .top-banner-wrapper { 
       padding-left: 0.8rem !important; 
       padding-right: 0.8rem !important; 
@@ -683,7 +866,7 @@ const isProd = import.meta.env.PROD;
       padding: 1.2rem 1rem;
       margin-top: 1rem;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.15); /* スマホ環境でもしっかり見やすく調整 */
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .hero-lead-catch {
