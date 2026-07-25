@@ -6,9 +6,9 @@ const { frontmatter } = serviceData;
 ---
 
 <Layout
- title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
- description={frontmatter.summary || "集客やホームページ制作、SNS・YouTube運用にお悩みのライトワーカー様へ。Webサイト制作からデザイン、動画撮影・編集、ライティングまで、あなたの活動をトータルでサポートする「お助け最強パック」をご紹介。ご状況や予算に応じた最適なメニューをご提案します。"}>
-<div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
+  title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト`}
+  description={frontmatter.summary || "魂の目的を言語化し、あなたの世界観をそのまま形に。スピリチュアルの専門家とクリエイターがタッグを組んでお届けする完全オーダーメイドのライトワーカー応援パックです。"}>
+  <div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
 
   <!-- メインコンテンツ -->
   <main class="detailed-container">
@@ -46,17 +46,18 @@ const { frontmatter } = serviceData;
 
 <!-- ページ全体のメインスタイル -->
 <style>
-.bg-layer {
+  .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-size: cover; background-position: center;
     z-index: -2; 
-    opacity: 0.7; /* 👈 これが明るさ（鮮やかさ）の正体です！ */
+    opacity: 0.7;
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
   @keyframes bgMovement {
     0% { transform: scale(1) rotate(0deg); }
     100% { transform: scale(1.08) rotate(1deg); }
   }
+
   /* コンテナ */
   .detailed-container {
     flex: 1;
@@ -64,15 +65,17 @@ const { frontmatter } = serviceData;
     margin: 140px auto 60px auto;
     padding: 0 1.5rem;
     width: 100%;
+    box-sizing: border-box;
   }
   
+  /* 全体カードパネル（外枠は暗めの他ページ共通デザインを維持） */
   .card-panel {
-    background: rgba(13, 11, 24, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08); 
-    border-radius: 16px;
-    padding: 3rem; 
-    backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: rgba(13, 11, 24, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px;
+    padding: 3.5rem; 
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     overflow: hidden;
   }
   
@@ -80,266 +83,326 @@ const { frontmatter } = serviceData;
   .program-header-block h2 { 
     font-size: 2.2rem; 
     margin-top: 0.5rem; 
-    margin-bottom: 2rem; 
+    margin-bottom: 1.5rem; 
     color: #fff;
     font-weight: bold;
     letter-spacing: 0.05em;
   }
   .catchphrase {
-    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.15em;
+    color: #ffb7ff; font-size: 1.05rem; font-weight: bold; margin: 0; letter-spacing: 0.15em;
     white-space: pre-line;
+    text-shadow: 0 0 10px rgba(255, 183, 255, 0.4);
   }
   .summary-message p { 
     font-size: 1.1rem; 
-    line-height: 1.8; 
-    color: #dbd7e0;
+    line-height: 1.85; 
+    color: #e2def0;
     white-space: pre-line;
   }
   
   .divider {
     border: 0; height: 1px;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,183,255,0.3), rgba(255,255,255,0));
     margin: 3rem 0;
   }
 
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
-  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
-  .back-home-link:hover { color: #ffb7ff; }
+  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: all 0.3s; }
+  .back-home-link:hover { color: #ffb7ff; text-shadow: 0 0 8px rgba(255, 183, 255, 0.6); }
 
   @media (max-width: 768px) {
-    .detailed-container { margin-top: 120px; }
+    .detailed-container { margin-top: 100px; }
     .card-panel { padding: 1.5rem; }
     .program-header-block h2 { font-size: 1.7rem; }
   }
 
   /* ===================================================
-      📚 [干渉排除＋再構築] マークダウン専用の新しいリストデザイン
+      📚 マークダウン本文の完全統合スタイリング
      =================================================== */
 
   .markdown-content :global(h3) {
-    font-size: 1.35rem !important;
+    font-size: 1.45rem !important;
     color: #fff !important;
     border-left: 4px solid #ffb7ff !important;
     padding-left: 14px !important;
-    margin: 2rem 0 !important;
+    margin: 2.5rem 0 1.5rem 0 !important;
+    font-weight: bold !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .markdown-content :global(h4) {
+    font-size: 1.2rem !important;
+    color: #a3e2ff !important;
+    margin: 2rem 0 1rem 0 !important;
     font-weight: bold !important;
   }
 
-  /* 
-    干渉している不要なグローバルスタイルを初期化。
-    ただし、中項目や小項目の「角丸四角」としてのコンテナ表現は、下部で美しく再定義します。
-  */
-  .markdown-content :global(ul),
-  .markdown-content :global(ul li),
-  .markdown-content :global(ul li::before),
-  .markdown-content :global(ul li::after) {
-    box-shadow: none !important;
-    width: auto !important;
-    height: auto !important;
-    content: none !important;
-    position: static !important;
-    transform: none !important;
+  .markdown-content :global(p) {
+    line-height: 1.85 !important;
+    color: #ffffff !important;
+    margin-bottom: 1.2rem !important;
   }
 
-  /* 1. 外側のカード一覧（2列のグリッド配置） */
-  .markdown-content :global(ul:first-of-type) {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
-    gap: 1.5rem !important;
-    margin: 2rem 0 !important;
+  .markdown-content :global(hr) {
+    border: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent) !important;
+    margin: 2.5rem 0 !important;
+  }
+
+  /* 引用メッセージ（強調ブロック） */
+  .markdown-content :global(blockquote) {
+    margin: 1.8rem 0 !important;
+    padding: 1.2rem 1.5rem !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 14px !important;
+    backdrop-filter: blur(8px) !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    font-size: 1.05rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+  }
+  .markdown-content :global(blockquote p) {
+    margin: 0 !important;
+  }
+
+  /* ===================================================
+      カード・リスト表現（トップページ風の白半透明デザイン）
+     =================================================== */
+
+  .markdown-content :global(ul) {
     padding: 0 !important;
     list-style: none !important;
+    margin: 1.5rem 0 !important;
   }
 
-  /* 2. 大項目「カード」（1〜4の大枠。ここにだけ個別の背景色を割り当てます） */
-  .markdown-content :global(ul:first-of-type > li) {
-    display: block !important;
+  /* ---------------------------------------------------
+     ① こんなお悩みリスト（チェックリストデザイン）
+     --------------------------------------------------- */
+  .markdown-content :global(ul:nth-of-type(1) > li) {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     border-radius: 12px !important;
-    padding: 1.8rem 1.8rem 1.5rem 1.8rem !important;
+    padding: 1rem 1.2rem 1rem 2.8rem !important;
+    margin-bottom: 0.8rem !important;
     position: relative !important;
-    overflow: hidden !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
-    background: none !important;
-    border: none !important;
+    font-size: 0.95rem !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(6px) !important;
   }
-
-  /* 🎨 各カードごとの背景色を微調整 */
-  /* カード1：ブルー（Web制作 & 運用） */
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(1)) {
-    background: rgba(0, 114, 255, 0.08) !important;
-    border: 1px solid rgba(0, 198, 255, 0.2) !important;
-  }
-  /* カード2：マゼンタ（デザイン & ビジュアル） */
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(2)) {
-    background: rgba(255, 94, 98, 0.08) !important;
-    border: 1px solid rgba(255, 153, 102, 0.2) !important;
-  }
-  /* カード3：パープル（動画 & 写真） */
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(3)) {
-    background: rgba(127, 0, 255, 0.08) !important;
-    border: 1px solid rgba(225, 0, 255, 0.2) !important;
-  }
-  /* カード4：グリーン（ライティング & 教材） */
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(4)) {
-    background: rgba(17, 153, 142, 0.08) !important;
-    border: 1px solid rgba(56, 239, 125, 0.2) !important;
-  }
-
-  /* ===================================================
-      ⚡ ① 大タイトルテキストの折り返し防止・文字サイズ調整
-     =================================================== */
-  .markdown-content :global(ul:first-of-type > li) {
-    font-size: 1.2rem !important; 
-    font-weight: 850 !important;   
-    letter-spacing: 0.05em !important;
-    line-height: 1.3 !important;
-  }
-
-  /* 各大タイトル個別の光彩（ネオンカラー）設定 */
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(1)) {
-    color: #a3e2ff !important;
-    text-shadow: 0 0 10px rgba(0, 198, 255, 0.6) !important;
-  }
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(2)) {
-    color: #ffb7ff !important;
-    text-shadow: 0 0 10px rgba(255, 94, 98, 0.6) !important;
-  }
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(3)) {
-    color: #e100ff !important;
-    text-shadow: 0 0 10px rgba(127, 0, 255, 0.7) !important;
-  }
-  .markdown-content :global(ul:first-of-type > li:nth-of-type(4)) {
-    color: #38ef7d !important;
-    text-shadow: 0 0 10px rgba(17, 153, 142, 0.7) !important;
-  }
-
-
-  /* ===================================================
-      💤 ② 下層の箇条書き（中・小項目）の余白・角丸ボックス再構築
-     =================================================== */
-
-  /* 中項目のリスト全体コンテナ */
-  .markdown-content :global(ul:first-of-type > li > ul) {
-    display: block !important;
-    margin-top: 1.2rem !important;
-    padding: 0 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12) !important; 
-    padding-top: 1.2rem !important;
-    background: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: none !important;
-  }
-
-  /* 
-    中項目（「Webサイト制作」など）を包む枠
-    ★ここで、美しく調和する角丸四角と程よい内側余白（パディング）を割り当てます
-  */
-  .markdown-content :global(ul:first-of-type > li > ul > li) {
-    display: block !important;
-    /* 控えめでスタイリッシュな角丸枠線を設定 */
-    background: rgba(255, 255, 255, 0.03) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.08) !important; 
-    border-radius: 8px !important; /* 美しい角丸 */
-    
-    /* ギチギチにならず、広がりすぎない上品な余白を設計 */
-    padding: 0.9rem 1.1rem !important; 
-    margin-top: 0 !important;
-    margin-bottom: 1rem !important; /* 各コンテナ同士の適度な縦すき間 */
-    
-    font-size: 1.0rem !important;
-    color: #dbd7e0 !important;   
-    font-weight: normal !important; 
-    text-shadow: none !important; 
-    position: relative !important;
-  }
-  
-  /* 最後の要素の余白を少し調整して、カード下部に合わせる */
-  .markdown-content :global(ul:first-of-type > li > ul > li:last-of-type) {
-    margin-bottom: 0 !important;
-  }
-
-  /* 強調タグのリセット */
-  .markdown-content :global(ul:first-of-type > li > ul > li strong) {
-    color: #dbd7e0 !important;
-    font-weight: normal !important;
-    text-shadow: none !important;
-    background: none !important;
-    border: none !important;
-  }
-
-  /* 中項目のポインター：ドットを少し右にずらして余白と調和させます */
-  .markdown-content :global(ul:first-of-type > li > ul > li::before) {
-    content: '•' !important;
+  .markdown-content :global(ul:nth-of-type(1) > li::before) {
+    content: "✔" !important;
     position: absolute !important;
-    left: 12px !important;
-    top: 0.9rem !important; /* テキストの1行目の高さに合わせる */
-    color: rgba(255, 255, 255, 0.4) !important; 
-    font-size: 1rem !important;
-    font-weight: normal !important;
-  }
-  
-  /* 中項目のテキスト自体も、ポインターと被らないように少し右へ */
-  .markdown-content :global(ul:first-of-type > li > ul > li) {
-    padding-left: 26px !important; 
+    left: 1rem !important;
+    top: 1rem !important;
+    color: #ffc2ff !important;
+    font-weight: bold !important;
   }
 
-  /* 小項目（具体的な対応業務などを包むul） */
-  .markdown-content :global(ul:first-of-type > li > ul > li > ul) {
-    display: block !important;
-    margin-top: 0.6rem !important; /* コンテナ内の中タイトルと小タイトル間の程よいすき間 */
-    margin-bottom: 0 !important;
-    padding-left: 0px !important;
+  /* ---------------------------------------------------
+     ② 3つの強み & ③ 3つの選べるパック（トップページと同等の白半透明枠）
+     --------------------------------------------------- */
+  .markdown-content :global(ul:nth-of-type(2)),
+  .markdown-content :global(ul:nth-of-type(3)) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(2) > li),
+  .markdown-content :global(ul:nth-of-type(3) > li) {
+    /* 🌟 トップページのカードに近い白系グラデーションと半透明感 */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 16px !important;
+    padding: 1.8rem !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* 3つの強みの個別アクセントカラー */
+  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(1)) { border-color: rgba(163, 226, 255, 0.4) !important; }
+  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(2)) { border-color: rgba(255, 183, 255, 0.4) !important; }
+  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(3)) { border-color: rgba(120, 255, 180, 0.4) !important; }
+
+  /* 3つのパックの個別アクセントカラー */
+  .markdown-content :global(ul:nth-of-type(3) > li:nth-child(1)) {
+    background: linear-gradient(135deg, rgba(255, 183, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
+    border: 1px solid rgba(255, 183, 255, 0.4) !important;
+  }
+  .markdown-content :global(ul:nth-of-type(3) > li:nth-child(2)) {
+    background: linear-gradient(135deg, rgba(163, 226, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
+    border: 1px solid rgba(163, 226, 255, 0.5) !important;
+    box-shadow: 0 0 20px rgba(163, 226, 255, 0.2) !important;
+  }
+  .markdown-content :global(ul:nth-of-type(3) > li:nth-child(3)) {
+    background: linear-gradient(135deg, rgba(225, 150, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
+    border: 1px solid rgba(225, 150, 255, 0.4) !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(2) > li > ul),
+  .markdown-content :global(ul:nth-of-type(3) > li > ul) {
+    margin-top: 1rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding-top: 1rem !important;
+  }
+
+  /* パック内の一般メニューリスト（すりガラス小カード） */
+  .markdown-content :global(ul:nth-of-type(2) > li > ul > li),
+  .markdown-content :global(ul:nth-of-type(3) > li > ul > li) {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    padding: 0.8rem 1rem 0.8rem 2rem !important;
+    font-size: 0.95rem !important;
+    color: #ffffff !important;
+    line-height: 1.6 !important;
+    margin-bottom: 0.6rem !important;
+    position: relative !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(2) > li > ul > li::before),
+  .markdown-content :global(ul:nth-of-type(3) > li > ul > li::before) {
+    content: "・" !important;
+    position: absolute !important;
+    left: 0.8rem !important;
+    color: #ffc2ff !important;
+  }
+
+/* ---------------------------------------------------
+     「対象：〜」のテキスト
+     --------------------------------------------------- */
+  .markdown-content :global(ul:nth-of-type(3) > li > ul > li:first-child) {
     background: none !important;
     border: none !important;
-  }
-
-  /* 小項目の中身
-     中項目の角丸ボックスの中にスッキリ綺麗に並ぶよう、個別の背景などは持たせません
-  */
-  .markdown-content :global(ul:first-of-type > li > ul > li > ul > li) {
-    display: block !important;
-    background: none !important; 
-    border: none !important;
-    border-radius: 0 !important;
     box-shadow: none !important;
-    
-    padding-left: 16px !important;
-    padding-top: 2px !important;  
-    padding-bottom: 2px !important;
-    margin: 0.4rem 0 !important;
-    
+    backdrop-filter: none !important;
+    padding: 0.2rem 0 0.8rem 0 !important;
+    margin-bottom: 0.4rem !important;
+    font-size: 0.98rem !important;
+    font-weight: bold !important;
+    color: #a3e2ff !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(3) > li > ul > li:first-child::before) {
+    display: none !important;
+  }
+
+  /* ---------------------------------------------------
+     ④ 提供可能スキル一覧（2列カード表示）
+     --------------------------------------------------- */
+  .markdown-content :global(ul:nth-of-type(4)) {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.2rem !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(4) > li) {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 12px !important;
+    padding: 1.2rem !important;
+    backdrop-filter: blur(6px) !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(4) > li > ul) {
+    margin-top: 0.6rem !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(4) > li > ul > li) {
     font-size: 0.88rem !important;
-    color: #b0abc4 !important; /* 少し明るくして視認性を確保 */
-    font-weight: normal !important;
+    color: #f0ecf9 !important;
+    margin-bottom: 0.4rem !important;
+    padding-left: 1rem !important;
     position: relative !important;
   }
 
-  /* 小項目のポインター：控えめな極小中空丸「◦」 */
-  .markdown-content :global(ul:first-of-type > li > ul > li > ul > li::before) {
-    content: '◦' !important;
+  .markdown-content :global(ul:nth-of-type(4) > li > ul > li::before) {
+    content: "◦" !important;
     position: absolute !important;
-    left: 2px !important;
-    top: 2px !important;
-    color: rgba(255, 255, 255, 0.3) !important; 
-    font-size: 0.85rem !important;
+    left: 0 !important;
+    color: rgba(255, 255, 255, 0.6) !important;
   }
 
+/* ---------------------------------------------------
+     ⑤ 流れ（STEPフローデザイン）
+     --------------------------------------------------- */
+  /* 各STEPカード（白半透明デザイン） */
+  .markdown-content :global(ul:nth-of-type(5) > li) {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 100%) !important;
+    border: 1px solid rgba(163, 226, 255, 0.35) !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    margin-bottom: 2.8rem !important; /* 矢印の拡大に合わせて上下余白を少し拡大 */
+    position: relative !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* STEP1〜3のカードの真下に矢印（▼）を大きく設置 */
+  .markdown-content :global(ul:nth-of-type(5) > li:not(:last-child)::after) {
+    content: "▼" !important; /* または "↓" や "⤓" */
+    position: absolute !important;
+    bottom: -2.2rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    font-size: 1.8rem !important; /* サイズを 1.4rem → 1.8rem に拡大 */
+    color: #ffb7ff !important;
+    text-shadow: 0 0 12px rgba(255, 183, 255, 0.9) !important;
+  }
+
+  /* STEPカード内のネストリスト（説明文章）のスタイル整理 */
+  .markdown-content :global(ul:nth-of-type(5) > li > ul) {
+    margin-top: 0.8rem !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(5) > li > ul > li) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    font-size: 0.95rem !important;
+    color: #f0ecf9 !important;
+    line-height: 1.7 !important;
+  }
+
+  .markdown-content :global(ul:nth-of-type(5) > li > ul > li::before) {
+    display: none !important;
+  }
+
+  /* ---------------------------------------------------
+     ⑥ お問い合わせ・CTAボタン
+     --------------------------------------------------- */
+  .markdown-content :global(.cta-container) {
+    text-align: center !important;
+    margin: 2.5rem 0 1rem 0 !important;
+  }
+
+  .markdown-content :global(.cta-button) {
+    display: inline-block !important;
+    padding: 1rem 2.5rem !important;
+    background: linear-gradient(135deg, #ffb7ff 0%, #a3e2ff 100%) !important;
+    color: #0d0b18 !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 20px rgba(255, 183, 255, 0.4) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .markdown-content :global(.cta-button:hover) {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 30px rgba(255, 183, 255, 0.6) !important;
+  }
+
+  /* レスポンシブ調整 */
   @media (max-width: 768px) {
-    .markdown-content :global(ul:first-of-type) {
+    .markdown-content :global(ul:nth-of-type(4)) {
       grid-template-columns: 1fr !important;
-    }
-    .markdown-content :global(ul:first-of-type > li) {
-      font-size: 1.1rem !important; 
-      padding: 1.5rem 1.5rem 1.2rem 1.5rem !important;
-    }
-    .markdown-content :global(ul:first-of-type > li > ul > li) {
-      padding: 0.8rem 1rem 0.8rem 22px !important;
-    }
-    .markdown-content :global(ul:first-of-type > li > ul > li::before) {
-      left: 10px !important;
-      top: 0.8rem !important;
     }
   }
 </style>
