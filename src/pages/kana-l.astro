@@ -105,9 +105,15 @@ const { frontmatter } = kanaLData;
   }
   
   .divider {
-    border: 0; height: 1px;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
+    border: 0 !important; height: 1px !important;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
     margin: 2.5rem 0;
+  }
+
+    .markdown-content :global(hr) {
+    border: 0 !important; height: 1px !important;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
+    margin: 3.5rem 0 !important;
   }
 
 /* ===================================================

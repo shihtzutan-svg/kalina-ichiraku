@@ -9,13 +9,17 @@ image: "/IMG_9666.avif"
 ### Kana-L（カナエル）とは？
 
 
-Kana-L（カナエル）とは、「あなたの願いを叶えるマスコット」です。
-一樂迦哩無が源（みなもと）と繋がり、手作りしました。
+Kana-L（カナエル）は、一樂迦哩無が源（みなもと）と繋がり、手作りした宇宙の天使です。
 
 <blockquote>
   <strong>※「源」とは</strong><br>
   ワンネス、万物の生まれる根源的な中心です。
 </blockquote>
+
+一樂は「皆の願いが叶って、イキイキと充実した日々を送ってほしい」という願いを「源」に託しました。
+
+Kana-Lのデザインは、「源」から降ろされたものを忠実に再現しています。Kana-Lの第三の目は、すべてを見通しクリアにする力の象徴です。
+
 
 
 ![カナエル](../assets/IMG_9728.avif)
@@ -50,9 +54,14 @@ Kana-Lを見るまで願いは忘れているくらいが、ちょうど良い�
 
 </div>
 
+---
+
+Kana-Lは1体 <strong>5,600円</strong>（送料別）、BASEショップにて販売中！<br>
+イベント出店時にも販売しています♪
+
 <div class="action-buttons-container">
   <a href="https://kalinart.base.shop" target="_blank" rel="noopener noreferrer" class="btn-action btn-apply">
-    <span>Kana-Lのお迎えはこちらから</span>
+    <span>Kana-Lをお迎えする</span>
   </a>
 </div>
 
@@ -116,6 +125,6 @@ A：はい、出来ます。
 
 <div class="action-buttons-container">
   <a href="https://kalinart.base.shop" target="_blank" rel="noopener noreferrer" class="btn-action btn-apply">
-    <span>Kana-Lのお迎えはこちらから</span>
+    <span>Kana-Lをお迎えする</span>
   </a>
 </div>
