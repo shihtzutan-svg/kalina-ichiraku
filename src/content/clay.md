@@ -63,7 +63,6 @@ image: "/02.avif"
 
 
 
-
 ---
 
 <img src="3.avif" alt="クレイワークのイメージ" class="small-img" />
