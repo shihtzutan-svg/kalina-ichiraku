@@ -65,7 +65,7 @@ image: "/02.avif"
 
 ---
 
-<img src="3.avif" alt="クレイワークのイメージ" class="small-img" />
+<img src="/3.avif" alt="クレイワークのイメージ" class="small-img" />
 
 <!-- コンバージョンボタンエリア（修正後） -->
 <div class="action-buttons-container">
@@ -80,10 +80,10 @@ image: "/02.avif"
 ---
 ### 💬 受講生の声
 
-<img src="IMG_3103.jpeg" alt="受講生の声" class="voice-img" />
+<img src="/IMG_3103.jpeg" alt="受講生の声" class="voice-img" />
 　（40代・Oさん）
 
-<img src="IMG_3104.jpeg" alt="受講生の声" class="voice-img" />
+<img src="/IMG_3104.jpeg" alt="受講生の声" class="voice-img" />
 　（60代・Mさん）
 
 ---
@@ -185,4 +185,4 @@ image: "/02.avif"
 
 ---
 
-<img src="1.avif" alt="クレイワークのイメージ" class="small-img" />
+<img src="/1.avif" alt="クレイワークのイメージ" class="small-img" />
