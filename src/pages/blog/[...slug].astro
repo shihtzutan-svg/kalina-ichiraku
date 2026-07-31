@@ -2,22 +2,21 @@
 import bgGalaxy from '../../assets/bg-galaxy.avif';
 import PageTop from '../../components/PageTop.astro';
 import Layout from '../../layouts/Layout.astro';
-import { getCollection, render } from 'astro:content'; // 💡 「render」を新しく追加
+import { getBlogs, getBlogDetail } from '../../library/microcms';
 
-// 1. 最新版対応：id を用いて静的ルートを構築
+// 1. microCMSから全記事のIDを取得して静的パスを生成
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.id },
-    props: { entry },
+  const response = await getBlogs({ fields: ["id"] });
+  return response.contents.map((content) => ({
+    params: { slug: content.id },
   }));
 }
 
-// 2. 最新版対応：propsから記事を取得し、新方式の render(entry) で本文を解析
-const { entry } = Astro.props;
-const { Content } = await render(entry); // 💡 entry.render() から書き換えました！
+// 2. URLパラメータ（slug = microCMSのコンテンツID）から詳細データを取得
+const { slug } = Astro.params;
+const blog = await getBlogDetail(slug as string);
 
-const pageTitle = `${entry.data.title} | 一樂 迦哩無 - 公式サイト`;
+const pageTitle = `${blog.title} | 一樂 迦哩無 - 公式サイト`;
 ---
 
 <Layout title={pageTitle}>
@@ -28,37 +27,28 @@ const pageTitle = `${entry.data.title} | 一樂 迦哩無 - 公式サイト`;
   <main class="detailed-container">
     <section class="card-panel">
       <div class="program-header-block">
-        {entry.data.catchphrase && <p class="catchphrase">{entry.data.catchphrase}</p>}
-        <h2>{entry.data.title}</h2>
+        <h2>{blog.title}</h2>
         <div class="blog-meta">
-          <time datetime={entry.data.date.toISOString()}>
-            📅 {entry.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+          <time datetime={blog.publishedAt}>
+            📅 {new Date(blog.publishedAt).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
           </time>
         </div>
       </div>
       
       <div class="card-content detailed-body">
-        {entry.data.image && (
+        {blog.eyecatch && (
           <div class="toppage-image-container">
-            <img src={entry.data.image} alt="メインイメージ" class="toppage-main-image" />
-          </div>
-        )}
-        
-        {entry.data.summary && (
-          <div class="summary-message">
-            <p>{entry.data.summary}</p>
+            <img src={blog.eyecatch.url} alt={blog.title} class="toppage-main-image" />
           </div>
         )}
 
         <hr class="divider" />
         
-        {/* Markdownの本文を自動展開 */}
-        <div class="markdown-content">
-          <Content />
-        </div>
+        {/* microCMSのリッチテキスト（HTML）を自動展開 */}
+        <div class="markdown-content" set:html={blog.content} />
         
         <div class="back-home-container">
-            <a href="/" class="back-home-link">トップページへ戻る</a>
+          <a href="/blog" class="back-home-link">← ブログ一覧へ戻る</a>
         </div>
       </div>
     </section>
@@ -159,7 +149,7 @@ const pageTitle = `${entry.data.title} | 一樂 迦哩無 - 公式サイト`;
   }
 
   /* ===================================================
-     ★重要：マークダウンの中身の強力装飾
+     ★重要：本文（HTML/リッチテキスト）の中身の強力装飾
      =================================================== */
   .markdown-content :global(p) {
     line-height: 1.85 !important; margin-bottom: 1.4rem !important; color: #dbd7e0 !important; letter-spacing: 0.03em !important;
@@ -292,8 +282,8 @@ const pageTitle = `${entry.data.title} | 一樂 迦哩無 - 公式サイト`;
     background: linear-gradient(to bottom, #f5af19, #f12711) !important; 
   }
 
-/* ===================================================
-     🖼️ マークダウン本文内の画像スタイル
+  /* ===================================================
+     🖼️ 本文内の画像スタイル
      =================================================== */
   .markdown-content :global(img) {
     max-width: 100% !important; /* 親要素の幅を超えない */
@@ -304,6 +294,4 @@ const pageTitle = `${entry.data.title} | 一樂 迦哩無 - 公式サイト`;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important; /* 高級感のあるシャドウ */
     border: 1px solid rgba(255, 255, 255, 0.08) !important; /* うっすら白い枠線 */
   }
-
 </style>
-
