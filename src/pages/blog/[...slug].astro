@@ -30,13 +30,13 @@ const pageTitle = `${blog.title} | 一樂 迦哩無 - 公式サイト`;
         <h2>{blog.title}</h2>
         <div class="blog-meta">
           <time datetime={blog.publishedAt}>
-            📅 {new Date(blog.publishedAt).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+            📅 {new Date(blog.publishedAt || blog.createdAt).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
           </time>
         </div>
       </div>
       
       <div class="card-content detailed-body">
-        {blog.eyecatch && (
+        {blog.eyecatch?.url && (
           <div class="toppage-image-container">
             <img src={blog.eyecatch.url} alt={blog.title} class="toppage-main-image" />
           </div>

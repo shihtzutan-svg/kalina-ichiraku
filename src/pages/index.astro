@@ -2,6 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import heroArt from '../assets/top.avif'; 
 
+// microcms.ts から getBlogs 関数をインポート
+import { getBlogs } from '../library/microcms';
+
+// 最新2件を取得
+const response = await getBlogs({ limit: 2, orders: '-publishedAt' });
+const latestBlogPosts = response.contents;
+
 // 📝 各種Markdownデータのインポート
 import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
@@ -9,13 +16,6 @@ import * as clayData from '../content/clay.md';
 import * as kanaLData from '../content/kana-l.md';
 import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
-
-// 📰 「ブログ（blog）」コレクションから全記事を取得して最新2件を切り出す
-import { getCollection } from 'astro:content';
-const allBlogPosts = await getCollection('blog');
-const latestBlogPosts = allBlogPosts
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 2);
 
 // 💡 Umami用の環境判定
 const isProd = import.meta.env.PROD;
@@ -240,29 +240,44 @@ const isProd = import.meta.env.PROD;
           <p class="catchphrase">BLOG & INFORMATION</p>
           <h2>ブログ・最新情報</h2>
         </div>
-        <div class="card-content blog-content-layout">
-          {latestBlogPosts.length > 0 && latestBlogPosts[0].data.image && (
-            <img src={latestBlogPosts[0].data.image} alt="ブログ" class="program-thumb blog-thumb" loading="lazy" decoding="async" />
-          )}
+<div class="card-content blog-content-layout">
+  <!-- 🖼️ アイキャッチ画像 -->
+  {latestBlogPosts.length > 0 && latestBlogPosts[0].eyecatch?.url && (
+    <img 
+      src={latestBlogPosts[0].eyecatch.url} 
+      alt="ブログアイキャッチ" 
+      class="program-thumb blog-thumb" 
+      loading="lazy" 
+      decoding="async" 
+    />
+  )}
 
-          <div class="blog-right-block">
-            <div class="news-list-container">
-              {latestBlogPosts.map((post) => (
-                <article class="news-inline-item">
-                  <div class="news-inline-meta">
-                    <time datetime={post.data.date.toISOString()}>
-                      {post.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}
-                    </time>
-                  </div>
-                  <h3 class="news-inline-title">
-                    <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                  </h3>
-                </article>
-              ))}
+  <div class="blog-right-block">
+    <div class="news-list-container">
+      {latestBlogPosts.map((post) => {
+        const rawDate = post.publishedAt || post.createdAt;
+        const dateObj = rawDate ? new Date(rawDate) : null;
+
+        return (
+          <article class="news-inline-item">
+            <div class="news-inline-meta">
+              <time datetime={dateObj ? dateObj.toISOString() : ''}>
+                {dateObj 
+                  ? dateObj.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                  : ''
+                }
+              </time>
             </div>
-            <a href="/blog" class="read-more">過去のブログ一覧 →</a>
-          </div>
-        </div>
+            <h3 class="news-inline-title">
+              <a href={`/blog/${post.id}`}>{post.title}</a>
+            </h3>
+          </article>
+        );
+      })}
+    </div>
+    <a href="/blog" class="read-more">過去のブログ一覧 →</a>
+  </div>
+</div>
       </section>
     </div>
 
