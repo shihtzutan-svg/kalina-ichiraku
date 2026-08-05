@@ -23,7 +23,7 @@ const isProd = import.meta.env.PROD;
       <ul>
         <li><a href="/">TOP</a></li>
         <li><a href="/profile">プロフィール</a></li>
-      
+        
         <!-- 📂 ドロップダウン1：自分の道をお探しの方へ -->
         <li class="dropdown-item">
           <a href="#" class="dropdown-trigger">自分の道をお探しの方へ <span class="arrow">▼</span></a>
@@ -52,6 +52,14 @@ const isProd = import.meta.env.PROD;
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </li>
+        <!-- ✨ 追加: X (旧Twitter) リンク -->
+        <li class="sns-item">
+          <a href="https://x.com/kalina_ichiraku" target="_blank" rel="noopener noreferrer" class="sns-nav-link x-nav-link" aria-label="X (Twitter)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
           </a>
         </li>
@@ -175,7 +183,7 @@ const isProd = import.meta.env.PROD;
     .site-logo-img { max-height: 55px; }
     .menu-trigger {
       display: flex !important; flex-direction: column; justify-content: space-between;
-      width: 30px; height: 22px; background: none; border: none; cursor: pointer; padding: 0; z-index: 200;
+      width: 30px; height: 22px; background: none; border: border; cursor: pointer; padding: 0; z-index: 200;
     }
     .menu-trigger span { width: 100%; height: 2px; background-color: #fff; border-radius: 2px; transition: all 0.4s; }
     
@@ -217,6 +225,8 @@ const isProd = import.meta.env.PROD;
     color: #dbd7e0; transition: color 0.2s, filter 0.2s; vertical-align: middle;
   }
   .instagram-nav-link:hover { color: #ffb7ff; filter: drop-shadow(0 0 8px rgba(255, 183, 255, 0.6)); }
+  /* ✨ X用ホバー表示設定 */
+  .x-nav-link:hover { color: #fff; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); }
   .line-link:hover { color: #06C755; filter: drop-shadow(0 0 8px rgba(6, 199, 85, 0.6)); }
   .line-link svg text { fill: #0d0b18; transition: fill 0.2s; }
 
