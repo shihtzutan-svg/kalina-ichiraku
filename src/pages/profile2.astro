@@ -447,6 +447,45 @@ const { frontmatter } = profile2Data;
   align-items: center;     /* 上下（垂直方向）の中央寄せ */
 }
 
+/* YouTube動画のレスポンシブ（16:9維持）設定 */
+.markdown-content .youtube-container {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 600px !important;    /* パソコン表示時の最大幅（お好みに合わせて調整可能） */
+  margin: 2.5rem auto !important;  /* 上下余白 ＆ 中央寄せ */
+  aspect-ratio: 16 / 9 !important; /* アスペクト比を16:9に固定 */
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 183, 255, 0.15) !important;
+}
+
+/* 枠の中のiframeをピッタリ収める */
+.markdown-content .youtube-container iframe {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
+
+/* Spotify埋め込み用のレスポンシブ設定 */
+.markdown-content .spotify-container {
+  width: 100% !important;
+  max-width: 600px !important;    /* YouTubeと横幅を揃える場合 */
+  margin: 2.5rem auto !important;  /* 中央配置 */
+}
+
+/* Spotifyのiframe自体のスタイル調整 */
+.markdown-content .spotify-container iframe {
+  width: 100% !important;
+  height: 352px !important;       /* リスト表示に適した高さを確保（コンパクト表示なら152px） */
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
 </style>
 
 <!-- ⚡ 自動キャプション生成＆リンク制御スクリプト -->

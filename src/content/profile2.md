@@ -58,14 +58,18 @@ image: "/IMG_0062.avif"
 2023年からのファンで、遠征にも行ってます
 
 <div class="flex-center">
-
+<div class="youtube-container">
 <p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IxkJeoxZ0WM?si=IJdGVD1xB0PMGXz1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="" src="https://www.youtube.com/embed/IxkJeoxZ0WM?si=IJdGVD1xB0PMGXz1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </p>
 </div>
+</div>
+
 <div class="flex-center">
+<div class="spotify-container">
 <p>
-<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/artist/4gSAE6I87LS39XMZpoQGPG?utm_source=generator&si=c24f334585ce4cc8" width="560" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/artist/4gSAE6I87LS39XMZpoQGPG?utm_source=generator&si=c24f334585ce4cc8" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 </p>
+</div>
 </div>
 
