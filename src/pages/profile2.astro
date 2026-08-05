@@ -174,6 +174,20 @@ const { frontmatter } = profile2Data;
   .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
   .back-home-link:hover { color: #ffb7ff; }
 
+    /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  .markdown-content :global(a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content :global(a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+
   /* レスポンシブ対応 */
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }
@@ -426,6 +440,13 @@ const { frontmatter } = profile2Data;
   line-height: 1.5 !important;
   font-weight: 500 !important;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center; /* 左右の中央寄せ */
+  align-items: center;     /* 上下（垂直方向）の中央寄せ */
+}
+
 </style>
 
 <!-- ⚡ 自動キャプション生成＆リンク制御スクリプト -->

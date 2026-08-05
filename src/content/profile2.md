@@ -45,11 +45,27 @@ image: "/IMG_0062.avif"
 ![マダガスカルオオゴキブリ・オブロンゴナタのみなさん（自主規制）](../assets/IMG_3242.avif)
 
 
-
-#### ●好きなこと1〜天然石を集める
-
-
-#### ●好きなこと2〜推し活
-
-
 ---
+
+
+#### ●推しているアーティスト
+
+![DEVILOOFのみなさん](../assets/devi.avif)
+
+<a href="https://deviloof.ryzm.jp/" target="_blank">DEVILOOF</a>
+
+日本のデスコアバンド<br>
+2023年からのファンで、遠征にも行ってます
+
+<div class="flex-center">
+
+<p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IxkJeoxZ0WM?si=IJdGVD1xB0PMGXz1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</p>
+</div>
+<div class="flex-center">
+<p>
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/artist/4gSAE6I87LS39XMZpoQGPG?utm_source=generator&si=c24f334585ce4cc8" width="560" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</p>
+</div>
+
