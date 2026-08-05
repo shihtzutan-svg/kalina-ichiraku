@@ -31,7 +31,9 @@ const { frontmatter } = profile2Data;
         
 
         <!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
+        <div class="markdown-content">
         <profile2Data.Content />
+     </div>
 
         <div class="back-home-container">
             <a href="/" class="back-home-link">トップページへ戻る</a>
@@ -382,35 +384,92 @@ const { frontmatter } = profile2Data;
   }
 </style>
 
-<!-- 新規ウィンドウ用の安心スクリプト -->
+<!-- 🖼️ 画像キャプション表示用スタイル（is:global を付与） -->
+<style is:global>
+/* 本文内の段落 */
+.markdown-content p {
+  line-height: 1.85 !important;
+  color: #dbd7e0 !important;
+  margin-bottom: 1.4rem !important;
+}
+
+/* 画像を包むラッパーカード（中央配置・ブロック表示） */
+.markdown-content .markdown-img-wrapper {
+  display: block !important;
+  width: 100% !important;
+  max-width: 520px !important;       /* 画像カードの最大横幅 */
+  margin: 2.5rem auto !important;     /* 上下に余白をつけて中央配置 */
+  padding: 0.8rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 183, 255, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  box-sizing: border-box !important;
+  clear: both !important;
+}
+
+/* カード内の画像本体 */
+.markdown-content .markdown-img-wrapper img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  border-radius: 8px !important;
+}
+
+/* 画像の下に表示されるキャプションテキスト */
+.markdown-content .img-caption-text {
+  margin: 0.6rem 0 0.2rem 0 !important;
+  font-size: 0.88rem !important;
+  color: #a3e2ff !important;        /* 文字色（アクアブルー） */
+  text-align: center !important;     /* テキスト中央揃え */
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+}
+</style>
+
+<!-- ⚡ 自動キャプション生成＆リンク制御スクリプト -->
 <script is:inline>
-  function setupFormButtons() {
-    const container = document.querySelector('.action-buttons-container');
-    if (!container) return;
+function initProfile2Page() {
+  // ① 外部リンクを新しいタブで開く設定
+  const links = document.querySelectorAll('.book-promo-card .action-buttons-container a');
+  links.forEach(link => {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  });
 
-    const links = document.querySelectorAll('.book-promo-card .action-buttons-container a');
-    links.forEach(link => {
-      link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener noreferrer');
-      
-      link.onclick = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const href = this.getAttribute('href');
-        if (href) {
-          window.open(href, '_blank', 'noopener,noreferrer');
-        }
-        return false;
-      };
-    });
-  }
+  // ② 画像のラッパー化とキャプション（alt属性）の読み込み
+  const markdownImgs = document.querySelectorAll('.markdown-content img');
+  markdownImgs.forEach(img => {
+    // 既にラッパーで包まれている場合はスキップ
+    if (img.parentElement.classList.contains('markdown-img-wrapper')) return;
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupFormButtons);
-  } else {
-    setupFormButtons();
-  }
+    let altText = img.getAttribute('alt') || '';
+    const wrapper = document.createElement('div');
+    wrapper.className = 'markdown-img-wrapper';
 
-  document.addEventListener('astro:page-load', setupFormButtons);
-  document.addEventListener('astro:after-swap', setupFormButtons);
+    // ::left や ::right などの指定文字が入っていても除去してキャプション文だけにする
+    altText = altText.replace(/::(left|right)/g, '').trim();
+
+    img.parentNode.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+
+    // alt属性にテキストが入っている場合のみキャプションを表示
+    if (altText !== '') {
+      const caption = document.createElement('p');
+      caption.className = 'img-caption-text';
+      caption.textContent = altText;
+      wrapper.appendChild(caption);
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProfile2Page);
+} else {
+  initProfile2Page();
+}
+
+document.addEventListener('astro:page-load', initProfile2Page);
+document.addEventListener('astro:after-swap', initProfile2Page);
 </script>
