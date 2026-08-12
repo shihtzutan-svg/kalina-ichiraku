@@ -11,7 +11,10 @@ import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
 ---
 
-<Layout title="一樂 迦哩無について - 詳細プロフィール | 一樂 迦哩無 - 公式サイト">
+<Layout 
+  title={`${frontmatter.title} | プロフィール　〜　一樂 迦哩無 - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  description={frontmatter.summary || "一樂迦哩無のプロフィールページ。「源」との対話を果たし霊的覚醒に至るまでの経歴、Kindle書籍のご紹介、保有するスピリチュアル能力を掲載。「みんなが自由に生きる」ことを望み、手助けをしています。"}
+>
   <!-- 背景画像 -->
   <div class="bg-layer"></div>
 

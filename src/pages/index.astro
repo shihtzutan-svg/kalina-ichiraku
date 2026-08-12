@@ -21,7 +21,10 @@ import * as townData from '../content/town.md';
 const isProd = import.meta.env.PROD;
 ---
 
-<Layout title="一樂 迦哩無 - 公式サイト">
+<Layout 
+  title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  description={frontmatter.summary || "創作系スピリチュアルワーカー・一樂迦哩無（いちらくかりな）の公式サイト。宇宙の「源」と繋がり魂の声を形にするマスコット「Kana-L」の販売や、楽しく覚醒へ導くワークショップ、ライトワーカー向けのWeb集客・サイト制作支援サービスを提供しています。"}
+>
   <div class="top-banner-wrapper">
     <div class="banner-container">
       <div class="sparkle-container">

@@ -6,7 +6,10 @@ import * as profile2Data from '../content/profile2.md';
 const { frontmatter } = profile2Data;
 ---
 
-<Layout title="一樂 迦哩無について - 詳細プロフィール | 一樂 迦哩無 - 公式サイト">
+<Layout 
+  title={`${frontmatter.title} | プロフィール2　〜　一樂 迦哩無 - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  description={frontmatter.summary || "一樂迦哩無のプロフィールページその2。動物の家族や推し活についてなど、ありのままの姿をご紹介。"}
+>
   <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
   <main class="detailed-container">
     <section class="card-panel">
