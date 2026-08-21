@@ -16,13 +16,15 @@ import * as clayData from '../content/clay.md';
 import * as kanaLData from '../content/kana-l.md';
 import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
+import * as kanalartData from '../content/kanal-art.md';
+import * as mycosmosData from '../content/my-cosmos.md';
 
 // 💡 Umami用の環境判定
 const isProd = import.meta.env.PROD;
 ---
 
 <Layout 
-  title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  title={`${frontmatter.title} | 一樂 迦哩無 - 公式サイト 〜 あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
   description={frontmatter.summary || "創作系スピリチュアルワーカー・一樂迦哩無（いちらくかりな）の公式サイト。宇宙の「源」と繋がり魂の声を形にするマスコット「Kana-L」の販売や、楽しく覚醒へ導くワークショップ、ライトワーカー向けのWeb集客・サイト制作支援サービスを提供しています。"}
 >
   <div class="top-banner-wrapper">
@@ -115,10 +117,10 @@ const isProd = import.meta.env.PROD;
         <div class="book-content-layout">
           <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%93%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?&linkCode=ll2&tag=szdmorg-22&linkId=12c6b9b8833697fbe0ded8835ab89eae&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" class="kindle-book-card">
             <div class="book-cover-wrapper">
-              <img src="guide.avif" alt="ガイドとの対話" class="book-cover-img" loading="lazy" decoding="async" />
+              <img src="guide.avif" alt="ガイドとの対話: 普通の主婦にある日突然起こったスピリチュアルガイドとの交信" class="book-cover-img" loading="lazy" decoding="async" />
             </div>
             <div class="book-info">
-              <h3 class="book-title">ガイドとの対話</h3>
+              <h3 class="book-title">ガイドとの対話: 普通の主婦にある日突然起こったスピリチュアルガイドとの交信</h3>
               <span class="amazon-btn">Kindleで読む <span>→</span></span>
             </div>
           </a>
@@ -127,10 +129,10 @@ const isProd = import.meta.env.PROD;
         <div class="book-content-layout">
           <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E1%81%84%E1%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?&linkCode=ll2&tag=szdmorg-22&linkId=41bf4ad5c00dc2c22b63850478e2fe08&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" class="kindle-book-card">
             <div class="book-cover-wrapper">
-              <img src="source.avif" alt="「源」との対話" class="book-cover-img" loading="lazy" decoding="async" />
+              <img src="source.avif" alt="「源」との対話: 普通の主婦が体験した大いなる存在との交信、その一部始終" class="book-cover-img" loading="lazy" decoding="async" />
             </div>
             <div class="book-info">
-              <h3 class="book-title">「源」との対話</h3>
+              <h3 class="book-title">「源」との対話: 普通の主婦が体験した大いなる存在との交信、その一部始終</h3>
               <span class="amazon-btn">Kindleで読む <span>→</span></span>
             </div>
           </a>
@@ -165,6 +167,19 @@ const isProd = import.meta.env.PROD;
         </div>
       </section>
 
+      <!-- カナエル・アート -->
+      <section class="card-panel" id="kanal-art">
+        <div class="profile-header-block">
+          <p class="catchphrase">{kanalartData.frontmatter.catchphrase}</p>
+          <h2>{kanalartData.frontmatter.title}</h2>
+        </div>
+        <div class="card-content">
+          <img src={kanalartData.frontmatter.image} alt={kanalartData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
+          <p>{kanalartData.frontmatter.summary}</p>
+      <!-- <a href="/kanal-art" class="read-more">カナエル・アートの詳細はこちら →</a>　-->
+        </div>
+      </section>
+
       <!-- クレイワーク-->
       <section class="card-panel" id="clay">
         <div class="profile-header-block">
@@ -175,6 +190,20 @@ const isProd = import.meta.env.PROD;
           <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" loading="lazy" decoding="async" />
           <p>{clayData.frontmatter.summary}</p>
           <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
+        </div>
+      </section>
+
+
+      <!-- 私の宇宙 -->
+      <section class="card-panel" id="my-cosmos">
+        <div class="profile-header-block">
+          <p class="catchphrase">{mycosmosData.frontmatter.catchphrase}</p>
+          <h2>{mycosmosData.frontmatter.title}</h2>
+        </div>
+        <div class="card-content">
+          <img src={mycosmosData.frontmatter.image} alt={mycosmosData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
+          <p>{mycosmosData.frontmatter.summary}</p>
+      <!-- <a href="/my-cosmos" class="read-more">私の宇宙の詳細はこちら →</a>　-->
         </div>
       </section>
     </div>

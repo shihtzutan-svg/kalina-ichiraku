@@ -1,0 +1,256 @@
+---
+import Layout from '../layouts/Layout.astro';
+import bgGalaxy from '../assets/bg-galaxy.avif';
+import PageTop from '../components/PageTop.astro';
+import * as kanalartData from '../content/kanal-art.md';
+const { frontmatter } = kanalartData;
+---
+
+<Layout 
+  title={`${frontmatter.title} | カナエル・アート　〜　一樂 迦哩無 - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  description={frontmatter.summary || "　"}
+>
+<div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-body">
+      
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt="メインイメージ" class="toppage-main-image" />
+          </div>
+        )}
+
+        <div class="summary-message">
+          <p>{frontmatter.summary}</p>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Markdownの本文（自動展開） -->
+        <div class="markdown-content">
+          <kanalartData.Content />
+        </div>
+
+        
+        <div class="back-home-container">
+            <a href="/" class="back-home-link">トップページへ戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<!-- ② ページ全体のメインスタイル -->
+<style>
+.bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    z-index: -2; 
+    opacity: 0.7; /* 👈 これが明るさ（鮮やかさ）の正体です！ */
+    animation: bgMovement 25s ease-in-out infinite alternate;
+  }
+  @keyframes bgMovement {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(1deg); }
+  }
+  /* コンテナ */
+  .detailed-container {
+    flex: 1;
+    max-width: 900px;
+    margin: 140px auto 60px auto;
+    padding: 0 1.5rem;
+    width: 100%;
+  }
+  
+  .card-panel {
+    background: rgba(13, 11, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
+    padding: 2.5rem; backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+  }
+  
+  /* テキスト・見出し装飾 */
+  .program-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; }
+  .catchphrase {
+    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
+    white-space: pre-line;
+  }
+  .summary-message p { 
+    font-size: 1.15rem; line-height: 1.8; color: #fff; font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 183, 255, 0.2);
+    white-space: pre-line;
+    margin: 2rem 0;
+  }
+
+  /* 中間区切り線 */
+  .card-panel .divider {
+    border: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.3), rgba(255,255,255,0)) !important;
+    margin: 3rem 0 !important;
+  }
+
+  /* ===================================================
+     ✨ お申し込み・お出かけボタン
+     =================================================== */
+  .action-buttons-container {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 4rem 0 2rem 0 !important;
+    width: 100% !important;
+  }
+
+  /* ボタン共通のベーススタイル */
+  .btn-action {
+    width: 100% !important;
+    max-width: 380px !important;
+    height: 60px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.08em !important;
+    border-radius: 30px !important;
+    position: relative !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    border: none !important;
+  }
+
+  .btn-action span {
+    position: relative !important;
+    z-index: 2 !important;
+    color: #fff !important;
+  }
+
+  /*美麗シアン×パープルグラデーション */
+  .btn-town-link {
+    background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3) !important;
+  }
+
+  .btn-town-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #7f00ff, #e100ff) !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+    transition: opacity 0.4s ease !important;
+  }
+
+  .btn-town-link:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 8px 30px rgba(127, 0, 255, 0.5), 0 0 15px rgba(0, 242, 254, 0.3) !important;
+  }
+  
+  .btn-town-link:hover::before {
+    opacity: 1 !important;
+  }
+
+  /* 訪問済みリンクのカラー対策 */
+  .btn-town-link:visited,
+  .btn-town-link:visited span {
+    color: #fff !important;
+  }
+
+  /* 戻るリンク */
+  .back-home-container { text-align: center; margin-top: 4rem; }
+  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+  .back-home-link:hover { color: #ffb7ff; }
+
+  @media (max-width: 768px) {
+    .detailed-container { margin-top: 120px; }
+    .card-panel { padding: 1.5rem; }
+    .program-header-block h2 { font-size: 1.6rem; }
+  }
+
+  /* ===================================================
+     📚 マークダウン本文（town.md）の最適化装飾
+     =================================================== */
+  .markdown-content :global(p) {
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #dbd7e0 !important; 
+    letter-spacing: 0.04em !important;
+    font-size: 1.05rem !important;
+  }
+
+  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  .markdown-content :global(a) {
+    color: #a3e2ff !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content :global(a:hover) {
+    color: #ffb7ff !important;
+    border-bottom: 1px solid #ffb7ff !important;
+    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+  }
+</style>  <!-- 💡【修正】ここで中間のスタイルタグを安全に一度閉じる -->
+
+<!-- ③ メイン画像用コンテナスタイル -->
+<style is:global>
+  .toppage-image-container {
+    width: 100%;
+    margin: 0 auto 2rem auto;
+    border-radius: 12px;
+    overflow: hidden; /* 💡【修正】内側画像の角のはみ出しをここでカット */
+    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
+    border: 1px solid rgba(255, 183, 255, 0.3);
+  }
+  .toppage-main-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px; /* 💡【修正】内側の画像自体にも角丸を適用して確実にする */
+  }
+</style>
+
+<!-- Astro完全対応版インラインスクリプト -->
+<script is:inline>
+  function setupFormButtons() {
+    const container = document.querySelector('.action-buttons-container');
+    if (!container) return;
+
+    const links = container.querySelectorAll('a');
+    links.forEach(link => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+      
+      link.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const href = this.getAttribute('href');
+        if (href) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
+        return false;
+      };
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFormButtons);
+  } else {
+    setupFormButtons();
+  }
+
+  document.addEventListener('astro:page-load', setupFormButtons);
+  document.addEventListener('astro:after-swap', setupFormButtons);
+</script>
