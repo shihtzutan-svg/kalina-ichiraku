@@ -1,5 +1,5 @@
 ---
-title: "一樂 迦哩無（いちらく かりな）"
+title: "西宮あすか"
 catchphrase: |
   魂の声を形にする　創作系スピリチュアルワーカー
 quote: |
@@ -98,7 +98,7 @@ image: "/profile.avif"
 
 ---
 
-<a href="/profile2">一樂 迦哩無 をより深く知る（笑）</a>
+<a href="/profile2">西宮あすか をより深く知る（笑）</a>
 
 ---
 
