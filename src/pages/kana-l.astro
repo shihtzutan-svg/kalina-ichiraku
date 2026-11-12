@@ -417,6 +417,7 @@ const { frontmatter } = kanaLData;
     border-radius: 0 8px 8px 0 !important;
   }
   .markdown-content :global(blockquote p) { margin: 0 !important; color: #1a1528 !important; font-size: 0.95rem !important; font-weight: 500 !important; }
+  
 
   /* 画像通常設定 */
   .markdown-content :global(img) {
@@ -501,6 +502,11 @@ const { frontmatter } = kanaLData;
     font-weight: bold !important;
     letter-spacing: 0.05em;
   }
+
+  .markdown-content :global(blockquote strong) {
+  color: #1a1528 !important;
+  font-weight: 700 !important;
+}
 
   /* ===================================================
     🎨 ボタン
