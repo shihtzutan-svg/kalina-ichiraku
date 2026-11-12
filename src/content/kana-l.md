@@ -12,7 +12,7 @@ image: "/IMG_9666.avif"
 Kana-L（カナエル）は、西宮あすかが源（みなもと）と繋がり、手作りした宇宙の天使です。
 
 <blockquote>
-  <strong>※「源」とは</strong><br>
+  <strong>※「源（みなもと）」とは</strong><br>
   ワンネス、万物の生まれる根源的な中心です。
 </blockquote>
 
