@@ -6,7 +6,7 @@ const { frontmatter } = serviceData;
 ---
 
 <Layout
-  title={`${frontmatter.title} | ライトワーカー様応援サービス　〜　西宮あすか- 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  title={`${frontmatter.title} | ライトワーカー様応援サービス 〜 西宮あすか- 公式サイト 〜 あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
   description={frontmatter.summary || "魂の目的を言語化し、あなたの世界観をそのまま形に。スピリチュアルの専門家とクリエイターがタッグを組んでお届けする完全オーダーメイドのライトワーカー応援パックです。"}>
   <div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
 
@@ -46,11 +46,12 @@ const { frontmatter } = serviceData;
 
 <!-- ページ全体のメインスタイル -->
 <style>
+  * { box-sizing: border-box; }
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-size: cover; background-position: center;
     z-index: -2; 
-    opacity: 0.7;
+    opacity: 1;
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
   @keyframes bgMovement {
@@ -68,14 +69,18 @@ const { frontmatter } = serviceData;
     box-sizing: border-box;
   }
   
-  /* 全体カードパネル（外枠は暗めの他ページ共通デザインを維持） */
+  /* 全体カードパネル（白ベース・透け感グレーに統一） */
   .card-panel {
-    background: rgba(13, 11, 24, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1); 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    background: rgba(220, 220, 230, 0.45); 
+    border: 1px solid rgba(255, 255, 255, 0.8); 
     border-radius: 20px;
     padding: 3.5rem; 
     backdrop-filter: blur(12px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(100, 90, 130, 0.15);
     overflow: hidden;
   }
   
@@ -84,32 +89,32 @@ const { frontmatter } = serviceData;
     font-size: 2.2rem; 
     margin-top: 0.5rem; 
     margin-bottom: 1.5rem; 
-    color: #fff;
+    color: #1a1528;
     font-weight: bold;
     letter-spacing: 0.05em;
   }
   .catchphrase {
-    color: #ffb7ff; font-size: 1.05rem; font-weight: bold; margin: 0; letter-spacing: 0.15em;
+    color: #7232e0; font-size: 1.05rem; font-weight: bold; margin: 0; letter-spacing: 0.15em;
     white-space: pre-line;
-    text-shadow: 0 0 10px rgba(255, 183, 255, 0.4);
   }
   .summary-message p { 
     font-size: 1.1rem; 
     line-height: 1.85; 
-    color: #e2def0;
+    color: #251f36;
+    font-weight: 500;
     white-space: pre-line;
   }
   
   .divider {
     border: 0; height: 1px;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,183,255,0.3), rgba(255,255,255,0));
+    background: linear-gradient(to right, rgba(114, 50, 224, 0), rgba(114, 50, 224, 0.3), rgba(114, 50, 224, 0));
     margin: 3rem 0;
   }
 
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
-  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: all 0.3s; }
-  .back-home-link:hover { color: #ffb7ff; text-shadow: 0 0 8px rgba(255, 183, 255, 0.6); }
+  .back-home-link { color: #554a66; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: all 0.3s; }
+  .back-home-link:hover { color: #7232e0; }
 
   @media (max-width: 768px) {
     .detailed-container { margin-top: 100px; }
@@ -118,13 +123,13 @@ const { frontmatter } = serviceData;
   }
 
   /* ===================================================
-      📚 マークダウン本文の完全統合スタイリング
+     📚 マークダウン本文の完全統合スタイリング
      =================================================== */
 
   .markdown-content :global(h3) {
     font-size: 1.45rem !important;
-    color: #fff !important;
-    border-left: 4px solid #ffb7ff !important;
+    color: #1a1528 !important;
+    border-left: 4px solid #7232e0 !important;
     padding-left: 14px !important;
     margin: 2.5rem 0 1.5rem 0 !important;
     font-weight: bold !important;
@@ -133,21 +138,22 @@ const { frontmatter } = serviceData;
 
   .markdown-content :global(h4) {
     font-size: 1.2rem !important;
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
     margin: 2rem 0 1rem 0 !important;
     font-weight: bold !important;
   }
 
   .markdown-content :global(p) {
     line-height: 1.85 !important;
-    color: #ffffff !important;
+    color: #251f36 !important;
     margin-bottom: 1.2rem !important;
+    font-weight: 500 !important;
   }
 
   .markdown-content :global(hr) {
     border: 0 !important;
     height: 1px !important;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent) !important;
+    background: linear-gradient(to right, transparent, rgba(114, 50, 224, 0.3), transparent) !important;
     margin: 2.5rem 0 !important;
   }
 
@@ -155,21 +161,22 @@ const { frontmatter } = serviceData;
   .markdown-content :global(blockquote) {
     margin: 1.8rem 0 !important;
     padding: 1.2rem 1.5rem !important;
-    background: rgba(255, 255, 255, 0.12) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 14px !important;
     backdrop-filter: blur(8px) !important;
-    color: #ffffff !important;
+    color: #1a1528 !important;
     text-align: center !important;
     font-size: 1.05rem !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+    font-weight: 500 !important;
+    box-shadow: 0 4px 20px rgba(130, 110, 160, 0.12) !important;
   }
   .markdown-content :global(blockquote p) {
     margin: 0 !important;
   }
 
   /* ===================================================
-      カード・リスト表現（トップページ風の白半透明デザイン）
+     カード・リスト表現（白半透明デザイン）
      =================================================== */
 
   .markdown-content :global(ul) {
@@ -182,14 +189,15 @@ const { frontmatter } = serviceData;
      ① こんなお悩みリスト（チェックリストデザイン）
      --------------------------------------------------- */
   .markdown-content :global(ul:nth-of-type(1) > li) {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 12px !important;
     padding: 1rem 1.2rem 1rem 2.8rem !important;
     margin-bottom: 0.8rem !important;
     position: relative !important;
     font-size: 0.95rem !important;
-    color: #ffffff !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
     backdrop-filter: blur(6px) !important;
   }
   .markdown-content :global(ul:nth-of-type(1) > li::before) {
@@ -197,12 +205,12 @@ const { frontmatter } = serviceData;
     position: absolute !important;
     left: 1rem !important;
     top: 1rem !important;
-    color: #ffc2ff !important;
+    color: #3f2ac6 !important;
     font-weight: bold !important;
   }
 
   /* ---------------------------------------------------
-     ② 3つの強み & ③ 3つの選べるパック（トップページと同等の白半透明枠）
+     ② 3つの強み & ③ 3つの選べるパック
      --------------------------------------------------- */
   .markdown-content :global(ul:nth-of-type(2)),
   .markdown-content :global(ul:nth-of-type(3)) {
@@ -211,53 +219,59 @@ const { frontmatter } = serviceData;
     gap: 1.5rem !important;
   }
 
+  /* 💡 リスト（li）の中にある最初の太字タイトル部分を濃いパープルにする */
+  .markdown-content :global(ul li > strong:first-child) {
+    color: #053ffd !important;
+    font-size: 1.1rem !important;
+  }
+
   .markdown-content :global(ul:nth-of-type(2) > li),
   .markdown-content :global(ul:nth-of-type(3) > li) {
-    /* 🌟 トップページのカードに近い白系グラデーションと半透明感 */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 16px !important;
     padding: 1.8rem !important;
     backdrop-filter: blur(10px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 8px 25px rgba(130, 110, 160, 0.12) !important;
   }
 
   /* 3つの強みの個別アクセントカラー */
-  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(1)) { border-color: rgba(163, 226, 255, 0.4) !important; }
-  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(2)) { border-color: rgba(255, 183, 255, 0.4) !important; }
-  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(3)) { border-color: rgba(120, 255, 180, 0.4) !important; }
+  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(1)) { border-color: rgba(80, 40, 198, 0.3) !important; }
+  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(2)) { border-color: rgba(114, 50, 224, 0.3) !important; }
+  .markdown-content :global(ul:nth-of-type(2) > li:nth-child(3)) { border-color: rgba(17, 153, 142, 0.3) !important; }
 
   /* 3つのパックの個別アクセントカラー */
   .markdown-content :global(ul:nth-of-type(3) > li:nth-child(1)) {
-    background: linear-gradient(135deg, rgba(255, 183, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
-    border: 1px solid rgba(255, 183, 255, 0.4) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 240, 255, 0.8) 100%) !important;
+    border: 1px solid rgba(114, 50, 224, 0.35) !important;
   }
   .markdown-content :global(ul:nth-of-type(3) > li:nth-child(2)) {
-    background: linear-gradient(135deg, rgba(163, 226, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
-    border: 1px solid rgba(163, 226, 255, 0.5) !important;
-    box-shadow: 0 0 20px rgba(163, 226, 255, 0.2) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 248, 255, 0.8) 100%) !important;
+    border: 1px solid rgba(80, 40, 198, 0.4) !important;
+    box-shadow: 0 0 20px rgba(114, 50, 224, 0.1) !important;
   }
   .markdown-content :global(ul:nth-of-type(3) > li:nth-child(3)) {
-    background: linear-gradient(135deg, rgba(225, 150, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
-    border: 1px solid rgba(225, 150, 255, 0.4) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 242, 248, 0.8) 100%) !important;
+    border: 1px solid rgba(255, 94, 98, 0.35) !important;
   }
 
   .markdown-content :global(ul:nth-of-type(2) > li > ul),
   .markdown-content :global(ul:nth-of-type(3) > li > ul) {
     margin-top: 1rem !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-top: 1px solid rgba(130, 110, 160, 0.15) !important;
     padding-top: 1rem !important;
   }
 
-  /* パック内の一般メニューリスト（すりガラス小カード） */
+  /* パック内の一般メニューリスト */
   .markdown-content :global(ul:nth-of-type(2) > li > ul > li),
   .markdown-content :global(ul:nth-of-type(3) > li > ul > li) {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
     border-radius: 8px !important;
     padding: 0.8rem 1rem 0.8rem 2rem !important;
     font-size: 0.95rem !important;
-    color: #ffffff !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
     line-height: 1.6 !important;
     margin-bottom: 0.6rem !important;
     position: relative !important;
@@ -268,12 +282,10 @@ const { frontmatter } = serviceData;
     content: "・" !important;
     position: absolute !important;
     left: 0.8rem !important;
-    color: #ffc2ff !important;
+    color: #7232e0 !important;
   }
 
-/* ---------------------------------------------------
-     「対象：〜」のテキスト
-     --------------------------------------------------- */
+  /* 「対象：〜」のテキスト */
   .markdown-content :global(ul:nth-of-type(3) > li > ul > li:first-child) {
     background: none !important;
     border: none !important;
@@ -283,14 +295,14 @@ const { frontmatter } = serviceData;
     margin-bottom: 0.4rem !important;
     font-size: 0.98rem !important;
     font-weight: bold !important;
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
   }
 
   .markdown-content :global(ul:nth-of-type(3) > li > ul > li:first-child::before) {
     display: none !important;
   }
 
-  /* ---------------------------------------------------
+ /* ---------------------------------------------------
      ④ 提供可能スキル一覧（2列カード表示）
      --------------------------------------------------- */
   .markdown-content :global(ul:nth-of-type(4)) {
@@ -300,11 +312,20 @@ const { frontmatter } = serviceData;
   }
 
   .markdown-content :global(ul:nth-of-type(4) > li) {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 12px !important;
     padding: 1.2rem !important;
     backdrop-filter: blur(6px) !important;
+  }
+
+  /* 💡 1〜4のカードタイトル部分（親li直下の太字） */
+  .markdown-content :global(ul:nth-of-type(4) > li > strong) {
+    color: #053ffd !important; 
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    display: inline-block !important;
+    margin-bottom: 0.4rem !important;
   }
 
   .markdown-content :global(ul:nth-of-type(4) > li > ul) {
@@ -313,47 +334,55 @@ const { frontmatter } = serviceData;
 
   .markdown-content :global(ul:nth-of-type(4) > li > ul > li) {
     font-size: 0.88rem !important;
-    color: #f0ecf9 !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
     margin-bottom: 0.4rem !important;
     padding-left: 1rem !important;
     position: relative !important;
+    background: none !important;
+    border: none !important;
+  }
+
+  /* 💡 「Webサイト制作」などの子リスト内の太字部分の色をここで調整できます */
+  .markdown-content :global(ul:nth-of-type(4) > li > ul > li strong) {
+    color: #7232e0 !important; /* 本文と同じ濃い文字色（またはお好みの色）にする場合 */
   }
 
   .markdown-content :global(ul:nth-of-type(4) > li > ul > li::before) {
     content: "◦" !important;
     position: absolute !important;
     left: 0 !important;
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: #7232e0 !important;
   }
 
-/* ---------------------------------------------------
+  /* ---------------------------------------------------
      ⑤ 流れ（STEPフローデザイン）
      --------------------------------------------------- */
-  /* 各STEPカード（白半透明デザイン） */
   .markdown-content :global(ul:nth-of-type(5) > li) {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 100%) !important;
-    border: 1px solid rgba(163, 226, 255, 0.35) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(114, 50, 224, 0.25) !important;
     border-radius: 16px !important;
     padding: 1.5rem !important;
-    margin-bottom: 2.8rem !important; /* 矢印の拡大に合わせて上下余白を少し拡大 */
+    margin-bottom: 2.8rem !important; 
     position: relative !important;
     backdrop-filter: blur(10px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 8px 25px rgba(130, 110, 160, 0.12) !important;
   }
 
-  /* STEP1〜3のカードの真下に矢印（▼）を大きく設置 */
+  
+
+  /* STEPカードの真下の矢印（▼） */
   .markdown-content :global(ul:nth-of-type(5) > li:not(:last-child)::after) {
-    content: "▼" !important; /* または "↓" や "⤓" */
+    content: "▼" !important; 
     position: absolute !important;
     bottom: -2.2rem !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    font-size: 1.8rem !important; /* サイズを 1.4rem → 1.8rem に拡大 */
-    color: #ffb7ff !important;
-    text-shadow: 0 0 12px rgba(255, 183, 255, 0.9) !important;
+    font-size: 1.8rem !important; 
+    color: #7232e0 !important;
+    text-shadow: 0 0 10px rgba(114, 50, 224, 0.3) !important;
   }
 
-  /* STEPカード内のネストリスト（説明文章）のスタイル整理 */
   .markdown-content :global(ul:nth-of-type(5) > li > ul) {
     margin-top: 0.8rem !important;
   }
@@ -365,7 +394,8 @@ const { frontmatter } = serviceData;
     backdrop-filter: none !important;
     padding: 0 !important;
     font-size: 0.95rem !important;
-    color: #f0ecf9 !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
     line-height: 1.7 !important;
   }
 
@@ -384,19 +414,19 @@ const { frontmatter } = serviceData;
   .markdown-content :global(.cta-button) {
     display: inline-block !important;
     padding: 1rem 2.5rem !important;
-    background: linear-gradient(135deg, #ffb7ff 0%, #a3e2ff 100%) !important;
-    color: #0d0b18 !important;
+    background: linear-gradient(135deg, #7232e0 0%, #5028c6 100%) !important;
+    color: #fff !important;
     font-size: 1.1rem !important;
     font-weight: bold !important;
     text-decoration: none !important;
     border-radius: 50px !important;
-    box-shadow: 0 4px 20px rgba(255, 183, 255, 0.4) !important;
+    box-shadow: 0 4px 20px rgba(114, 50, 224, 0.3) !important;
     transition: all 0.3s ease !important;
   }
 
   .markdown-content :global(.cta-button:hover) {
     transform: translateY(-3px) !important;
-    box-shadow: 0 8px 30px rgba(255, 183, 255, 0.6) !important;
+    box-shadow: 0 8px 30px rgba(114, 50, 224, 0.5) !important;
   }
 
   /* レスポンシブ調整 */
@@ -414,8 +444,8 @@ const { frontmatter } = serviceData;
     margin: 0 auto 2rem auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
-    border: 1px solid rgba(255, 183, 255, 0.3);
+    box-shadow: 0 0 20px rgba(130, 110, 160, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
   }
   .toppage-main-image {
     width: 100%;
@@ -423,4 +453,6 @@ const { frontmatter } = serviceData;
     object-fit: cover;
     display: block;
   }
+
+
 </style>

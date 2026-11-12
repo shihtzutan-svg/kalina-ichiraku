@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import bgGalaxy from '../assets/bg-galaxy.avif';
+import bgGalaxy from '../assets/bg-galaxy.avif'; 
 
 // ★本の画像（表紙）をインポート
 import bookCover1 from '../assets/guide.avif'; // 『ガイドとの対話』
@@ -12,7 +12,7 @@ const { frontmatter } = profileData;
 ---
 
 <Layout 
-  title={`${frontmatter.title} | プロフィール　〜　西宮あすか - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  title={`${frontmatter.title} | プロフィール 〜 西宮あすか - 公式サイト 〜 あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
   description={frontmatter.summary || "一樂迦哩無のプロフィールページ。「源」との対話を果たし霊的覚醒に至るまでの経歴、Kindle書籍のご紹介、保有するスピリチュアル能力を掲載。「みんなが自由に生きる」ことを望み、手助けをしています。"}
 >
   <!-- 背景画像 -->
@@ -21,7 +21,6 @@ const { frontmatter } = profileData;
   <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
   <main class="detailed-container">
     <section class="card-panel">
-      <!-- 💡 profile2.astro と同構造のヘッダーブロック -->
       <div class="profile-header-block">
         <p class="catchphrase">{frontmatter.catchphrase}</p>
         <h2>{frontmatter.title}</h2>
@@ -34,7 +33,7 @@ const { frontmatter } = profileData;
           </div>
         )}
 
-        <!-- 💡 profile2.astro と同構造のご挨拶・引用ブロック -->
+        <!-- ご挨拶・引用ブロック -->
         { (frontmatter.greeting || frontmatter.quote) && (
           <div class="intro-message">
             {frontmatter.greeting && <p class="greeting">{frontmatter.greeting}</p>}
@@ -60,13 +59,13 @@ const { frontmatter } = profileData;
               <div class="book-promo-badge source-badge">発売中</div>
               <h4 class="book-promo-title">Kindle書籍『ガイドとの対話』（一樂迦哩無名義）</h4>
               <p class="book-promo-description">
-                私が瞑想の最中、スピリチュアルガイドと思しき存在と繋がり、対話した内容の一部始終です。<br />
+                私が瞑想の中、スピリチュアルガイドと思しき存在と繋がり、対話した内容の一部始終です。<br />
 ガイドに「書きなさい」と促され、出版致しました。<br />
 この世の理（ことわり）が語られています。<br />
 ありのままを書いておりますので、意味不明な箇所もあるかもしれませんが、気にならない方はご一読頂けると幸いです。
               </p>
               <div class="action-buttons-container">
-                <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%93%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?tag=szdmorg-22" class="btn-action btn-apply">
+                <a href="https://www.amazon.co.jp/%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AB%E3%81%82%E3%82%8B%E6%97%A5%E7%AA%81%E7%84%B6%E8%B5%B7%E3%81%A3%E3%81%9F%E3%82%B9%E3%83%94%E3%83%AA%E3%83%81%E3%83%A5%E3%82%A2%E3%82%AC%E3%82%A4%E3%83%89%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0FVRRVHZP?tag=szdmorg-22" class="btn-action btn-apply">
                   <span>Amazonで詳細を見る</span>
                 </a>
               </div>
@@ -114,7 +113,7 @@ const { frontmatter } = profileData;
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: var(--bgUrl); background-size: cover; background-position: center;
-    z-index: -2; opacity: 0.7;
+    z-index: -2; opacity: 1;
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
   @keyframes bgMovement {
@@ -128,7 +127,7 @@ const { frontmatter } = profileData;
   * { box-sizing: border-box; }
   body { 
     margin: 0; padding: 0;
-    background: #0d0b18; color: #f0ecf4; 
+    background: #f8f6fc; color: #1a1528; /* 全体のベース文字色をより濃くハッキリ変更 */
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
@@ -148,45 +147,51 @@ const { frontmatter } = profileData;
   
   /* カードパネル設定 */
   .card-panel {
-    background: rgba(13, 11, 24, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
-    padding: 2.5rem; backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    padding: 2rem 1.5rem !important;
+    background: rgba(220, 220, 230, 0.45); /* 透け感を保ちつつ少し視認性をアップしたグレー */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(100, 90, 130, 0.15);
+    box-sizing: border-box;
   }
   
   /* テキスト装飾 */
-  .profile-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; }
+  .profile-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; color: #1a1528; font-weight: bold; }
   .catchphrase {
-    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
+    color: #7232e0; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
     white-space: pre-line;
   }
 
   .detailed-story p { 
-    line-height: 1.85; margin-bottom: 1.4rem; color: #dbd7e0; letter-spacing: 0.03em;
+    line-height: 1.85; margin-bottom: 1.4rem; color: #251f36; letter-spacing: 0.03em; font-weight: 500;
   }
-  .intro-message .greeting { font-size: 1.15rem; font-weight: bold; color: #fff; }
+  .intro-message .greeting { font-size: 1.15rem; font-weight: bold; color: #1a1528; }
   .intro-message blockquote {
-    margin: 1.5rem 0; padding-left: 1.2rem; border-left: 3px solid #ffb7ff;
-    font-style: italic; color: #fff; font-size: 1.1rem;
+    margin: 1.5rem 0; padding-left: 1.2rem; border-left: 3px solid #7232e0;
+    font-style: italic; color: #1a1528; font-size: 1.1rem;
     white-space: pre-line;
   }
 
-  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  /* マークダウン本文内のリンク */
   .markdown-content :global(a) {
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
     text-decoration: none !important;
     font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    border-bottom: 1px dashed rgba(80, 40, 198, 0.6) !important;
     transition: all 0.3s ease !important;
   }
   .markdown-content :global(a:hover) {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+    color: #7232e0 !important;
+    border-bottom: 1px solid #7232e0 !important;
   }
 
   /* ===================================================
-     📚 Kindle書籍 紹介カード（2冊用コンテナ）
+     📚 Kindle書籍 紹介カード
      =================================================== */
   .books-wrapper {
     display: flex;
@@ -199,16 +204,15 @@ const { frontmatter } = profileData;
     display: flex !important;
     align-items: center !important;
     gap: 2.5rem !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 183, 255, 0.04) 100%) !important;
-    border: 1px solid rgba(255, 183, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.75) !important; /* カード内は少し白を強めて読みやすく */
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 16px !important;
     padding: 2.5rem !important;
-    box-shadow: 0 8px 32px rgba(13, 11, 24, 0.5), inset 0 0 15px rgba(255, 183, 255, 0.05) !important;
+    box-shadow: 0 8px 30px rgba(130, 110, 160, 0.12) !important;
     position: relative !important;
     overflow: hidden !important;
   }
 
-  /* 書籍画像エリア */
   .book-img-area {
     flex: 0 0 160px !important;
     display: flex !important;
@@ -219,20 +223,18 @@ const { frontmatter } = profileData;
     width: 100% !important;
     height: auto !important;
     border-radius: 6px !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 183, 255, 0.1) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 10px rgba(114, 50, 224, 0.1) !important;
     transition: transform 0.3s ease !important;
   }
   .book-promo-card:hover .book-cover-img {
     transform: translateY(-5px) scale(1.02) !important;
   }
 
-  /* 書籍情報エリア */
   .book-info-area {
     flex: 1 !important;
     text-align: left !important;
   }
 
-  /* 好評発売中バッジ */
   .book-promo-badge {
     display: inline-block !important;
     background: linear-gradient(90deg, #ff5e62, #ff9966) !important;
@@ -247,26 +249,24 @@ const { frontmatter } = profileData;
   }
 
   .source-badge {
-    background: linear-gradient(90deg, #8a2be2, #4a00e0) !important;
-    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3) !important;
+    background: linear-gradient(90deg, #7232e0, #5028c6) !important;
+    box-shadow: 0 0 10px rgba(114, 50, 224, 0.3) !important;
   }
 
-  /* 書籍タイトル */
   .book-promo-title {
     font-size: 1.35rem !important;
-    color: #fff !important;
-    text-shadow: 0 0 10px rgba(255, 183, 255, 0.3) !important;
+    color: #1a1528 !important;
     margin: 0 0 0.8rem 0 !important;
     font-weight: bold !important;
     letter-spacing: 0.05em !important;
   }
 
-  /* 書籍説明文 */
   .book-promo-description {
     font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     line-height: 1.7 !important;
     margin: 0 0 1.5rem 0 !important;
+    font-weight: 500 !important;
   }
 
   .book-promo-card .action-buttons-container {
@@ -274,18 +274,15 @@ const { frontmatter } = profileData;
     justify-content: flex-start !important;
   }
   
-  /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
-  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
-  .back-home-link:hover { color: #ffb7ff; }
+  .back-home-link { color: #554a66; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.3s; }
+  .back-home-link:hover { color: #7232e0; }
 
-  /* レスポンシブ対応 */
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }
     .card-panel { padding: 1.5rem; }
     .profile-header-block h2 { font-size: 1.6rem; }
 
-    /* スマホ時は本を縦並びにする */
     .book-promo-card {
       flex-direction: column !important;
       gap: 1.5rem !important;
@@ -312,8 +309,8 @@ const { frontmatter } = profileData;
     margin: 0 auto 2rem auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
-    border: 1px solid rgba(255, 183, 255, 0.3);
+    box-shadow: 0 0 20px rgba(130, 110, 160, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
   }
   .toppage-main-image {
     width: 100%;
@@ -322,53 +319,51 @@ const { frontmatter } = profileData;
     display: block;
   }
 
-  /* 🏷️ キャプションのテキストスタイル */
   .img-caption-text {
     margin-top: 0.8rem !important;
     margin-bottom: 0.2rem !important;
     font-size: 0.9rem !important;
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
     text-align: center !important;
     letter-spacing: 0.08em !important;
     font-weight: bold !important;
-    text-shadow: 0 0 6px rgba(163, 226, 255, 0.4) !important;
     line-height: 1.4 !important;
   }
 
   .img-caption-text::before {
     content: "✦ " !important;
-    color: #ffb7ff !important;
+    color: #7232e0 !important;
   }
 
-  /* ✨ Markdownの中身を装飾するグローバル指定 */
   .card-panel h3 {
     font-size: 1.35rem !important;
-    color: #ffb7ff !important;
-    text-shadow: 0 0 10px rgba(255, 183, 255, 0.4) !important;
-    border-left: 3px solid #ffb7ff !important;
+    color: #1a1528 !important;
+    border-left: 3px solid #7232e0 !important;
     padding-left: 0.8rem !important;
     margin-top: 3.5rem !important;
     margin-bottom: 2rem !important;
     letter-spacing: 0.08em !important;
     background: none !important;
-    clear: both !important; /* 回り込み解除 */
+    clear: both !important;
+    font-weight: bold !important;
   }
   
   .card-panel h4 + ul {
     list-style: none !important;
     padding-left: 0 !important;
     margin: 0.8rem 0 2rem 0 !important;
-    background: linear-gradient(to right, rgba(163, 226, 255, 0.03), transparent) !important;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0.06), transparent) !important;
     padding: 1rem 1.2rem !important;
     border-radius: 6px !important;
   }
   
-.card-panel ul li {
+  .card-panel ul li {
     position: relative !important;
     padding-left: 1.4rem !important;
     margin-bottom: 0.6rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     font-size: 0.95rem !important;
+    font-weight: 500 !important;
     background: none !important;
     border: none !important;
     list-style: none !important;
@@ -376,7 +371,7 @@ const { frontmatter } = profileData;
   
   .card-panel ul li::before {
     content: "✦" !important;
-    color: #a3e2ff !important;
+    color: #7232e0 !important;
     position: absolute !important;
     left: 0 !important;
     top: -1px !important;
@@ -385,32 +380,33 @@ const { frontmatter } = profileData;
     background: none !important;
     width: auto !important;
     height: auto !important;
-    text-shadow: 0 0 4px rgba(163, 226, 255, 0.6) !important;
   }
 
   .card-panel h4 {
     margin-top: 2rem !important;
     margin-bottom: 0.6rem !important;
     font-size: 1.1rem !important;
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
     letter-spacing: 0.05em !important;
-    clear: both !important; /* 回り込み解除 */
+    clear: both !important;
+    font-weight: bold !important;
   }
 
   .card-panel h4 + p {
     line-height: 1.85 !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     margin-bottom: 2rem !important;
     letter-spacing: 0.03em !important;
     padding-left: 1.2rem !important;
+    font-weight: 500 !important;
   }
 
   .card-panel hr {
     border: 0 !important;
     height: 1px !important;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0), rgba(114, 50, 224, 0.3), rgba(114, 50, 224, 0)) !important;
     margin: 3.5rem 0 !important;
-    clear: both !important; /* 回り込み解除 */
+    clear: both !important;
   }
 
   .action-buttons-container {
@@ -448,16 +444,16 @@ const { frontmatter } = profileData;
   }
 
   .btn-apply {
-    background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
+    background: linear-gradient(135deg, #7232e0, #5028c6) !important;
     color: #fff !important;
-    box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(114, 50, 224, 0.3) !important;
   }
 
   .btn-apply::before {
     content: '' !important;
     position: absolute !important;
     top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
-    background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
+    background: linear-gradient(135deg, #5028c6, #7232e0) !important;
     opacity: 0 !important;
     z-index: 1 !important;
     transition: opacity 0.4s ease !important;
@@ -465,7 +461,7 @@ const { frontmatter } = profileData;
 
   .btn-apply:hover {
     transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(114, 50, 224, 0.5) !important;
   }
   
   .btn-apply:hover::before {
@@ -490,39 +486,36 @@ const { frontmatter } = profileData;
   }
 
 /* ===================================================
-   🖼️ 画像の回り込み（float）＆折り返し設定（決定版）
+   🖼️ 画像の回り込み（float）＆折り返し設定
 =================================================== */
 
-/* 本文内の段落 */
 .markdown-content p {
   line-height: 1.85 !important;
-  color: #dbd7e0 !important;
+  color: #251f36 !important;
   margin-bottom: 1.4rem !important;
+  font-weight: 500 !important;
 }
 
-/* 明示的に右寄せが指定された場合 */
 .markdown-content .markdown-img-wrapper.align-right {
   float: right !important;
   margin: 0.5rem 0 1.2rem 1.8rem !important;
 }
 
-/* 明示的に左寄せが指定された場合 */
 .markdown-content .markdown-img-wrapper.align-left {
   float: left !important;
   margin: 0.5rem 1.8rem 1.2rem 0 !important;
 }
 
-/* 1枚目・3枚目の画像（奇数）：左配置＆右側にテキスト折り返し */
 .markdown-content .markdown-img-wrapper {
   float: left !important;
   width: 260px !important;
   max-width: 45% !important;
   margin: 0.5rem 1.8rem 1.2rem 0 !important;
   padding: 0.8rem !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border: 1px solid rgba(255, 183, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(130, 110, 160, 0.12) !important;
   box-sizing: border-box !important;
   clear: both !important;
 }
@@ -535,21 +528,19 @@ const { frontmatter } = profileData;
   border-radius: 8px !important;
 }
 
-/* 2枚目の画像（偶数）：右配置＆左側にテキスト折り返し */
 .markdown-content .markdown-img-wrapper:nth-of-type(even) {
   float: right !important;
   margin: 0.5rem 0 1.2rem 1.8rem !important;
 }
 
-/* 📱 スマホ表示時（768px以下）：回り込みを完全に解除し、画像を中央配置にする */
 @media (max-width: 768px) {
   .markdown-content .markdown-img-wrapper,
   .markdown-content .markdown-img-wrapper:nth-of-type(even),
   .markdown-content .markdown-img-wrapper.align-left,
   .markdown-content .markdown-img-wrapper.align-right {
-    float: none !important;           /* 回り込み（float）を解除 */
-    margin: 2rem auto !important;     /* 上下に余白をつけて中央揃え */
-    width: 90 % !important;           /* スマホで見やすい画像サイズ */
+    float: none !important;            
+    margin: 2rem auto !important;      
+    width: 90% !important;             
     max-width: 360px !important;
     clear: both !important;
   }
@@ -573,7 +564,6 @@ function initProfilePage() {
     const wrapper = document.createElement('div');
     wrapper.className = 'markdown-img-wrapper';
 
-    // 💡 ::right か ::left を判定してクラスを付与
     if (altText.includes('::right')) {
       wrapper.classList.add('align-right');
       altText = altText.replace('::right', '').trim();

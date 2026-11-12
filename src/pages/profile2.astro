@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import bgGalaxy from '../assets/bg-galaxy.avif';
 
 // ★テキストファイルを読み込む
 import * as profile2Data from '../content/profile2.md';
@@ -7,9 +8,12 @@ const { frontmatter } = profile2Data;
 ---
 
 <Layout 
-  title={`${frontmatter.title} | プロフィール2　〜　西宮あすか - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  title={`${frontmatter.title} | プロフィール2 〜 西宮あすか - 公式サイト 〜 あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
   description={frontmatter.summary || "一樂迦哩無のプロフィールページその2。動物の家族や推し活についてなど、ありのままの姿をご紹介。"}
 >
+  <!-- 背景画像 -->
+  <div class="bg-layer"></div>
+
   <!-- メインコンテンツ（中央配置の1カラムコンテナ） -->
   <main class="detailed-container">
     <section class="card-panel">
@@ -36,7 +40,7 @@ const { frontmatter } = profile2Data;
         <!-- Markdownの本文（プロフィールストーリーやスキルなど）を自動展開 -->
         <div class="markdown-content">
         <profile2Data.Content />
-     </div>
+       </div>
 
         <div class="back-home-container">
             <a href="/" class="back-home-link">トップページへ戻る</a>
@@ -46,8 +50,34 @@ const { frontmatter } = profile2Data;
   </main>
 </Layout>
 
+<!-- ① 背景専用のスタイル -->
+<style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
+  .bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: var(--bgUrl); background-size: cover; background-position: center;
+    z-index: -2; opacity: 1;
+    animation: bgMovement 25s ease-in-out infinite alternate;
+  }
+  @keyframes bgMovement {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(1deg); }
+  }
+</style>
+
 <!-- ② ページ全体のメインスタイル（profile2 個別用） -->
 <style>
+  * { box-sizing: border-box; }
+  body { 
+    margin: 0; padding: 0;
+    background: #f8f6fc; color: #1a1528; 
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   /* メインコンテンツコンテナ */
   .detailed-container {
     flex: 1;
@@ -57,28 +87,35 @@ const { frontmatter } = profile2Data;
     width: 100%;
   }
   
-  /* カードパネル設定 */
+  /* カードパネル設定（白ベース・透け感グレー） */
   .card-panel {
-    background: rgba(13, 11, 24, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
-    padding: 2.5rem; backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    padding: 2rem 1.5rem !important;
+    background: rgba(220, 220, 230, 0.45); 
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(100, 90, 130, 0.15);
+    box-sizing: border-box;
   }
   
   /* テキスト装飾 */
-  .profile-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; }
+  .profile-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; color: #1a1528; font-weight: bold; }
   .catchphrase {
-    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
+    color: #7232e0; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
     white-space: pre-line;
   }
 
   .detailed-story p { 
-    line-height: 1.85; margin-bottom: 1.4rem; color: #dbd7e0; letter-spacing: 0.03em;
+    line-height: 1.85; margin-bottom: 1.4rem; color: #251f36; letter-spacing: 0.03em; font-weight: 500;
   }
-  .intro-message .greeting { font-size: 1.15rem; font-weight: bold; color: #fff; }
+  .intro-message .greeting { font-size: 1.15rem; font-weight: bold; color: #1a1528; }
   .intro-message blockquote {
-    margin: 1.5rem 0; padding-left: 1.2rem; border-left: 3px solid #ffb7ff;
-    font-style: italic; color: #fff; font-size: 1.1rem;
+    margin: 1.5rem 0; padding-left: 1.2rem; border-left: 3px solid #7232e0;
+    font-style: italic; color: #1a1528; font-size: 1.1rem;
     white-space: pre-line;
   }
 
@@ -96,11 +133,11 @@ const { frontmatter } = profile2Data;
     display: flex !important;
     align-items: center !important;
     gap: 2.5rem !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 183, 255, 0.04) 100%) !important;
-    border: 1px solid rgba(255, 183, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 16px !important;
     padding: 2.5rem !important;
-    box-shadow: 0 8px 32px rgba(13, 11, 24, 0.5), inset 0 0 15px rgba(255, 183, 255, 0.05) !important;
+    box-shadow: 0 8px 30px rgba(130, 110, 160, 0.12) !important;
     position: relative !important;
     overflow: hidden !important;
   }
@@ -116,7 +153,7 @@ const { frontmatter } = profile2Data;
     width: 100% !important;
     height: auto !important;
     border-radius: 6px !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 183, 255, 0.1) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 10px rgba(114, 50, 224, 0.1) !important;
     transition: transform 0.3s ease !important;
   }
   .book-promo-card:hover .book-cover-img {
@@ -143,17 +180,15 @@ const { frontmatter } = profile2Data;
     box-shadow: 0 0 10px rgba(255, 94, 98, 0.3) !important;
   }
 
-  /* 2冊目のバッジ色を「源（source）」をイメージした紫・青系に微変化させ知的な印象に */
   .source-badge {
-    background: linear-gradient(90deg, #8a2be2, #4a00e0) !important;
-    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3) !important;
+    background: linear-gradient(90deg, #7232e0, #5028c6) !important;
+    box-shadow: 0 0 10px rgba(114, 50, 224, 0.3) !important;
   }
 
   /* 書籍タイトル */
   .book-promo-title {
     font-size: 1.35rem !important;
-    color: #fff !important;
-    text-shadow: 0 0 10px rgba(255, 183, 255, 0.3) !important;
+    color: #1a1528 !important;
     margin: 0 0 0.8rem 0 !important;
     font-weight: bold !important;
     letter-spacing: 0.05em !important;
@@ -162,9 +197,10 @@ const { frontmatter } = profile2Data;
   /* 書籍説明文 */
   .book-promo-description {
     font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     line-height: 1.7 !important;
     margin: 0 0 1.5rem 0 !important;
+    font-weight: 500 !important;
   }
 
   .book-promo-card .action-buttons-container {
@@ -174,21 +210,20 @@ const { frontmatter } = profile2Data;
   
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
-  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
-  .back-home-link:hover { color: #ffb7ff; }
+  .back-home-link { color: #554a66; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.3s; }
+  .back-home-link:hover { color: #7232e0; }
 
-    /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
   .markdown-content :global(a) {
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
     text-decoration: none !important;
     font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    border-bottom: 1px dashed rgba(80, 40, 198, 0.6) !important;
     transition: all 0.3s ease !important;
   }
   .markdown-content :global(a:hover) {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+    color: #7232e0 !important;
+    border-bottom: 1px solid #7232e0 !important;
   }
 
   /* レスポンシブ対応 */
@@ -197,7 +232,6 @@ const { frontmatter } = profile2Data;
     .card-panel { padding: 1.5rem; }
     .profile-header-block h2 { font-size: 1.6rem; }
 
-    /* スマホ時は縦並びにする */
     .book-promo-card {
       flex-direction: column !important;
       gap: 1.5rem !important;
@@ -219,44 +253,41 @@ const { frontmatter } = profile2Data;
 
 <!-- ✨ Markdownの中身を確実に装飾するためのグローバル指定 -->
 <style is:global>
-  /* Markdownの「###」を左線付きのネオンラインに */
   .card-panel h3 {
     font-size: 1.35rem !important;
-    color: #ffb7ff !important;
-    text-shadow: 0 0 10px rgba(255, 183, 255, 0.4) !important;
-    border-left: 3px solid #ffb7ff !important;
+    color: #1a1528 !important;
+    border-left: 3px solid #7232e0 !important;
     padding-left: 0.8rem !important;
     margin-top: 3.5rem !important;
     margin-bottom: 2rem !important;
     letter-spacing: 0.08em !important;
     background: none !important;
+    font-weight: bold !important;
   }
   
-  /* リスト全体に薄いオーラのような背景グラデーションを敷く */
   .card-panel h4 + ul {
     list-style: none !important;
     padding-left: 0 !important;
     margin: 0.8rem 0 2rem 0 !important;
-    background: linear-gradient(to right, rgba(163, 226, 255, 0.03), transparent) !important;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0.06), transparent) !important;
     padding: 1rem 1.2rem !important;
     border-radius: 6px !important;
   }
   
-  /* 各リスト項目の設定 */
   .card-panel ul li {
     position: relative !important;
     padding-left: 1.4rem !important;
     margin-bottom: 0.6rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     font-size: 0.95rem !important;
+    font-weight: 500 !important;
     background: none !important;
     border: none !important;
   }
   
-  /* 行頭の丸ドットを、光る星屑（✦）に */
   .card-panel ul li::before {
     content: "✦" !important;
-    color: #a3e2ff !important;
+    color: #7232e0 !important;
     position: absolute !important;
     left: 0 !important;
     top: -1px !important;
@@ -265,38 +296,33 @@ const { frontmatter } = profile2Data;
     background: none !important;
     width: auto !important;
     height: auto !important;
-    text-shadow: 0 0 4px rgba(163, 226, 255, 0.6) !important;
   }
 
-  /* 小見出し（####）のカラーを水色に統一 */
   .card-panel h4 {
     margin-top: 2rem !important;
     margin-bottom: 0.6rem !important;
     font-size: 1.1rem !important;
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
     letter-spacing: 0.05em !important;
+    font-weight: bold !important;
   }
 
-  /* 普通の文章テキスト（p）の余白とバランス調整 */
   .card-panel h4 + p {
     line-height: 1.85 !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     margin-bottom: 2rem !important;
     letter-spacing: 0.03em !important;
     padding-left: 1.2rem !important;
+    font-weight: 500 !important;
   }
 
-  /* Markdown内の区切り線（---）の装飾 */
   .card-panel hr {
     border: 0 !important;
     height: 1px !important;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0), rgba(114, 50, 224, 0.3), rgba(114, 50, 224, 0)) !important;
     margin: 3.5rem 0 !important;
   }
 
-  /* ===================================================
-     ⚡ アクションボタンのグローバル装飾
-     =================================================== */
   .action-buttons-container {
     display: flex !important;
     justify-content: center !important;
@@ -331,18 +357,17 @@ const { frontmatter } = profile2Data;
     z-index: 2 !important;
   }
 
-  /* Amazonボタン：オレンジ〜ピンクグラデーション */
   .btn-apply {
-    background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
+    background: linear-gradient(135deg, #7232e0, #5028c6) !important;
     color: #fff !important;
-    box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(114, 50, 224, 0.3) !important;
   }
 
   .btn-apply::before {
     content: '' !important;
     position: absolute !important;
     top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
-    background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
+    background: linear-gradient(135deg, #5028c6, #7232e0) !important;
     opacity: 0 !important;
     z-index: 1 !important;
     transition: opacity 0.4s ease !important;
@@ -350,14 +375,13 @@ const { frontmatter } = profile2Data;
 
   .btn-apply:hover {
     transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(114, 50, 224, 0.5) !important;
   }
   
   .btn-apply:hover::before {
     opacity: 1 !important;
   }
 
-  /* 訪問済みリンクのカラー対策 */
   .btn-apply:visited,
   .btn-apply:visited span {
     color: #fff !important;
@@ -379,12 +403,12 @@ const { frontmatter } = profile2Data;
 <!-- ③ メイン画像用コンテナスタイル -->
 <style is:global>
   .toppage-image-container {
-    width: 50%; /* 半分の大きさに指定 */
-    margin: 0 auto 2rem auto; /* 中央配置 */
+    width: 50%;
+    margin: 0 auto 2rem auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
-    border: 1px solid rgba(255, 183, 255, 0.3);
+    box-shadow: 0 0 20px rgba(130, 110, 160, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
   }
   .toppage-main-image {
     width: 100%;
@@ -393,7 +417,6 @@ const { frontmatter } = profile2Data;
     display: block;
   }
 
-  /* スマホ等で小さくなりすぎないための調整 */
   @media (max-width: 768px) {
     .toppage-image-container {
       width: 80%;
@@ -401,31 +424,29 @@ const { frontmatter } = profile2Data;
   }
 </style>
 
-<!-- 🖼️ 画像キャプション表示用スタイル（is:global を付与） -->
+<!-- 🖼️ 画像キャプション表示用スタイル -->
 <style is:global>
-/* 本文内の段落 */
 .markdown-content p {
   line-height: 1.85 !important;
-  color: #dbd7e0 !important;
+  color: #251f36 !important;
   margin-bottom: 1.4rem !important;
+  font-weight: 500 !important;
 }
 
-/* 画像を包むラッパーカード（中央配置・ブロック表示） */
 .markdown-content .markdown-img-wrapper {
   display: block !important;
   width: 100% !important;
-  max-width: 520px !important;       /* 画像カードの最大横幅 */
-  margin: 2.5rem auto !important;     /* 上下に余白をつけて中央配置 */
+  max-width: 520px !important;
+  margin: 2.5rem auto !important;
   padding: 0.8rem !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border: 1px solid rgba(255, 183, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(130, 110, 160, 0.12) !important;
   box-sizing: border-box !important;
   clear: both !important;
 }
 
-/* カード内の画像本体 */
 .markdown-content .markdown-img-wrapper img {
   display: block !important;
   width: 100% !important;
@@ -434,36 +455,33 @@ const { frontmatter } = profile2Data;
   border-radius: 8px !important;
 }
 
-/* 画像の下に表示されるキャプションテキスト */
 .markdown-content .img-caption-text {
   margin: 0.6rem 0 0.2rem 0 !important;
   font-size: 0.88rem !important;
-  color: #a3e2ff !important;        /* 文字色（アクアブルー） */
-  text-align: center !important;     /* テキスト中央揃え */
+  color: #5028c6 !important;
+  text-align: center !important;
   line-height: 1.5 !important;
-  font-weight: 500 !important;
+  font-weight: bold !important;
 }
 
 .flex-center {
   display: flex;
-  justify-content: center; /* 左右の中央寄せ */
-  align-items: center;     /* 上下（垂直方向）の中央寄せ */
+  justify-content: center;
+  align-items: center;
 }
 
-/* YouTube動画のレスポンシブ（16:9維持）設定 */
 .markdown-content .youtube-container {
   position: relative !important;
   width: 100% !important;
-  max-width: 600px !important;    /* パソコン表示時の最大幅（お好みに合わせて調整可能） */
-  margin: 2.5rem auto !important;  /* 上下余白 ＆ 中央寄せ */
-  aspect-ratio: 16 / 9 !important; /* アスペクト比を16:9に固定 */
+  max-width: 600px !important;
+  margin: 2.5rem auto !important;
+  aspect-ratio: 16 / 9 !important;
   border-radius: 12px !important;
   overflow: hidden !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-  border: 1px solid rgba(255, 183, 255, 0.15) !important;
+  box-shadow: 0 8px 24px rgba(130, 110, 160, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
 }
 
-/* 枠の中のiframeをピッタリ収める */
 .markdown-content .youtube-container iframe {
   position: absolute !important;
   top: 0 !important;
@@ -473,51 +491,43 @@ const { frontmatter } = profile2Data;
   border: none !important;
 }
 
-/* Spotify埋め込み用のレスポンシブ設定 */
 .markdown-content .spotify-container {
   width: 100% !important;
-  max-width: 600px !important;    /* YouTubeと横幅を揃える場合 */
-  margin: 2.5rem auto !important;  /* 中央配置 */
+  max-width: 600px !important;
+  margin: 2.5rem auto !important;
 }
 
-/* Spotifyのiframe自体のスタイル調整 */
 .markdown-content .spotify-container iframe {
   width: 100% !important;
-  height: 352px !important;       /* リスト表示に適した高さを確保（コンパクト表示なら152px） */
+  height: 352px !important;
   border-radius: 12px !important;
   border: none !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(130, 110, 160, 0.15) !important;
 }
-
 </style>
 
 <!-- ⚡ 自動キャプション生成＆リンク制御スクリプト -->
 <script is:inline>
 function initProfile2Page() {
-  // ① 外部リンクを新しいタブで開く設定
   const links = document.querySelectorAll('.book-promo-card .action-buttons-container a');
   links.forEach(link => {
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
   });
 
-  // ② 画像のラッパー化とキャプション（alt属性）の読み込み
   const markdownImgs = document.querySelectorAll('.markdown-content img');
   markdownImgs.forEach(img => {
-    // 既にラッパーで包まれている場合はスキップ
     if (img.parentElement.classList.contains('markdown-img-wrapper')) return;
 
     let altText = img.getAttribute('alt') || '';
     const wrapper = document.createElement('div');
     wrapper.className = 'markdown-img-wrapper';
 
-    // ::left や ::right などの指定文字が入っていても除去してキャプション文だけにする
     altText = altText.replace(/::(left|right)/g, '').trim();
 
     img.parentNode.insertBefore(wrapper, img);
     wrapper.appendChild(img);
 
-    // alt属性にテキストが入っている場合のみキャプションを表示
     if (altText !== '') {
       const caption = document.createElement('p');
       caption.className = 'img-caption-text';

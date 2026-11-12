@@ -11,8 +11,10 @@
     right: 30px;
     width: 50px;
     height: 50px;
-    background: rgba(13, 11, 24, 0.8);
-    border: 2px solid #ffb7ff;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid #8c52ff;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -23,15 +25,15 @@
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 15px rgba(255, 183, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(130, 110, 160, 0.15);
   }
 
   /* 上向き矢印の形 */
   .page-top-scroll-btn .arrow {
     width: 12px;
     height: 12px;
-    border-top: 3px solid #ffb7ff;
-    border-left: 3px solid #ffb7ff;
+    border-top: 3px solid #8c52ff;
+    border-left: 3px solid #8c52ff;
     transform: translateY(2px) rotate(45deg);
     transition: border-color 0.3s;
   }
@@ -45,12 +47,12 @@
 
   /* ホバー（マウスを乗せた時）のエフェクト */
   .page-top-scroll-btn:hover {
-    background: #ffb7ff;
-    box-shadow: 0 0 20px rgba(255, 183, 255, 0.6);
+    background: #8c52ff;
+    box-shadow: 0 0 20px rgba(140, 82, 255, 0.4);
   }
   .page-top-scroll-btn:hover .arrow {
-    border-top-color: #0d0b18;
-    border-left-color: #0d0b18;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
   }
 
   /* スマホの時は少し小さく＆位置を調整 */

@@ -54,12 +54,12 @@ const pageTitle = "プライバシーポリシー | 西宮あすか - 公式サ�
         <p>
           事業者名：西宮あすか（ご請求をいただきましたら、遅滞なく本名を開示いたします。）<br />
           住所：ご請求をいただきましたら、遅滞なく開示いたします。<br />
-お問い合わせ：<a href="https://docs.google.com/forms/d/e/1FAIpQLSc82y219bbR0uQjqlR_0_EQj3utegWtJQ5YfrZdHx6A8qtXmg/viewform" target="_blank" rel="noopener noreferrer">お問い合わせフォーム</a>
+          お問い合わせ：<a href="https://docs.google.com/forms/d/e/1FAIpQLSc82y219bbR0uQjqlR_0_EQj3utegWtJQ5YfrZdHx6A8qtXmg/viewform" target="_blank" rel="noopener noreferrer">お問い合わせフォーム</a>
         </p>
 
         <hr class="divider" />
         
-       <div class="back-home-container">
+        <div class="back-home-container">
           <a href="/" class="back-home-link">トップページへ戻る</a>
         </div>
       </div>
@@ -70,11 +70,23 @@ const pageTitle = "プライバシーポリシー | 西宮あすか - 公式サ�
 </Layout>
 
 <style is:global>
+  * { box-sizing: border-box; }
+  body { 
+    margin: 0; padding: 0;
+    background: #f8f6fc; color: #1a1528; 
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   /* 背景の基本アニメーション */
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-size: cover; background-position: center;
-    z-index: -2; opacity: 0.7;
+    z-index: -2; opacity: 1;
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
   @keyframes bgMovement {
@@ -82,43 +94,107 @@ const pageTitle = "プライバシーポリシー | 西宮あすか - 公式サ�
     100% { transform: scale(1.08) rotate(1deg); }
   }
 
-  /* 🌌 共通デザインの強制適用枠組み */
+  /* 🌌 共通デザインの適用枠組み（白ベース・透け感グレー） */
   .detailed-container {
     flex: 1; max-width: 900px; margin: 140px auto 60px auto; padding: 0 1.5rem; width: 100%; box-sizing: border-box;
   }
   .card-panel {
-    background: rgba(13, 11, 24, 0.85) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important; 
-    border-radius: 16px !important; padding: 2.5rem !important; 
-    backdrop-filter: blur(12px) !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    background: rgba(220, 220, 230, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important; 
+    border-radius: 20px !important; padding: 2.5rem !important; 
+    backdrop-filter: blur(12px) !important; 
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 15px 35px rgba(100, 90, 130, 0.15) !important;
     overflow: hidden; box-sizing: border-box;
   }
-  .program-header-block h2 { font-size: 2rem !important; margin-top: 0.2rem !important; margin-bottom: 2rem !important; color: #fff !important; }
-  .catchphrase { color: #ffb7ff !important; font-size: 0.95rem !important; font-weight: bold !important; margin: 0 !important; letter-spacing: 0.1em !important; }
-  .divider { border: 0 !important; height: 1px !important; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0)) !important; margin: 2.5rem 0 !important; }
+  .program-header-block h2 { 
+    font-size: 2rem !important; 
+    margin-top: 0.2rem !important; 
+    margin-bottom: 2rem !important; 
+    color: #1a1528 !important; 
+    font-weight: bold !important;
+  }
+  .catchphrase { 
+    color: #7232e0 !important; 
+    font-size: 0.95rem !important; 
+    font-weight: bold !important; 
+    margin: 0 !important; 
+    letter-spacing: 0.1em !important; 
+  }
+  .divider { 
+    border: 0 !important; 
+    height: 1px !important; 
+    background: linear-gradient(to right, rgba(114, 50, 224, 0), rgba(114, 50, 224, 0.3), rgba(114, 50, 224, 0)) !important; 
+    margin: 2.5rem 0 !important; 
+  }
   
-  /* 🏡 トップページへ戻るリンク（最優先でグレー化） */
+  /* 🏡 トップページへ戻るリンク */
   .back-home-container { text-align: center !important; margin-top: 4rem !important; }
   .back-home-container .back-home-link { 
-    color: #aaa !important; 
+    color: #554a66 !important; 
     text-decoration: none !important; 
     font-size: 0.95rem !important; 
+    font-weight: 600 !important;
     display: inline-block !important;
-    border-bottom: none !important; /* 水色の点線が入るのを完全に阻止 */
+    border-bottom: none !important;
+    transition: color 0.3s !important;
   }
-  .back-home-container .back-home-link:hover { color: #ffb7ff !important; text-shadow: none !important; }
+  .back-home-container .back-home-link:hover { color: #7232e0 !important; }
 
   /* 📚 本文テキスト装飾 */
-  .markdown-content p { line-height: 1.95 !important; margin-bottom: 1.8rem !important; color: #dbd7e0 !important; font-size: 1.05rem !important; }
-  .markdown-content h3 { font-size: 1.3rem !important; color: #fff !important; border-left: 4px solid #d4af37 !important; padding-left: 12px !important; margin: 3.5rem 0 1.5rem 0 !important; display: block !important; }
+  .markdown-content p { 
+    line-height: 1.95 !important; 
+    margin-bottom: 1.8rem !important; 
+    color: #251f36 !important; 
+    font-size: 1.05rem !important; 
+    font-weight: 500 !important;
+  }
+  .markdown-content h3 { 
+    font-size: 1.3rem !important; 
+    color: #1a1528 !important; 
+    border-left: 4px solid #7232e0 !important; 
+    padding-left: 12px !important; 
+    margin: 3.5rem 0 1.5rem 0 !important; 
+    display: block !important; 
+    font-weight: bold !important;
+  }
   
   /* 普通のテキストリンク（戻るボタン以外のaタグに適用） */
-  .markdown-content a:not(.back-home-link) { color: #a3e2ff !important; text-decoration: none !important; font-weight: bold !important; border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important; }
-  .markdown-content a:not(.back-home-link):hover { color: #ffb7ff !important; border-bottom: 1px solid #ffb7ff !important; }
+  .markdown-content a:not(.back-home-link) { 
+    color: #5028c6 !important; 
+    text-decoration: none !important; 
+    font-weight: bold !important; 
+    border-bottom: 1px dashed rgba(80, 40, 198, 0.6) !important; 
+    transition: all 0.3s ease !important;
+  }
+  .markdown-content a:not(.back-home-link):hover { 
+    color: #7232e0 !important; 
+    border-bottom: 1px solid #7232e0 !important; 
+  }
   
-  .markdown-content ol { background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 12px !important; padding: 1.5rem 1.5rem 1.5rem 2.5rem !important; margin: 1.5rem 0 2.5rem 0 !important; }
-  .markdown-content ol li { margin: 0.8rem 0 !important; font-size: 0.95rem !important; color: #dbd7e0 !important; line-height: 1.7 !important; }
-  .markdown-content ol li::marker { color: #ffb7ff !important; font-weight: bold; }
+  /* 番号付きリスト枠 */
+  .markdown-content ol { 
+    background: rgba(255, 255, 255, 0.75) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.95) !important; 
+    border-radius: 12px !important; 
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem !important; 
+    margin: 1.5rem 0 2.5rem 0 !important; 
+    box-shadow: 0 4px 15px rgba(130, 110, 160, 0.08) !important;
+  }
+  .markdown-content ol li { 
+    margin: 0.8rem 0 !important; 
+    font-size: 0.95rem !important; 
+    color: #251f36 !important; 
+    font-weight: 500 !important;
+    line-height: 1.7 !important; 
+  }
+  .markdown-content ol li::marker { 
+    color: #7232e0 !important; 
+    font-weight: bold !important; 
+  }
 
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }

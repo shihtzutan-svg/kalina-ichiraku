@@ -7,7 +7,7 @@ const { frontmatter } = kanaLData;
 ---
 
 <Layout 
-  title={`${frontmatter.title} |宇宙天使「Kana-L（カナエル）」 　〜　西宮あすか - 公式サイト　〜　あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
+  title={`${frontmatter.title} |宇宙天使「Kana-L（カナエル）」  〜 西宮あすか - 公式サイト 〜 あなたの可能性を目醒めさせ、魂の変容・覚醒を支援する`}
   description={frontmatter.summary || "あなたの願いを叶えるマスコット、宇宙天使「Kana-L（カナエル）」。西宮あすかが万物の根源である「源」と繋がり、一つひとつ手作りしました。願いを託し、可愛がることで波動を高め、あなたの理想の現実創造を優しくサポートします。"}
 >
   <!-- 背景画像 -->
@@ -49,12 +49,12 @@ const { frontmatter } = kanaLData;
 </Layout>
 
 <!-- スタイル設定 -->
-<!-- ① 背景専用のスタイル（影響をここに閉じ込める） -->
+<!-- ① 背景専用のスタイル -->
 <style define:vars={{ bgUrl: `url(${bgGalaxy.src})` }}>
   .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: var(--bgUrl); background-size: cover; background-position: center;
-    z-index: -2; opacity: 0.7;
+    z-index: -2; opacity: 1;
     animation: bgMovement 25s ease-in-out infinite alternate;
   }
   @keyframes bgMovement {
@@ -63,12 +63,12 @@ const { frontmatter } = kanaLData;
   }
 </style>
 
-<!-- ② ページ全体のメインスタイル（不要ヘッダー用CSSを完全排除） -->
+<!-- ② ページ全体のメインスタイル（白ベース・透け感グレー・濃い文字色） -->
 <style>
   * { box-sizing: border-box; }
   body { 
     margin: 0; padding: 0;
-    background: #0d0b18; color: #f0ecf4; 
+    background: #f8f6fc; color: #1a1528; 
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
@@ -87,64 +87,71 @@ const { frontmatter } = kanaLData;
   }
   
   .card-panel {
-    background: rgba(13, 11, 24, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
-    padding: 2.5rem; backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    padding: 2rem 1.5rem !important;
+    background: rgba(220, 220, 230, 0.45); 
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(100, 90, 130, 0.15);
+    box-sizing: border-box;
     overflow: hidden;
   }
   
   /* テキスト・見出し装飾 */
-  .program-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; }
+  .program-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; color: #1a1528; font-weight: bold; }
   .catchphrase {
-    color: #ffb7ff; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
+    color: #7232e0; font-size: 0.95rem; font-weight: bold; margin: 0; letter-spacing: 0.1em;
     white-space: pre-line;
   }
-  .summary-message p { font-size: 1.1rem; line-height: 1.8; color: #fff;
+  .summary-message p { font-size: 1.1rem; line-height: 1.8; color: #251f36; font-weight: 500;
     white-space: pre-line;
   }
   
   .divider {
     border: 0 !important; height: 1px !important;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0), rgba(114, 50, 224, 0.3), rgba(114, 50, 224, 0)) !important;
     margin: 2.5rem 0;
   }
 
-    .markdown-content :global(hr) {
+  .markdown-content :global(hr) {
     border: 0 !important; height: 1px !important;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255, 183, 255, 0.4), rgba(255,255,255,0)) !important;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0), rgba(114, 50, 224, 0.3), rgba(114, 50, 224, 0)) !important;
     margin: 3.5rem 0 !important;
   }
 
 /* ===================================================
-     📚 マークダウン本文（town.md）の最適化装飾
-     =================================================== */
+    📚 マークダウン本文の最適化装飾
+    =================================================== */
   .markdown-content :global(p) {
     line-height: 1.95 !important; 
     margin-bottom: 1.8rem !important; 
-    color: #dbd7e0 !important; 
+    color: #251f36 !important; 
     letter-spacing: 0.04em !important;
     font-size: 1.05rem !important;
+    font-weight: 500 !important;
   }
 
-  /* マークダウン本文内のすべてのリンク（aタグ）を読みやすくネオン調に */
+  /* マークダウン本文内のすべてのリンク（aタグ） */
   .markdown-content :global(a) {
-    color: #a3e2ff !important;
+    color: #5028c6 !important;
     text-decoration: none !important;
     font-weight: bold !important;
-    border-bottom: 1px dashed rgba(163, 226, 255, 0.6) !important;
+    border-bottom: 1px dashed rgba(80, 40, 198, 0.6) !important;
     transition: all 0.3s ease !important;
   }
   .markdown-content :global(a:hover) {
-    color: #ffb7ff !important;
-    border-bottom: 1px solid #ffb7ff !important;
-    text-shadow: 0 0 8px rgba(255, 183, 255, 0.5) !important;
+    color: #7232e0 !important;
+    border-bottom: 1px solid #7232e0 !important;
   }
 
   /* 戻るリンク */
   .back-home-container { text-align: center; margin-top: 4rem; }
-  .back-home-link { color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
-  .back-home-link:hover { color: #ffb7ff; }
+  .back-home-link { color: #554a66; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.3s; }
+  .back-home-link:hover { color: #7232e0; }
 
   @media (max-width: 768px) {
     .detailed-container { margin-top: 120px; }
@@ -153,30 +160,31 @@ const { frontmatter } = kanaLData;
   }
 
   /* ===================================================
-     ★重要：マークダウンの中身を「クラス名なし」で強力に装飾
-     =================================================== */
+    ★重要：マークダウンの中身の装飾
+    =================================================== */
   
   .markdown-content :global(p) {
-    line-height: 1.85 !important; margin-bottom: 1.4rem !important; color: #dbd7e0 !important; letter-spacing: 0.03em !important;
+    line-height: 1.85 !important; margin-bottom: 1.4rem !important; color: #251f36 !important; letter-spacing: 0.03em !important; font-weight: 500 !important;
   }
 
-  /* ゴールド縦線の見出し (h3) */
+  /* 見出し (h3) */
   .markdown-content :global(h3) {
     font-size: 1.3rem !important;
-    color: #fff !important;
-    border-left: 4px solid #d4af37 !important;
+    color: #1a1528 !important;
+    border-left: 4px solid #7232e0 !important;
     padding-left: 12px !important;
     margin: 4rem 0 1.5rem 0 !important;
     letter-spacing: 0.05em !important;
     display: block !important;
+    font-weight: bold !important;
   }
   .markdown-content :global(h3:first-of-type) {
     margin-top: 2rem !important;
   }
 
   /* ---------------------------------------------------
-     🎨 メリットカード（一番基本となる1つ目のul層）
-     --------------------------------------------------- */
+    🎨 リストカード層
+    --------------------------------------------------- */
   .markdown-content :global(ul) {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
@@ -187,19 +195,19 @@ const { frontmatter } = kanaLData;
   }
 
   .markdown-content :global(ul li) {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 12px !important;
     padding: 1.2rem 1.5rem 1.2rem 1.8rem !important;
     position: relative !important;
     overflow: hidden !important;
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
-    color: #e0dce5 !important;
+    color: #251f36 !important;
     list-style-type: none !important;
+    font-weight: 500 !important;
   }
 
-  /* 基本の左帯（メリットセクション用） */
   .markdown-content :global(ul > li::before) {
     content: '' !important;
     position: absolute !important;
@@ -209,22 +217,20 @@ const { frontmatter } = kanaLData;
   .markdown-content :global(ul > li:nth-child(1)::before) { background: linear-gradient(to bottom, #ff9966, #ff5e62) !important; }
   .markdown-content :global(ul > li:nth-child(2)::before) { background: linear-gradient(to bottom, #f5af19, #f12711) !important; }
   .markdown-content :global(ul > li:nth-child(3)::before) { background: linear-gradient(to bottom, #00c6ff, #0072ff) !important; }
-  .markdown-content :global(ul > li:nth-child(4)::before) { background: linear-gradient(to bottom, #7F00FF, #E100FF) !important; }
+  .markdown-content :global(ul > li:nth-child(4)::before) { background: linear-gradient(to bottom, #7232e0, #5028c6) !important; }
   .markdown-content :global(ul > li:nth-child(5)::before) { background: linear-gradient(to bottom, #11998e, #38ef7d) !important; }
   .markdown-content :global(ul > li:nth-child(6)::before) { background: linear-gradient(to bottom, #00f2fe, #4facfe) !important; }
 
   .markdown-content :global(ul li strong) {
-    color: #ff8da1 !important;
+    color: #7232e0 !important;
     font-weight: bold !important;
   }
 
   /* ---------------------------------------------------
-     ⏰ スケジュール（h4 ＋ 番号付きリスト ol）完全独立設定
-     --------------------------------------------------- */
-  
-  /* スケジュール用のh4 */
+    ⏰ スケジュール（h4 ＋ 番号付きリスト ol）
+    --------------------------------------------------- */
   .markdown-content :global(h4) {
-    color: #ffb7ff !important;
+    color: #7232e0 !important;
     font-size: 1.05rem !important;
     margin: 2.5rem 0 0.5rem 0 !important;
     padding: 0 !important;
@@ -232,11 +238,12 @@ const { frontmatter } = kanaLData;
     display: block !important;
     margin-bottom: 0.5rem !important;
     z-index: 1 !important;
+    font-weight: bold !important;
   }
 
   .markdown-content :global(ol) {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 12px !important;
     padding: 1.5rem 1.5rem 1.5rem 2.5rem !important;
     margin: 0.5rem 0 2.5rem 0 !important;
@@ -251,17 +258,16 @@ const { frontmatter } = kanaLData;
     padding: 0 !important;
     margin: 0.8rem 0 !important;
     font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     line-height: 1.6 !important;
+    font-weight: 500 !important;
   }
   .markdown-content :global(ol li::before) { display: none !important; content: none !important; }
-  .markdown-content :global(ol li::marker) { font-size: 1rem !important; color: #ffb7ff !important; }
-
+  .markdown-content :global(ol li::marker) { font-size: 1rem !important; color: #7232e0 !important; font-weight: bold !important; }
 
   /* ===================================================
-     🎨 持ち物リスト（2列レイアウト＆帯消去）
-     =================================================== */
-
+    🎨 持ち物リスト（2列レイアウト＆帯消去）
+    =================================================== */
   .markdown-content :global(ul:has(ul)) {
     display: flex !important;
     flex-direction: row !important;
@@ -276,8 +282,8 @@ const { frontmatter } = kanaLData;
   .markdown-content :global(ul:has(ul) > li) {
     flex: 0 1 calc(50% - 0.75rem) !important;
     min-width: 300px !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 12px !important;
     padding: 1.5rem 2rem 2rem 2rem !important;
     overflow: visible !important;
@@ -305,17 +311,18 @@ const { frontmatter } = kanaLData;
   }
 
   .markdown-content :global(ul:has(ul) ul li) {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
     border-radius: 8px !important;
     padding: 0.9rem 1.2rem 0.9rem 2.8rem !important;
     margin: 0.6rem 0 !important;
     position: relative !important;
     font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     overflow: visible !important;
     list-style-type: none !important;
     display: block !important;
+    font-weight: 500 !important;
   }
   .markdown-content :global(ul:has(ul) ul li::marker) { display: none !important; content: none !important; }
 
@@ -331,28 +338,25 @@ const { frontmatter } = kanaLData;
     width: auto !important;
     height: auto !important;
   }
-  .markdown-content :global(ul:has(ul) > li:nth-of-type(1) ul li::before) { color: #ff8da1 !important; }
-  .markdown-content :global(ul:has(ul) > li:nth-of-type(2) ul li::before) { color: #d4af37 !important; }
-
+  .markdown-content :global(ul:has(ul) > li:nth-of-type(1) ul li::before) { color: #ff5e62 !important; }
+  .markdown-content :global(ul:has(ul) > li:nth-of-type(2) ul li::before) { color: #7232e0 !important; }
 
   /* ===================================================
-     🎨 料金セクション
-     =================================================== */
-
+    🎨 料金セクション
+    =================================================== */
   .markdown-content :global(h4) + :global(ul) {
     display: block !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     border-radius: 16px !important;
     padding: 5.5rem 2rem 2rem 2rem !important;
     margin: 0 0 3.5rem 0 !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(130, 110, 160, 0.12) !important;
     position: relative !important;
     overflow: hidden !important;
     list-style: none !important;
   }
   
-  /* 料金カード内の見出しテキスト */
   .markdown-content :global(main) .markdown-content :global(h4):has(+ ul),
   .markdown-content :global(h4):has(+ ul) {
     margin-top: 3.5rem !important;
@@ -362,11 +366,10 @@ const { frontmatter } = kanaLData;
     padding-left: 2rem !important;
     font-size: 1.15rem !important;
     font-weight: bold !important;
-    color: #ffb7ff !important;
+    color: #7232e0 !important;
     display: block !important;
   }
 
-  /* 料金カードの左側に美しく伸びる縦グラデーション */
   .markdown-content :global(h4) + :global(ul)::before {
     content: '' !important;
     position: absolute !important;
@@ -375,30 +378,28 @@ const { frontmatter } = kanaLData;
     height: 100% !important;
   }
   
-  /* 1つ目の料金プラン */
   .markdown-content :global(h4:nth-of-type(1)):has(+ ul) + :global(ul)::before,
   .markdown-content :global(h4):has(+ ul) + :global(ul)::before {
     background: linear-gradient(to bottom, #ff9966, #ff5e62) !important;
   }
-  /* 2つ目の料金プラン */
   .markdown-content :global(ul) + :global(h4):has(+ ul) + :global(ul)::before {
     background: linear-gradient(to bottom, #f5af19, #f12711) !important;
   }
 
-  /* 金額表示の行 */
   .markdown-content :global(h4) + :global(ul) li {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
     border-radius: 12px !important;
     padding: 1.5rem 2rem !important;
     margin: 0 !important;
     width: 100% !important;
     font-size: 1.05rem !important;
-    color: #fff !important;
+    color: #1a1528 !important;
     overflow: hidden !important;
     position: relative !important;
     list-style-type: none !important;
     display: block !important;
+    font-weight: 500 !important;
   }
   .markdown-content :global(h4) + :global(ul) li::marker { display: none !important; content: none !important; }
   .markdown-content :global(h4) + :global(ul) li::before {
@@ -407,28 +408,25 @@ const { frontmatter } = kanaLData;
     background: none !important;
   }
 
-  /* 💡対面開催をご希望の方へ の引用ブロック装飾 */
+  /* 引用ブロック装飾 */
   .markdown-content :global(blockquote) {
-    border-left: 4px solid #ffb7ff !important;
-    background: rgba(255, 183, 255, 0.05) !important;
+    border-left: 4px solid #7232e0 !important;
+    background: rgba(114, 50, 224, 0.05) !important;
     padding: 1rem 1.5rem !important;
     margin: 2.5rem 0 !important;
     border-radius: 0 8px 8px 0 !important;
   }
-  .markdown-content :global(blockquote p) { margin: 0 !important; color: #fff !important; font-size: 0.95rem !important; }
+  .markdown-content :global(blockquote p) { margin: 0 !important; color: #1a1528 !important; font-size: 0.95rem !important; font-weight: 500 !important; }
 
-  /* マークダウン内の画像通常設定 */
+  /* 画像通常設定 */
   .markdown-content :global(img) {
     width: 100% !important; height: auto !important; border-radius: 12px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important; margin: 2rem 0 !important;
+    box-shadow: 0 8px 24px rgba(130, 110, 160, 0.15) !important; margin: 2rem 0 !important;
   }
-  /* 作品画像 */
   .markdown-content :global(img[alt="クレイワークのイメージ"]) {
     width: 30% !important; max-width: 450px !important; height: auto !important;
     margin: 2rem auto !important; display: block !important;
   }
-
-  /* 受講生の声 */
   .markdown-content :global(img[alt="受講生の声"]) {
     width: 70% !important; max-width: 450px !important; height: auto !important;
     margin: 2rem auto !important; display: block !important;
@@ -441,32 +439,26 @@ const { frontmatter } = kanaLData;
   }
 
   /* ===================================================
-     ✨ Kana-L（カナエル）ページ専用：拡張スタイル
-     =================================================== */
-
-  /* ステップ部分（H4見出しとテキストの間隔調整） */
+    ✨ Kana-L（カナエル）ページ専用：拡張スタイル
+    =================================================== */
   .markdown-content :global(.kanal-steps h4) {
     margin-top: 2rem !important;
     margin-bottom: 0.4rem !important;
   }
 
-  /* 例文のタグ装飾 */
   .markdown-content :global(.example-tag) {
     display: inline-block;
-    background: rgba(255, 183, 255, 0.08) !important;
-    color: #ffb7ff !important;
-    border: 1px dashed rgba(255, 183, 255, 0.25) !important;
+    background: rgba(114, 50, 224, 0.08) !important;
+    color: #7232e0 !important;
+    border: 1px dashed rgba(114, 50, 224, 0.3) !important;
     padding: 0.4rem 1rem !important;
     border-radius: 6px !important;
     font-size: 0.9rem !important;
     margin-top: 0.5rem !important;
+    font-weight: bold !important;
   }
 
-  /* ===================================================
-     ⚡【修正】チャージ方法・料金の見た目をおとなしくリセット
-     =================================================== */
-
-  /* チャージエリア全体の箇条書き（ul）を包む枠や背景を完全に消し去る */
+  /* チャージ方法・料金の見た目 */
   .markdown-content :global(.kanal-charge-section ul) {
     display: flex !important;
     flex-direction: column !important;
@@ -478,7 +470,6 @@ const { frontmatter } = kanaLData;
     box-shadow: none !important;
   }
 
-  /* 箇条書きの各項目（li）の派手な背景や余白をリセット */
   .markdown-content :global(.kanal-charge-section ul li) {
     background: none !important;
     border: none !important;
@@ -486,14 +477,14 @@ const { frontmatter } = kanaLData;
     padding: 0 0 0 1.2rem !important;
     margin: 0 !important;
     font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
     overflow: visible !important;
+    font-weight: 500 !important;
   }
 
-  /* メリット用のカラフルな左帯を非表示にし、シンプルな淡い紫のドットにする */
   .markdown-content :global(.kanal-charge-section ul li::before) {
     content: '•' !important;
-    color: #ffb7ff !important;
+    color: #7232e0 !important;
     position: absolute !important;
     left: 0 !important;
     top: 0 !important;
@@ -504,17 +495,16 @@ const { frontmatter } = kanaLData;
     height: auto !important;
   }
 
-  /* 金額のテキストだけ、ほんのり上品にテーマカラーを適用 */
   .markdown-content :global(.kanal-price-text) {
-    color: #ffb7ff !important;
+    color: #7232e0 !important;
     font-size: 1.05rem !important;
     font-weight: bold !important;
     letter-spacing: 0.05em;
   }
 
   /* ===================================================
-     🎨 お申し込み・お問い合わせボタン（Markdown内強制適用版）
-     =================================================== */
+    🎨 ボタン
+    =================================================== */
   .markdown-content :global(.action-buttons-container) {
     display: flex !important;
     justify-content: center !important;
@@ -524,7 +514,6 @@ const { frontmatter } = kanaLData;
     flex-wrap: wrap !important;
   }
 
-  /* ボタン共通のベーススタイル */
   .markdown-content :global(.btn-action) {
     flex: 1 !important;
     max-width: 320px !important;
@@ -550,18 +539,17 @@ const { frontmatter } = kanaLData;
     z-index: 2 !important;
   }
 
-  /* 🔥 お申し込みボタン：ピンク〜オレンジグラデーション */
   .markdown-content :global(.btn-apply) {
-    background: linear-gradient(135deg, #ff5e62, #ff9966) !important;
+    background: linear-gradient(135deg, #7232e0, #5028c6) !important;
     color: #fff !important;
-    box-shadow: 0 4px 15px rgba(255, 94, 98, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(114, 50, 224, 0.3) !important;
   }
 
   .markdown-content :global(.btn-apply::before) {
     content: '' !important;
     position: absolute !important;
     top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
-    background: linear-gradient(135deg, #ff9966, #ff5e62) !important;
+    background: linear-gradient(135deg, #5028c6, #7232e0) !important;
     opacity: 0 !important;
     z-index: 1 !important;
     transition: opacity 0.4s ease !important;
@@ -569,30 +557,27 @@ const { frontmatter } = kanaLData;
 
   .markdown-content :global(.btn-apply:hover) {
     transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(255, 94, 98, 0.6), 0 0 15px rgba(255, 153, 102, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(114, 50, 224, 0.5) !important;
   }
   
   .markdown-content :global(.btn-apply:hover::before) {
     opacity: 1 !important;
   }
 
-  /* 💬 お問い合わせボタン：パープルネオン調 */
   .markdown-content :global(.btn-contact) {
-    background: rgba(255, 255, 255, 0.03) !important;
-    color: #ffb7ff !important;
-    border: 2px solid #ffb7ff !important;
-    box-shadow: 0 4px 15px rgba(255, 183, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    color: #7232e0 !important;
+    border: 2px solid #7232e0 !important;
+    box-shadow: 0 4px 15px rgba(114, 50, 224, 0.1) !important;
   }
 
   .markdown-content :global(.btn-contact:hover) {
     transform: translateY(-3px) !important;
-    background: rgba(255, 183, 255, 0.15) !important;
+    background: #7232e0 !important;
     color: #fff !important;
-    box-shadow: 0 8px 25px rgba(255, 183, 255, 0.4), 0 0 15px rgba(255, 183, 255, 0.2) !important;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 8px 25px rgba(114, 50, 224, 0.4) !important;
   }
 
-  /* スマホ対応 */
   @media (max-width: 600px) {
     .markdown-content :global(.action-buttons-container) {
       flex-direction: column !important;
@@ -606,60 +591,48 @@ const { frontmatter } = kanaLData;
   }
 
   /* ===================================================
-     🙋 よくあるご質問（FAQ）セクション
-     =================================================== */
-
-  /* FAQ全体のコンテナの余白 */
+    🙋 よくあるご質問（FAQ）セクション
+    =================================================== */
   .markdown-content :global(.kanal-faq-section) {
     margin-top: 2rem !important;
   }
 
-  /* 質問（H4）の装飾：文字色を活かし、下部にうっすらと上品な線を引く */
   .markdown-content :global(.kanal-faq-section h4) {
     font-size: 1.1rem !important;
     margin-top: 3.5rem !important;
     margin-bottom: 1rem !important;
-    border-bottom: 1px solid rgba(255, 183, 255, 0.15) !important;
+    border-bottom: 1px solid rgba(114, 50, 224, 0.2) !important;
     padding-bottom: 0.6rem !important;
   }
 
-  /* 最初の質問だけ、上の余白を少し詰める */
   .markdown-content :global(.kanal-faq-section h4:first-of-type) {
     margin-top: 1.5rem !important;
   }
 
-  /* 回答テキスト（P）の間隔微調整 */
   .markdown-content :global(.kanal-faq-section p) {
     margin-bottom: 1.2rem !important;
     font-size: 0.95rem !important;
-    color: #dbd7e0 !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
   }
 
-  /* ===================================================
-     訪問済みリンク（:visited）のカラー調整（完全対策版）
-     =================================================== */
-
-  /* 通常のテキストリンク（Markdown内など）の訪問済みカラー */
+  /* 訪問済みリンク */
   .markdown-content :global(a:visited) {
-    color: #e2b7ff !important; /* 明るく透明感のある薄紫へ */
+    color: #5028c6 !important;
   }
 
-  /* 超重要】お申し込みボタンの文字色を「白」で絶対強制キープ */
   .markdown-content :global(.btn-apply:visited),
   .markdown-content :global(.btn-apply:visited span) {
     color: #fff !important;
   }
 
-  /* 【超重要】お問い合わせボタンの文字色を「元のピンクパープル」で絶対強制キープ */
   .markdown-content :global(.btn-contact:visited),
   .markdown-content :global(.btn-contact:visited span) {
-    color: #ffb7ff !important;
+    color: #7232e0 !important;
   }
-  /* お問い合わせボタンをホバーした時は白にする設定もキープ */
   .markdown-content :global(.btn-contact:hover:visited) {
     color: #fff !important;
   }
-
 </style>
 
 <style is:global>
@@ -668,8 +641,8 @@ const { frontmatter } = kanaLData;
     margin: 0 auto 2rem auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 183, 255, 0.2);
-    border: 1px solid rgba(255, 183, 255, 0.3);
+    box-shadow: 0 0 20px rgba(130, 110, 160, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
   }
   .toppage-main-image {
     width: 100%;
@@ -678,8 +651,6 @@ const { frontmatter } = kanaLData;
     display: block;
   }
 </style>
-
-
 
 <!-- Astro完全対応版インラインスクリプト -->
 <script is:inline>
