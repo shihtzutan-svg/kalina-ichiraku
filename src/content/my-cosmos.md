@@ -1,8 +1,8 @@
 ---
-title: "私の宇宙"
-catchphrase: "近日公開"
+title: "私の宇宙ノート"
+catchphrase: "描いて、気づいて、私を知る"
 image: "/cosmos.avif" 
-summary: "　"
+summary: "日々の気づきのために"
 ---
 
 ---

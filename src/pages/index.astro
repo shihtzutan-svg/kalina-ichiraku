@@ -12,11 +12,11 @@ const latestBlogPosts = response.contents;
 // 📝 各種Markdownデータのインポート
 import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
-import * as clayData from '../content/clay.md';
+import * as timelineData from '../content/timeline.md';
 import * as kanaLData from '../content/kana-l.md';
 import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
-import * as kanalartData from '../content/kanal-art.md';
+import * as lrsData from '../content/lrs.md';
 import * as mycosmosData from '../content/my-cosmos.md';
 
 // 💡 Umami用の環境判定
@@ -152,32 +152,36 @@ const isProd = import.meta.env.PROD;
     </div>
 
     <div class="grid-row-two">
-      <!--Kana-L（カナエル）-->
-      <section class="card-panel" id="kana-l">
+
+
+
+
+      <!-- ライフ・リバイブ・セッション -->
+      <section class="card-panel" id="lrs">
         <div class="profile-header-block">
-          <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
-          <h2>{kanaLData.frontmatter.title}</h2>
+          <p class="catchphrase">{lrsData.frontmatter.catchphrase}</p>
+          <h2>{lrsData.frontmatter.title}</h2>
         </div>
         <div class="card-content">
-          <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" loading="lazy" decoding="async" />
-          <p>{kanaLData.frontmatter.summary}</p>
-          <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
+          <img src={lrsData.frontmatter.image} alt={lrsData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
+          <p>{lrsData.frontmatter.summary}</p>
         </div>
       </section>
 
-      <!-- カナエル・アート -->
-      <section class="card-panel" id="kanal-art">
+            <!-- 私の宇宙史セッション-->
+      <section class="card-panel" id="timeline">
         <div class="profile-header-block">
-          <p class="catchphrase">{kanalartData.frontmatter.catchphrase}</p>
-          <h2>{kanalartData.frontmatter.title}</h2>
+          <p class="catchphrase">{timelineData.frontmatter.catchphrase}</p>
+          <h2>{timelineData.frontmatter.title}</h2>
         </div>
         <div class="card-content">
-          <img src={kanalartData.frontmatter.image} alt={kanalartData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
-          <p>{kanalartData.frontmatter.summary}</p>
+          <img src={timelineData.frontmatter.image} alt={timelineData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
+          <p>{timelineData.frontmatter.summary}</p>
+
         </div>
       </section>
 
-      <!-- クレイワーク-->
+      <!-- クレイワーク
       <section class="card-panel" id="clay">
         <div class="profile-header-block">
           <p class="catchphrase">{clayData.frontmatter.catchphrase}</p>
@@ -187,6 +191,20 @@ const isProd = import.meta.env.PROD;
           <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" loading="lazy" decoding="async" />
           <p>{clayData.frontmatter.summary}</p>
           <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
+        </div>
+      </section>
+      -->
+
+            <!--Kana-L（カナエル）-->
+      <section class="card-panel" id="kana-l">
+        <div class="profile-header-block">
+          <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
+          <h2>{kanaLData.frontmatter.title}</h2>
+        </div>
+        <div class="card-content">
+          <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" loading="lazy" decoding="async" />
+          <p>{kanaLData.frontmatter.summary}</p>
+          <a href="/kana-l" class="read-more">Kana-Lの詳細はこちら →</a>
         </div>
       </section>
 
