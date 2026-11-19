@@ -113,7 +113,7 @@ image: "/lrs.avif"
     <p><strong>セッション会場の様子</strong></p>
      <p>（準備中）</p>
 <br>
-<p><strong>時間：</strong>10:00〜最長20:00まで</p>    
+<p><strong>時間：</strong>10:00〜最長18:00まで</p>    
   </div>
 </div>
 
