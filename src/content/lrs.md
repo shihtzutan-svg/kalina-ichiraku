@@ -108,6 +108,8 @@ image: "/lrs.avif"
   <div class="feature-inner">
     <p><strong>場所：</strong>兵庫県神戸市長田区（詳細な住所はご予約確定時にご連絡いたします）</p>
     <p><strong>最寄り駅：</strong>神戸市営地下鉄／山陽電車　板宿駅<br /></p>
+    <p>※現在、オンラインセッションは行なっておりません。<br /></p> 
+    <br>   
     <p><strong>セッション会場の様子</strong></p>
      <p>（準備中）</p>
 <br>
