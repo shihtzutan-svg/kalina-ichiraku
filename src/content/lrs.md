@@ -102,7 +102,7 @@ image: "/lrs.avif"
 
 ---
 
-## セッション会場
+## セッション会場・時間
 
 <div class="feature-card">
   <div class="feature-inner">
@@ -110,6 +110,8 @@ image: "/lrs.avif"
     <p><strong>最寄り駅：</strong>神戸市営地下鉄／山陽電車　板宿駅<br /></p>
     <p><strong>セッション会場の様子</strong></p>
      <p>（準備中）</p>
+<br>
+<p><strong>時間：</strong>10:00〜最長20:00まで</p>    
   </div>
 </div>
 
