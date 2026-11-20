@@ -4,7 +4,7 @@
 </button>
 
 <style>
-  /* ボタンの基本スタイル（最初は非表示） */
+  /* ボタンの基本スタイル（最初は非表示・スマホ/タブレットは右下固定） */
   .page-top-scroll-btn {
     position: fixed;
     bottom: 30px;
@@ -26,6 +26,25 @@
     transform: translateY(20px);
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 15px rgba(130, 110, 160, 0.15);
+  }
+
+  /* PC表示の時だけ中央枠の右横・下側に配置 */
+  @media (min-width: 1221px) {
+    .page-top-scroll-btn {
+      top: auto;
+      bottom: 40px;
+      left: calc(50% + 505px);
+      right: auto;
+      transform: translateY(20px);
+    }
+
+    .page-top-scroll-btn.show {
+      transform: translateY(0);
+    }
+
+    .page-top-scroll-btn:hover {
+      transform: translateY(-3px);
+    }
   }
 
   /* 上向き矢印の形 */
@@ -67,30 +86,36 @@
 </style>
 
 <script>
-  // Astroのページ遷移（View Transitionsなど）にも対応できるよう、関数として定義
   function initPageTop() {
     const topBtn = document.getElementById('page-top-btn');
     if (!topBtn) return;
 
-    // 1. 一定以上スクロールしたらボタンを表示・非表示にする
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) { // 400px以上スクロールしたら
+    const toggleVisibility = () => {
+      if (window.scrollY > 400) {
         topBtn.classList.add('show');
       } else {
         topBtn.classList.remove('show');
       }
-    });
+    };
 
-    // 2. ボタンを押した時にスムーズに一番上に戻る
-    topBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // 💡するすると滑らかにスクロールさせる
+    // 重複登録防止
+    if (!topBtn.dataset.bound) {
+      window.addEventListener('scroll', toggleVisibility, { passive: true });
+
+      topBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       });
-    });
+
+      topBtn.dataset.bound = 'true';
+    }
+
+    toggleVisibility();
   }
 
-  // 最初のアニメーション読み込み時＆Astroのページ切り替え時どちらでも動くように設定
   initPageTop();
+  document.addEventListener('astro:page-load', initPageTop);
   document.addEventListener('astro:after-swap', initPageTop);
 </script>

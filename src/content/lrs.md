@@ -69,6 +69,7 @@ image: "/lrs.avif"
 
 <p>ライフ・リバイバーとは、あなたの人生を丸ごと受け止めて、癒しと気づきを与えることの出来る傾聴者を指します。</p>
 <strong>西宮あすか</strong>
+<p>ライフ・リバイバー連盟メンバー（<a href="https://www.eonet.ne.jp/~miracles/" target="_blank">ミラクルアカデミー</a>提携）</p>
 <p>
 <a href="/profile_lrs">詳細なプロフィールはこちら</a>
 </p>

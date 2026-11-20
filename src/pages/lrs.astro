@@ -3,6 +3,18 @@ import Layout from '../layouts/Layout.astro';
 import bgGalaxy from '../assets/bg-galaxy.avif';
 import * as lrsData from '../content/lrs.md';
 const { frontmatter } = lrsData;
+
+// 目次項目（lrs.md の ## 見出しに対応）
+const tocItems = [
+  { id: 'sec-lrs-kobe', label: 'ライフ・リバイブ・セッション in 神戸' },
+  { id: 'sec-features', label: '当セッションの特徴' },
+  { id: 'sec-reviver', label: 'ライフ・リバイバー（人生蘇生士）について' },
+  { id: 'sec-promises', label: '当セッションにおけるあなたとの大切なお約束' },
+  { id: 'sec-venue', label: 'セッション会場・時間' },
+  { id: 'sec-price', label: '料金・ご予約について' },
+  { id: 'sec-flow', label: 'ご予約の流れ（必ずお読み下さい）' },
+  { id: 'sec-terms', label: 'ご利用にあたって（必ずお読み下さい）' },
+];
 ---
 
 <Layout 
@@ -29,6 +41,21 @@ const { frontmatter } = lrsData;
         <div class="summary-message">
           <p>{frontmatter.summary}</p>
         </div>
+
+        <!-- 目次（ページ内リンク） -->
+        <nav class="toc-box" aria-label="目次">
+          <p class="toc-title">目次</p>
+          <ol class="toc-list">
+            {tocItems.map((item, index) => (
+              <li>
+                <a href={`#${item.id}`}>
+                  <span class="toc-num">{String(index + 1).padStart(2, '0')}</span>
+                  <span class="toc-text">{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
 
         <hr class="divider" />
 
@@ -523,6 +550,88 @@ const { frontmatter } = lrsData;
       max-height: 300px;
     }
   }
+
+/* ===================================================
+     📑 目次（ページ内リンク）
+     =================================================== */
+  .toc-box {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(114, 50, 224, 0.28);
+    border-radius: 16px;
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0 0 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(130, 110, 160, 0.12);
+  }
+
+  .toc-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #5028c6;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .toc-title::before {
+    content: "✦";
+    color: #7232e0;
+  }
+
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem 1.2rem;
+  }
+
+  .toc-list li a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #251f36;
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.5;
+    transition: all 0.25s ease;
+    background: rgba(248, 245, 255, 0.65);
+  }
+
+  .toc-list li a:hover {
+    background: rgba(114, 50, 224, 0.12);
+    color: #5028c6;
+    transform: translateX(3px);
+  }
+
+  .toc-num {
+    color: #7232e0;
+    font-weight: bold;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* ページ内ジャンプ時にヘッダーと被らない余白を確保 */
+  .markdown-content :global(h2[id]) {
+    scroll-margin-top: 110px;
+  }
+
+  @media (max-width: 768px) {
+    .toc-box {
+      padding: 1.2rem 1.2rem;
+    }
+    .toc-list {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
 </style>
 
 <script is:inline>
@@ -536,4 +645,60 @@ const { frontmatter } = lrsData;
 
   setupFormButtons();
   document.addEventListener('astro:page-load', setupFormButtons);
+</script>
+
+<script is:inline>
+  function initLrsPage() {
+    // 外部フォームリンクを新規タブで開く
+    const links = document.querySelectorAll('.action-buttons-container a');
+    links.forEach(link => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    // 見出しテキストと目次IDの対応表（順番に依存せず確実に紐づける）
+    const headingMap = [
+      { keyword: 'ライフ・リバイブ・セッション in 神戸', id: 'sec-lrs-kobe' },
+      { keyword: '当セッションの特徴', id: 'sec-features' },
+      { keyword: 'ライフ・リバイバー（人生蘇生士）について', id: 'sec-reviver' },
+      { keyword: '当セッションにおけるあなたとの大切なお約束', id: 'sec-promises' },
+      { keyword: 'セッション会場・時間', id: 'sec-venue' },
+      { keyword: '料金・ご予約について', id: 'sec-price' },
+      { keyword: 'ご予約の流れ', id: 'sec-flow' },
+      { keyword: 'ご利用にあたって', id: 'sec-terms' },
+    ];
+
+    const headings = document.querySelectorAll('.markdown-content h2');
+    headings.forEach(h2 => {
+      const text = (h2.textContent || '').trim();
+      const matched = headingMap.find(item => text.includes(item.keyword));
+      if (matched) {
+        h2.id = matched.id;
+      }
+    });
+  }
+
+// 目次クリック時のスムーススクロール（固定ヘッダーの高さ分を手前で止める）
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('.toc-list a[href^="#"]');
+    if (!anchor) return;
+    const targetId = anchor.getAttribute('href').slice(1);
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      e.preventDefault();
+      // 固定ヘッダーの高さ + ゆとり分（130px）を引いてスクロール位置を計算
+      const headerOffset = 130;
+      const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      history.pushState(null, '', `#${targetId}`);
+    }
+  });
+
+  initLrsPage();
+  document.addEventListener('astro:page-load', initLrsPage);
 </script>
