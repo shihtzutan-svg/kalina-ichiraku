@@ -6,7 +6,7 @@ const { frontmatter } = lrsData;
 
 // 目次項目（lrs.md の ## 見出しに対応）
 const tocItems = [
-  { id: 'sec-lrs-kobe', label: 'ライフ・リバイブ・セッション in 神戸' },
+  { id: 'sec-lrs-kobe', label: 'ライフ・リバイブ・セッションとは' },
   { id: 'sec-features', label: '当セッションの特徴' },
   { id: 'sec-reviver', label: 'ライフ・リバイバー（人生蘇生士）について' },
   { id: 'sec-promises', label: '当セッションにおけるあなたとの大切なお約束' },
@@ -194,7 +194,7 @@ const tocItems = [
 
   /* 追加：黒色の強調用クラス（<strong class="strong-black">） */
   .markdown-content :global(strong.strong-black) {
-    color: #1a1528 !important;
+    color: #f80202 !important;
     font-weight: bold !important;
   }
 
@@ -658,7 +658,7 @@ const tocItems = [
 
     // 見出しテキストと目次IDの対応表（順番に依存せず確実に紐づける）
     const headingMap = [
-      { keyword: 'ライフ・リバイブ・セッション in 神戸', id: 'sec-lrs-kobe' },
+      { keyword: 'ライフ・リバイブ・セッションとは', id: 'sec-lrs-kobe' },
       { keyword: '当セッションの特徴', id: 'sec-features' },
       { keyword: 'ライフ・リバイバー（人生蘇生士）について', id: 'sec-reviver' },
       { keyword: '当セッションにおけるあなたとの大切なお約束', id: 'sec-promises' },

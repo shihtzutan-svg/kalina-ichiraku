@@ -6,14 +6,12 @@ summary: "人生を棚卸しし、今までと違う自分に生まれ変わる�
 image: "/lrs.avif"
 ---
 
-## ライフ・リバイブ・セッション in 神戸
-
+## ライフ・リバイブ・セッションとは
 
 <div class="feature-card">
   <div class="feature-inner">
-    <h4>ライフ・リバイブ・セッションとは</h4>
-<p><strong class="strong-black">「生きながらにして死んだようになっている」</strong>人生を、もう一度ここから豊かに<strong class="strong-black">生き直す</strong>ためのセッションです。</p>
-<p>完全1対1・最長8時間、<strong class="strong-black">生まれてから今までの人生を語り尽くしていただく</strong>ことで、人生の棚卸しを行ない、生き直すための気づきを得て、覚醒を促します。</p>
+    <h4><strong class="strong-black">「生きながらにして死んだようになっている」</strong>人生を、もう一度ここから豊かに<strong class="strong-black">生き直す</strong>ためのセッションです。</h4>
+    <h4>完全1対1・最長8時間、<strong class="strong-black">生まれてから今までの人生を語り尽くしていただく</strong>ことで、人生の棚卸しを行ない、生き直すための気づきを得て、覚醒を促します。</h4>
   </div>
 </div>
 
