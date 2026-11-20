@@ -45,6 +45,11 @@ const { frontmatter } = profileData;
           </div>
         )}
 
+        <!-- Markdownの本文を自動展開 -->
+        <div class="markdown-content">
+          <profileData.Content />
+        </div>
+
         <!-- ===================================================
              📚 Kindle書籍 紹介エリア（2冊連続配置）
              =================================================== -->
@@ -95,10 +100,7 @@ const { frontmatter } = profileData;
 
         </div>
 
-        <!-- Markdownの本文を自動展開 -->
-        <div class="markdown-content">
-          <profileData.Content />
-        </div>
+        <a href="/profile2">西宮あすか をより深く知る（笑）</a>
 
         <div class="back-home-container">
           <a href="/" class="back-home-link">トップページへ戻る</a>
@@ -124,6 +126,9 @@ const { frontmatter } = profileData;
 
 <!-- ② ページ全体のメインスタイル -->
 <style>
+
+
+
   * { box-sizing: border-box; }
   body { 
     margin: 0; padding: 0;
@@ -159,6 +164,7 @@ const { frontmatter } = profileData;
     box-shadow: 0 15px 35px rgba(100, 90, 130, 0.15);
     box-sizing: border-box;
   }
+
   
   /* テキスト装飾 */
   .profile-header-block h2 { font-size: 2rem; margin-top: 0.2rem; margin-bottom: 2rem; color: #1a1528; font-weight: bold; }
@@ -319,6 +325,7 @@ const { frontmatter } = profileData;
     display: block;
   }
 
+
   .img-caption-text {
     margin-top: 0.8rem !important;
     margin-bottom: 0.2rem !important;
@@ -348,12 +355,13 @@ const { frontmatter } = profileData;
     font-weight: bold !important;
   }
   
-  .card-panel h4 + ul {
+.card-panel h4 + ul,
+  .card-panel h4 ~ p + ul,
+  .card-panel h4 + p {
     list-style: none !important;
-    padding-left: 0 !important;
     margin: 0.8rem 0 2rem 0 !important;
     background: linear-gradient(to right, rgba(114, 50, 224, 0.06), transparent) !important;
-    padding: 1rem 1.2rem !important;
+    padding: 1rem 2.7rem !important;
     border-radius: 6px !important;
   }
   
@@ -545,7 +553,51 @@ const { frontmatter } = profileData;
     clear: both !important;
   }
 }
+
+
+/* ===================================================
+     💻 持っているデジタル系スキル 枠＆見出しスタイル
+     =================================================== */
+  .card-panel .digital-skill-box {
+    margin: 0.8rem 0 2rem 0 !important;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0.06), transparent) !important;
+    padding: 1rem 1.2rem !important;
+    border-radius: 6px !important;
+  }
+
+  /* 数字見出し（1. Web制作・運用 など）を左揃え＆太字＆色変更 */
+  .card-panel .digital-skill-box p,
+  .card-panel .digital-skill-box ol,
+  .card-panel .digital-skill-box ol li {
+    padding-left: 3 !important;
+    margin-left: 0 !important;
+    font-weight: bold !important;
+    color: #5028c6 !important;
+  }
+
+  .card-panel .digital-skill-box p,
+  .card-panel .digital-skill-box ol {
+    margin-top: 1.2rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .card-panel .digital-skill-box > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* 枠内の箇条書き（✦付き）は元のインデントと余白を維持 */
+  .card-panel .digital-skill-box ul {
+    list-style: none !important;
+    padding-left: 2.0rem !important;
+    margin: 0 0 0.8rem 0 !important;
+  }
+
+  .card-panel .digital-skill-box ul:last-child {
+    margin-bottom: 0 !important;
+  }
+
 </style>
+
 
 <!-- ⚡ 自動キャプション生成＆新規ウィンドウ設定用スクリプト -->
 <script is:inline>
@@ -554,6 +606,26 @@ function initProfilePage() {
   links.forEach(link => {
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
+  });
+
+  // 「●持っているデジタル系スキル」の中身を1つの枠（div.digital-skill-box）で囲む
+  const h4List = document.querySelectorAll('.card-panel h4');
+  h4List.forEach(h4 => {
+    if (h4.textContent && h4.textContent.includes('デジタル系スキル')) {
+      // すでに処理済みの場合はスキップ
+      if (h4.nextElementSibling && h4.nextElementSibling.classList.contains('digital-skill-box')) return;
+
+      const box = document.createElement('div');
+      box.className = 'digital-skill-box';
+
+      let next = h4.nextElementSibling;
+      while (next && next.tagName !== 'H4') {
+        const current = next;
+        next = next.nextElementSibling;
+        box.appendChild(current);
+      }
+      h4.after(box);
+    }
   });
 
   const markdownImgs = document.querySelectorAll('.markdown-content img');
