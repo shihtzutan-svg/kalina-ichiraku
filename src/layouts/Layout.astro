@@ -7,8 +7,18 @@ import PageTop from '../components/PageTop.astro';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
-const { title, description = "西宮あすか - 公式サイト 〜 神戸で魂の目醒め・覚醒・アセンションを支援, 神戸のスピリチュアルワーカー・西宮あすかの公式サイト。開運アートの販売、人生の棚卸しをして生き直すセッション・ライトワーカー向けのWeb集客・サイト制作支援サービスを提供しています。" } = Astro.props;
+
+const {
+  title,
+  description = "西宮あすか - 公式サイト 〜 神戸で魂の目醒め・覚醒・アセンションを支援, 神戸のスピリチュアルワーカー・西宮あすかの公式サイト。開運アートの販売、人生の棚卸しをして生き直すセッション・ライトワーカー向けのWeb集客・サイト制作支援サービスを提供しています。",
+  image = "/new.avif",
+} = Astro.props;
+
+// 正規URLとSNSシェア用画像のフルURLを生成（astro.config.mjs に site 設定がある場合に機能します）
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.pathname;
+const socialImageURL = Astro.site ? new URL(image, Astro.site).href : image;
 ---
 
 <html lang="ja">
@@ -17,16 +27,32 @@ const { title, description = "西宮あすか - 公式サイト 〜 神戸で魂
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
     <title>{title}</title>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BB3QD1YR47"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-BB3QD1YR47');
-</script>
+    <!-- OGP (LINE / Facebook / SNSシェア表示用) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- X (旧Twitter) カード設定 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BB3QD1YR47"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BB3QD1YR47');
+    </script>
   </head>
   <body>
     <!-- 背景画像 -->
@@ -106,27 +132,27 @@ const { title, description = "西宮あすか - 公式サイト 〜 神戸で魂
         }
       }
 
-draw() {
-  if (!ctx) return;
-  ctx.beginPath();
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
 
-  const gradient = ctx.createRadialGradient(
-    this.x,
-    this.y,
-    0,
-    this.x,
-    this.y,
-    this.size
-  );
+        const gradient = ctx.createRadialGradient(
+          this.x,
+          this.y,
+          0,
+          this.x,
+          this.y,
+          this.size
+        );
 
-gradient.addColorStop(0, `rgba(235, 250, 255, ${this.opacity})`);
-gradient.addColorStop(0.4, `rgba(163, 226, 255, ${this.opacity * 0.8})`);
-gradient.addColorStop(1, 'rgba(163, 226, 255, 0)');
+        gradient.addColorStop(0, `rgba(235, 250, 255, ${this.opacity})`);
+        gradient.addColorStop(0.4, `rgba(163, 226, 255, ${this.opacity * 0.8})`);
+        gradient.addColorStop(1, 'rgba(163, 226, 255, 0)');
 
-  ctx.fillStyle = gradient;
-  ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
-  ctx.fill();
-}
+        ctx.fillStyle = gradient;
+        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
     const particleCount = 120;
@@ -173,7 +199,7 @@ gradient.addColorStop(1, 'rgba(163, 226, 255, 0)');
 
 <!-- ② ベース・共通コンポーネント用のグローバルスタイル -->
 <style is:global>
-  * { box-sizing: border-box; }
+* { box-sizing: border-box; }
   
   body { 
     margin: 0; 

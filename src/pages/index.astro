@@ -18,15 +18,12 @@ import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
 import * as lrsData from '../content/lrs.md';
 import * as mycosmosData from '../content/my-cosmos.md';
-
-// 💡 Umami用の環境判定
-const isProd = import.meta.env.PROD;
 ---
 
-
 <Layout 
-  title={`西宮あすか - 公式サイト 〜 神戸で魂の目醒め・覚醒・アセンションを支援`}
-  description={"神戸のスピリチュアルワーカー・西宮あすかの公式サイト。開運アートの販売、人生の棚卸しをして生き直すセッション・ライトワーカー向けのWeb集客・サイト制作支援サービスを提供しています。"}
+  title="西宮あすか - 公式サイト 〜 神戸で魂の目醒め・覚醒・アセンションを支援"
+  description="神戸のスピリチュアルワーカー・西宮あすかの公式サイト。開運アートの販売、人生の棚卸しをして生き直すセッション・ライトワーカー向けのWeb集客・サイト制作支援サービスを提供しています。"
+  image="/new.avif"
 >
   <div class="top-banner-wrapper">
     <div class="banner-container">
@@ -87,15 +84,15 @@ const isProd = import.meta.env.PROD;
   <!-- メインコンテンツ -->
   <main class="content-grid">
 
-    <!-- ３．プロフィール（独立して中央配置） -->
+    <!-- ３．プロフィール（ページ全体のメイン見出し h1 を配置） -->
     <div class="profile-container">
       <section class="card-panel profile-single" id="profile">
         <div class="profile-header-block">
           <p class="catchphrase">{frontmatter.catchphrase}</p>
-          <h2>{profileData.frontmatter.title}</h2>
+          <h1 class="main-page-title">{profileData.frontmatter.title}</h1>
         </div>
         <div class="card-content intro-message">
-          <img src="/new.avif" alt="Profile" class="program-thumb" loading="lazy" decoding="async" />
+          <img src="/new.avif" alt="西宮あすか プロフィール画像" class="program-thumb" loading="lazy" decoding="async" />
           <p>
             ここはスピリチュアルワーカー「西宮あすか」のホームページです。<br>
             人生の目的を探している方へのお手伝い、および既に目的を見つけ活動されている方への支援を致します。
@@ -126,7 +123,7 @@ const isProd = import.meta.env.PROD;
         </div>
 
         <div class="book-content-layout">
-          <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E1%81%84%E1%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?&linkCode=ll2&tag=szdmorg-22&linkId=41bf4ad5c00dc2c22b63850478e2fe08&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" class="kindle-book-card">
+          <a href="https://www.amazon.co.jp/%E3%80%8C%E6%BA%90%E3%80%8D%E3%81%A8%E3%81%AE%E5%AF%BE%E8%A9%B1-%E6%99%AE%E9%80%9A%E3%81%AE%E4%B8%BB%E5%A9%A6%E3%81%AF%E4%BD%93%E9%A8%93%E3%81%97%E3%81%9F-%E5%A4%A7%E3%81%84%E3%81%AA%E3%82%8B%E5%AD%98%E5%9C%A8%E3%81%A8%E3%81%AE%E4%BA%A4%E4%BF%A1%E3%80%81%E3%81%9D%E3%81%AE%E4%B8%80%E8%B2%B2%E7%B5%82-%E4%B8%80%E6%A8%82-%E8%BF%A6%E5%93%A9%E7%84%A1-ebook/dp/B0GCZG242N?&linkCode=ll2&tag=szdmorg-22&linkId=41bf4ad5c00dc2c22b63850478e2fe08&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer" class="kindle-book-card">
             <div class="book-cover-wrapper">
               <img src="source.avif" alt="「源」との対話: 普通の主婦が体験した大いなる存在との交信、その一部始終" class="book-cover-img" loading="lazy" decoding="async" />
             </div>
@@ -149,59 +146,40 @@ const isProd = import.meta.env.PROD;
     <!-- ４．【自分の道をお探しの方へ】グループ -->
     <div class="target-group-header">
       <span class="target-badge badge-before">自分の道をお探しの方へ</span>
-      <h3 class="target-group-title">能力を開花させ、願いを叶える</h3>
+      <h2 class="target-group-title">能力を開花させ、願いを叶える</h2>
     </div>
 
     <div class="grid-row-two">
-
-
-
-
       <!-- ライフ・リバイブ・セッション -->
       <section class="card-panel" id="lrs">
         <div class="profile-header-block">
           <p class="catchphrase">{lrsData.frontmatter.catchphrase}</p>
-          <h2>{lrsData.frontmatter.title}</h2>
+          <h3>{lrsData.frontmatter.title}</h3>
         </div>
         <div class="card-content">
           <img src={lrsData.frontmatter.image} alt={lrsData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
           <p>{lrsData.frontmatter.summary}</p>
-                    <a href="lrs" class="read-more">ライフ・リバイブ・セッションの詳細はこちら →</a>
+          <a href="/lrs" class="read-more">ライフ・リバイブ・セッションの詳細はこちら →</a>
         </div>
       </section>
 
-            <!-- 私の宇宙史セッション-->
+      <!-- 私の宇宙史セッション-->
       <section class="card-panel" id="timeline">
         <div class="profile-header-block">
           <p class="catchphrase">{timelineData.frontmatter.catchphrase}</p>
-          <h2>{timelineData.frontmatter.title}</h2>
+          <h3>{timelineData.frontmatter.title}</h3>
         </div>
         <div class="card-content">
           <img src={timelineData.frontmatter.image} alt={timelineData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
           <p>{timelineData.frontmatter.summary}</p>
-
         </div>
       </section>
 
-      <!-- クレイワーク
-      <section class="card-panel" id="clay">
-        <div class="profile-header-block">
-          <p class="catchphrase">{clayData.frontmatter.catchphrase}</p>
-          <h2>{clayData.frontmatter.title}</h2>
-        </div>
-        <div class="card-content">
-          <img src={clayData.frontmatter.image} alt="クレイワーク" class="program-thumb" loading="lazy" decoding="async" />
-          <p>{clayData.frontmatter.summary}</p>
-          <a href="/claywork" class="read-more">プログラムの詳細はこちら →</a>
-        </div>
-      </section>
-      -->
-
-            <!--Kana-L（カナエル）-->
+      <!-- Kana-L（カナエル）-->
       <section class="card-panel" id="kana-l">
         <div class="profile-header-block">
           <p class="catchphrase">{kanaLData.frontmatter.catchphrase}</p>
-          <h2>{kanaLData.frontmatter.title}</h2>
+          <h3>{kanaLData.frontmatter.title}</h3>
         </div>
         <div class="card-content">
           <img src={kanaLData.frontmatter.image} alt="Kana-L" class="program-thumb" loading="lazy" decoding="async" />
@@ -214,7 +192,7 @@ const isProd = import.meta.env.PROD;
       <section class="card-panel" id="my-cosmos">
         <div class="profile-header-block">
           <p class="catchphrase">{mycosmosData.frontmatter.catchphrase}</p>
-          <h2>{mycosmosData.frontmatter.title}</h2>
+          <h3>{mycosmosData.frontmatter.title}</h3>
         </div>
         <div class="card-content">
           <img src={mycosmosData.frontmatter.image} alt={mycosmosData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
@@ -233,7 +211,7 @@ const isProd = import.meta.env.PROD;
     <!-- ５．【ライトワーカー向け】グループ -->
     <div class="target-group-header">
       <span class="target-badge badge-lightworker">ライトワーカーとして活動中の方へ</span>
-      <h3 class="target-group-title">お仕事のサポートとコミュニティ</h3>
+      <h2 class="target-group-title">お仕事のサポートとコミュニティ</h2>
     </div>
 
     <div class="grid-row-two">
@@ -241,7 +219,7 @@ const isProd = import.meta.env.PROD;
       <section class="card-panel" id="service">
         <div class="profile-header-block">
           <p class="catchphrase">{serviceData.frontmatter.catchphrase}</p>
-          <h2>{serviceData.frontmatter.title}</h2>
+          <h3>{serviceData.frontmatter.title}</h3>
         </div>
         <div class="card-content">
           <img src={serviceData.frontmatter.image} alt="サービス" class="program-thumb" loading="lazy" decoding="async" />
@@ -254,7 +232,7 @@ const isProd = import.meta.env.PROD;
       <section class="card-panel" id="spiritual-town">
         <div class="profile-header-block">
           <p class="catchphrase">{townData.frontmatter.catchphrase}</p>
-          <h2>{townData.frontmatter.title}</h2>
+          <h3>{townData.frontmatter.title}</h3>
         </div>
         <div class="card-content">
           <img src={townData.frontmatter.image} alt="スピリチュアル・タウン" class="program-thumb" loading="lazy" decoding="async" />
@@ -387,7 +365,7 @@ const isProd = import.meta.env.PROD;
     justify-content: center;
   }
 
-.blog-panel {
+  .blog-panel {
     width: 100%;
     max-width: 800px;
     background: rgba(180, 180, 190, 0.25) !important;
@@ -416,7 +394,7 @@ const isProd = import.meta.env.PROD;
     min-height: 160px;
   }
 
-/* ==========================================
+  /* ==========================================
      📚 Kindleカード（デザイン修正）
   ============================================= */
   .book-container {
@@ -425,7 +403,7 @@ const isProd = import.meta.env.PROD;
     justify-content: center;
   }
 
-.book-panel {
+  .book-panel {
     width: 100%;
     max-width: 800px;
     background: rgba(180, 180, 190, 0.25) !important;
@@ -438,11 +416,11 @@ const isProd = import.meta.env.PROD;
     padding: 0.8rem 0;
   }
 
-.kindle-book-card {
+  .kindle-book-card {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    background: rgba(180, 180, 190, 0.35); /* 内側のカードも少し透けるグレーに */
+    background: rgba(180, 180, 190, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 14px;
     padding: 1rem 1.5rem;
@@ -517,8 +495,7 @@ const isProd = import.meta.env.PROD;
     background: #ffac33;
   }
 
-
-/* カードパネル基本スタイル（少し濃いめのグレー＋高めの透け感） */
+  /* カードパネル基本スタイル（少し濃いめのグレー＋高めの透け感） */
   .card-panel {
     display: flex;
     flex-direction: column;
@@ -541,18 +518,20 @@ const isProd = import.meta.env.PROD;
     margin-bottom: 0.5rem;
   }
 
-.card-panel h2 { 
+  .card-panel h2,
+  .card-panel h3.main-page-title,
+  .card-panel .profile-header-block h3 { 
     font-size: 1.25rem; 
     border-bottom: 2px solid rgba(140, 82, 255, 0.2); 
     padding-bottom: 0.75rem; 
     margin-top: 0;
     margin-bottom: 1.5rem;
-    color: #2c253f; /* 見出しをはっきりした濃い色に */
+    color: #2c253f;
   }
 
-.card-content { 
+  .card-content { 
     flex: 1; 
-    color: #38304c; /* 本文の文字色を濃くして読みやすくする */
+    color: #38304c;
     font-size: 0.95rem; 
     line-height: 1.75; 
     letter-spacing: 0.03em;

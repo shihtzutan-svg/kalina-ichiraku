@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.kalina-ichiraku.com/sitemap-index.xml
+Sitemap: https://asuka-nishimiya.com/sitemap-index.xml
