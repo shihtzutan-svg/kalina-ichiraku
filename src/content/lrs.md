@@ -12,7 +12,7 @@ image: "/lrs.avif"
   <div class="feature-inner">
     <h4><strong class="strong-black">「生きながらにして死んだようになっている」</strong>人生を、もう一度ここから豊かに<strong class="strong-black">生き直す</strong>ためのセッションです。</h4>
     <h4>完全1対1・最長8時間、<strong class="strong-black">生まれてから今までの人生を語り尽くしていただく</strong>ことで、人生の棚卸しを行ない、生き直すための気づきを得て、覚醒を促します。</h4><br>
-    <p>2026年11月21日：ブログ記事にも説明を掲載いたしました。ぜひ合わせてお読み下さい。<br>
+    <p>ブログ記事にも説明を掲載いたしました。ぜひ合わせてお読み下さい。<br>
     <a href="https://asuka-nishimiya.com/blog/v0ywp5l40x14/">人生の棚卸し！生き直しのセッション「ライフ・リバイブ・セッション」</a></p>
   </div>
 </div>
