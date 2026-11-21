@@ -270,14 +270,12 @@ const { frontmatter } = contactData;
   .markdown-content .btn-apply:hover,
   .btn-apply:hover {
     transform: translateY(-3px) !important;
+    background: linear-gradient(135deg, #7f00ff, #e100ff) !important;
     box-shadow: 0 8px 25px rgba(255, 94, 98, 0.55) !important;
     border-bottom: 0px solid transparent !important;
   }
   
-  .markdown-content .btn-apply:hover::before,
-  .btn-apply:hover::before {
-    opacity: 1 !important;
-  }
+
 
   /* 💬 お問い合わせボタン：白ベースに映えるパープル */
   .markdown-content .btn-contact,
@@ -309,6 +307,31 @@ const { frontmatter } = contactData;
   .btn-action:visited {
     text-decoration: none !important;
   }
+
+  /* 💬 LRSボタン */
+  .markdown-content .btn-town-link,
+  .btn-town-link {
+    background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3) !important;
+  }
+
+  .markdown-content .btn-town-link span,
+  .btn-town-link span {
+    color: #fff !important;        
+  }
+
+  .markdown-content .btn-town-link:hover,
+  .btn-town-link:hover {
+    transform: translateY(-3px) !important;
+    background: linear-gradient(135deg, #7f00ff, #e100ff) !important;
+    box-shadow: 0 8px 30px rgba(127, 0, 255, 0.5), 0 0 15px rgba(0, 242, 254, 0.3) !important;
+  }
+
+  .markdown-content .btn-town-link:hover span,
+  .btn-town-link:hover span {
+    color: #fff !important;                 
+  }
+
 
   /* ===================================================
      🎨 その他マークダウンコンテンツ装飾（見出し・カード・スケジュール等）
@@ -563,6 +586,8 @@ const { frontmatter } = contactData;
     width: 70% !important; max-width: 450px !important; height: auto !important;
     margin: 2rem auto !important; display: block !important;
   }
+
+
 
   /* ===================================================
      📱 スマホレスポンシブ

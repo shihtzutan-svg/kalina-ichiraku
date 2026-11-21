@@ -10,12 +10,16 @@ image: "/contact.avif"
 
 <!-- コンバージョンボタンエリア -->
 <div class="action-buttons-container">
-<!-- 
-  <a href="https://forms.gle/Uf1iazz1dmR691yh9" target="_blank" rel="noopener noreferrer" class="btn-action btn-apply">
-    <span>クレイワーク・プログラムのお申し込みはこちら</span>
+
+  <a href="https://forms.gle/DSgVSV6AwKS818mcA" target="_blank" rel="noopener noreferrer" class="btn-action btn-town-link">
+    <span>ライフ・リバイブ・セッションのお申し込みはこちら</span>
   </a>
--->
-  <a href="https://forms.gle/S4YanYgGCeFCjhqr8" target="_blank" rel="noopener noreferrer" class="btn-action btn-contact">
+
+ <a href="https://forms.gle/X298nLrnr1nSuiuGA" target="_blank" rel="noopener noreferrer" class="btn-action btn-apply">
+    <span>ライトワーカー様応援サービスのお申し込みはこちら</span>
+  </a>
+
+  <a href="https://forms.gle/sUngbn28DFGpGkpo8" target="_blank" rel="noopener noreferrer" class="btn-action btn-contact">
     <span>すべてのお問い合わせはこちら</span>
   </a>
 </div>
