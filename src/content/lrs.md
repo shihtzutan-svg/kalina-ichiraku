@@ -114,9 +114,12 @@ image: "/lrs.avif"
 <p><strong>時間：</strong>10:00〜最長18:00まで</p>    
 <br>
  <p><strong>オンラインにも対応しました！</strong></p>
- <p>セッションは<a href="https://www.microsoft.com/ja-jp/microsoft-teams/group-chat-software" target="_blank">Microsoft Teams</a>で行います。<br>
+ <p>セッションは<a href="https://workspace.google.com/intl/ja/products/meet/" target="_blank">Google Meet</a>で行います。<br>
      パソコンでは、普段お使いのブラウザから使用できます。<br>
-     スマホからは<a href="https://www.microsoft.com/ja-jp/area/biz/smb/column-teams-mobile-apps" target="_blank">アプリのインストール</a>が必要です。</p>
+     スマホからはアプリのインストールが必要です。<br>
+     <a href="https://apps.apple.com/jp/app/google-meet/id1096918571" target="_blank">iOS</a>
+     <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.tachyon&hl=ja" target="_blank">Android</a>
+     </p>
   </div>
 </div>
 
