@@ -117,7 +117,7 @@ image: "/lrs.avif"
  <p>セッションは<a href="https://workspace.google.com/intl/ja/products/meet/" target="_blank">Google Meet</a>で行います。<br>
      パソコンでは、普段お使いのブラウザから使用できます。<br>
      スマホからはアプリのインストールが必要です。<br>
-     <a href="https://apps.apple.com/jp/app/google-meet/id1096918571" target="_blank">iOS</a>
+     <a href="https://apps.apple.com/jp/app/google-meet/id1096918571" target="_blank">iOS</a><br>
      <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.tachyon&hl=ja" target="_blank">Android</a>
      </p>
   </div>
