@@ -117,7 +117,7 @@ image: "/profile.avif"
 
 ### ストーリー（詳細版）
 
-<a href="/profile_lrs">更に詳しいストーリーはこちら（マニア向け）</a>
+<a href="/profile_lrs">更に詳しいストーリーはこちら</a>
 
 ---
 
