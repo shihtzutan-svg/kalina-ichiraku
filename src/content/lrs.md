@@ -111,7 +111,7 @@ image: "/lrs.avif"
     <p><strong>最寄り駅：</strong>神戸市営地下鉄／山陽電車　板宿駅<br /></p>
     <p><strong>セッション会場の様子</strong></p>
      <p>（準備中）</p>
-<p><strong>時間：</strong>10:00〜最長18:00まで</p>    
+<p><strong>時間：</strong>10:00〜最長19:00（休憩1時間含む）</p>    
 <br>
  <p><strong>オンラインにも対応しました！</strong></p>
  <p>セッションは<a href="https://workspace.google.com/intl/ja/products/meet/" target="_blank">Google Meet</a>で行います。<br>
