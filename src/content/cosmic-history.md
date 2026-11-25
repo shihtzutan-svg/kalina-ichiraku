@@ -104,7 +104,7 @@ image: "/cosmic-history.avif"
 <div class="feature-card">
   <div class="feature-inner">
   <h4>セッション料金</h4>
-    <p>約2時間 <strong>¥15,000（税込）</strong></p>
+    <p>約2時間 <strong>¥12,000（税込）</strong></p>
   </div>
 </div>
 
