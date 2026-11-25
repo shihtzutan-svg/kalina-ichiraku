@@ -12,7 +12,7 @@ const latestBlogPosts = response.contents;
 // 📝 各種Markdownデータのインポート
 import * as profileData from '../content/profile.md';
 const { frontmatter } = profileData;
-import * as timelineData from '../content/timeline.md';
+import * as cosmicData from '../content/cosmic-history.md';
 import * as kanaLData from '../content/kana-l.md';
 import * as serviceData from '../content/service.md';
 import * as townData from '../content/town.md';
@@ -163,15 +163,16 @@ import * as mycosmosData from '../content/my-cosmos.md';
         </div>
       </section>
 
-      <!-- 私の宇宙史セッション-->
-      <section class="card-panel" id="timeline">
+      <!-- 「私の宇宙史」セッション-->
+      <section class="card-panel" id="cosmic">
         <div class="profile-header-block">
-          <p class="catchphrase">{timelineData.frontmatter.catchphrase}</p>
-          <h3>{timelineData.frontmatter.title}</h3>
+          <p class="catchphrase">{cosmicData.frontmatter.catchphrase}</p>
+          <h3>{cosmicData.frontmatter.title}</h3>
         </div>
         <div class="card-content">
-          <img src={timelineData.frontmatter.image} alt={timelineData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
-          <p>{timelineData.frontmatter.summary}</p>
+          <img src={cosmicData.frontmatter.image} alt={cosmicData.frontmatter.title} class="program-thumb" loading="lazy" decoding="async" />
+          <p>{cosmicData.frontmatter.summary}</p>
+          <a href="/cosmic-history" class="read-more">「私の宇宙史」セッションの詳細はこちら →</a>
         </div>
       </section>
 
@@ -188,7 +189,7 @@ import * as mycosmosData from '../content/my-cosmos.md';
         </div>
       </section>
 
-      <!-- 私の宇宙 -->
+      <!-- 私の宇宙ノート -->
       <section class="card-panel" id="my-cosmos">
         <div class="profile-header-block">
           <p class="catchphrase">{mycosmosData.frontmatter.catchphrase}</p>

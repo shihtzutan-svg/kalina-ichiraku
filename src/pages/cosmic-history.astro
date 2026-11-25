@@ -1,0 +1,757 @@
+---
+import Layout from '../layouts/Layout.astro';
+import bgGalaxy from '../assets/bg-galaxy.avif';
+import * as cosmicData from '../content/cosmic-history.md';
+const { frontmatter } = cosmicData;
+
+// 目次項目（cosmic-history.md の ## 見出しに対応）
+const tocItems = [
+  { id: 'sec-about', label: '「私の宇宙史」セッションとは' },
+  { id: 'sec-recommend', label: 'こんな方におすすめです' },
+  { id: 'sec-flow', label: 'セッションの流れ' },
+  { id: 'sec-difference', label: 'ライフ・リバイブ・セッションとの違い' },
+  { id: 'sec-venue', label: '時間・オンラインセッションについて' },
+  { id: 'sec-price', label: '料金' },
+];
+---
+
+<Layout 
+  title={`${frontmatter.title} | 西宮あすか - 公式サイト 〜 神戸で魂の目醒め・覚醒・アセンションを支援`}
+  description={frontmatter.summary || "これまでの人生を、ゆっくり振り返ってみませんか。「あの頃のこと、あれでよかったのかな？」そんなふとした思いに寄り添うセッションです。"}
+>
+  <div class="bg-layer" style={`background-image: url(${bgGalaxy.src});`}></div>
+
+  <!-- メインコンテンツ -->
+  <main class="detailed-container">
+    <section class="card-panel">
+      <div class="program-header-block">
+        <p class="catchphrase">{frontmatter.catchphrase}</p>
+        <h2>{frontmatter.title}</h2>
+      </div>
+      
+      <div class="card-content detailed-body">
+        {frontmatter.image && (
+          <div class="toppage-image-container">
+            <img src={frontmatter.image} alt={frontmatter.title} class="toppage-main-image" />
+          </div>
+        )}
+
+        <div class="summary-message">
+          <p>{frontmatter.summary}</p>
+        </div>
+
+        <!-- 目次（ページ内リンク） -->
+        <nav class="toc-box" aria-label="目次">
+          <p class="toc-title">目次</p>
+          <ol class="toc-list">
+            {tocItems.map((item, index) => (
+              <li>
+                <a href={`#${item.id}`}>
+                  <span class="toc-num">{String(index + 1).padStart(2, '0')}</span>
+                  <span class="toc-text">{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <hr class="divider" />
+
+        <!-- Markdownの本文を自動展開 -->
+        <div class="markdown-content">
+          <cosmicData.Content />
+        </div>
+        
+        <div class="back-home-container">
+          <a href="/" class="back-home-link">トップページへ戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ページトップ戻るボタン -->
+  <button id="page-top-btn" class="page-top-scroll-btn" aria-label="ページトップへ戻る">
+    <span class="arrow"></span>
+  </button>
+</Layout>
+
+<!-- ページ全体のメインスタイル -->
+<style>
+  * { box-sizing: border-box; }
+
+  .bg-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    z-index: -2; 
+    opacity: 1;
+    animation: bgMovement 25s ease-in-out infinite alternate;
+  }
+  @keyframes bgMovement {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(1deg); }
+  }
+
+  /* コンテナ */
+  .detailed-container {
+    flex: 1;
+    max-width: 950px;
+    margin: 140px auto 60px auto;
+    padding: 0 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* 全体カードパネル */
+  .card-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    background: rgba(220, 220, 230, 0.45); 
+    border: 1px solid rgba(255, 255, 255, 0.8); 
+    border-radius: 20px;
+    padding: 3.5rem; 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(100, 90, 130, 0.15);
+    overflow: hidden;
+  }
+  
+  /* テキスト・見出し装飾 */
+  .program-header-block h2 { 
+    font-size: 2.2rem; 
+    margin-top: 0.5rem; 
+    margin-bottom: 1.5rem; 
+    color: #1a1528;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+  .catchphrase {
+    color: #7232e0;
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 0.15em;
+    white-space: pre-line;
+  }
+  .summary-message p { 
+    font-size: 1.08rem; 
+    line-height: 1.9; 
+    color: #251f36;
+    font-weight: 500;
+    white-space: pre-line;
+  }
+  
+  .divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, rgba(114, 50, 224, 0), rgba(114, 50, 224, 0.3), rgba(114, 50, 224, 0));
+    margin: 3rem 0;
+  }
+
+  /* ===================================================
+     📑 目次（ページ内リンク）
+     =================================================== */
+  .toc-box {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(114, 50, 224, 0.28);
+    border-radius: 16px;
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0 0 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(130, 110, 160, 0.12);
+  }
+
+  .toc-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #5028c6;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .toc-title::before {
+    content: "✦";
+    color: #7232e0;
+  }
+
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem 1.2rem;
+  }
+
+  .toc-list li a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #251f36;
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.5;
+    transition: all 0.25s ease;
+    background: rgba(248, 245, 255, 0.65);
+  }
+
+  .toc-list li a:hover {
+    background: rgba(114, 50, 224, 0.12);
+    color: #5028c6;
+    transform: translateX(3px);
+  }
+
+  .toc-num {
+    color: #7232e0;
+    font-weight: bold;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .markdown-content :global(h2[id]) {
+    scroll-margin-top: 130px;
+  }
+
+  /* 戻るリンク */
+  .back-home-container { text-align: center; margin-top: 4rem; }
+  .back-home-link { color: #554a66; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: all 0.3s; }
+  .back-home-link:hover { color: #7232e0; }
+
+  @media (max-width: 768px) {
+    .detailed-container { margin-top: 100px; }
+    .card-panel { padding: 1.5rem; }
+    .program-header-block h2 { font-size: 1.7rem; }
+    .toc-box { padding: 1.2rem; }
+    .toc-list {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+  /* ===================================================
+     📚 マークダウン本文の統合スタイリング（lrs.astro準拠）
+     =================================================== */
+  .markdown-content :global(h2) {
+    font-size: 1.45rem !important;
+    color: #1a1528 !important;
+    border-left: 4px solid #7232e0 !important;
+    padding-left: 14px !important;
+    margin: 2.5rem 0 1.5rem 0 !important;
+    font-weight: bold !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .markdown-content :global(h3) {
+    font-size: 1.2rem !important;
+    color: #5028c6 !important;
+    margin: 2rem 0 1rem 0 !important;
+    font-weight: bold !important;
+  }
+
+  .markdown-content :global(p) {
+    line-height: 1.85 !important;
+    color: #251f36 !important;
+    margin-bottom: 1.2rem !important;
+    font-weight: 500 !important;
+  }
+
+  .markdown-content :global(strong) {
+    color: #053ffd !important;
+    font-weight: bold !important;
+  }
+
+  .markdown-content :global(strong.strong-black) {
+    color: #1a1528 !important;
+    font-weight: bold !important;
+  }
+
+  .markdown-content :global(a:not(.btn-action)) {
+    color: #5028c6 !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed rgba(80, 40, 198, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .markdown-content :global(a:not(.btn-action):hover) {
+    color: #7232e0 !important;
+    border-bottom: 1px solid #7232e0 !important;
+  }
+
+  .markdown-content :global(hr) {
+    border: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(to right, transparent, rgba(114, 50, 224, 0.3), transparent) !important;
+    margin: 2.5rem 0 !important;
+  }
+
+  /* おすすめの方リスト（チェックリストカード） */
+  .markdown-content :global(ul:not([class])) {
+    padding: 0 !important;
+    list-style: none !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .markdown-content :global(ul:not([class]) > li) {
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.2rem 1rem 2.8rem !important;
+    margin-bottom: 0.8rem !important;
+    position: relative !important;
+    font-size: 0.95rem !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
+    backdrop-filter: blur(6px) !important;
+  }
+
+  .markdown-content :global(ul:not([class]) > li::before) {
+    content: "✔" !important;
+    position: absolute !important;
+    left: 1rem !important;
+    top: 1rem !important;
+    color: #3f2ac6 !important;
+    font-weight: bold !important;
+  }
+
+  /* セッションの流れ（STEPカード） */
+  .markdown-content :global(.step-list) {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 1.5rem 0 2rem 0 !important;
+  }
+
+  .markdown-content :global(.step-list > li) {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border: 1px solid rgba(114, 50, 224, 0.25) !important;
+    border-radius: 16px !important;
+    padding: 1.4rem 1.8rem !important;
+    margin-bottom: 2.6rem !important;
+    position: relative !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 6px 20px rgba(130, 110, 160, 0.1) !important;
+  }
+
+  .markdown-content :global(.step-list > li:last-child) {
+    margin-bottom: 1.8rem !important;
+  }
+
+  .markdown-content :global(.step-badge) {
+    display: inline-block !important;
+    background: linear-gradient(135deg, #5028c6, #7232e0) !important;
+    color: #fff !important;
+    font-size: 0.82rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.08em !important;
+    padding: 0.25rem 0.9rem !important;
+    border-radius: 20px !important;
+    margin-bottom: 0.7rem !important;
+    box-shadow: 0 3px 10px rgba(114, 50, 224, 0.25) !important;
+  }
+
+  .markdown-content :global(.step-list > li > h4) {
+    color: #053ffd !important;
+    font-size: 1.08rem !important;
+    font-weight: bold !important;
+    margin: 0 0 0.5rem 0 !important;
+  }
+
+  .markdown-content :global(.step-list > li > p) {
+    margin: 0 !important;
+    font-size: 0.98rem !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
+    line-height: 1.75 !important;
+  }
+
+  .markdown-content :global(.step-list > li:not(:last-child)::after) {
+    content: "▼" !important;
+    position: absolute !important;
+    bottom: -2.05rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    font-size: 1.5rem !important;
+    color: #7232e0 !important;
+    text-shadow: 0 0 10px rgba(114, 50, 224, 0.25) !important;
+  }
+
+  /* 補足ボックス */
+  .markdown-content :global(.note-box) {
+    background: rgba(243, 238, 255, 0.85) !important;
+    border-left: 4px solid #7232e0 !important;
+    border-radius: 8px !important;
+    padding: 1rem 1.4rem !important;
+    margin: 1.5rem 0 2rem 0 !important;
+  }
+
+  .markdown-content :global(.note-box p) {
+    margin: 0 !important;
+    font-size: 0.95rem !important;
+    color: #3a2e56 !important;
+    line-height: 1.75 !important;
+  }
+
+  /* 二重囲み枠カード（.feature-card） */
+  .markdown-content :global(.feature-card) {
+    background: rgba(255, 255, 255, 0.82) !important;
+    border: 1px solid rgba(114, 50, 224, 0.25) !important;
+    border-radius: 16px !important;
+    padding: 1.8rem !important;
+    margin-bottom: 1.5rem !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 8px 25px rgba(130, 110, 160, 0.12) !important;
+  }
+
+  .markdown-content :global(.feature-card h4) {
+    color: #053ffd !important;
+    font-size: 1.12rem !important;
+    font-weight: bold !important;
+    margin: 0 0 1rem 0 !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .markdown-content :global(.feature-inner) {
+    background: rgba(255, 255, 255, 0.72) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+    border-radius: 10px !important;
+    padding: 1.2rem 1.4rem !important;
+  }
+
+  .markdown-content :global(.feature-inner p) {
+    margin-bottom: 0.9rem !important;
+    font-size: 0.96rem !important;
+    line-height: 1.8 !important;
+    color: #251f36 !important;
+  }
+
+  .markdown-content :global(.feature-inner p:last-child) {
+    margin-bottom: 0 !important;
+  }
+
+  /* 枠内の箇条書きリスト（.inner-list） */
+  .markdown-content :global(.inner-list) {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 1rem 0 1.2rem 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.55rem !important;
+  }
+
+  .markdown-content :global(.inner-list li) {
+    position: relative !important;
+    padding: 0.7rem 1rem 0.7rem 2.3rem !important;
+    margin-bottom: 0 !important;
+    font-size: 0.95rem !important;
+    color: #251f36 !important;
+    font-weight: 500 !important;
+    line-height: 1.65 !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 239, 255, 0.85) 100%) !important;
+    border: 1px solid rgba(114, 50, 224, 0.2) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 3px 10px rgba(130, 110, 160, 0.06) !important;
+  }
+
+  .markdown-content :global(.inner-list li::before) {
+    content: "✓" !important;
+    position: absolute !important;
+    left: 0.85rem !important;
+    top: 0.68rem !important;
+    color: #5028c6 !important;
+    font-weight: bold !important;
+    font-size: 0.95rem !important;
+  }
+
+  .markdown-content :global(.inner-list li:last-child) {
+    margin-bottom: 0 !important;
+  }
+
+  /* お支払い方法・お支払い期限（2列コンパクトカード） */
+  .markdown-content :global(.payment-grid) {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.2rem !important;
+    margin: 1.5rem 0 1rem 0 !important;
+  }
+
+  .markdown-content :global(.payment-item) {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(245, 242, 255, 0.85) 100%) !important;
+    border: 1px solid rgba(114, 50, 224, 0.3) !important;
+    border-radius: 14px !important;
+    padding: 1.4rem 1.6rem !important;
+    text-align: center !important;
+    box-shadow: 0 6px 20px rgba(130, 110, 160, 0.1) !important;
+  }
+
+  .markdown-content :global(.payment-item h4) {
+    color: #053ffd !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    margin: 0 0 0.6rem 0 !important;
+    padding-bottom: 0.5rem !important;
+    border-bottom: 1px dashed rgba(114, 50, 224, 0.25) !important;
+  }
+
+  .markdown-content :global(.payment-item p) {
+    margin: 0 !important;
+    font-size: 1.05rem !important;
+    font-weight: bold !important;
+    color: #1a1528 !important;
+  }
+
+  @media (max-width: 768px) {
+    .markdown-content :global(.payment-grid) {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* お申し込みボタン */
+  .markdown-content :global(.action-buttons-container) {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 3.5rem 0 1.5rem 0 !important;
+    width: 100% !important;
+  }
+
+  .markdown-content :global(.btn-action) {
+    width: 100% !important;
+    max-width: 420px !important;
+    height: 60px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    font-size: 1.05rem !important;
+    font-weight: bold !important;
+    letter-spacing: 0.06em !important;
+    border-radius: 30px !important;
+    position: relative !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    border: none !important;
+    color: #fff !important;
+  }
+
+  .markdown-content :global(.btn-action span) {
+    position: relative !important;
+    z-index: 2 !important;
+    color: #fff !important;
+  }
+
+  .markdown-content :global(.btn-town-link) {
+    background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3) !important;
+  }
+
+  .markdown-content :global(.btn-town-link::before) {
+    content: '' !important;
+    position: absolute !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #7f00ff, #e100ff) !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+    transition: opacity 0.4s ease !important;
+  }
+
+  .markdown-content :global(.btn-town-link:hover) {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 8px 30px rgba(127, 0, 255, 0.5), 0 0 15px rgba(0, 242, 254, 0.3) !important;
+  }
+  
+  .markdown-content :global(.btn-town-link:hover::before) {
+    opacity: 1 !important;
+  }
+
+  /* ページトップ戻るボタン */
+  .page-top-scroll-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid #8c52ff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(130, 110, 160, 0.15);
+  }
+
+  @media (min-width: 1221px) {
+    .page-top-scroll-btn {
+      top: auto;
+      bottom: 40px;
+      left: calc(50% + 505px);
+      right: auto;
+      transform: translateY(20px);
+    }
+
+    .page-top-scroll-btn.show {
+      transform: translateY(0);
+    }
+
+    .page-top-scroll-btn:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  .page-top-scroll-btn .arrow {
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid #8c52ff;
+    border-left: 3px solid #8c52ff;
+    transform: translateY(2px) rotate(45deg);
+    transition: border-color 0.3s;
+  }
+
+  .page-top-scroll-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .page-top-scroll-btn:hover {
+    background: #8c52ff;
+    box-shadow: 0 0 20px rgba(140, 82, 255, 0.4);
+  }
+  .page-top-scroll-btn:hover .arrow {
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    .markdown-content :global(.feature-card) {
+      padding: 1.2rem !important;
+    }
+    .markdown-content :global(.feature-inner) {
+      padding: 1rem !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .page-top-scroll-btn {
+      bottom: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>
+
+<!-- グローバル用の独立スタイル（画像サイズ制御） -->
+<style is:global>
+  .toppage-image-container {
+    width: 100%;
+    max-height: 440px;
+    margin: 0 auto 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(130, 110, 160, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+  .toppage-main-image {
+    width: 100%;
+    max-height: 440px;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .toppage-image-container,
+    .toppage-main-image {
+      max-height: 300px;
+    }
+  }
+</style>
+
+<script is:inline>
+  function initCosmicHistoryPage() {
+    // 外部フォームリンクを新規タブで開く
+    const links = document.querySelectorAll('.action-buttons-container a');
+    links.forEach(link => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    // 見出しテキストと目次IDの対応表
+    const headingMap = [
+      { keyword: '「私の宇宙史」セッションとは', id: 'sec-about' },
+      { keyword: 'こんな方におすすめです', id: 'sec-recommend' },
+      { keyword: 'セッションの流れ', id: 'sec-flow' },
+      { keyword: 'ライフ・リバイブ・セッションとの違い', id: 'sec-difference' },
+      { keyword: '時間・オンラインセッションについて', id: 'sec-venue' },
+      { keyword: '料金', id: 'sec-price' },
+    ];
+
+    const headings = document.querySelectorAll('.markdown-content h2');
+    headings.forEach(h2 => {
+      const text = (h2.textContent || '').trim();
+      const matched = headingMap.find(item => text.includes(item.keyword));
+      if (matched) {
+        h2.id = matched.id;
+      }
+    });
+
+    // ページトップ戻るボタン
+    const topBtn = document.getElementById('page-top-btn');
+    if (topBtn) {
+      const toggleVisibility = () => {
+        if (window.scrollY > 400) {
+          topBtn.classList.add('show');
+        } else {
+          topBtn.classList.remove('show');
+        }
+      };
+
+      if (!topBtn.dataset.bound) {
+        window.addEventListener('scroll', toggleVisibility, { passive: true });
+        topBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        topBtn.dataset.bound = 'true';
+      }
+      toggleVisibility();
+    }
+  }
+
+  // 目次クリック時のスムーススクロール
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('.toc-list a[href^="#"]');
+    if (!anchor) return;
+    const targetId = anchor.getAttribute('href').slice(1);
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      e.preventDefault();
+      const headerOffset = 130;
+      const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      history.pushState(null, '', `#${targetId}`);
+    }
+  });
+
+  initCosmicHistoryPage();
+  document.addEventListener('astro:page-load', initCosmicHistoryPage);
+  document.addEventListener('astro:after-swap', initCosmicHistoryPage);
+</script>
