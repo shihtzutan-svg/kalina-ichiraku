@@ -113,7 +113,7 @@ image: "/lrs.avif"
      <p>（準備中）</p>
 <p><strong>時間：</strong>10:00〜最長19:00（休憩1時間含む）</p>    
 <br>
- <p><strong>オンラインにも対応しました！</strong></p>
+ <p><strong>オンライン</strong></p>
  <p>セッションは<a href="https://workspace.google.com/intl/ja/products/meet/" target="_blank">Google Meet</a>で行います。<br>
      パソコンでは、普段お使いのブラウザから使用できます。<br>
      スマホからはアプリのインストールが必要です。<br>

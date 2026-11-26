@@ -82,13 +82,18 @@ image: "/cosmic-history.avif"
 
 ---
 
-## 時間・オンラインセッションについて
+## セッション会場（対面／オンライン）・時間
 
 <div class="feature-card">
   <div class="feature-inner">
-<p><strong>時間：</strong>約2時間</p>    
- <p><strong>オンラインセッションについて</strong></p>
- <p>セッションは<a href="https://workspace.google.com/intl/ja/products/meet/" target="_blank">Google Meet</a>で行います。（オンラインのみ）<br>
+    <p><strong>場所：</strong>兵庫県神戸市長田区（詳細な住所はご予約確定時にご連絡いたします）</p>
+    <p><strong>最寄り駅：</strong>神戸市営地下鉄／山陽電車　板宿駅<br /></p>
+    <p><strong>セッション会場の様子</strong></p>
+     <p>（準備中）</p>
+<p><strong>時間：</strong>2時間</p>    
+<br>
+ <p><strong>オンライン</strong></p>
+ <p>セッションは<a href="https://workspace.google.com/intl/ja/products/meet/" target="_blank">Google Meet</a>で行います。<br>
      パソコンでは、普段お使いのブラウザから使用できます。<br>
      スマホからはアプリのインストールが必要です。<br>
      <a href="https://apps.apple.com/jp/app/google-meet/id1096918571" target="_blank">iOS</a><br>
@@ -104,7 +109,8 @@ image: "/cosmic-history.avif"
 <div class="feature-card">
   <div class="feature-inner">
   <h4>セッション料金</h4>
-    <p>約2時間 <strong>¥12,000（税込）</strong></p>
+   <p><strong>¥14,000</strong>（税込）ー対面</p>
+    <p><strong>¥12,000</strong>（税込）ーオンライン</p>
   </div>
 </div>
 
